@@ -19,7 +19,7 @@
                             <li role="presentation"><a href="?">Inicio</a></li>
                             <li role="presentation"><a href="noteshrink.php">Conversión</a></li>
                             <li role="presentation"><a href="#">Categorías</a></li>
-                            <li role="presentation" class="text-right"><a href="?usuarios/registro">Registro</a></li>
+                            <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
                         </ul>
                     </div>
                 </div>

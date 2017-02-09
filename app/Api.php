@@ -13,7 +13,7 @@ namespace app\Api;
  * @author oliver
  */
 class Api {
-    private $peticion = NULL;
+    public $peticion = NULL;
     private $clase = NULL;      /*Elegir clase por defecto*/
     private $metodo = NULL;     /*Elegir método por defecto*/
     private $parametros = NULL; /*Parámetros provenientes de los formularios*/
@@ -24,7 +24,7 @@ class Api {
     private $espacio_nombres = '\\app\\controladores\\';
     
     /*Constructor*/
-    public function __construct() {
+    public function Api() {
         $this->TratarURL();
         $this->DamePeticion();
         $this->EstablecerCabeceras();
@@ -90,7 +90,7 @@ class Api {
     /**
      * Función que establece la petición de acceso al servicio
      */
-    private function DamePeticion() {
+    public function DamePeticion() {
         
         if(isset($_SERVER['REQUEST_METHOD'])) {
             $this->peticion = $_SERVER['REQUEST_METHOD'];
@@ -100,7 +100,7 @@ class Api {
     /**
      * Método que establece las cabeceras del servicio
      */
-    private function EstablecerCabeceras() {
+    public function EstablecerCabeceras() {
         header("HTTP/1.1 " . $this->codEstado . " " . $this->GetCodEstado());  
         header("Content-Type:" . $this->tipo . ';charset=utf-8');
      }
@@ -109,7 +109,7 @@ class Api {
       * Método que devuelve el código del estado de la petición
       * @return string  Mensaje correspondiente al código del estado de la petición
       */
-    private function GetCodEstado() {  
+    public function GetCodEstado() {  
         $estado = array(
             200 => 'OK',  
             201 => 'Created',  
@@ -126,14 +126,14 @@ class Api {
             405 => 'Method Not Allowed',  
             500 => 'Internal Server Error');  
         
-        $respuesta = ($estado[$this->_codEstado]) ? $estado[$this->_codEstado] : $estado[500];  
+        $respuesta = ($estado[$this->codEstado]) ? $estado[$this->codEstado] : $estado[500];  
         
         return $respuesta;  
    }
    
    /**
     * Método que va a dirigir la petición a un método de una clase con unos argumentos, si los hubiera,
-    * en función del método de la petición realizada (POST, GET, PUT, DELETE)
+    * en función del método de la petición realizada (POST, GET)
     */
    private function EjecutarPeticion() {
        /*Construyo la ruta donde se encuentra el archivo de la clase a la que se va a llamar

@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <h2>Formulario para el registro</h2>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <form class="form-horizontal" role="form" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="POST">
+    <form class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
         <div class="form-group">
             <label>Nombre</label>
             <input type="text" name="nombre" class="form-control" id="nombre">

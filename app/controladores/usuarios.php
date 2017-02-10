@@ -33,7 +33,7 @@ class usuarios extends Api\Api implements Rest /*Esto no funciona*/ {
         if($this->peticion === "POST")
         {
             //echo "Viene por POST";
-            //var_dump($_POST);            
+            var_dump($_POST);
             $ruta_vista = VISTAS .'usuarios/alta.php' ;
             require_once $ruta_vista;
         }

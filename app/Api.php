@@ -24,10 +24,14 @@ class Api {
     private $espacio_nombres = '\\app\\controladores\\';
     
     /*Constructor*/
-    public function Api() {
-        $this->TratarURL();
+    public function Api($params = array()) {
         $this->DamePeticion();
+        //var_dump($_SERVER['REQUEST_URI']);
+        //echo $this->peticion;
+        $this->TratarURL();
         $this->EstablecerCabeceras();
+        //var_dump($_POST);
+        //var_dump(headers_list());
         //echo 'Petición: '.$this->peticion;
         //echo '<br/>Clase: '.$this->clase;
         //echo '<br/>Método: '.$this->metodo;

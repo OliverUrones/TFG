@@ -16,24 +16,35 @@ use app\modelos\usuariosModelo\usuariosModelo;
  *
  * @author oliver
  */
-class usuarios extends Api\Api implements Rest /*Esto no funciona*/ {
+class usuarios extends Api\Api implements Rest {
 
-    var $nombre_usuario = 'usuario_prueba';
-
+    /**
+     * Función que da de alta un usuario
+     */
     public function alta() {
-        //echo "Estoy en la clase usuarios en el método alta()";
+        //Recoge el tipo de petición realizada
         $this->DamePeticion();
+        
+        //Si viene por GET...
         if($this->peticion === "GET")
         {
+            //..muestra el forumulario de registro
             $ruta_vista = VISTAS .'usuarios/alta.php' ;
             require_once $ruta_vista;
-//        $usuariosModelo = new usuariosModelo();
-//        $usuariosModelo->altaUsuario();
         }
+        
+        //Si viene por POST
         if($this->peticion === "POST")
         {
-            //echo "Viene por POST";
-            var_dump($_POST);
+            //Se crea un objeto del modelo usuarios
+            $usuariosModelo = new usuariosModelo();
+            
+            //Se llama al método del modelo usuarios que añade un usuario a la base de datos
+            $usuariosModelo->altaUsuario();
+            
+            //Enviar correo para activar cuenta
+            
+            //Redirección a la vista... y mensaje para comprobación de correo para la activación de la cuenta
             $ruta_vista = VISTAS .'usuarios/alta.php' ;
             require_once $ruta_vista;
         }

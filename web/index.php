@@ -5,6 +5,8 @@ require_once dirname(__DIR__). '/app/interfaz/Rest.php';
 require_once dirname(__DIR__). '/app/controladores/home.php';
 require_once dirname(__DIR__). '/app/controladores/usuarios.php';
 require_once dirname(__DIR__). '/app/modelos/usuariosModelo.php';
+require_once ADODB;
+require_once ADODB_DRIVER_MYSQLI;
 use app\Api;
 
 //var_dump(parse_url(urldecode($_SERVER['REQUEST_URI'])));

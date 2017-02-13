@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="web/css/estilos.css">
         <script src="web/css/js/jquery.js"></script>
         <script src="web/css/js/bootstrap.js"></script>
+        <script src="web/js/angular.min.js"></script>
+        <script src="web/js/app.js"></script>
     </head>
     <body>
         <header class="navbar">

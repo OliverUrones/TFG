@@ -40,7 +40,7 @@ class usuarios extends Api\Api implements Rest {
             $usuariosModelo = new usuariosModelo();
             
             //Se llama al método del modelo usuarios que añade un usuario a la base de datos
-            $usuariosModelo->altaUsuario();
+            //$usuariosModelo->altaUsuario();
             
             //Enviar correo para activar cuenta
             

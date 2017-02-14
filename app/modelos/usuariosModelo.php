@@ -88,7 +88,6 @@ class usuariosModelo {
         }else
         {
             //..si existe es que el usuario ya está en la base de datos
-            
             echo 'Mensaje de que el correo ya existe';
         }        
     }

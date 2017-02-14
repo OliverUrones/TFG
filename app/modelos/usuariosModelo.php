@@ -8,7 +8,6 @@
 
 namespace app\modelos\usuariosModelo;
 require_once ADODB;
-//require_once ADODB_DRIVER_MYSQLI;
 
 /**
  * Description of usuariosModelo
@@ -25,8 +24,9 @@ class usuariosModelo {
     public $password = NULL;
     public $nombre = NULL;
     public $apellidos = NULL;
-    public $token = 'NULL';
-    public $fecha_creacion = 'NULL';
+    public $token = NULL;
+    public $validez_token = NULL;
+    public $fecha_creacion = NULL;
     public $estado = 0;
 
 
@@ -55,6 +55,9 @@ class usuariosModelo {
         if(isset($_POST['token'])) {
             $this->token = $_POST['token'];
         }
+        if(isset($_POST['validez_token'])) {
+            $this->validez_token = $_POST['validez_token'];
+        }
         if(isset($_POST['fecha_creacion'])) {
             $this->fecha_creacion = $_POST['fecha_creacion'];
         }
@@ -77,9 +80,9 @@ class usuariosModelo {
         if(!$this->__existe())
         {
             //..si no existe es un usuario no registrado
-            $sql = "INSERT INTO `usuarios` (`rol_id`, `email`, `password`, `nombre`, `apellidos`, `token`, `fecha_creacion`, `estado` )"
-                    . " VALUES (".$this->rol_id.", '".$this->email."', '".$this->password."', '". utf8_decode($this->nombre)."', '". utf8_decode($this->apellidos)."', '".$this->token."', '"
-                    . $this->fecha_creacion."', ".$this->estado.");";
+            $sql = "INSERT INTO `usuarios` (`rol_id`, `email`, `password`, `nombre`, `apellidos`, `token`, `validez_token`, `fecha_creacion`, `estado` )"
+                    . " VALUES (".$this->rol_id.", '".$this->email."', '".$this->password."', '". utf8_decode($this->nombre)."', '". utf8_decode($this->apellidos)."', '"
+                    .$this->token."', '".$this->validez_token."', '".$this->fecha_creacion."', ".$this->estado.");";
             $recordSet = $this->conexion->execute($sql);
             $sql = $this->conexion->getInsertSql($this->tabla, $_POST);
         }else

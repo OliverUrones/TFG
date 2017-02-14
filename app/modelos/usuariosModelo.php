@@ -80,6 +80,10 @@ class usuariosModelo {
         if(!$this->__existe())
         {
             //..si no existe es un usuario no registrado
+            //Genero el hash de la contraseña
+            $this->__creaHash($this->password);
+            
+            //Consulta de inserción de un usuario a la base de datos
             $sql = "INSERT INTO `usuarios` (`rol_id`, `email`, `password`, `nombre`, `apellidos`, `token`, `fecha_creacion`, `estado` )"
                     . " VALUES (".$this->rol_id.", '".$this->email."', '".$this->password."', '". utf8_decode($this->nombre)."', '". utf8_decode($this->apellidos)."', '"
                     .$this->token."', '".$this->fecha_creacion."', ".$this->estado.");";
@@ -134,5 +138,13 @@ class usuariosModelo {
             //..sino, si existe
             return true;
         }
+    }
+    
+    /**
+     * Función que genera el hash de la contraseña
+     * Se usará el algoritmo CRYPT_BLOWFISH con la constante PASSWORD_BCRYPT de php
+     */
+    private function __creaHash($password) {
+        $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
 }

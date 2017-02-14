@@ -25,7 +25,7 @@ class usuariosModelo {
     public $nombre = NULL;
     public $apellidos = NULL;
     public $token = NULL;
-    public $validez_token = 'NULL';
+    public $validez_token = NULL;
     public $fecha_creacion = NULL;
     public $estado = 0;
 

@@ -40,7 +40,7 @@ function ValidarFormulario() {
     this.mensaje_pass2 = "Las contraseñas no pueden ser vacias.";
 
     /*
-     * Función que comprueba que el nombre tenga al menos 3 caracteres
+     * Función que comprueba que el nombre tenga al menos 3 caracteres.
      */
     this.comprobarNombre = function() {
         if(this.nombre.length >= 3)
@@ -55,7 +55,7 @@ function ValidarFormulario() {
     }
     
     /*
-     * Función que comprueba el formato del email
+     * Función que comprueba el formato del email.
      */
     this.comprobarEmail = function() {
         if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(this.email))
@@ -70,7 +70,7 @@ function ValidarFormulario() {
     }
     
     /*
-     * Función que comprueba que la contraseña tenga al menos 8 caracteres
+     * Función que comprueba que la contraseña tenga al menos 8 caracteres.
      */
     this.comprobarLongitud = function() {
         if(this.pass1.length >= 8) {
@@ -84,7 +84,7 @@ function ValidarFormulario() {
     }
 
     /*
-     * Función que comprueba que la contraseña no esté vacía y que sean iguales
+     * Función que comprueba que la contraseña no esté vacía y que sean iguales.
      */
     this.comprobarPass = function() {
         if(this.pass1.length == 0 || this.pass2.length == 0)

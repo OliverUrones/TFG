@@ -6,6 +6,8 @@
  */
 
 namespace app\controladores\usuarios;
+require_once PHPMAILER;
+require_once PHPMAILER_SMTP;
 
 use app\Api;
 use app\interfaz\Rest\Rest;
@@ -40,9 +42,10 @@ class usuarios extends Api\Api implements Rest {
             $usuariosModelo = new usuariosModelo();
             
             //Se llama al método del modelo usuarios que añade un usuario a la base de datos
-            $usuariosModelo->altaUsuario();
+            //$usuariosModelo->altaUsuario();
             
             //Enviar correo para activar cuenta
+            $this->__enviarEmail();
             
             //Redirección a la vista... y mensaje para comprobación de correo para la activación de la cuenta
             $ruta_vista = VISTAS .'usuarios/alta.php' ;
@@ -70,4 +73,24 @@ class usuarios extends Api\Api implements Rest {
         echo "Estoy en la clase usuarios en el método login()";
     }
     
+    /**
+     * Función que envía un email al los usuarios
+     */
+    private function __enviarEmail() {
+        $mail = new \PHPMailer();
+        $mail->Mailer = "smpt";
+        $mail->Host = "smpt.hotpop.com";
+        $mail->SMTPAuth = true;
+        $mail->Username = "turboSMTP";
+        $mail->Password = "turboSMTP";
+        $mail->From = "activacion@activacion.es";
+        $mail->FromName = "Activación de la cuenta";
+        $mail->Timeout = 30;
+        $mail->addAddress("Oliver.Urones@usal.es");
+        $mail->Subject = "Prueba de envio de email para activacion de cuenta";
+        $mail->Body = "<a href=\"https://localhost/TFG2/?usuarios/activar\">Activar cuenta</a>";
+        $mail->AltBody = "Para activar la cuenta copie el siguiente enlace https://localhost/TFG2/?usuarios/activar y péguelo en la barra de direcciones del navegador";
+        $exito = $mail->send();
+        echo $exito;
+    }
 }

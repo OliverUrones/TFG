@@ -143,6 +143,7 @@ class usuariosModelo {
     /**
      * Función que genera el hash de la contraseña
      * Se usará el algoritmo CRYPT_BLOWFISH con la constante PASSWORD_BCRYPT de php
+     * @param string $password Contraseña que introduce el usuario
      */
     private function __creaHash($password) {
         $this->password = password_hash($password, PASSWORD_BCRYPT);

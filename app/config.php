@@ -13,8 +13,10 @@ define('DIRECTORIO_WEB',  RAIZ .SEPARADOR . 'web'. SEPARADOR);
 define('DIRECTORIO_CSS',  DIRECTORIO_WEB . 'css' . SEPARADOR);
 define('DIRECTORIO_JS',  DIRECTORIO_WEB . 'js' . SEPARADOR);
 define('DIRECTORIO_FUENTES',  DIRECTORIO_WEB . 'fonts' . SEPARADOR);
-define('ADODB', DIRECTORIO_APLICACION.'adodb5'.SEPARADOR.'adodb.inc.php');
-define('ADODB_DRIVER_MYSQLI', DIRECTORIO_APLICACION.'adodb5'.SEPARADOR.'drivers'.SEPARADOR.'adodb-mysqli.inc.php');
+define('ADODB', DIRECTORIO_APLICACION . 'adodb5' . SEPARADOR . 'adodb.inc.php');
+define('ADODB_DRIVER_MYSQLI', DIRECTORIO_APLICACION . 'adodb5' . SEPARADOR . 'drivers' . SEPARADOR . 'adodb-mysqli.inc.php');
+define('PHPMAILER', DIRECTORIO_APLICACION.'PHPMailer' . SEPARADOR . 'PHPMailerAutoload.php');
+define('PHPMAILER_SMTP', DIRECTORIO_APLICACION.'PHPMailer' . SEPARADOR . 'class.smtp.php');
 
 //echo '<br/>DS '.SEPARADOR;
 //echo '<br/>RAIZ'.RAIZ;

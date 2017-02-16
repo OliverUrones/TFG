@@ -8,6 +8,7 @@
 
 namespace app\modelos\usuariosModelo;
 require_once ADODB;
+require_once APLICACION.'modelos'.SEPARADOR.'envioEmailModelo.php';
 
 /**
  * Description of usuariosModelo
@@ -76,8 +77,8 @@ class usuariosModelo {
         //Llamo a la función para conectarse a la base de datos
         $this->__conexion();
         
-        //Compruebo si el correo del usuario que se va a crear existe..
-        if(!$this->__existe())
+        //Compruebo si el correo del usuario que se va a crear no existe..
+        if(!$this->__existe($this->email))
         {
             //..si no existe es un usuario no registrado
             //Genero el hash de la contraseña
@@ -89,6 +90,14 @@ class usuariosModelo {
                     .$this->token."', '".$this->fecha_creacion."', ".$this->estado.");";
             $recordSet = $this->conexion->execute($sql);
             $sql = $this->conexion->getInsertSql($this->tabla, $_POST);
+            
+            //Recupero el id del usuario recién registrado para mandarle luego el correo de activación
+            $this->usuario_id = $this->__dameId($this->email);
+            
+            //Envio correo para activar cuenta
+            $mail = new \app\modelos\envioEmailModelo\envioEmailModelo();
+            $mail->activarCuenta($this->usuario_id, $this->email, $this->nombre, $this->apellidos);
+            //$this->__enviarEmail();
         }else
         {
             //..si existe es que el usuario ya está en la base de datos
@@ -114,19 +123,22 @@ class usuariosModelo {
         $this->conexion->connect($host, $usuario, $pass, $db);
         
         //Para debuggear ADODB
-        $this->conexion->debug = true;
+        //$this->conexion->debug = true;
     }
     
     /**
      * Función que comprueba si un usuario existe mediante su correo electrónico
+     * @param string $email email del usuario a comprobar
+     * @return boolean true si existe; false si no existe
      */
-    private function __existe() {
+    private function __existe($email) {
         
-        //Consulta para seleccionar el correo cuando es igual al que le viene por $_POST
-        $sql = "SELECT email FROM `usuarios` WHERE email='".$this->email."';";
+        //Consulta para seleccionar el correo de un usuario
+        $sql = "SELECT email FROM `usuarios` WHERE email='".$email."';";
         
         //Intenta obtener una fila de la consulta
         $columna = $this->conexion->getRow($sql);
+        //var_dump($columna);
         
         //Si hay 0 elementos en el array..
         if(count($columna) == 0)
@@ -147,5 +159,28 @@ class usuariosModelo {
      */
     private function __creaHash($password) {
         $this->password = password_hash($password, PASSWORD_BCRYPT);
+    }
+    
+    private function __dameId($email) {
+        
+        //Consulta para seleccionar el identificador del usuario
+        $sql = "SELECT usuario_id FROM `usuarios` WHERE email='".$email."';";
+        
+        //Intenta obtener una fila de la consulta
+        $columna = $this->conexion->getRow($sql);
+        
+        //Si hay 0 elementos en el array..
+        if(count($columna) == 0)
+        {
+            //..no existe el usuario con el email
+            return false;
+        } else
+        {
+            //..sino, si existe
+            //Y devuelvo el id del usuario
+            return $columna['usuario_id'];
+        }
+        
+        return false;
     }
 }

@@ -74,7 +74,6 @@ class Api {
                 /*..vienen más parámetros a parte de la clase y el método. Los argumentos del método a invocar */
                 for ($i = 0; $i < count($parametros); $i++) {
                     $this->parametros[$i] = $parametros[$i];
-                    $j++;
                 }
             }
         } else

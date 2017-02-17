@@ -22,6 +22,11 @@ class usuarios extends Api\Api implements Rest {
      * Función que da de alta un usuario
      */
     public function alta() {
+        //Incluyo las otras partes del layout
+        //Tendría que incluir las categorías aquí también y en cada uno de los métodos
+        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+        require_once $ruta_vista_login;
+        
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
         
@@ -43,8 +48,8 @@ class usuarios extends Api\Api implements Rest {
             $usuariosModelo->altaUsuario();
             
             //Redirección a la vista... y mensaje para comprobación de correo para la activación de la cuenta
-            $ruta_vista = VISTAS .'usuarios/alta.php' ;
-            require_once $ruta_vista;
+            $ruta_vista_alta = VISTAS .'usuarios/alta.php' ;
+            require_once $ruta_vista_alta;
         }
     }
     

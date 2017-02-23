@@ -35,7 +35,7 @@ class envioEmailModelo {
         $mail = new \PHPMailer();
         
         //Activo el debug
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         
         //Configuración envío por SMTP
         $mail->isSMTP();

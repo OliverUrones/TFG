@@ -25,7 +25,7 @@ class usuariosModelo {
     public $password = NULL;
     public $nombre = NULL;
     public $apellidos = NULL;
-    public $token = NULL;
+    public $token = 'NULL';
     public $validez_token = NULL;
     public $fecha_creacion = NULL;
     public $estado = 0;
@@ -35,35 +35,39 @@ class usuariosModelo {
      * Constructor de defecto que recoge los datos de $_POST y los guarda en los atributos
      */
     public function __construct() {
+        
+        //Llamo a la función para conectarse a la base de datos
+        $this->__conexion();
+        
         if(isset($_POST['usuario_id'])) {
-            $this->usuario_id = $_POST['usuario_id'];
+            $this->usuario_id = $this->conexion->qStr($_POST['usuario_id']);
         }
         if(isset($_POST['rol_id'])) {
-            $this->rol_id = $_POST['rol_id'];
+            $this->rol_id = $this->conexion->qStr($_POST['rol_id']);
         }
         if(isset($_POST['email'])) {
-            $this->email = $_POST['email'];
+            $this->email = $this->conexion->qStr($_POST['email']);
         }
         if(isset($_POST['password'])) {
-            $this->password = $_POST['password'];
+            $this->password = $this->conexion->qStr($_POST['password']);
         }
         if(isset($_POST['nombre'])) {
-            $this->nombre = $_POST['nombre'];
+            $this->nombre = $this->conexion->qStr($_POST['nombre']);
         }
         if(isset($_POST['apellidos'])) {
-            $this->apellidos = $_POST['apellidos'];
+            $this->apellidos = $this->conexion->qStr($_POST['apellidos']);
         }
         if(isset($_POST['token'])) {
-            $this->token = $_POST['token'];
+            $this->token = $this->conexion->qStr($_POST['token']);
         }
         if(isset($_POST['validez_token'])) {
-            $this->validez_token = $_POST['validez_token'];
+            $this->validez_token = $this->conexion->qStr($_POST['validez_token']);
         }
         if(isset($_POST['fecha_creacion'])) {
-            $this->fecha_creacion = $_POST['fecha_creacion'];
+            $this->fecha_creacion = $this->conexion->qStr($_POST['fecha_creacion']);
         }
         if(isset($_POST['estado'])) {
-            $this->estado = $_POST['estado'];
+            $this->estado = $this->conexion->qStr($_POST['estado']);
         }
     }
 
@@ -72,10 +76,8 @@ class usuariosModelo {
      */
     public function altaUsuario() {
         //Establezco la fecha de creación con la fecha actual en formato año-mes-día hora:minutos:segundos
-        $this->fecha_creacion = date('y-m-d h:m:s');
+        $this->fecha_creacion = $this->conexion->qStr(date('y-m-d h:m:s'));
         
-        //Llamo a la función para conectarse a la base de datos
-        $this->__conexion();
         
         //Compruebo si el correo del usuario que se va a crear no existe..
         if(!$this->__existe($this->email))
@@ -83,11 +85,10 @@ class usuariosModelo {
             //..si no existe es un usuario no registrado
             //Genero el hash de la contraseña
             $this->__creaHash($this->password);
-            
             //Consulta de inserción de un usuario a la base de datos
             $sql = "INSERT INTO `usuarios` (`rol_id`, `email`, `password`, `nombre`, `apellidos`, `token`, `fecha_creacion`, `estado` )"
-                    . " VALUES (".$this->rol_id.", '".$this->email."', '".$this->password."', '". utf8_decode($this->nombre)."', '". utf8_decode($this->apellidos)."', '"
-                    .$this->token."', '".$this->fecha_creacion."', ".$this->estado.");";
+                    . " VALUES (".$this->rol_id.", ".$this->email.", '".$this->password."', ". utf8_decode($this->nombre).", ". utf8_decode($this->apellidos).", "
+                    .$this->token.", ".$this->fecha_creacion.", ".$this->estado.");";
             $recordSet = $this->conexion->execute($sql);
             $sql = $this->conexion->getInsertSql($this->tabla, $_POST);
             
@@ -123,7 +124,7 @@ class usuariosModelo {
         $this->conexion->connect($host, $usuario, $pass, $db);
         
         //Para debuggear ADODB
-        //$this->conexion->debug = true;
+        $this->conexion->debug = true;
     }
     
     /**
@@ -134,7 +135,7 @@ class usuariosModelo {
     private function __existe($email) {
         
         //Consulta para seleccionar el correo de un usuario
-        $sql = "SELECT email FROM `usuarios` WHERE email='".$email."';";
+        $sql = "SELECT email FROM `usuarios` WHERE email=".$email.";";
         
         //Intenta obtener una fila de la consulta
         $columna = $this->conexion->getRow($sql);
@@ -161,10 +162,15 @@ class usuariosModelo {
         $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
     
+    /**
+     * Función que devuelve el id de un usuario cuyo email exista o falso en caso contrario
+     * @param type $email
+     * @return boolean
+     */
     private function __dameId($email) {
         
         //Consulta para seleccionar el identificador del usuario
-        $sql = "SELECT usuario_id FROM `usuarios` WHERE email='".$email."';";
+        $sql = "SELECT usuario_id FROM `usuarios` WHERE email=".$email.";";
         
         //Intenta obtener una fila de la consulta
         $columna = $this->conexion->getRow($sql);
@@ -182,5 +188,19 @@ class usuariosModelo {
         }
         
         return false;
+    }
+    
+    /**
+     * Función que activa una cuenta en la base de datos.
+     * @param string $id Id de la cuenta a activar
+     */
+    public function activarCuenta($id) {
+        //Consulta para cambiar activar una cuenta
+        $sql = "UPDATE `usuarios` SET `estado` = '1' WHERE `usuarios`.`estado` = 0 AND `usuarios`.`usuario_id` = ".$id[0].";";
+        
+        //Ejecución de la consulta
+        $resultado = $this->conexion->execute($sql);
+        
+        //Cargar la vista con el mensaje correspondiente
     }
 }

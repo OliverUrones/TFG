@@ -74,6 +74,20 @@ class usuarios extends Api\Api implements Rest {
     }
     
     public function activar($id) {
-        echo "Se va a activar la cuenta con id = ".$id[0];
+        //echo "Se va a activar la cuenta con id = ".$id[0];
+        //Recoge el tipo de petición realizada
+        $this->DamePeticion();
+        
+        //Si viene por GET...
+        if($this->peticion === "GET") {
+            //Compruebo que sólo viene un parámetro por la url
+            if(count($id) == 1){
+                //Se crea un objeto del modelo usuarios
+                $usuariosModelo = new usuariosModelo();
+
+                //Se llama al método del modelo usuarios que activa una cuenta
+                $usuariosModelo->activarCuenta($id);
+            }
+        }
     }
 }

@@ -41,6 +41,20 @@ class archivos extends Api implements Rest {
     }
     
     public function convertir() {
-        echo "Class archivos -- Método convertir()";
+        //echo "Class archivos -- Método convertir()";
+        //Incluyo las otras partes del layout
+        //Tendría que incluir las categorías aquí también y en cada uno de los métodos
+        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+        require_once $ruta_vista_login;
+        
+        //Recoge el tipo de petición realizada
+        $this->DamePeticion();
+        
+        if($this->peticion === "GET")
+        {
+            //..muestra el forumulario de registro
+            $ruta_vista = VISTAS .'archivos/convertir.php' ;
+            require_once $ruta_vista;
+        }
     }
 }

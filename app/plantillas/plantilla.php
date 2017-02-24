@@ -19,7 +19,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
                             <li role="presentation"><a href="?">Inicio</a></li>
-                            <li role="presentation"><a href="?archivos">Conversión</a></li>
+                            <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
                             <li role="presentation"><a href="#">Categorías</a></li>
                             <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
                         </ul>

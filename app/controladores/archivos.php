@@ -79,6 +79,7 @@ class archivos extends Api implements Rest {
                 //Se comprueba los tipos recogidos con el formato requerido
                 if($this->comprobarTiposArchivos($tipo_archivo))
                 {
+                    $images;
                     //Para cada nombre temporal del archivo subido..
                     foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
                         //Se recoge la ruta de origen
@@ -93,12 +94,21 @@ class archivos extends Api implements Rest {
                         //Si se ha movido con éxtio...
                         if(move_uploaded_file($origen, $destino))
                         {
-                            //...Se procedería a llamar al script noteshrink.py
-                            echo "<br/>Se ha movido el archivo subido correctamente.";
+                            //Construyo la cadena de parámetros con el nombre de los archivos
+                            //Quedará algo como /var/www/html/app/temp/archivo1 /var/www/html/app/temp/archivo2 ...
+                            $images = $destino.' '.$images;
+                            //echo "<br/>Se ha movido el archivo subido correctamente.";
                         } else {
-                            echo "<br/>NO se ha movido el archivo subido.";
+                            //echo "<br/>NO se ha movido el archivo subido.";
                         }
                     }
+                    //Una vez que se han procesado todos los archivos, se procedería a llamar al script noteshrink.py
+                    //echo $images;
+                    //var_dump($_POST);
+                    //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
+                    //Será de la forma: /var/www/html/app/temp/archivo1 [/var/www/html/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
+                    $argumentos = $this->procesarParametros($images, $_POST);
+                    echo $argumentos;
                 } else 
                 {
                     echo "El formato requerido no coincide.";
@@ -112,7 +122,7 @@ class archivos extends Api implements Rest {
     
     /**
      * Función que comprueba que el tipo de archivo es PNG o JPG
-     * @param array $tipos Array con los tipos de los archivos subidos "image/jpeg" o image/png
+     * @param array $tipos Array con los tipos de los archivos subidos "image/jpeg" o "image/png"
      * @return boolean True | False Devuelve falso si se ha subido un archivo que no es jpeg o png y true en caso contrario
      */
     private function comprobarTiposArchivos($tipos) {
@@ -130,5 +140,28 @@ class archivos extends Api implements Rest {
             return false;
         }
         return true;
+    }
+    
+    /**
+     * Función que devuelve una cadena con los parámetros necesarios para el funcionamiento del script noteshrink.py
+     * Ejemplo: imágen1 [imágen2] -b salida.png -o salida.pdf ...
+     * @param string $imagenes Cadena con las rutas completas a los archivos jpg/png que se van a procesar
+     * @param array $params Valores recibidos desde el formulario en el array $_POST
+     * @return string $cadena Devuelve la cadena de los argumentos construida
+     */
+    private function procesarParametros($imagenes, $params) {
+        $cadena = $imagenes;
+        if(is_array($params))
+        {
+            foreach ($params as $opcion => $value) {
+                if($opcion === '-w' || $opcion === '-S' || $opcion === '-K')
+                {
+                    $cadena = $cadena.$opcion.' ';
+                } else {
+                    $cadena = $cadena.$opcion.' '.$value.' ';
+                }
+            }
+            return $cadena;
+        }
     }
 }

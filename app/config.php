@@ -17,6 +17,7 @@ define('ADODB', DIRECTORIO_APLICACION . 'adodb5' . SEPARADOR . 'adodb.inc.php');
 define('ADODB_DRIVER_MYSQLI', DIRECTORIO_APLICACION . 'adodb5' . SEPARADOR . 'drivers' . SEPARADOR . 'adodb-mysqli.inc.php');
 define('PHPMAILER', DIRECTORIO_APLICACION.'PHPMailer' . SEPARADOR . 'PHPMailerAutoload.php');
 define('PHPMAILER_SMTP', DIRECTORIO_APLICACION.'PHPMailer' . SEPARADOR . 'class.smtp.php');
+define('CARPETA_TEMPORALES', APLICACION . 'temp');
 
 //echo '<br/>DS '.SEPARADOR;
 //echo '<br/>RAIZ'.RAIZ;

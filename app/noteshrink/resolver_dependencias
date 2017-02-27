@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Script que instala los módulos de python necesarios para la ejecución del programa noteshrink
+
+sudo apt-get install python-numpy
+sudo apt-get install python-pil
+sudo apt-get install python-scipy
+sudo apt-get install python-setuptools

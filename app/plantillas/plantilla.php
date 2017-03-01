@@ -49,6 +49,9 @@
                 <article class="col-xs-12 col-sm-8 col-md-9">
                     <?php echo $contenido ?>
                 </article>
+                
+                <!-- login -->
+                <?php echo $login ?>
 
                 <aside class="col-xs-12 col-sm-4 col-md-3">
                     <h2>Categorías</h2>
@@ -56,9 +59,6 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
                 </aside>
-                
-                <!-- login -->
-                <?php echo $login ?>
             </section>
         </div>
         <div class="clearfix visible-xs-inline-block"></div>

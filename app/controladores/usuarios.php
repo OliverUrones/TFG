@@ -70,7 +70,32 @@ class usuarios extends Api\Api implements Rest {
     }
     
     public function login() {
-        echo "Estoy en la clase usuarios en el método login()";
+        //echo "Estoy en la clase usuarios en el método login()";
+        //Incluyo las otras partes del layout
+        //Tendría que incluir las categorías aquí también y en cada uno de los métodos
+        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+        require_once $ruta_vista_login;
+        
+        //Recoge el tipo de petición realizada
+        $this->DamePeticion();
+        
+        //Si viene por POST
+        if($this->peticion === "POST")
+        {
+            //Se crea un objeto del modelo usuarios
+            $usuariosModelo = new usuariosModelo();
+            
+            //Se llama al método del modelo usuarios que añade un usuario a la base de datos
+            $usuario = $usuariosModelo->dameUsuario();
+            //var_dump($usuario);
+            
+            //Función extract() para pasar los datos a la vista
+            extract($usuario);
+            
+            //Redirección a la vista... y mensaje del estado del login
+            //$ruta_vista_alta = VISTAS .'usuarios/alta.php' ;
+            //require_once $ruta_vista_alta;
+        }
     }
     
     public function activar($id) {

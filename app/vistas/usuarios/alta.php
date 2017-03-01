@@ -1,4 +1,4 @@
-    <?php ob_start(); ?>
+<?php ob_start(); ?>
 <h2>Formulario para el registro</h2>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl as vm">
     <form class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
@@ -38,6 +38,27 @@
             <button type="submit" class="btn btn-success" value="Enviar">Registrarse</button>
         </div>
     </form>
+    <?php
+        if(isset($registro)) {
+    ?>
+    <div class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title">Mensaje de Error</h4>
+                </div>
+                <div class="modal-body">
+                    <?php
+                        $registro = json_decode($registro); 
+                        //var_dump($registro);
+                        echo $registro->Mensaje;
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
 </div>
 <?php $contenido = ob_get_clean(); ?>
 <?php 

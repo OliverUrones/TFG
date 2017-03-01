@@ -102,7 +102,9 @@ class usuariosModelo {
         }else
         {
             //..si existe es que el usuario ya está en la base de datos
-            echo 'Mensaje de que el correo ya existe';
+            //echo 'Mensaje de que el correo ya existe';
+            $json = $this->__construyeJSON('400 KO', 'El correo ya existe', NULL, NULL);
+            return $json;
         }        
     }
     
@@ -325,7 +327,7 @@ class usuariosModelo {
      * @param array $datos Datos en forma de array asociativo
      * @return JSON Datos en JSON
      */
-    private function __construyeJSON($estado, $mensaje, $clave_datos, $datos) {
+    private function __construyeJSON($estado, $mensaje, $clave_datos=NULL, $datos=NULL) {
         return json_encode(array('estado' => $estado, 'Mensaje' => $mensaje, $clave_datos => $datos));
         //var_dump($JSON);
     }

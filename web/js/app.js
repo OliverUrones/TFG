@@ -1,8 +1,6 @@
 angular
-    .module('altaApp', [])
-    .controller('altaAppCtrl', ValidarFormulario);
-    
-function ValidarFormulario() {
+    .module('altaApp', ['ngDialog'])
+    .controller('altaAppCtrl', function($scope, ngDialog) {
     //Modelo para el campo del nombre
     this.nombre;
     //Atributos de clase para la etiqueta y el input del nombre
@@ -38,6 +36,10 @@ function ValidarFormulario() {
     this.clase_mensaje_pass2 = "text-info";
     //texto del mensaje de información para la repetición de la contraseña
     this.mensaje_pass2 = "Las contraseñas no pueden ser vacias.";
+
+    $scope.abrirDialog = function() {
+        ngDialog.open({template: 'popupTmpl.html', className: 'ngdialog-theme-default'});
+    }
 
     /*
      * Función que comprueba que el nombre tenga al menos 3 caracteres.
@@ -104,7 +106,7 @@ function ValidarFormulario() {
             }
         }
     }
-}
+});
 
 angular
     .module('avanzadasApp', [])

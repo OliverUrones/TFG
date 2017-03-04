@@ -35,29 +35,27 @@
             {{vm.mensaje_pass2}}
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success" value="Enviar">Registrarse</button>
+            <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="abrirDialog()">Registrarse</button>
         </div>
     </form>
     <?php
+        //Si vienen la respuesta del alta se muestra la ventana modal con el mensaje
         if(isset($registro)) {
     ?>
-    <div class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                    <h4 class="modal-title">Mensaje de Error</h4>
-                </div>
-                <div class="modal-body">
-                    <?php
-                        $registro = json_decode($registro); 
-                        //var_dump($registro);
-                        echo $registro->Mensaje;
-                    ?>
+    <script type="text/ng-template" id="popupTmpl.html">
+            <div class="modal-header">
+                <h3 class="modal-title">Estado del registro</h3>
+            </div>
+            <div class="modal-body">
+                <div>
+                <?php
+                    $registro = json_decode($registro); 
+                    //var_dump($registro);
+                    echo $registro->Mensaje;
+                ?>
                 </div>
             </div>
-        </div>
-    </div>
+    </script>
     <?php } ?>
 </div>
 <?php $contenido = ob_get_clean(); ?>

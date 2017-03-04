@@ -6,9 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="web/css/bootstrap.min.css">
         <link rel="stylesheet" href="web/css/estilos.css">
-        <script src="web/css/js/jquery.js"></script>
-        <script src="web/css/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="web/css/ngDialog-theme-default.min.css">
+        <link rel="stylesheet" href="web/css/ngDialog.min.css">
         <script src="web/js/angular.min.js"></script>
+        <script src="web/js/ngDialog.min.js"></script>
+        <script src="web/js/jquery.js"></script>
+        <script src="web/js/bootstrap.js"></script>
         <script src="web/js/app.js"></script>
     </head>
     <body>

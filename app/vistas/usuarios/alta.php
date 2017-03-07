@@ -1,41 +1,66 @@
 <?php ob_start(); ?>
 <h2>Formulario para el registro</h2>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl as vm">
-    <form class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
-        <div class="form-group has-error" data-ng-class="vm.clase_nombre">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl">
+    <form name="alta" class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
+        <div class="form-group">
             <label class="control-label">Nombre</label>
-            <input type="text" name="nombre" class="form-control" id="nombre" data-ng-model="vm.nombre" data-ng-keyup="vm.comprobarNombre()">
-        </div>
-        <div class="form-group text-info" data-ng-class="vm.clase_mensaje_nombre">
-            {{vm.mensaje_nombre}}
-        </div>
-        <div class="form-group has-success">
-            <label class="control-label">Apellidos</label>
-            <input type="text" name="apellidos" class="form-control" id="apellidos">
-        </div>
-        <div class="form-group has-error" data-ng-class="vm.clase_email">
-            <label class="control-label">E-mail</label>
-            <input type="email" name="email" placeholder="correo@correo.es" class="form-control" data-ng-model="vm.email" data-ng-keyup="vm.comprobarEmail()">
-        </div>
-        <div class="form-group text-info" data-ng-class="vm.clase_mensaje_email">
-            {{vm.mensaje_email}}
-        </div>
-        <div class="form-group has-error" data-ng-class="vm.clase_pass1">
-            <label class="control-label">Contraseña</label>
-            <input type="password" name="password" placeholder="******" class="form-control" data-ng-model="vm.pass1" data-ng-keyup="vm.comprobarLongitud()">
-        </div>
-        <div class="form-group text-info" data-ng-class="vm.clase_mensaje_pass1">
-            {{vm.mensaje_pass1}}
-        </div>
-        <div class="form-group has-error" data-ng-class="vm.clase_pass2">
-            <label class="control-label">Repita la contraseña</label>
-            <input type="password" name="password_repeat" placeholder="******" class="form-control" data-ng-model="vm.pass2" data-ng-keyup="vm.comprobarPass()">
-        </div>
-        <div class="form-group text-info" data-ng-class="vm.clase_mensaje_pass2">
-            {{vm.mensaje_pass2}}
+            <input type="text" 
+                   name="nombre" 
+                   class="form-control" 
+                   id="nombre" 
+                   data-ng-model="altaModelo.nombre"
+                   data-ng-minlength="3"
+                   required>
+            <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
+            <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="abrirDialog()">Registrarse</button>
+            <label class="control-label">Apellidos</label>
+            <input type="text"
+                   name="apellidos" 
+                   class="form-control" 
+                   id="apellidos" 
+                   data-ng-model="altaModelo.apellidos"
+                   required>
+            <span data-ng-show='alta.apellidos.$error.required && !alta.apellidos.$pristine'>Los apellidos son obligatorios.</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">E-mail</label>
+            <input type="email" 
+                   name="email" 
+                   placeholder="correo@correo.es" 
+                   class="form-control" 
+                   data-ng-model="altaModelo.email" 
+                   required>
+            <span data-ng-show='alta.email.$error.required && !alta.email.$pristine'>El email es obligatorio.</span>
+            <span data-ng-show='alta.email.$error.email && !alta.email.$pristine'>El email no es válido.</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Contraseña</label>
+            <input type="password" 
+                   name="password" 
+                   placeholder="******" 
+                   class="form-control" 
+                   data-ng-model="altaModelo.password" 
+                   data-ng-minlength="8"
+                   required>
+            <span data-ng-show='alta.password.$error.required && !alta.password.$pristine'>La contraseña es obligatoria.</span>
+            <span data-ng-show='alta.password.$error.minlength && !alta.password.$pristine'>La contraseña debe tener al menos 8 caracteres.</span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">Repita la contraseña</label>
+            <input type="password" 
+                   name="password_repeat" 
+                   placeholder="******" 
+                   class="form-control" 
+                   data-ng-model="altaModelo.password_repeat" 
+                   data-ng-minlength="8"
+                   required>
+            <span data-ng-show="altaModelo.password_repeat !== altaModelo.password">Las contraseñas no coinciden</span>
+            <span data-ng-show='alta.password.$error.minlength'>La contraseña debe tener al menos 8 caracteres.</span>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="abrirDialog()" data-ng-disabled="!alta.$valid" data-ng-click="enviar(altaModelo)">Registrarse</button>
         </div>
     </form>
     <?php

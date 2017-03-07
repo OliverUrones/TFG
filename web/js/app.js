@@ -2,8 +2,10 @@ angular
     .module('altaApp', ['ngDialog'])
     .controller('altaAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {
     
+    //Objeto que representa al modelo de los datos del formulario de alta
     $scope.altaModelo = {};
     
+    //Función que se ejecuta en la directiva ng-click del formulario de alta
     $scope.enviar = function (altaModelo) {
         //alert(JSON.stringify(altaModelo));
     }

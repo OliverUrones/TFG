@@ -24,8 +24,8 @@ class usuarios extends Api\Api implements Rest {
     public function alta() {
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
-        $ruta_vista_login = VISTAS . 'usuarios/login.php';
-        require_once $ruta_vista_login;
+        //$ruta_vista_login = VISTAS . 'usuarios/login.php';
+        //require_once $ruta_vista_login;
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
@@ -76,8 +76,8 @@ class usuarios extends Api\Api implements Rest {
         //echo "Estoy en la clase usuarios en el método login()";
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
-        $ruta_vista_login = VISTAS . 'usuarios/login.php';
-        require_once $ruta_vista_login;
+        //$ruta_vista_login = VISTAS . 'usuarios/login.html';
+        //require_once $ruta_vista_login;
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();

@@ -18,7 +18,7 @@
             <input type="text" placeholder="salida.pdf" class="form-control" name="-o">
             <p class="help-block">Por defecto será output.pdf</p>
         </div>
-        <div ng-app="avanzadasApp" ng-controller="avanzadasAppCtrl as vm">
+        <div ng-app="avanzadasApp" ng-controller="AvanzadasAppController as vm">
             <div ng-class="vm.clase">
                 <div class="form-group">
                     <label>Umbral de saturación</label>

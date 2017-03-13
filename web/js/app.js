@@ -18,13 +18,11 @@ angular
 angular
     .module('loginApp', ['ngDialog'])
     .controller('loginAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {
-            
-    //Objeto que representa al modelo de los datos del formulario de login
-    $scope.loginModelo = {};
     
     //Función que se ejecuta en la directia ng-click del formulario de login
-    $scope.enviar = function (loginModelo) {
-        console.log("loginApp");
+    $scope.loginDialog = function() {
+        console.log("Estoy en loginDialog");
+        ngDialog.open({template: 'app/vistas/usuarios/login.html', className: 'ngdialog-theme-default'});
     }
 }])
 

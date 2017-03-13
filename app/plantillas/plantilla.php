@@ -25,6 +25,7 @@
                             <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
                             <li role="presentation"><a href="#">Categorías</a></li>
                             <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
+                            <li role="presentation" class="text-right" data-ng-app="loginApp" data-ng-controller="loginAppCtrl" data-ng-click="loginDialog()"><a href="#">Login</a></li>
                         </ul>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                 </article>
                 
                 <!-- login -->
-                <?php echo $login ?>
+                <?php //echo $login ?>
 
                 <aside class="col-xs-12 col-sm-4 col-md-3">
                     <h2>Categorías</h2>

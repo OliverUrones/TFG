@@ -1,8 +1,7 @@
-<div class="modal-header" data-ng-app="loginApp" data-ng-controller="loginAppCtrl">
-    <h2 class="modal-title">Login</h2>
-</div>
-<form name="acceso" role="form" action="?usuarios/login" method="POST">
-    <div class="modal-body">
+<?php ob_start() ?>
+<aside class="col-xs-12 col-sm-4 col-md-3" data-ng-app="loginApp" data-ng-controller="loginAppCtrl">
+    <h2>Login</h2>
+    <form role="form" action="?usuarios/login" method="POST">
         <div class="form-group">
             <input class="form-control" type="text" placeholder="corre@correo.es" name="email" data-ng-model="loginModelo.email">
             <span data-ng-show='login.email.$error.required && !login.email.$pristine'>El email es obligatorio.</span>
@@ -17,7 +16,8 @@
             <a href="?usuarios/recordar">¿Ha olvidado la contraseña?</a>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success modal-footer" data-ng-disabled="!login.$valid">Entrar</button>
+            <button type="submit" class="btn btn-success" data-ng-disabled="!login.$valid">Entrar</button>
         </div>
-    </div>
-</form>
+    </form>
+</aside>
+<?php $login = ob_get_clean(); ?>

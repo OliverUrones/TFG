@@ -1,7 +1,7 @@
 <?php ob_start() ?>
 <aside class="col-xs-12 col-sm-4 col-md-3" data-ng-app="loginApp" data-ng-controller="loginAppCtrl">
     <h2>Login</h2>
-    <form role="form" action="?usuarios/login" method="POST">
+    <form name="login" role="form" action="?usuarios/login" method="POST">
         <div class="form-group">
             <input class="form-control" type="text" placeholder="corre@correo.es" name="email" data-ng-model="loginModelo.email">
             <span data-ng-show='login.email.$error.required && !login.email.$pristine'>El email es obligatorio.</span>

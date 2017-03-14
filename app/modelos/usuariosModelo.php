@@ -227,7 +227,13 @@ class usuariosModelo {
         //Ejecución de la consulta
         $resultado = $this->conexion->execute($sql);
         
-        //Cargar la vista con el mensaje correspondiente
+        if(!$resultado)
+        {
+            return $this->__construyeJSON('400 KO', 'Error al activar la cuenta');
+        }else
+        {
+            return $this->__construyeJSON('200 OK', 'Cuenta activada correctamente');
+        }
     }
     
     /**

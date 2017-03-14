@@ -58,6 +58,7 @@ class envioEmailModelo {
         
         
         $mail->Subject = "Activar cuenta";
+        //Sustituir localhost por la dirección IP del servidor
         $mail->Body = "Para activar la cuenta haga click <a href=\"https://localhost/TFG2/?usuarios/activar/".$usuario_id."\">". utf8_decode("Aquí")."</a>";
         $mail->AltBody = "Para activar la cuenta copie el siguiente enlace https://localhost/TFG2/?usuarios/activar/".$usuario_id." y péguelo en la barra de direcciones del navegador";
 

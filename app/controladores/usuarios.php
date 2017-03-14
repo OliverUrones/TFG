@@ -113,8 +113,15 @@ class usuarios extends Api\Api implements Rest {
                 //Se crea un objeto del modelo usuarios
                 $usuariosModelo = new usuariosModelo();
 
-                //Se llama al método del modelo usuarios que activa una cuenta
-                $usuariosModelo->activarCuenta($id);
+                //Se llama al método del modelo usuarios que activa una cuenta que devuele el JSON con el mensaje y el estado de la petición
+                $estado_activacion = $usuariosModelo->activarCuenta($id);
+                
+                //Paso el JSON a la vista
+                extract($estado_activacion);
+                
+                //Cargo la vista de la activación de la cuenta para mostrar el mensaje
+                $ruta_vista_estado_activacion = VISTAS . 'usuarios/estado_activacion.php';
+                require_once $ruta_vista_estado_activacion;
             }
         }
     }

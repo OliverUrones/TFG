@@ -23,7 +23,7 @@ class envioEmailModelo {
     public $puerto = 465;
     public $usuario = "Oliver.Urones@usal.es";
     //Quitar la contraseña antes de subirlo al repositorio
-    public $password = "********";
+    public $password = "*******";
     
     /**
      * Función que manda un correo con el enlace para activar la cuenta
@@ -35,7 +35,7 @@ class envioEmailModelo {
         $mail = new \PHPMailer();
         
         //Activo el debug
-        //$mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 2;
         
         //Configuración envío por SMTP
         $mail->isSMTP();
@@ -52,7 +52,10 @@ class envioEmailModelo {
         $mail->setFrom("no-reply@repositorio.es", "Oliver Urones");
         
         //Receptor del correo
+        //Le quito las comillas simples que vienen en la cadena para la proteción de SQL-Inject porque sino al añadir la dirección con addAddress da error
+        $email = str_replace("'", "", $email);
         $mail->addAddress($email, $nombre." ".$apellidos );
+        
         
         $mail->Subject = "Activar cuenta";
         $mail->Body = "Para activar la cuenta haga click <a href=\"https://localhost/TFG2/?usuarios/activar/".$usuario_id."\">". utf8_decode("Aquí")."</a>";

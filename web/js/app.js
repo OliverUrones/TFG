@@ -23,7 +23,7 @@ angular
     $scope.loginModelo = {};
     
     //Función que se ejecuta en la directia ng-click del formulario de login
-    $scope.enviar = function (loginModelo) {
+    $scope.login = function (loginModelo) {
         console.log("loginApp");
     }
 }])

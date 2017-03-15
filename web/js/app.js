@@ -16,15 +16,15 @@ angular
 }]);
 
 angular
-    .module('loginApp', ['ngDialog'])
-    .controller('loginAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {
+    .module('loginApp', [])
+    .controller('loginAppCtrl', ['$scope', function($scope) {
             
     //Objeto que representa al modelo de los datos del formulario de login
     $scope.loginModelo = {};
     
     //Función que se ejecuta en la directia ng-click del formulario de login
     $scope.login = function (loginModelo) {
-        console.log("loginApp");
+        console.log(loginModelo);
     }
 }])
 

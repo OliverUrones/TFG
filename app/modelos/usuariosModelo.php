@@ -284,21 +284,25 @@ class usuariosModelo {
                         }
                         //var_dump($usuario);
                         $json = $this->__construyeJSON('200 OK', 'Usuario logeado correctamente', 'usuario', $usuario);
-                        return $json;
                     } else {
-                        echo "Error al actualizar el token y la validez";
+                        //echo "Error al actualizar el token y la validez";
+                        $json = $this->__construyeJSON('400 KO', 'Error al actualizar el token y la validez');
                     }
                 } else {
                     //Si password_verify devuelve false; el hash no coincide y el usuario no accede
-                    echo "Compruebe la contraseña";
+                    //echo "Compruebe la contraseña";
+                    $json = $this->__construyeJSON('400 KO', 'Compruebe la contraseña');
                 }
             } else {
-                echo "La cuenta no está activada";
+                //echo "La cuenta no está activada";
+                $json = $this->__construyeJSON('400 KO', 'La cuenta no está activada');
             }
         } else {
             //Sino es que el email no existe
-            echo "No existe el email";
+            //echo "No existe el email";
+            $json = $this->__construyeJSON('400 KO', 'No existe el email');
         }
+        return $json;
     }
     
     /**
@@ -335,7 +339,13 @@ class usuariosModelo {
      * @return JSON Datos en JSON
      */
     private function __construyeJSON($estado, $mensaje, $clave_datos=NULL, $datos=NULL) {
-        return json_encode(array('estado' => $estado, 'Mensaje' => $mensaje, $clave_datos => $datos));
+        if($clave_datos === NULL && $datos === NULL)
+        {
+            return json_encode(array('estado' => $estado, 'Mensaje' => $mensaje));
+        } else
+        {
+            return json_encode(array('estado' => $estado, 'Mensaje' => $mensaje, $clave_datos => $datos));
+        }
         //var_dump($JSON);
     }
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php var_dump($usuario); ?>
 <html>
     <head>
         <title>Repositorio</title>

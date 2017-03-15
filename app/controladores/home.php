@@ -30,3 +30,5 @@ class home {
         require_once $ruta_vista_home;
     }
 }
+
+

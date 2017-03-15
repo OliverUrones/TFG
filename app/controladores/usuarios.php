@@ -96,8 +96,8 @@ class usuarios extends Api\Api implements Rest {
             extract($usuario);
             
             //Redirección a la vista... y mensaje del estado del login
-            //$ruta_vista_alta = VISTAS .'usuarios/alta.php' ;
-            //require_once $ruta_vista_alta;
+            $ruta_vista_perfil = VISTAS .'usuarios/perfil.php' ;
+            require_once $ruta_vista_perfil;
         }
     }
     

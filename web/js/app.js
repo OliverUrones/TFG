@@ -1,17 +1,35 @@
-angular
-    .module('altaApp', ['ngDialog'])
-    .controller('altaAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {
-    
+var formularios = angular.module('RepositorioApp', ['ngDialog']);
+
+formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', function($scope, ngDialog) {
     //Objeto que representa al modelo de los datos del formulario de alta
     $scope.altaModelo = {};
     
+    $scope.resgistroDialog = function() {
+        ngDialog.open({template: 'popupTmpl.html', className: 'ngdialog-theme-default'});
+    }
+}]);
+
+angular
+    .module('altaApp', ['ngDialog'])
+    .controller('altaAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {
+
     //Función que se ejecuta en la directiva ng-click del formulario de alta
     $scope.enviar = function (altaModelo) {
         //alert(JSON.stringify(altaModelo));
     }
     
-    $scope.abrirDialog = function() {
-        ngDialog.open({template: 'popupTmpl.html', className: 'ngdialog-theme-default'});
+}]);
+
+angular
+    .module('loginApp', [])
+    .controller('loginAppCtrl', ['$scope', function($scope) {
+            
+    //Objeto que representa al modelo de los datos del formulario de login
+    $scope.loginModelo = {};
+    
+    //Función que se ejecuta en la directia ng-click del formulario de login
+    $scope.login = function (loginModelo) {
+        console.log(loginModelo);
     }
 }]);
 
@@ -29,19 +47,6 @@ angular
     
     $scope.msgActivacion = function() {
         ngDialog.open({template: 'estadoActivacion.html', className: 'ngdialog-theme-default'});
-    }
-}]);
-
-angular
-    .module('loginApp', [])
-    .controller('loginAppCtrl', ['$scope', function($scope) {
-            
-    //Objeto que representa al modelo de los datos del formulario de login
-    $scope.loginModelo = {};
-    
-    //Función que se ejecuta en la directia ng-click del formulario de login
-    $scope.login = function (loginModelo) {
-        console.log(loginModelo);
     }
 }]);
 

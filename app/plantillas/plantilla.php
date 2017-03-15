@@ -47,7 +47,7 @@
             </div>
         </div>
         
-        <div class="container">
+        <div class="container" data-ng-app="RepositorioApp" data-ng-controller="ValidacionFormsController">
             <section class="main row">
                 <article class="col-xs-12 col-sm-8 col-md-9">
                     <?php echo $contenido ?>

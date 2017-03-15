@@ -1,9 +1,10 @@
 <?php ob_start(); ?>
 <h2>Formulario para el registro</h2>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl">
+<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl">-->
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <form name="alta" class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
         <div class="form-group">
-            <label class="control-label">Nombre</label>
+            <label class="control-label ">Nombre</label>
             <input type="text" 
                    name="nombre" 
                    class="form-control" 
@@ -60,7 +61,7 @@
             <span data-ng-show='alta.password.$error.minlength'>La contraseña debe tener al menos 8 caracteres.</span>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="abrirDialog()" data-ng-disabled="!alta.$valid" data-ng-click="enviar(altaModelo)">Registrarse</button>
+            <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="resgistroDialog()" data-ng-disabled="!alta.$valid">Registrarse</button>
         </div>
     </form>
     <?php

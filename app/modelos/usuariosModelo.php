@@ -48,8 +48,14 @@ class usuariosModelo {
         if(isset($_POST['email'])) {
             $this->email = $this->conexion->qStr($_POST['email']);
         }
+        if(isset($_POST['email_login'])) {
+            $this->email = $this->conexion->qStr($_POST['email_login']);
+        }
         if(isset($_POST['password'])) {
             $this->password = $this->conexion->qStr($_POST['password']);
+        }
+        if(isset($_POST['password_login'])) {
+            $this->password = $this->conexion->qStr($_POST['password_login']);
         }
         if(isset($_POST['nombre'])) {
             $this->nombre = $this->conexion->qStr($_POST['nombre']);
@@ -87,7 +93,7 @@ class usuariosModelo {
             $this->__creaHash($this->password);
             //Consulta de inserción de un usuario a la base de datos
             $sql = "INSERT INTO `usuarios` (`rol_id`, `email`, `password`, `nombre`, `apellidos`, `token`, `fecha_creacion`, `estado` )"
-                    . " VALUES (".$this->rol_id.", ".$this->email.", '".$this->password."', ". utf8_decode($this->nombre).", ". utf8_decode($this->apellidos).", "
+                    . " VALUES (".$this->rol_id.", ".$this->email.", '".$this->password."', ". utf8_encode($this->nombre).", ". utf8_encode($this->apellidos).", "
                     .$this->token.", ".$this->fecha_creacion.", ".$this->estado.");";
             $recordSet = $this->conexion->execute($sql);
             $sql = $this->conexion->getInsertSql($this->tabla, $_POST);
@@ -267,11 +273,9 @@ class usuariosModelo {
      * @return JSON Datos de un usuario logeado en formato JSON
      */
     public function dameUsuario() {
-        //var_dump($_POST);
         //Si existe el email que le viene...
         if($this->__existe($this->email))
         {
-            //echo "Existe el email";
             //Compruebo si la cuenta está activada
             if($this->__cuentaActivada($this->email))
             {
@@ -287,12 +291,9 @@ class usuariosModelo {
                     //Establezco la validez del token en segundos para 10 Minutos
                     $time = time(); //Fecha actual del sistema en segundos
                     $this->validez_token = ($time+600); //Se suma 600segundos para 10 Minutos de validez del token a la fecha actual
-                    //echo '<br/>time: '.$time;
-                    //echo '<br/>validez_token: '.$this->validez_token;
                     
                     //Consulta para actualizar los campos token y validez_token en la base de datos en función del id del usuario
                     $sql = "UPDATE `usuarios` SET `token` = '". uniqid()."', `validez_token` = ".$this->validez_token."  WHERE `usuarios`.`usuario_id` = ".$id.";";
-                    //echo '<br/>'.$sql;
 
                     //Si la consulta se ejecuta correctamente..
                     if($this->conexion->execute($sql))
@@ -304,11 +305,11 @@ class usuariosModelo {
                         foreach ($resultado as $key => $value) {
                             if(is_string($key))
                             {
-                                $usuario[$key] = $value;
+                                $usuario[$key] = utf8_decode($value);
                                 //echo '<br/>resultado['.$key.'] = '.$value;
                             }
                         }
-                        //var_dump($usuario);
+                        var_dump($usuario);
                         $json = $this->__construyeJSON('200 OK', 'Usuario logeado correctamente', 'usuario', $usuario);
                     } else {
                         //echo "Error al actualizar el token y la validez";
@@ -328,6 +329,8 @@ class usuariosModelo {
             //echo "No existe el email";
             $json = $this->__construyeJSON('400 KO', 'No existe el email');
         }
+        //echo json_last_error_msg();
+        //var_dump($json);
         return $json;
     }
     

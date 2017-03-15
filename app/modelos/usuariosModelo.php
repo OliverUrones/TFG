@@ -221,21 +221,47 @@ class usuariosModelo {
      * @param string $id Id de la cuenta a activar
      */
     public function activarCuenta($id) {
-        //Consulta para cambiar activar una cuenta
-        $sql = "UPDATE `usuarios` SET `estado` = '1' WHERE `usuarios`.`estado` = 0 AND `usuarios`.`usuario_id` = ".$id[0].";";
-        
-        //Ejecución de la consulta
-        $resultado = $this->conexion->execute($sql);
-        
-        if(!$resultado)
-        {
-            return $this->__construyeJSON('400 KO', 'Error al activar la cuenta');
-        }else
-        {
-            return $this->__construyeJSON('200 OK', 'Cuenta activada correctamente');
+        //Comprueba el estado de la cuenta con id $id
+        //Si este estado ya es 1; la cuenta ya está activada
+        $estado = $this->__dameEstado($id[0]);
+        if($estado == 1){
+            return $this->__construyeJSON('400 KO', 'La cuenta ya está activada');
+        } elseif ($estado === NULL) {
+            return $this->__construyeJSON('400 KO', 'No existe la cuenta');
+        }else {
+            //sino, se procede a activar la cuenta
+            //Consulta para cambiar activar una cuenta
+            $sql = "UPDATE `usuarios` SET `estado` = '1' WHERE `usuarios`.`estado` = 0 AND `usuarios`.`usuario_id` = ".$id[0].";";
+
+            //Ejecución de la consulta
+            $resultado = $this->conexion->execute($sql);
+
+            if(!$resultado)
+            {
+                return $this->__construyeJSON('400 KO', 'Error al activar la cuenta');
+            }else
+            {
+                return $this->__construyeJSON('200 OK', 'Cuenta activada correctamente');
+            }
         }
     }
     
+    /**
+     * Función que comrueba el estado de una cuenta de usuario a través del id del usuario
+     * @param int $id ID de la cuenta del usuario a activar
+     * @return int Devuelve el estado actual de la cuenta de usuario
+     */
+    function __dameEstado($id) {
+        $sql = "SELECT `estado` FROM `usuarios` WHERE `usuario_id`=".$id.";";
+        $resultado = $this->conexion->getRow($sql);
+        if(!$resultado){
+            return NULL;
+        } else {
+            return $resultado['estado'];
+        }
+    }
+
+
     /**
      * Función que devuelve los datos de un usuario logeado en formato JSON
      * @return JSON Datos de un usuario logeado en formato JSON

@@ -16,6 +16,23 @@ angular
 }]);
 
 angular
+    .module('estadoActivacionApp', ['ngDialog'])
+    .controller('estadoActivacionController', ['$scope', 'ngDialog', function($scope, ngDialog) {
+    
+    //Objeto que representa al modelo de los datos del formulario de alta
+    $scope.altaModelo = {};
+    
+    //Función que se ejecuta en la directiva ng-click del formulario de alta
+    $scope.enviar = function (altaModelo) {
+        //alert(JSON.stringify(altaModelo));
+    }
+    
+    $scope.msgActivacion = function() {
+        ngDialog.open({template: 'estadoActivacion.html', className: 'ngdialog-theme-default'});
+    }
+}]);
+
+angular
     .module('loginApp', [])
     .controller('loginAppCtrl', ['$scope', function($scope) {
             
@@ -26,7 +43,7 @@ angular
     $scope.login = function (loginModelo) {
         console.log(loginModelo);
     }
-}])
+}]);
 
 angular
     .module('avanzadasApp', [])

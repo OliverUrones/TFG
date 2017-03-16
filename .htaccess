@@ -1,6 +1,14 @@
-<IfModule mod_rewrite.c>
-    RewriteEngine off
-#    RewriteRule    ^$    webroot/    [L]
-#    RewriteRule    (.*) webroot/$1    [L]
+# Uncomment the following to prevent the httpoxy vulnerability
+# See: https://httpoxy.org/
+#<IfModule mod_headers.c>
+#    RequestHeader unset Proxy
+#</IfModule>
 
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule    ^(.+)/(.+)/(.+)/(.+)$ index.php?controlador=$1&metodo=$2&id=$3&token=$4 [QSA]    [L]
+    RewriteRule    ^(.+)/(.+)/(.+)$ index.php?controlador=$1&metodo=$2&id=$3 [QSA]    [L]
+    RewriteRule    ^(.+)/(.+)$ index.php?controlador=$1&metodo=$2 [QSA]    [L]
 </IfModule>

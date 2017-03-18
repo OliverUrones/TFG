@@ -6,9 +6,10 @@
 
 <IfModule mod_rewrite.c>
     RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule    ^(.+)/(.+)/(.+)/(.+)$ index.php?controlador=$1&metodo=$2&id=$3&token=$4 [QSA]    [L]
-    RewriteRule    ^(.+)/(.+)/(.+)$ index.php?controlador=$1&metodo=$2&id=$3 [QSA]    [L]
-    RewriteRule    ^(.+)/(.+)$ index.php?controlador=$1&metodo=$2 [QSA]    [L]
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{HTTP:header} !-f
+#	RewriteRule    ^(.+)/(.+)$ index.php?controlador=$1&metodo=$2 [QSA]    [L]
+    #RewriteRule    ^(.+)/(.+)/(.+)/(.+)$ index.php?controlador=$1&metodo=$2&id=$3&token=$4 [QSA]    [L]
+    #RewriteRule    ^(.+)/(.+)/(.+)$ index.php?controlador=$1&metodo=$2&id=$3 [QSA]    [L]
 </IfModule>

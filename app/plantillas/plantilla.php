@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<?php var_dump($usuario); ?>
+<?php //var_dump(json_decode($usuario)); ?>
 <html>
     <head>
         <title>Repositorio</title>
@@ -22,10 +22,19 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
-                            <li role="presentation"><a href="?">Inicio</a></li>
-                            <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
-                            <li role="presentation"><a href="#">Categorías</a></li>
-                            <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
+                            <?php if(!isset($usuario)) { ?>
+                                <li role="presentation"><a href="?home/index">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
+                                <li role="presentation"><a href="#">Categorías</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
+                            <?php } else {
+                                $usuario = json_decode($usuario);
+                            ?>
+                                <li role="presentation"><a href="?home/index/<?php echo $usuario->usuario->token ?>">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
+                                <li role="presentation"><a href="#">Categorías</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario->usuario_id ?>">Perfil</a></li>
+                            <?php } ?>
                         </ul>
                     </div>
                 </div>
@@ -55,7 +64,11 @@
                 </article>
                 
                 <!-- login -->
-                <?php echo $login ?>
+                <?php 
+                    if(!isset($usuario)) {
+                        echo $login;
+                    }
+                ?>
 
                 <aside class="col-xs-12 col-sm-4 col-md-3">
                     <h2>Categorías</h2>

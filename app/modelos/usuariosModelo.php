@@ -269,7 +269,7 @@ class usuariosModelo {
 
 
     /**
-     * Función que devuelve los datos de un usuario logeado en formato JSON
+     * Función que devuelve los datos de un usuario cuando se logeado en formato JSON
      * @return JSON Datos de un usuario logeado en formato JSON
      */
     public function dameUsuario() {
@@ -293,6 +293,7 @@ class usuariosModelo {
                     $this->validez_token = ($time+600); //Se suma 600segundos para 10 Minutos de validez del token a la fecha actual
                     
                     //Consulta para actualizar los campos token y validez_token en la base de datos en función del id del usuario
+                    //uniqid(true) generará un id único con 23 caracteres
                     $sql = "UPDATE `usuarios` SET `token` = '". uniqid()."', `validez_token` = ".$this->validez_token."  WHERE `usuarios`.`usuario_id` = ".$id.";";
 
                     //Si la consulta se ejecuta correctamente..
@@ -309,7 +310,7 @@ class usuariosModelo {
                                 //echo '<br/>resultado['.$key.'] = '.$value;
                             }
                         }
-                        var_dump($usuario);
+                        //var_dump($usuario);
                         $json = $this->__construyeJSON('200 OK', 'Usuario logeado correctamente', 'usuario', $usuario);
                     } else {
                         //echo "Error al actualizar el token y la validez";
@@ -360,6 +361,38 @@ class usuariosModelo {
     }
     
     /**
+     * Función que devuelve la validez de un token
+     * @param string $token
+     * @return int
+     */
+    public function validezToken($token) {
+        //Consulta para seleccionar validez_token de un usuario
+        $sql = "SELECT validez_token FROM `usuarios` WHERE token='".$token."';";
+        
+        //Intenta obtener una fila de la consulta
+        $columna = $this->conexion->getRow($sql);
+        
+        return $columna['validez_token'];
+    }
+    
+    public function dameUsuarioToken($token) {
+        $sql = "SELECT * FROM `usuarios` WHERE token='".$token."'";
+        
+        $resultado = $this->conexion->getRow($sql);
+        //var_dump($usuario);
+        foreach ($resultado as $key => $value) {
+            if(is_string($key))
+            {
+                $usuario[$key] = utf8_decode($value);
+                //echo '<br/>resultado['.$key.'] = '.$value;
+            }
+        }
+        
+        $json = $this->__construyeJSON('200 OK', 'Usuario logeado correctamente', 'usuario', $usuario);
+        return $json;
+    }
+
+        /**
      * Función que codifica en JSON los datos recibidos como parámetros
      * @param string $estado Estado de la petición
      * @param string $mensaje Mensaje de la petición

@@ -15,7 +15,6 @@ use app\Api;
 //echo '<br/>'. __DIR__;
 //echo '<br/>'. dirname(__DIR__);
 //echo '<br/>'.urldecode($_SERVER['REQUEST_URI']);
-var_dump($_GET);
 $api = new Api\Api;
 $api->Api();
 ?>

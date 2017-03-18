@@ -14,8 +14,8 @@ namespace app\Api;
  */
 class Api {
     public $peticion = NULL;
-    private $clase = NULL;      /*Elegir clase por defecto*/
-    private $metodo = NULL;     /*Elegir método por defecto*/
+    private $controlador = 'home';      /*controlador por defecto*/
+    private $metodo = 'index';     /*método por defecto*/
     private $parametros = NULL; /*Parámetros provenientes de los formularios*/
     private $tipo = "text/html";
     //private $tipo = "application/json";
@@ -45,7 +45,7 @@ class Api {
     private function TratarURL() {
         //Recogo la URI de la petición y la trato, de forma que queda un array con las claves "path" y "query"
         $url = parse_url(urldecode($_SERVER['REQUEST_URI']));
-        
+        //var_dump($_GET);
         /*Si viene la clave query..*/
         if(isset($url['query']))
         {
@@ -61,7 +61,7 @@ class Api {
              */
             $parametros = explode("/", $url['query']);
             /*Extraigo la clase del array de parámetros*/
-            $this->clase = array_shift($parametros);
+            $this->controlador = array_shift($parametros);
             /*Extraigo el método del array de parámetros*/
             $this->metodo = array_shift($parametros);
             
@@ -82,7 +82,7 @@ class Api {
              * Si no viene la clave query la petición se realizará a
              * la clase home y al método index()
              */
-            $this->clase = 'home';
+            $this->controlador = 'home';
             $this->metodo = 'index';
             
 //            echo '<br/>'.$this->clase;
@@ -142,7 +142,7 @@ class Api {
        /*Construyo la ruta donde se encuentra el archivo de la clase a la que se va a llamar
         * añadiéndole la extensión .php
         */
-       $ruta_controlador = __DIR__.$this->ruta_controlador.$this->clase.'.php';
+       $ruta_controlador = __DIR__.$this->ruta_controlador.$this->controlador.'.php';
        /*Compruebo si el archivo existe*/
        if(file_exists($ruta_controlador)){
            /*Compruebo si el archivo se puede leer*/
@@ -153,7 +153,7 @@ class Api {
                 * Construyo la cadena para el controlador. Se incluye el espacio de nombres 'namespace'
                 * La cadena queda de la siguiente forma: \app\controladores\<<clase>>\<<clase>>
                 */
-               $controlador = $this->espacio_nombres.$this->clase.'\\'.$this->clase;
+               $controlador = $this->espacio_nombres.$this->controlador.'\\'.$this->controlador;
                /*Si existe la clase del controlador...*/
                if(class_exists($controlador, false)) {
                    /*...y si existe el método de ese controlador*/
@@ -173,7 +173,7 @@ class Api {
                         }
                    } else
                    {
-                       echo "No existe el método ".$this->metodo." de la clase ".$this->clase;
+                       echo "No existe el método ".$this->metodo." de la clase ".$this->controlador;
                    }
                } else
                {

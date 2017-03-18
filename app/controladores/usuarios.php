@@ -72,6 +72,15 @@ class usuarios extends Api\Api implements Rest {
         echo "Estoy en la clase usuarios en el método modificar()";
     }
     
+    /**
+     * Función que devuelve los datos del perfil de un usuario
+     * @param type $id
+     */
+    public function perfil($id) {
+        echo "Estoy en la clase usuarios en el método perfil() y el parámetro id es ".$id[0];
+        //Compruebo la validez del token del usuario con usuario_id = $id
+    }
+
     public function login() {
         //echo "Estoy en la clase usuarios en el método login()";
         //Incluyo las otras partes del layout
@@ -95,6 +104,10 @@ class usuarios extends Api\Api implements Rest {
             //Función extract() para pasar los datos a la vista
             extract($usuario);
             
+            $id = json_decode($usuario);
+            $id = $id->usuario->usuario_id;
+            
+            //$this->perfil($id);
             //Redirección a la vista... y mensaje del estado del login
             $ruta_vista_perfil = VISTAS .'usuarios/perfil.php' ;
             require_once $ruta_vista_perfil;

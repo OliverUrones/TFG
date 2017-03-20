@@ -11,8 +11,8 @@
 #RewriteCond %{HTTP:header} !-f
 #RewriteCond %{DOCUMENT_ROOT}/ !-f
 #    RewriteBase "/TFG2/"
-    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/?$                              index.php?controlador=$1&metodo=$2                  [QSA]   [L]
-    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/([0-9]+)/?$                     index.php?controlador=$1&metodo=$2&id=$3            [QSA]   [L]
-    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/([0-9]+)/(.[a-zA-Z0-9]+)/?$     index.php?controlador=$1&metodo=$2&id=$3&token=$4   [QSA]   [L]
-    RewriteRule  ^(.*)$                                                     index.php?controlador=home&metodo=index             [QSA]   [L]
+#    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/?$                              index.php?controlador=$1&metodo=$2                  [QSA]   [L]
+#    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/([0-9]+)/?$                     index.php?controlador=$1&metodo=$2&id=$3            [QSA]   [L]
+#    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/([0-9]+)/(.[a-zA-Z0-9]+)/?$     index.php?controlador=$1&metodo=$2&id=$3&token=$4   [QSA]   [L]
+#    RewriteRule  ^(.*)$                                                     index.php?controlador=home&metodo=index             [QSA]   [L]
 </IfModule>

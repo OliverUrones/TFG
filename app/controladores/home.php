@@ -29,18 +29,21 @@ class home {
         $ruta_vista_home = VISTAS.'home.php';
         $ruta_vista_login = VISTAS.'usuarios/login.php';
 
-        //Si vienen parámetros, compruebo que la longitud sea de 13 caracteres que es la longitud de un token
-        if(strlen($parametros[0]) === 13) {
-            //Si el token es válido...
-            if($this->compruebaValidezToken($parametros[0])) {
-                $modeloUsuario = new usuariosModelo();
-                //...recupero los datos del usuario
-                $usuario = $modeloUsuario->dameUsuarioToken($parametros[0]);
-                //Devuelvo lo datos del usuario a la vista
-                extract($usuario);
+        //Si vienen parámetros, compruebo que la longitud sea de 14 caracteres que es la longitud de un token
+        if(isset($parametros['token']))
+        {
+            if(strlen($parametros['token']) === 14) {
+                //Si el token es válido...
+                if($this->compruebaValidezToken($parametros['token'])) {
+                    $modeloUsuario = new usuariosModelo();
+                    //...recupero los datos del usuario
+                    $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                    //Devuelvo lo datos del usuario a la vista
+                    var_dump($usuario);
+                    extract($usuario);
+                }
             }
         }
-        
         
         require_once $ruta_vista_login;
         require_once $ruta_vista_home;

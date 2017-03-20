@@ -23,15 +23,15 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
                             <?php if(!isset($usuario)) { ?>
-                                <li role="presentation"><a href="home/index">Inicio</a></li>
-                                <li role="presentation"><a href="archivos/convertir">Conversión</a></li>
+                                <li role="presentation"><a href="?home/index">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-                                <li role="presentation" class="text-right"><a href="usuarios/alta">Registro</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
                             <?php } else {
                                 $usuario = json_decode($usuario);
                             ?>
                                 <li role="presentation"><a href="?home/index/<?php echo $usuario->usuario->token ?>">Inicio</a></li>
-                                <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
+                                <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario->usuario->token ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
                                 <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario->usuario_id ?>">Perfil</a></li>
                             <?php } ?>

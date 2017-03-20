@@ -293,8 +293,9 @@ class usuariosModelo {
                     $this->validez_token = ($time+600); //Se suma 600segundos para 10 Minutos de validez del token a la fecha actual
                     
                     //Consulta para actualizar los campos token y validez_token en la base de datos en función del id del usuario
-                    //uniqid(true) generará un id único con 23 caracteres
-                    $sql = "UPDATE `usuarios` SET `token` = '". uniqid()."', `validez_token` = ".$this->validez_token."  WHERE `usuarios`.`usuario_id` = ".$id.";";
+                    //uniqid() generará un id único con 13 caracteres al que se le añadirá la t delante para indicar que es el token
+                    $token = 't'.uniqid();
+                    $sql = "UPDATE `usuarios` SET `token` = '". $token ."', `validez_token` = ".$this->validez_token."  WHERE `usuarios`.`usuario_id` = ".$id.";";
 
                     //Si la consulta se ejecuta correctamente..
                     if($this->conexion->execute($sql))
@@ -375,6 +376,11 @@ class usuariosModelo {
         return $columna['validez_token'];
     }
     
+    /**
+     * Función que devuelve los datos del usuario a través de un token
+     * @param string $token Token de 14 caracteres siendo t el primero de ellos
+     * @return ObjetoJSON Devuelve el objeto JSON
+     */
     public function dameUsuarioToken($token) {
         $sql = "SELECT * FROM `usuarios` WHERE token='".$token."'";
         

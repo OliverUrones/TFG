@@ -18,6 +18,7 @@ class Api {
     private $metodo = 'index';     /*método por defecto*/
     private $parametros = NULL; /*Parámetros provenientes de los formularios*/
     private $tipo = "text/html";
+    //private $tipo = "application/javascript";
     //private $tipo = "application/json";
     private $codEstado = 200;
     private $ruta_controlador = '/controladores/';
@@ -45,7 +46,6 @@ class Api {
     private function TratarURL() {
         //Recogo la URI de la petición y la trato, de forma que queda un array con las claves "path" y "query"
         $url = parse_url(urldecode($_SERVER['REQUEST_URI']));
-        //var_dump($_GET);
         /*Si viene la clave query..*/
         if(isset($url['query']))
         {
@@ -59,6 +59,7 @@ class Api {
              * ..quiere decir que vienen los parámetros de la llamada.
              * Divido la cadena por / y los devuelvo
              */
+            //var_dump($url);
             $parametros = explode("/", $url['query']);
             /*Extraigo la clase del array de parámetros*/
             $this->controlador = array_shift($parametros);
@@ -68,13 +69,22 @@ class Api {
 //            echo '<br/>'.$this->clase;
 //            echo '<br/>'.$this->metodo;
             
-            
-            /*Si todavía quedan elementos en el array..*/
-            if(count($parametros) > 0) {
-                /*..vienen más parámetros a parte de la clase y el método. Los argumentos del método a invocar */
+            //var_dump($parametros);
+            /*Si todavía quedan elementos en el array., en concreto 2 o 3.*/
+            if(count($parametros) > 0 && count($parametros) < 3) {
+                /*..vienen más parámetros a parte de la clase y el método. Los argumentos del método a invocar id y token*/
                 for ($i = 0; $i < count($parametros); $i++) {
-                    $this->parametros[$i] = $parametros[$i];
+                    //Compruebo si el primer caracter de la dentro del array de parámetros es t...
+                    if(substr($parametros[$i], 0, 1) === 't') {
+                        //...Si es 't' quiere decir que ese parámetro es el token
+                        //echo substr($parametros[$i], 0, 1);
+                        $this->parametros['token'] = $parametros[$i];
+                    } else {
+                        //..sino será el id
+                        $this->parametros['id'] = $parametros[$i];
+                    }
                 }
+                //var_dump($this->parametros);
             }
         } else
         {
@@ -105,7 +115,7 @@ class Api {
      */
     public function EstablecerCabeceras() {
         header("HTTP/1.1 " . $this->codEstado . " " . $this->GetCodEstado());  
-        header("Content-Type:" . $this->tipo . ';charset=utf-8');
+        //header("Content-Type:" . $this->tipo . ';charset=utf-8');
      }
      
      /**

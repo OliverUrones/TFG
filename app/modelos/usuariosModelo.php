@@ -229,25 +229,25 @@ class usuariosModelo {
     public function activarCuenta($id) {
         //Comprueba el estado de la cuenta con id $id
         //Si este estado ya es 1; la cuenta ya está activada
-        $estado = $this->__dameEstado($id[0]);
+        $estado = $this->__dameEstado($id);
         if($estado == 1){
-            return $this->__construyeJSON('400 KO', 'La cuenta ya está activada');
+            return array('estado' => '400 KO', 'Mensaje' => 'La cuenta ya está activada');
         } elseif ($estado === NULL) {
-            return $this->__construyeJSON('400 KO', 'No existe la cuenta');
+            return array('estado' => '400 KO', 'Mensaje' => 'No existe la cuenta');
         }else {
             //sino, se procede a activar la cuenta
             //Consulta para cambiar activar una cuenta
-            $sql = "UPDATE `usuarios` SET `estado` = '1' WHERE `usuarios`.`estado` = 0 AND `usuarios`.`usuario_id` = ".$id[0].";";
+            $sql = "UPDATE `usuarios` SET `estado` = '1' WHERE `usuarios`.`estado` = 0 AND `usuarios`.`usuario_id` = ".$id.";";
 
             //Ejecución de la consulta
             $resultado = $this->conexion->execute($sql);
 
             if(!$resultado)
             {
-                return $this->__construyeJSON('400 KO', 'Error al activar la cuenta');
+                return array('estado' => '400 KO', 'Mensaje' => 'Error al activar la cuenta');
             }else
             {
-                return $this->__construyeJSON('200 OK', 'Cuenta activada correctamente');
+                return array('estado' => '200 OK', 'Mensaje' => 'Cuenta activada correctamente');
             }
         }
     }

@@ -103,7 +103,7 @@ class usuarios extends Api\Api implements Rest {
             //Se llama al método del modelo usuarios recupera los datos del usuario a loguearse
             $usuario = $usuariosModelo->dameUsuarioLogueado();
             
-            //var_dump($usuario);
+            var_dump($usuario);
                 
             //Se convierte los datos a JSON
             $usuario = $this->construyeJSON($usuario);
@@ -155,6 +155,8 @@ class usuarios extends Api\Api implements Rest {
 
                 //Se llama al método del modelo usuarios que activa una cuenta que devuele el JSON con el mensaje y el estado de la petición
                 $estado_activacion = $usuariosModelo->activarCuenta($parametros['id']);
+                $estado_activacion = $this->construyeJSON($estado_activacion);
+                //var_dump($estado_activacion);
                 
                 //Paso el JSON a la vista
                 extract($estado_activacion);

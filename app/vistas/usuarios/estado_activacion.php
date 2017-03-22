@@ -25,7 +25,7 @@ if(isset($estado_activacion)) {
                 <div>
                 <?php
                     $estado_activacion = json_decode($estado_activacion); 
-                    //var_dump($registro);
+                    //var_dump($estado_activacion);
                     echo $estado_activacion->Mensaje;
                 ?>
                 </div>

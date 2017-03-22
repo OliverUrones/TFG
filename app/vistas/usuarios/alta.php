@@ -75,6 +75,7 @@
             <div class="modal-body">
                 <div>
                 <?php
+                print_r($registro);
                     $registro = json_decode($registro); 
                     //var_dump($registro);
                     echo $registro->Mensaje;

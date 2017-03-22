@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<?php //var_dump(json_decode($usuario)); ?>
+<?php //var_dump(json_decode($usuario));
+    if(isset($usuario)) {
+        $usuario = json_decode($usuario);
+    }
+?>
 <html>
     <head>
         <title>Repositorio</title>
@@ -22,20 +26,23 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
-                            <?php if(!isset($usuario)) { ?>
+                            <?php if($usuario->estado === '400 KO') { ?>
                                 <li role="presentation"><a href="?home/index">Inicio</a></li>
                                 <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
                                 <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
                             <?php } else {
-                                $usuario = json_decode($usuario);
+                                //$usuario = json_decode($usuario);
+                                //var_dump($usuario->estado === '200 OK');
                             ?>
                                 <li role="presentation"><a href="?home/index/<?php echo $usuario->token ?>">Inicio</a></li>
                                 <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario->token ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
                                 <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
                                 <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario->usuario_id ?>">Salir</a></li>
-                            <?php } ?>
+                            <?php
+                                }
+                            ?>
                         </ul>
                     </div>
                 </div>

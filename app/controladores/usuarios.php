@@ -111,7 +111,7 @@ class usuarios extends Api\Api implements Rest {
             //Función extract() para pasar los datos a la vista
             extract($usuario);
             
-            //Redirección a la vista... y mensaje del estado del login
+            //Redirección a la vista... y mensaje del estado del login ************ OJO
             $ruta_vista_perfil = VISTAS .'usuarios/perfil.php' ;
             require_once $ruta_vista_perfil;
         }

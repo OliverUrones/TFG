@@ -42,9 +42,9 @@
                                 <li role="presentation"><a href="#">Categorías</a></li>
 <!--                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
                                 <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario->usuario_id ?>">Salir</a></li>-->
-                                <li class="dropdown">
+                                <li class="dropdown dr">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
-                                    <ul class="dropdown-menu">
+                                    <ul class="dropdown-menu dropdown-menu-right">
                                         <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario_id ?>/<?php echo $usuario->token ?>">Ver perfil</a></li>
                                         <li class="divider"></li>
                                         <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario->usuario_id ?>">Salir</a></li>

@@ -30,10 +30,11 @@
                             <?php } else {
                                 $usuario = json_decode($usuario);
                             ?>
-                                <li role="presentation"><a href="?home/index/<?php echo $usuario->usuario->token ?>">Inicio</a></li>
-                                <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario->usuario->token ?>">Conversión</a></li>
+                                <li role="presentation"><a href="?home/index/<?php echo $usuario->token ?>">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario->token ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario->usuario_id ?>">Perfil</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario->usuario_id ?>">Salir</a></li>
                             <?php } ?>
                         </ul>
                     </div>

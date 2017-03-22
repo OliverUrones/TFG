@@ -200,4 +200,14 @@ class Api {
            echo "El archivo del controlador ". $this->ruta_controlador." no existe";
        }
    }
+   
+   /**
+     * Función que codifica en JSON los datos recibidos como parámetros
+     * @param array $respuesta Estado de la petición
+     * @return JSON Datos en JSON
+     */
+    public function construyeJSON($respuesta) {
+        return json_encode($respuesta);
+        //var_dump($JSON);
+    }
 }

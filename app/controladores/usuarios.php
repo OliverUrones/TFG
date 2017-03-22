@@ -81,6 +81,9 @@ class usuarios extends Api\Api implements Rest {
         //Compruebo la validez del token del usuario con usuario_id = $id
     }
 
+    /**
+     * Función para loguearse
+     */
     public function login() {
         //echo "Estoy en la clase usuarios en el método login()";
         //Incluyo las otras partes del layout
@@ -97,24 +100,48 @@ class usuarios extends Api\Api implements Rest {
             //Se crea un objeto del modelo usuarios
             $usuariosModelo = new usuariosModelo();
             
-            //Se llama al método del modelo usuarios que añade un usuario a la base de datos
-            $usuario = $usuariosModelo->dameUsuario();
-            //var_dump($usuario);
+            //Se llama al método del modelo usuarios recupera los datos del usuario a loguearse
+            $usuario = $usuariosModelo->dameUsuarioLogueado();
             
+            //var_dump($usuario);
+                
+            //Se convierte los datos a JSON
+            $usuario = $this->construyeJSON($usuario);
+                        
             //Función extract() para pasar los datos a la vista
             extract($usuario);
             
-            $id = json_decode($usuario);
-            $id = $id->usuario->usuario_id;
-            
-            //$this->perfil($id);
             //Redirección a la vista... y mensaje del estado del login
             $ruta_vista_perfil = VISTAS .'usuarios/perfil.php' ;
             require_once $ruta_vista_perfil;
         }
     }
     
-    public function activar($id) {
+    /**
+     * Función para cerrar sesión
+     */
+    public function logout($parametros = NULL) {
+        
+        //Recogo el tipo de petición realizada
+        $this->DamePeticion();
+        //si viene por GET...
+        if($this->peticion === "GET") {
+            //Compruebo si viene el id
+            if(isset($parametros['id']))
+            {
+                var_dump($parametros);
+                //Se crea un objeto del modelo usuarios
+                $usuariosModelo = new usuariosModelo();
+                $estado_peticion = $usuariosModelo->borraDatosSesion($parametros['id']);
+                echo $estado_peticion['Mensaje'];
+                
+                //Requerir la vista correspondiente
+            }
+        }
+        
+    }
+
+    public function activar($parametros = NULL) {
         //echo "Se va a activar la cuenta con id = ".$id[0];
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
@@ -122,12 +149,12 @@ class usuarios extends Api\Api implements Rest {
         //Si viene por GET...
         if($this->peticion === "GET") {
             //Compruebo que sólo viene un parámetro por la url
-            if(count($id) == 1){
+            if(isset($parametros['id'])){
                 //Se crea un objeto del modelo usuarios
                 $usuariosModelo = new usuariosModelo();
 
                 //Se llama al método del modelo usuarios que activa una cuenta que devuele el JSON con el mensaje y el estado de la petición
-                $estado_activacion = $usuariosModelo->activarCuenta($id);
+                $estado_activacion = $usuariosModelo->activarCuenta($parametros['id']);
                 
                 //Paso el JSON a la vista
                 extract($estado_activacion);

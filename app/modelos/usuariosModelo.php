@@ -269,10 +269,10 @@ class usuariosModelo {
 
 
     /**
-     * Función que devuelve los datos de un usuario cuando se logeado en formato JSON
-     * @return JSON Datos de un usuario logeado en formato JSON
+     * Función que establece el token y su validez a la hora de loguearse y devuelve el usuario logueado y el estado de la petición 
+     * @return array Devuelve un array asociativo con el estado de la petición, un mensaje y el usuario en caso de logueo exitoso
      */
-    public function dameUsuario() {
+    public function dameUsuarioLogueado() {
         //Si existe el email que le viene...
         if($this->__existe($this->email))
         {
@@ -303,37 +303,40 @@ class usuariosModelo {
                         //Consulta para recupear los datos del usuario
                         $sql = "SELECT * FROM `usuarios` WHERE `usuarios`.`usuario_id`=".$id.";";
                         $resultado = $this->conexion->getRow($sql);
-                        //var_dump($usuario);
+
+                        //Recorro el array asociativo...
                         foreach ($resultado as $key => $value) {
+                            //...para dejar las claves que sean string
                             if(is_string($key))
                             {
+                                //Decodifico los valores del array con utf8
                                 $usuario[$key] = utf8_decode($value);
-                                //echo '<br/>resultado['.$key.'] = '.$value;
                             }
                         }
-                        //var_dump($usuario);
-                        $json = $this->__construyeJSON('200 OK', 'Usuario logeado correctamente', 'usuario', $usuario);
+                        
+                        //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
+                        $usuario['estado'] = '200 OK';
+                        $usuario['Mensaje'] = 'Usuario logeado correctamente';
+                        return $usuario;
                     } else {
                         //echo "Error al actualizar el token y la validez";
-                        $json = $this->__construyeJSON('400 KO', 'Error al actualizar el token y la validez');
+                        $resultado = array('estado' => '400 KO', 'Mensaje' => 'Error al actualizar el token y la validez');
+                        return $resultado;
                     }
                 } else {
                     //Si password_verify devuelve false; el hash no coincide y el usuario no accede
-                    //echo "Compruebe la contraseña";
-                    $json = $this->__construyeJSON('400 KO', 'Compruebe la contraseña');
+                    $resultado = array('estado' => '400 KO', 'Mensaje' => 'Compruebe la contraseña');
+                    return $resultado;
                 }
             } else {
-                //echo "La cuenta no está activada";
-                $json = $this->__construyeJSON('400 KO', 'La cuenta no está activada');
+                $resultado = array('estado' => '400 KO', 'Mensaje' => 'La cuenta no está activada');
+                return $resultado;
             }
         } else {
             //Sino es que el email no existe
-            //echo "No existe el email";
-            $json = $this->__construyeJSON('400 KO', 'No existe el email');
+            $resultado = array('estado' => '400 KO', 'Mensaje' => 'No existe el email');
+            return $resultado;
         }
-        //echo json_last_error_msg();
-        //var_dump($json);
-        return $json;
     }
     
     /**
@@ -366,7 +369,7 @@ class usuariosModelo {
      * @param string $token
      * @return int
      */
-    public function validezToken($token) {
+    private function __validezToken($token) {
         //Consulta para seleccionar validez_token de un usuario
         $sql = "SELECT validez_token FROM `usuarios` WHERE token='".$token."';";
         
@@ -374,6 +377,25 @@ class usuariosModelo {
         $columna = $this->conexion->getRow($sql);
         
         return $columna['validez_token'];
+    }
+    
+    /**
+     * Función que comprueba la validez de un token para comprobar si un usuario tiene una sesión abierta o no
+     * @param string $token
+     * @return boolean True si el token es válido False si no lo es
+     */
+    public function compruebaValidezToken($token) {
+        $validezToken = $this->__validezToken($token);
+        $time = time();
+        if($time > $validezToken) {
+            //Token no válido
+            echo "token no válido";
+            return false;
+        } else {
+            //Token válido
+            echo "token válido";
+            return true;
+        }
     }
     
     /**
@@ -393,27 +415,26 @@ class usuariosModelo {
                 //echo '<br/>resultado['.$key.'] = '.$value;
             }
         }
-        
-        $json = $this->__construyeJSON('200 OK', 'Usuario logeado correctamente', 'usuario', $usuario);
-        return $json;
+        //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
+        $usuario['estado'] = '200 OK';
+        $usuario['Mensaje'] = 'Sesión establecida correctamente';
+        return $usuario;
     }
 
-        /**
-     * Función que codifica en JSON los datos recibidos como parámetros
-     * @param string $estado Estado de la petición
-     * @param string $mensaje Mensaje de la petición
-     * @param string $clave_datos Clave para el acceso a los datos en el JSON
-     * @param array $datos Datos en forma de array asociativo
-     * @return JSON Datos en JSON
+    /**
+     * Función que actualiza el campo token y validez_token a NULL para cerrar la sesión de un usuario
+     * @param int $id Id del usuario
+     * @return array Array asociativo con el estado y el Mensaje de la petición
      */
-    private function __construyeJSON($estado, $mensaje, $clave_datos=NULL, $datos=NULL) {
-        if($clave_datos === NULL && $datos === NULL)
-        {
-            return json_encode(array('estado' => $estado, 'Mensaje' => $mensaje));
-        } else
-        {
-            return json_encode(array('estado' => $estado, 'Mensaje' => $mensaje, $clave_datos => $datos));
+    public function borraDatosSesion($id) {
+        //Consulta para poner quitar el token y la validez
+        $sql = "UPDATE `usuarios` SET `token` = NULL, `validez_token` = NULL WHERE `usuarios`.`usuario_id` = ".$id.";";
+        
+        if($this->conexion->execute($sql)) {
+            return array('estado' => '200 OK', 'Mensaje' => 'Sesión cerrada correctamente');
+        } else {
+            return array('estado' => '400 OK', 'Mensaje' => 'Ha habido un problema al cerrar la sesión');
         }
-        //var_dump($JSON);
+
     }
 }

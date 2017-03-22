@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +8,8 @@
 namespace app\controladores\home;
 
 use app\Api;
+use app\interfaz\Rest\Rest;
+
 use app\modelos\usuariosModelo\usuariosModelo;
 
 /**
@@ -16,7 +17,7 @@ use app\modelos\usuariosModelo\usuariosModelo;
  *
  * @author oliver
  */
-class home {
+class home extends Api\Api {
     
     /*Constructor*/
     public function home() {
@@ -33,13 +34,17 @@ class home {
         if(isset($parametros['token']))
         {
             if(strlen($parametros['token']) === 14) {
+                //Creo un objeto usuario
+                $modeloUsuario = new usuariosModelo();
                 //Si el token es válido...
-                if($this->compruebaValidezToken($parametros['token'])) {
-                    $modeloUsuario = new usuariosModelo();
+                if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                     //...recupero los datos del usuario
                     $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                    
+                    //Construyo la cadena JSON
+                    $usuario = $this->construyeJSON($usuario);
                     //Devuelvo lo datos del usuario a la vista
-                    var_dump($usuario);
+                    //var_dump($usuario);
                     extract($usuario);
                 }
             }
@@ -47,23 +52,5 @@ class home {
         
         require_once $ruta_vista_login;
         require_once $ruta_vista_home;
-    }
-    
-    /**
-     * Función que comprueba la validez de un token para comprobar si un usuario tiene una sesión abierta o no
-     * @param string $token
-     * @return boolean True si el token es válido False si no lo es
-     */
-    private function compruebaValidezToken($token) {
-        $modeloUsuario = new usuariosModelo();
-        $validezToken = $modeloUsuario->validezToken($token);
-        $time = time();
-        if($time > $validezToken) {
-            //Token no válido
-            return false;
-        } else {
-            //Token válido
-            return true;
-        }
     }
 }

@@ -10,12 +10,12 @@
         <!-- Este archivo de salida se podría omitir-->
         <div class="form-group">
             <label>Nombre del archivo de salida</label>
-            <input type="text" placeholder="página.png" class="form-control" name="-b">
-            <p class="help-block">Por defecto será page.png</p>
+            <input type="text" placeholder="página.png" class="form-control" name="-b" value="pagina">
+            <p class="help-block">Por defecto será pagina.png</p>
         </div>
         <div class="form-group">
             <label>Nombre del archivo de salida en formato .PDF</label>
-            <input type="text" placeholder="salida.pdf" class="form-control" name="-o">
+            <input type="text" placeholder="salida.pdf" class="form-control" name="-o" value="output">
             <p class="help-block">Por defecto será output.pdf</p>
         </div>
         <div ng-app="avanzadasApp" ng-controller="avanzadasAppCtrl as vm">
@@ -23,7 +23,7 @@
                 <div class="form-group">
                     <label>Umbral de saturación</label>
                     <div class=" input-group">
-                        <input type="text" class="form-control" placeholder="20" name="-s">
+                        <input type="text" class="form-control" placeholder="20" name="-s" value="20">
                         <span class="input-group-addon">%</span>
                     </div>
                     <p class="help-block">Reduce los colores de la imagen a blanco y negro.</p>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label>Umbral de fondo</label>
                     <div class=" input-group">
-                        <input type="text" class="form-control" placeholder="25" name="-v">
+                        <input type="text" class="form-control" placeholder="25" name="-v" value="25">
                         <span class="input-group-addon">%</span>
                     </div>
                     <p class="help-block">Los píxeles blancos representan los píxeles de la imagen cuyo valor está  en el rango del umbral, y los negros el valor que está  fuera de este rango.</p>
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label>Profundidad del color</label>
                     <div class=" input-group">
-                        <input type="text" class="form-control" placeholder="8" name="-n">
+                        <input type="text" class="form-control" placeholder="8" name="-n" value="8">
                         <span class="input-group-addon">%</span>
                     </div>
                     <p class="help-block">Cantidad de bits para representar el color de un píxel. 8 por defecto, equivale a 256 colores.</p>
@@ -47,7 +47,7 @@
                 <div class="form-group">
                     <label>Píxeles para muestrear</label>
                     <div class=" input-group">
-                        <input type="text" class="form-control" placeholder="5" name="-p">
+                        <input type="text" class="form-control" placeholder="5" name="-p" value="5">
                         <span class="input-group-addon">%</span>
                     </div>
                     <p class="help-block">El muestreo reduce la resolución espacial de la imagen. 5 por defecto</p>

@@ -12,6 +12,7 @@ use app\Api\Api;
 use app\interfaz\Rest\Rest;
 
 //use modelo archivos
+use app\modelos\usuariosModelo\usuariosModelo;
 
 /**
  * Description of archivos
@@ -40,7 +41,7 @@ class archivos extends Api implements Rest {
         
     }
     
-    public function convertir() {
+    public function convertir($parametros=NULL) {
         //echo "Class archivos -- Método convertir()";
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
@@ -53,6 +54,21 @@ class archivos extends Api implements Rest {
         //Viene por GET
         if($this->peticion === "GET")
         {
+            //var_dump($parametros);
+            if(isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                        //Construyo la cadena JSON
+                        $usuario = $this->construyeJSON($usuario);
+                        //var_dump($usuario);
+                    }
+                }
+            }
             //..muestra el forumulario de registro
             $ruta_vista = VISTAS .'archivos/convertir.php' ;
             require_once $ruta_vista;
@@ -61,7 +77,7 @@ class archivos extends Api implements Rest {
         //Viene por POST
         if($this->peticion === "POST")
         {
-            //var_dump($_POST);
+            var_dump($_POST);
             //var_dump($_FILES);
 //            echo "<br/>Nombre: ".print_r($_FILES['archivos']['name']);
 //            echo "<br/>Tipo: ".print_r($_FILES['archivos']['type']);
@@ -108,7 +124,8 @@ class archivos extends Api implements Rest {
                     //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
                     //Será de la forma: /var/www/html/app/temp/archivo1 [/var/www/html/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
                     $argumentos = $this->procesarParametros($images, $_POST);
-                    echo $argumentos;
+                    //echo $argumentos;
+                    $this->ejecutaNoteshrink($argumentos);
                 } else 
                 {
                     echo "El formato requerido no coincide.";
@@ -120,7 +137,18 @@ class archivos extends Api implements Rest {
         }
     }
     
-    /**
+    private function ejecutaNoteshrink($argumentos) {
+        if(isset($argumentos)) {
+            var_dump(exec('whoami'));
+            var_dump($argumentos);
+            $comando = 'app/noteshrink/./noteshrink.py '.$argumentos;
+            exec($comando, $salida);
+            var_dump($salida);
+            var_dump(exec('2>$1'.$comando));
+        }
+    }
+
+        /**
      * Función que comprueba que el tipo de archivo es PNG o JPG
      * @param array $tipos Array con los tipos de los archivos subidos "image/jpeg" o "image/png"
      * @return boolean True | False Devuelve falso si se ha subido un archivo que no es jpeg o png y true en caso contrario

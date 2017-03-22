@@ -90,29 +90,29 @@ class usuarios extends Api\Api implements Rest {
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
         $ruta_vista_login = VISTAS . 'usuarios/login.php';
         require_once $ruta_vista_login;
-        
+
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
-        
+
         //Si viene por POST
         if($this->peticion === "POST")
         {
             //Se crea un objeto del modelo usuarios
             $usuariosModelo = new usuariosModelo();
-            
+
             //Se llama al método del modelo usuarios recupera los datos del usuario a loguearse
             $usuario = $usuariosModelo->dameUsuarioLogueado();
-            
-            var_dump($usuario);
-                
+
+            //var_dump($usuario);
+
             //Se convierte los datos a JSON
             $usuario = $this->construyeJSON($usuario);
-                        
+
             //Función extract() para pasar los datos a la vista
             extract($usuario);
             
             //Redirección a la vista... y mensaje del estado del login ************ OJO
-            $ruta_vista_perfil = VISTAS .'usuarios/perfil.php' ;
+            $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
             require_once $ruta_vista_perfil;
         }
     }
@@ -137,8 +137,7 @@ class usuarios extends Api\Api implements Rest {
                 
                 //Requerir la vista correspondiente
             }
-        }
-        
+        }   
     }
 
     public function activar($parametros = NULL) {

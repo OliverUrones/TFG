@@ -66,6 +66,7 @@ class archivos extends Api implements Rest {
                         //Construyo la cadena JSON
                         $usuario = $this->construyeJSON($usuario);
                         //var_dump($usuario);
+                        extract($usuario);
                     }
                 }
             }
@@ -77,7 +78,7 @@ class archivos extends Api implements Rest {
         //Viene por POST
         if($this->peticion === "POST")
         {
-            var_dump($_POST);
+            //var_dump($_POST);
             //var_dump($_FILES);
 //            echo "<br/>Nombre: ".print_r($_FILES['archivos']['name']);
 //            echo "<br/>Tipo: ".print_r($_FILES['archivos']['type']);
@@ -110,9 +111,12 @@ class archivos extends Api implements Rest {
                         //Si se ha movido con éxtio...
                         if(move_uploaded_file($origen, $destino))
                         {
+                            //var_dump($origen);
+                            //var_dump($destino);
                             //Construyo la cadena de parámetros con el nombre de los archivos
                             //Quedará algo como /var/www/html/app/temp/archivo1 /var/www/html/app/temp/archivo2 ...
                             $images = $destino.' '.$images;
+                            //var_dump($images);
                             //echo "<br/>Se ha movido el archivo subido correctamente.";
                         } else {
                             //echo "<br/>NO se ha movido el archivo subido.";
@@ -124,7 +128,7 @@ class archivos extends Api implements Rest {
                     //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
                     //Será de la forma: /var/www/html/app/temp/archivo1 [/var/www/html/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
                     $argumentos = $this->procesarParametros($images, $_POST);
-                    //echo $argumentos;
+                    //echo $argumentos.'<br/';
                     $this->ejecutaNoteshrink($argumentos);
                 } else 
                 {
@@ -139,12 +143,19 @@ class archivos extends Api implements Rest {
     
     private function ejecutaNoteshrink($argumentos) {
         if(isset($argumentos)) {
-            var_dump(exec('whoami'));
-            var_dump($argumentos);
-            $comando = 'app/noteshrink/./noteshrink.py '.$argumentos;
-            exec($comando, $salida);
-            var_dump($salida);
-            var_dump(exec('2>$1'.$comando));
+            //var_dump(exec('whoami'));
+            //var_dump($argumentos);
+            $comando = '2>&1 app/noteshrink/./noteshrink.py '.$argumentos;
+            //var_dump($comando);
+            //echo exec('pwd').'<br/>';
+            //var_dump($comando);
+            exec($comando, $salida, $valor_retorno);
+            //var_dump($salida);
+            foreach ($salida as $key => $value) {
+                echo $value.'<br/>';
+            }
+            echo '<br/>'.$valor_retorno;
+            //echo exec('2>$1'.$comando);
         }
     }
 
@@ -172,15 +183,30 @@ class archivos extends Api implements Rest {
     
     /**
      * Función que devuelve una cadena con los parámetros necesarios para el funcionamiento del script noteshrink.py
-     * Ejemplo: imágen1 [imágen2] -b salida.png -o salida.pdf ...
+     * Ejemplo: imágen1 [imágen2] -b ruta_a_carpeta_temporal/salida.png -o ruta_a_carpeta_temporal/salida.pdf ...
      * @param string $imagenes Cadena con las rutas completas a los archivos jpg/png que se van a procesar
      * @param array $params Valores recibidos desde el formulario en el array $_POST
      * @return string $cadena Devuelve la cadena de los argumentos construida
      */
     private function procesarParametros($imagenes, $params) {
         $cadena = $imagenes;
+        //var_dump($params);
+        
         if(is_array($params))
         {
+            //Le pongo la extensión .pdf al archivo de salida que genera el algoritmo y le añado la ruta
+            if(isset($params['-o']))
+            {
+                $params['-o'] = CARPETA_TEMPORALES.SEPARADOR.$params['-o'].'.pdf';
+                //var_dump($params);
+            }
+            
+            //Estalbezco la ruta de la carpeta temporal donde se van a guardar las imágenes .png mejoradas
+            if(isset($params['-b']))
+            {
+                $params['-b'] = CARPETA_TEMPORALES.SEPARADOR.$params['-b'];
+                //var_dump($params);
+            }
             foreach ($params as $opcion => $value) {
                 if($opcion === '-w' || $opcion === '-S' || $opcion === '-K')
                 {
@@ -189,6 +215,7 @@ class archivos extends Api implements Rest {
                     $cadena = $cadena.$opcion.' '.$value.' ';
                 }
             }
+            //var_dump($cadena);
             return $cadena;
         }
     }

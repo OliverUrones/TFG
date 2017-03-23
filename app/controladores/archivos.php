@@ -96,7 +96,7 @@ class archivos extends Api implements Rest {
                 //Se comprueba los tipos recogidos con el formato requerido
                 if($this->comprobarTiposArchivos($tipo_archivo))
                 {
-                    $images;
+                    $images = '';
                     //Para cada nombre temporal del archivo subido..
                     foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
                         //Se recoge la ruta de origen
@@ -129,7 +129,12 @@ class archivos extends Api implements Rest {
                     //Será de la forma: /var/www/html/app/temp/archivo1 [/var/www/html/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
                     $argumentos = $this->procesarParametros($images, $_POST);
                     //echo $argumentos.'<br/';
-                    $this->ejecutaNoteshrink($argumentos);
+                    if($this->ejecutaNoteshrink($argumentos)) {
+                        //Se ha ejecutado el script noteshrink.py correctamente
+                        //Se debería gestionar los archivos que ha generado el script
+                    } else {
+                        //El script noteshrink.py ha tirado algún error
+                    }
                 } else 
                 {
                     echo "El formato requerido no coincide.";
@@ -150,12 +155,15 @@ class archivos extends Api implements Rest {
             //echo exec('pwd').'<br/>';
             //var_dump($comando);
             exec($comando, $salida, $valor_retorno);
-            //var_dump($salida);
+            var_dump($salida);
             foreach ($salida as $key => $value) {
                 echo $value.'<br/>';
             }
-            echo '<br/>'.$valor_retorno;
-            //echo exec('2>$1'.$comando);
+        }
+        if($valor_retorno === 1) {
+            return true;
+        } else {
+            return false;
         }
     }
 

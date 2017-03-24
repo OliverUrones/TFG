@@ -41,8 +41,13 @@ class archivos extends Api implements Rest {
         
     }
     
+    /**
+     * Función que convierte los archivos que se suben tratados con NotheSrink.
+     * @param type $parametros
+     */
     public function convertir($parametros=NULL) {
-        //echo "Class archivos -- Método convertir()";
+        //Habría que comprobar si hay usuario logueado o no!!
+
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
         $ruta_vista_login = VISTAS . 'usuarios/login.php';
@@ -129,9 +134,15 @@ class archivos extends Api implements Rest {
                     //Será de la forma: /var/www/html/app/temp/archivo1 [/var/www/html/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
                     $argumentos = $this->procesarParametros($images, $_POST);
                     //echo $argumentos.'<br/';
-                    if($this->ejecutaNoteshrink($argumentos)) {
+                    $salida = $this->ejecutarNoteshrink($argumentos);
+                    if($salida !== NULL) {
                         //Se ha ejecutado el script noteshrink.py correctamente
                         //Se debería gestionar los archivos que ha generado el script
+                        //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
+                        //var_dump($salida);
+                        $this->borrarTemporales($salida);
+                        
+                        
                     } else {
                         //El script noteshrink.py ha tirado algún error
                     }
@@ -146,7 +157,33 @@ class archivos extends Api implements Rest {
         }
     }
     
-    private function ejecutaNoteshrink($argumentos) {
+    /**
+     * Función que borrará los archivos temporales que se han subido al servidor en la carpeta temp de la aplicación
+     * @param array $salida Array con las líneas de salida del script NoteShrink.py
+     */
+    private function borrarTemporales($salida) {
+        //Los temporales se almacenan en el string que empieza por "opened"
+        //echo '<br/>Hola'.strpos($salida[0], 'opened');
+        foreach ($salida as $key => $value) {
+            $posicion = strpos($value, 'opened ');
+            if($posicion !== false)
+            {
+                //echo "key ".$key.' -- '.$value.'<br/>';
+                $ruta = explode(' ', $value);
+                unlink($ruta[1]);
+            } else {
+                
+            }
+        }
+    }
+
+        /**
+     * Función que llama al script NoteShrink.py para tratar los archivos
+     * @param string $argumentos Los arqumentos del script
+     * @return boolean False si ha habido algún error en la ejecución.
+     * @return array Array con las líneas de salida de la ejecución del script
+     */
+    private function ejecutarNoteshrink($argumentos) {
         if(isset($argumentos)) {
             //var_dump(exec('whoami'));
             //var_dump($argumentos);
@@ -155,15 +192,15 @@ class archivos extends Api implements Rest {
             //echo exec('pwd').'<br/>';
             //var_dump($comando);
             exec($comando, $salida, $valor_retorno);
-            var_dump($salida);
+            //var_dump($salida);
             foreach ($salida as $key => $value) {
-                echo $value.'<br/>';
+                echo $key.' '.$value.'<br/>';
             }
         }
-        if($valor_retorno === 1) {
-            return true;
+        if($valor_retorno === 0) {
+            return $salida;
         } else {
-            return false;
+            return null;
         }
     }
 

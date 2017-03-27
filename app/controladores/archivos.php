@@ -55,10 +55,7 @@ class archivos extends Api implements Rest {
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
-        
-        //Viene por GET
-        if($this->peticion === "GET")
-        {
+        var_dump($parametros);
             //var_dump($parametros);
             if(isset($parametros['token'])) {
                 if(strlen($parametros['token']) === 14) {
@@ -75,6 +72,9 @@ class archivos extends Api implements Rest {
                     }
                 }
             }
+        //Viene por GET
+        if($this->peticion === "GET")
+        {
             //..muestra el forumulario de registro
             $ruta_vista = VISTAS .'archivos/convertir.php' ;
             require_once $ruta_vista;
@@ -84,6 +84,7 @@ class archivos extends Api implements Rest {
         if($this->peticion === "POST")
         {
             //var_dump($_POST);
+            //var_dump($_GET);
             //var_dump($_FILES);
 //            echo "<br/>Nombre: ".print_r($_FILES['archivos']['name']);
 //            echo "<br/>Tipo: ".print_r($_FILES['archivos']['type']);
@@ -139,10 +140,11 @@ class archivos extends Api implements Rest {
                         //Se ha ejecutado el script noteshrink.py correctamente
                         //Se debería gestionar los archivos que ha generado el script
                         //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
-                        //var_dump($salida);
+                        //var_dump($salida[count($salida)-1]);
                         $this->borrarTemporales($salida);
                         
-                        
+                        //
+                        $ruta_archivo_temporal = $this->dameRutaArchivoTemporal($salida[count($salida)-1]);
                     } else {
                         //El script noteshrink.py ha tirado algún error
                     }
@@ -154,10 +156,27 @@ class archivos extends Api implements Rest {
                 //Mensaje de error no se han subido los ficheros correctamente
                 echo 'Error al subir los ficheros';
             }
+            //..muestra el forumulario de registro
+            $ruta_vista = VISTAS .'archivos/resultado.php' ;
+            require_once $ruta_vista;
         }
     }
     
     /**
+     * Función que devuelve la ruta en la carpeta temp del fichero pdf convertido
+     * @param string $salida Última línea del script NoteShrink.py que muestra la cadena wrote ruta/al/archivo.pdf
+     * @return string $ruta Cadena con la ruta al archivo
+     */
+    private function dameRutaArchivoTemporal($salida) {
+        //Si está la palabra "wrote" en $salida...
+        if(strpos($salida, "wrote")){
+            //Divido por esa palabra y en la segunda posición del array está la ruta al archivo temporal
+            $ruta = explode("wrote ", $salida);
+            return $ruta[1];
+        }
+    }
+
+        /**
      * Función que borrará los archivos temporales que se han subido al servidor en la carpeta temp de la aplicación
      * @param array $salida Array con las líneas de salida del script NoteShrink.py
      */
@@ -194,7 +213,7 @@ class archivos extends Api implements Rest {
             exec($comando, $salida, $valor_retorno);
             //var_dump($salida);
             foreach ($salida as $key => $value) {
-                echo $key.' '.$value.'<br/>';
+                //echo $key.' '.$value.'<br/>';
             }
         }
         if($valor_retorno === 0) {

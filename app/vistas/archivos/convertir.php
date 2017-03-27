@@ -1,7 +1,18 @@
 <?php ob_start() ?>
     <h2>Convierta documentos escaneados a PDF</h2>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data">
+<?php
+//Si viene el usuario...
+if(isset($usuario)) {
+    //..decodifico la cadena json
+    $usuario_json = json_decode($usuario);
+    //var_dump($usuario_json->token);
+    //Al action del formulario se le añade el token
+?>
+    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data">
+<?php } else { ?>
+    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data"> 
+<?php } ?>
         <div class="form-group">
             <label>Seleccione uno o varios archivos</label>
             <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[]">

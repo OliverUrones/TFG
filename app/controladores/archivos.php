@@ -56,10 +56,6 @@ class archivos extends Api implements Rest {
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
         
-        //Viene por GET
-        if($this->peticion === "GET")
-        {
-            //var_dump($parametros);
             if(isset($parametros['token'])) {
                 if(strlen($parametros['token']) === 14) {
                     $modeloUsuario = new usuariosModelo();
@@ -75,6 +71,10 @@ class archivos extends Api implements Rest {
                     }
                 }
             }
+        //Viene por GET
+        if($this->peticion === "GET")
+        {
+            //var_dump($parametros);
             //..muestra el forumulario de registro
             $ruta_vista = VISTAS .'archivos/convertir.php' ;
             require_once $ruta_vista;
@@ -141,8 +141,12 @@ class archivos extends Api implements Rest {
                         //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
                         //var_dump($salida);
                         $this->borrarTemporales($salida);
-                        
-                        
+                        //var_dump($salida[count($salida)-1]);
+
+                        //..muestro la vista para descargar el archivo
+                        $ruta_vista = VISTAS .'archivos/descargar.php' ;
+                        require_once $ruta_vista;
+                        exit(0);
                     } else {
                         //El script noteshrink.py ha tirado algún error
                     }

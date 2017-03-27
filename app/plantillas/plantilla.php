@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<?php //var_dump(json_decode($usuario));
+<?php //var_dump($usuario);
     if(isset($usuario)) {
         $usuario = json_decode($usuario);
-    } else {
-        $usuario->estado = '400 KO';
     }
 ?>
 <html>
@@ -28,7 +26,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
-                                <?php if($usuario->estado === '400 KO') { ?>
+                                <?php if(!isset($usuario->token)) { ?>
                                 <li role="presentation"><a href="?home/index">Inicio</a></li>
                                 <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
@@ -83,7 +81,7 @@
                 
                 <!-- login -->
                 <?php 
-                    if($usuario->estado === '400 KO') {
+                    if(!isset($usuario)) {
                         echo $login;
                     }
                 ?>

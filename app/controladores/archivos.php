@@ -55,7 +55,7 @@ class archivos extends Api implements Rest {
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
-        var_dump($parametros);
+        //var_dump($parametros);
             //var_dump($parametros);
             if(isset($parametros['token'])) {
                 if(strlen($parametros['token']) === 14) {
@@ -144,7 +144,9 @@ class archivos extends Api implements Rest {
                         $this->borrarTemporales($salida);
                         
                         //
-                        $ruta_archivo_temporal = $this->dameRutaArchivoTemporal($salida[count($salida)-1]);
+                        $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
+                        //var_dump($ruta_archivo_temporal);
+                        extract($nombre_archivo);
                     } else {
                         //El script noteshrink.py ha tirado algún error
                     }
@@ -167,16 +169,27 @@ class archivos extends Api implements Rest {
      * @param string $salida Última línea del script NoteShrink.py que muestra la cadena wrote ruta/al/archivo.pdf
      * @return string $ruta Cadena con la ruta al archivo
      */
-    private function dameRutaArchivoTemporal($salida) {
+    private function dameNombreArchivo($salida) {
         //Si está la palabra "wrote" en $salida...
         if(strpos($salida, "wrote")){
             //Divido por esa palabra y en la segunda posición del array está la ruta al archivo temporal
             $ruta = explode("wrote ", $salida);
-            return $ruta[1];
+            //var_dump($ruta[1]);
+            $array_ruta = explode("/", $ruta[1]);
+            $nombre_archivo = $array_ruta[count($array_ruta)-1];
+            return $nombre_archivo;
         }
     }
+    
+    public function descargar($parametros=NULL) {
+        //Si viene el nombre del archivo...
+        if(isset($parametros['archivo'])) {
+            
+        }
+        
+    }
 
-        /**
+    /**
      * Función que borrará los archivos temporales que se han subido al servidor en la carpeta temp de la aplicación
      * @param array $salida Array con las líneas de salida del script NoteShrink.py
      */

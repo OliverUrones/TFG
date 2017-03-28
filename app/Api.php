@@ -79,6 +79,11 @@ class Api {
                         //...Si es 't' quiere decir que ese parámetro es el token
                         //echo substr($parametros[$i], 0, 1);
                         $this->parametros['token'] = $parametros[$i];
+                    //Si el primer caracter no es "t" compruebo si es la extensión .pdf del archivo que se puede descargar
+                    } elseif(substr($parametros[$i],-4) === '.pdf') {
+                        //Esto es para cuando se realiza la descarga del archivo generado en convertir
+                        //var_dump(substr($parametros[$i],-4));
+                        $this->parametros['archivo'] = $parametros[$i];
                     } else {
                         //..sino será el id
                         $this->parametros['id'] = $parametros[$i];

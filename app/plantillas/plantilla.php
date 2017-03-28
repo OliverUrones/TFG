@@ -81,7 +81,7 @@
                 
                 <!-- login -->
                 <?php 
-                    if(!isset($usuario)) {
+                    if(!isset($usuario->token)) {
                         echo $login;
                     }
                 ?>

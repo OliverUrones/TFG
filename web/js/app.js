@@ -5,7 +5,8 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
     $scope.altaModelo = {};
     
     $scope.resgistroDialog = function() {
-        ngDialog.open({template: 'popupTmpl.html', className: 'ngdialog-theme-default'});
+        //Abro el diálogo con la plantilla con id 'respuestaRegistro.html', con la clase 'ngdialog-theme-default' y le paso el scope para poder usar closeThisDialog() en la vista
+        ngDialog.open({template: 'respuestaRegistro.html', className: 'ngdialog-theme-default', scope: $scope});
     }
 }]);
 
@@ -46,7 +47,8 @@ angular
     }
     
     $scope.msgActivacion = function() {
-        ngDialog.open({template: 'estadoActivacion.html', className: 'ngdialog-theme-default'});
+        //Abro el diálogo con la plantilla con id 'estadoActivacion.html', con la clase 'ngdialog-theme-default' y le paso el scope para poder usar closeThisDialog() en la vista
+        ngDialog.open({template: 'estadoActivacion.html', className: 'ngdialog-theme-default', scope: $scope, closeByEscape: false, closeByDocument: false, showClose: false});
     }
 }]);
 

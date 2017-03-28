@@ -1,4 +1,4 @@
-<?php var_dump($usuario); 
+<?php //var_dump($usuario); 
     if(isset($usuario)) {
         $usuario_json = json_decode($usuario);
     }

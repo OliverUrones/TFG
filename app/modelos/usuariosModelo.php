@@ -105,14 +105,16 @@ class usuariosModelo {
             $mail = new \app\modelos\envioEmailModelo\envioEmailModelo();
             $mail->activarCuenta($this->usuario_id, $this->email, $this->nombre, $this->apellidos);
             //$this->__enviarEmail();
-            $json = $this->__construyeJSON('200 KO', 'Usuario añadido correctamente. Compruebe su correo para realizar la activación de la cuenta');
+            $resultado = array('estado' => '200 OK', 'Mensaje' => 'Usuario añadido correctamente. Compruebe su correo para realizar la activación de la cuenta');
+            //$json = $this->__construyeJSON('200 KO', 'Usuario añadido correctamente. Compruebe su correo para realizar la activación de la cuenta');
         }else
         {
             //..si existe es que el usuario ya está en la base de datos
             //echo 'Mensaje de que el correo ya existe';
-            $json = $this->__construyeJSON('400 KO', 'El correo introducido ya existe', NULL, NULL);
+            $resultado = array('estado' => '400 KO', 'Mensaje' => 'El correo introducido ya existe');
+            //$json = $this->__construyeJSON('400 KO', 'El correo introducido ya existe', NULL, NULL);
         }        
-            return $json;
+            return $resultado;
     }
     
     /**

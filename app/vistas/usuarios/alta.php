@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
 <h2>Formulario para el registro</h2>
 <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl">-->
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="RepositorioApp" data-ng-controller="ValidacionFormsController">
     <form name="alta" class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
         <div class="form-group">
             <label class="control-label ">Nombre</label>
@@ -67,22 +67,29 @@
     <?php
         //Si vienen la respuesta del alta se muestra la ventana modal con el mensaje
         if(isset($registro)) {
+            $registro_json = json_decode($registro);
+            //var_dump($registro_json);
     ?>
-    <script type="text/ng-template" id="popupTmpl.html">
-            <div class="modal-header">
-                <h3 class="modal-title">Estado del registro</h3>
-            </div>
-            <div class="modal-body">
-                <div>
-                <?php
-                print_r($registro);
-                    $registro = json_decode($registro); 
-                    //var_dump($registro);
-                    echo $registro->Mensaje;
-                ?>
+    <div class="modal modal-content">
+        <script type="text/ng-template" id="respuestaRegistro.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Estado del registro</h3>
                 </div>
-            </div>
-    </script>
+                <div class="modal-body">
+                    <div>
+                    <?php
+                    //print_r($registro_json);
+                        //var_dump($registro_son);
+                        echo $registro_json->Mensaje;
+                    ?>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cerrar</a>
+                </div>
+        </script>
+    </div>
+
     <?php } ?>
 </div>
 <?php $contenido = ob_get_clean(); ?>

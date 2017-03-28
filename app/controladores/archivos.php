@@ -132,7 +132,7 @@ class archivos extends Api implements Rest {
                     //echo $images;
                     //var_dump($_POST);
                     //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
-                    //Será de la forma: /var/www/html/app/temp/archivo1 [/var/www/html/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
+                    //Será de la forma: /var/www/html/TFG/app/temp/archivo1 [/var/www/html/TFG/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
                     $argumentos = $this->procesarParametros($images, $_POST);
                     //echo $argumentos.'<br/';
                     $salida = $this->ejecutarNoteshrink($argumentos);
@@ -197,11 +197,15 @@ class archivos extends Api implements Rest {
         //Los temporales se almacenan en el string que empieza por "opened"
         //echo '<br/>Hola'.strpos($salida[0], 'opened');
         foreach ($salida as $key => $value) {
+            //Busco la cadena 'opened '
             $posicion = strpos($value, 'opened ');
+            //Si está...
             if($posicion !== false)
             {
                 //echo "key ".$key.' -- '.$value.'<br/>';
+                //Divido la cadena por el espacio
                 $ruta = explode(' ', $value);
+                //y borro la segunda posición que es la ruta al archivo
                 unlink($ruta[1]);
             } else {
                 

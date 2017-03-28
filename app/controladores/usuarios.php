@@ -47,6 +47,8 @@ class usuarios extends Api\Api implements Rest {
             //Se llama al método del modelo usuarios que añade un usuario a la base de datos
             $registro = $usuariosModelo->altaUsuario();
             
+            $registro = $this->construyeJSON($registro);
+            
             //Paso los datos a la vista
             extract($registro);
             
@@ -142,6 +144,11 @@ class usuarios extends Api\Api implements Rest {
 
     public function activar($parametros = NULL) {
         //echo "Se va a activar la cuenta con id = ".$id[0];
+        //Incluyo las otras partes del layout
+        //Tendría que incluir las categorías aquí también y en cada uno de los métodos
+        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+        require_once $ruta_vista_login;
+        
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
         

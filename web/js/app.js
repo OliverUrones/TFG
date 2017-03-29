@@ -10,6 +10,12 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
     }
 }]);
 
+formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', function($scope, ngDialog) {
+    $scope.abreFormSubida = function() {
+        ngDialog.open({template: 'formSubidaArchivo.html', className: 'ngdialog-theme-default', scope: $scope});
+    }    
+}]);
+
 angular
     .module('altaApp', ['ngDialog'])
     .controller('altaAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {

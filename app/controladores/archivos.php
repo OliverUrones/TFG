@@ -184,7 +184,14 @@ class archivos extends Api implements Rest {
     public function descargar($parametros=NULL) {
         //Si viene el nombre del archivo...
         if(isset($parametros['archivo'])) {
-            
+            //Se establece el tipo Content-Type para la cabecera
+            //Funciona tanto con 'application/force-download' como con 'application/pdf'
+            //$this->tipo = 'application/force-download';
+            $this->tipo = 'application/pdf';
+            //Se construye la ruta del archivo para ser descargado
+            $file = CARPETA_TEMPORALES.SEPARADOR.$parametros['archivo'];
+            //Se establece la cabecera pasándole el archivo a ser descargado.
+            $this->EstablecerCabeceras($parametros['archivo']);
         }
         
     }

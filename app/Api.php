@@ -17,7 +17,7 @@ class Api {
     private $controlador = 'home';      /*controlador por defecto*/
     private $metodo = 'index';     /*método por defecto*/
     private $parametros = NULL; /*Parámetros provenientes de los formularios*/
-    private $tipo = "text/html";
+    public $tipo = "text/html";
     //private $tipo = "application/javascript";
     //private $tipo = "application/json";
     private $codEstado = 200;
@@ -30,7 +30,7 @@ class Api {
         //var_dump($_SERVER['REQUEST_URI']);
         //echo $this->peticion;
         $this->TratarURL();
-        $this->EstablecerCabeceras();
+        $this->EstablecerCabeceras(NULL);
         //var_dump($_POST);
         //var_dump(headers_list());
         //echo 'Petición: '.$this->peticion;
@@ -118,9 +118,15 @@ class Api {
     /**
      * Método que establece las cabeceras del servicio
      */
-    public function EstablecerCabeceras() {
+    public function EstablecerCabeceras($filename=NULL) {
         header("HTTP/1.1 " . $this->codEstado . " " . $this->GetCodEstado());  
-        //header("Content-Type:" . $this->tipo . ';charset=utf-8');
+        header("Content-Type:" . $this->tipo . ';charset=utf-8');
+        //Si se le pasas como argumento un archivo...
+        if(isset($filename) && $filename !== NULL) {
+            //...Se establece Content-Disposition: attachment; filename=$filename para descargar el archivo
+            header("Content-Disposition: attachment; filename=$filename");
+            readfile(CARPETA_TEMPORALES.SEPARADOR.$filename);
+        }
      }
      
      /**

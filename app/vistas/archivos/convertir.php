@@ -5,7 +5,7 @@
 ?>
 <?php ob_start() ?>
     <h2>Convierta documentos escaneados a PDF</h2>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <?php
 //Si viene el usuario...
 if(isset($usuario)) {
@@ -18,10 +18,15 @@ if(isset($usuario)) {
 <?php } else { ?>
     <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data"> 
 <?php } ?>
-        <div class="form-group">
-            <label>Seleccione uno o varios archivos</label>
-            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[]">
+        <div class="form-group" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
+            <div class="dropzone dz-clickable dz-started" options="dzOptions" methods="dzMethods" callbacks="dzCallbacks" ng-dropzone name="archivos[]">
+                <div class="dz-message">
+                    <span>Arrastre y suelte sus archivos escaneados</span>
+                </div>
+<!--            <label>Seleccione uno o varios archivos</label>-->
+<!--            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[]">-->
             <p class="help-block">Formatos: JPG y/o PNG</p>
+            </div>
         </div>
         <!-- Este archivo de salida se podría omitir-->
         <div class="form-group">
@@ -91,7 +96,7 @@ if(isset($usuario)) {
             </div>
         </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="Enviar">Enviar</button>
+                <button type="submit" class="btn btn-success" value="Enviar" ng-click="dzMethods.processQueue();">Enviar</button>
             </div>
     </form>
 </div>

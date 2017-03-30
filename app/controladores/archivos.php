@@ -85,7 +85,7 @@ class archivos extends Api implements Rest {
         {
             //var_dump($_POST);
             //var_dump($_GET);
-            //var_dump($_FILES);
+            var_dump($_FILES);
 //            echo "<br/>Nombre: ".print_r($_FILES['archivos']['name']);
 //            echo "<br/>Tipo: ".print_r($_FILES['archivos']['type']);
 //            echo "<br/>tmp_name: ".print_r($_FILES['archivos']['tmp_name']);
@@ -255,17 +255,20 @@ class archivos extends Api implements Rest {
     private function comprobarTiposArchivos($tipos) {
         if(is_array($tipos)) {
             foreach ($tipos as $key => $value) {
-                if($value === 'image/jpeg' || $value === 'image/png')
+                if($value === 'image/jpeg' || $value === 'image/png' || $value === 'image/jpg')
                 {
                 } else
                 {
-                    //echo "La imagen NO es jpeg o png<br/>";
+                    echo '<p>'.$value.'</p>';
+                    echo "La imagen NO es jpeg o png<br/>";
                     return false;
                 }
             }
         } else {
+            echo "\$tipos no es un array";
             return false;
         }
+        echo "Me cago en dios";
         return true;
     }
     

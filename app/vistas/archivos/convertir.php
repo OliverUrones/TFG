@@ -18,16 +18,19 @@ if(isset($usuario)) {
 <?php } else { ?>
     <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data"> 
 <?php } ?>
+    <div ng-model="archivos">
         <div class="form-group" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
-            <div class="dropzone dz-clickable dz-started" options="dzOptions" methods="dzMethods" callbacks="dzCallbacks" ng-dropzone name="archivos[]">
+            <div id="archivos" class="dropzone dz-clickable dz-started" options="dzOptions" methods="dzMethods" callbacks="dzCallbacks" ng-dropzone name="archivos">
                 <div class="dz-message">
                     <span>Arrastre y suelte sus archivos escaneados</span>
                 </div>
 <!--            <label>Seleccione uno o varios archivos</label>-->
-<!--            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[]">-->
-            <p class="help-block">Formatos: JPG y/o PNG</p>
             </div>
+        {{archivos}}
         </div>
+            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[{{archivos}}]">
+            <p class="help-block">Formatos: JPG y/o PNG</p>
+    </div>
         <!-- Este archivo de salida se podría omitir-->
         <div class="form-group">
             <label>Nombre del archivo de salida</label>

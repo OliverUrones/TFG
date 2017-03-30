@@ -13,8 +13,8 @@
         <link rel="stylesheet" href="web/css/estilos.css">
         <link rel="stylesheet" href="web/css/ngDialog-theme-default.min.css">
         <link rel="stylesheet" href="web/css/ngDialog.min.css">
-        <link href="web/css/dropzone.css" rel="stylesheet" type="text/css"/>
         <link href="web/css/ng-dropzone.min.css" rel="stylesheet" type="text/css"/>
+        <link href="web/css/dropzone.css" rel="stylesheet" type="text/css"/>
         <script src="web/js/angular.min.js"></script>
         <script src="web/js/ngDialog.min.js"></script>
         <script src="web/js/jquery.js"></script>

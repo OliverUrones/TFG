@@ -28,7 +28,7 @@ if(isset($usuario)) {
             </div>
         {{archivos}}
         </div>
-            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[{{archivos}}]">
+<!--            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[{{archivos}}]">-->
             <p class="help-block">Formatos: JPG y/o PNG</p>
     </div>
         <!-- Este archivo de salida se podría omitir-->

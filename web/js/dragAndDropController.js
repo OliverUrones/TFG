@@ -1,4 +1,4 @@
-//Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false;
 var dragAndDrop = angular.module('dragAndDropApp', ['thatisuday.dropzone']);
 
 dragAndDrop.controller('DragAndDropController', function($scope){
@@ -6,14 +6,14 @@ dragAndDrop.controller('DragAndDropController', function($scope){
     $scope.archivos = [];
     $scope.dzOptions = {
         url: '?archivos/convertir',
-        paramName: $scope.archivos,
+        paramName: 'archivos',
         uploadMultiple: true,
         addRemoveLinks: true,
         clickable: true,
         acceptedFiles: 'image/jpg, image/jpeg, image/png',
         dictDefaultMessage : 'Arrastre y suelte sus archivos escaneados',
         dictRemoveFile: "Eliminar",
-        autoProcessQueue: false
+        autoProcessQueue: true
     };
     console.log($scope.dzOptions);
     

@@ -259,16 +259,14 @@ class archivos extends Api implements Rest {
                 {
                 } else
                 {
-                    echo '<p>'.$value.'</p>';
-                    echo "La imagen NO es jpeg o png<br/>";
+                    //echo '<p>'.$value.'</p>';
+                    //echo "La imagen NO es jpeg o png<br/>";
                     return false;
                 }
             }
         } else {
-            echo "\$tipos no es un array";
             return false;
         }
-        echo "Me cago en dios";
         return true;
     }
     

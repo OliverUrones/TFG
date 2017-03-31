@@ -14,9 +14,11 @@ if(isset($usuario)) {
     //var_dump($usuario_json->token);
     //Al action del formulario se le añade el token
 ?>
-    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data">
+<!--    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data">-->
+    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data">
 <?php } else { ?>
-    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data"> 
+<!--    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data"> -->
+    <form role="form" class="form-horizontal" action="?archivos/conversion" method="POST" enctype="multipart/form-data"> 
 <?php } ?>
     <div ng-model="archivos">
         <div class="form-group" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
@@ -99,7 +101,7 @@ if(isset($usuario)) {
             </div>
         </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="Enviar" ng-click="dzMethods.processQueue();">Enviar</button>
+                <button type="submit" class="btn btn-success" value="EnviarArchivos" ng-click="dzMethods.processQueue();">Enviar</button>
             </div>
     </form>
 </div>

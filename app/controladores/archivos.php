@@ -42,6 +42,145 @@ class archivos extends Api implements Rest {
     }
     
     /**
+     * Función para subir los archivos automáticamente cuando se añaden a la zona Drag and Drop del formulario de convertir
+     * @param type $parametros
+     */
+    public function subir($parametros=NULL) {
+        echo "Estoy en el método subir() del controlador archivos";
+        var_dump($_FILES);
+        $this->DamePeticion();
+        if($this->peticion === "POST") {
+            //Si existe la clave type del array de ficheros subidos...
+            if(isset($_FILES['archivos']['type']))
+            {
+                //..Se recoge los tipos de los ficheros subidos
+                $tipo_archivo = $_FILES['archivos']['type'];
+                //print_r($tipo_archivo);
+                //Se comprueba los tipos recogidos con el formato requerido
+                if($this->comprobarTiposArchivos($tipo_archivo))
+                {
+                    $images = '';
+                    //Para cada nombre temporal del archivo subido..
+                    $i = 0;
+                    foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
+                        //Se recoge la ruta de origen
+                        $origen = $_FILES['archivos']['tmp_name'][$key];
+                        //Se extrae el nombre temporal que se le asigna
+                        $nombre_temp = explode("/", $value);
+                        $nombre_temp = $nombre_temp[2];
+                        //echo $nombre_temp;
+                        //El destino será en la carpeta temp/$nombre_temp extraído
+                        $destino = CARPETA_TEMPORALES . SEPARADOR . $i.$nombre_temp;
+                        //echo "<p>".$destino."</p>";
+                        //Si se ha movido con éxtio...
+                        if(move_uploaded_file($origen, $destino))
+                        {
+                            //var_dump($origen);
+                            //var_dump($destino);
+                            //Construyo la cadena de parámetros con el nombre de los archivos
+                            //Quedará algo como /var/www/html/app/temp/archivo1 /var/www/html/app/temp/archivo2 ...
+                            $images = $destino.' '.$images;
+                            //var_dump($images);
+                            echo "<br/>Se ha movido el archivo subido correctamente.";
+                        } else {
+                            echo "<br/>NO se ha movido el archivo subido.";
+                        }
+                        $i++;
+                    }
+                } else 
+                {
+                    echo "El formato requerido no coincide.";
+                }
+            } else {
+                //Mensaje de error no se han subido los ficheros correctamente
+                echo 'Error al subir los ficheros';
+            }
+        }
+    }
+
+    /**
+     * Método que realiza la conversión cuando se pulsa el votón enviar y se han subido archivos automáticamente a través de la zona
+     * de Drag and Drop
+     * @param type $parametros
+     */
+    public function conversion($parametros=NULL) {
+        //Incluyo las otras partes del layout
+        //Tendría que incluir las categorías aquí también y en cada uno de los métodos
+        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+        require_once $ruta_vista_login;
+        
+        //Recoge el tipo de petición realizada
+        $this->DamePeticion();
+        //var_dump($parametros);
+            //var_dump($parametros);
+            if(isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                        //Construyo la cadena JSON
+                        $usuario = $this->construyeJSON($usuario);
+                        //var_dump($usuario);
+                        extract($usuario);
+                    }
+                }
+            }
+        //Viene por GET
+        if($this->peticion === "GET")
+        {
+            //..muestra el forumulario de registro
+            $ruta_vista = VISTAS .'archivos/convertir.php' ;
+            require_once $ruta_vista;
+        }
+        
+        if($this->peticion === "POST") {
+            //Compruebo que se hayan archivos en la carpeta de los archivos temporales
+                //Si los hay
+                //var_dump(CARPETA_TEMPORALES);
+                $temporales = scandir(CARPETA_TEMPORALES, SCANDIR_SORT_ASCENDING);
+                //var_dump($temporales);
+                $images = '';
+                for ($i=0; $i<=count($temporales)-1; $i++) {
+                    //var_dump($temporales[$i]);
+                    if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
+                        //echo '<br/>'.$temporales[$i];
+                        $images = CARPETA_TEMPORALES . SEPARADOR . $temporales[$i].' '.$images;
+                    }
+                }
+                //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
+                    //echo '<br/>'.$images;
+                //var_dump($images);
+                //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
+                //Será de la forma: /var/www/html/TFG/app/temp/archivo1 [/var/www/html/TFG/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
+                $argumentos = $this->procesarParametros($images, $_POST);
+                //echo $argumentos.'<br/';
+                $salida = $this->ejecutarNoteshrink($argumentos);
+                if($salida !== NULL) {
+                    //Se ha ejecutado el script noteshrink.py correctamente
+                    //Se debería gestionar los archivos que ha generado el script
+                    //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
+                    //var_dump($salida[count($salida)-1]);
+                    //var_dump($salida);
+                    $this->borrarTemporales($salida);
+
+                    //
+                    $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
+                    //var_dump($ruta_archivo_temporal);
+                    extract($nombre_archivo);
+                    
+                    //..muestra el forumulario de registro
+                    $ruta_vista = VISTAS .'archivos/resultado.php' ;
+                    require_once $ruta_vista;
+                } else {
+                    //El script noteshrink.py ha tirado algún error
+                }
+        }
+    }
+
+    /**
      * Función que convierte los archivos que se suben tratados con NotheSrink.
      * @param type $parametros
      */

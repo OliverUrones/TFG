@@ -5,7 +5,9 @@ dragAndDrop.controller('DragAndDropController', function($scope){
     console.log($scope);
     $scope.archivos = [];
     $scope.dzOptions = {
-        url: '?archivos/convertir',
+        url: '?archivos/subir',
+        method: 'post',
+        parallelUpload: 1,
         paramName: 'archivos',
         uploadMultiple: true,
         addRemoveLinks: true,

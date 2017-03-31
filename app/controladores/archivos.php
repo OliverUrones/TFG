@@ -106,8 +106,8 @@ class archivos extends Api implements Rest {
     public function conversion($parametros=NULL) {
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
-        $ruta_vista_login = VISTAS . 'usuarios/login.php';
-        require_once $ruta_vista_login;
+//        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+//        require_once $ruta_vista_login;
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
@@ -189,8 +189,8 @@ class archivos extends Api implements Rest {
 
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
-        $ruta_vista_login = VISTAS . 'usuarios/login.php';
-        require_once $ruta_vista_login;
+//        $ruta_vista_login = VISTAS . 'usuarios/login.php';
+//        require_once $ruta_vista_login;
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();

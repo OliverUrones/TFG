@@ -16,6 +16,13 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', fun
     }    
 }]);
 
+formularios.controller('LoginFormController', ['$scope', 'ngDialog', function($scope, ngDialog) {
+    $scope.abreFormLogin = function () {
+        console.log("He entrado en abreFormLogin");
+        ngDialog.open({template: 'login.html', className: 'ngdialog-theme-default', scope: $scope});
+    }
+}]);
+
 angular
     .module('altaApp', ['ngDialog'])
     .controller('altaAppCtrl', ['$scope', 'ngDialog', function($scope, ngDialog) {

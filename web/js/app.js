@@ -16,10 +16,20 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', fun
     }    
 }]);
 
-formularios.controller('LoginFormController', ['$scope', 'ngDialog', function($scope, ngDialog) {
+formularios.controller('LoginFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
     $scope.abreFormLogin = function () {
         console.log("He entrado en abreFormLogin");
-        ngDialog.open({template: 'login.html', className: 'ngdialog-theme-default', scope: $scope});
+        ngDialog.open({template: 'app/vistas/usuarios/login.php', className: 'ngdialog-theme-default', scope: $scope});
+    }
+    
+    $scope.login = function (loginModelo) {
+        //loginModelo = {};
+        console.log(loginModelo);
+        console.log($scope);
+        $http.post("index.php?usuarios/login", loginModelo)
+                .then(function(respuesta){
+                    console.log(respuesta);
+                });
     }
 }]);
 

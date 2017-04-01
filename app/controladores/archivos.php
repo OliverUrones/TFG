@@ -13,6 +13,7 @@ use app\interfaz\Rest\Rest;
 
 //use modelo archivos
 use app\modelos\usuariosModelo\usuariosModelo;
+use app\modelos\archivosModelo\archivosModelo;
 
 /**
  * Description of archivos
@@ -34,8 +35,38 @@ class archivos extends Api implements Rest {
         
     }    
     /*GET*/
-    public function listar() {
-        
+    public function listar($parametros=NULL) {
+        if(is_array($parametros) && count($parametros) === 2){
+            if(isset($parametros['id']) && isset($parametros['token']))
+            {
+                if(strlen($parametros['token']) === 14) {
+                    //Creo un objeto usuario
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                        //Construyo la cadena JSON
+                        $usuario = $this->construyeJSON($usuario);
+                        //Devuelvo lo datos del usuario a la vista
+                        //var_dump($usuario);
+                        extract($usuario);
+                        
+                        $archivo = new archivosModelo();
+                        $archivos = $archivo->dameArchivos($parametros['id']);
+
+                        //var_dump($archivos);
+                        $archivos = $this->construyeJSON($archivos);
+
+                        extract($archivo);
+
+                        $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
+                        require_once $ruta_vista_perfil;
+                    }
+                }
+            }
+        }
     }
     public function ver($id) {
         

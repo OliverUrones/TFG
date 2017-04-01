@@ -78,8 +78,31 @@ class usuarios extends Api\Api implements Rest {
      * Función que devuelve los datos del perfil de un usuario
      * @param type $id
      */
-    public function perfil($id) {
-        echo "Estoy en la clase usuarios en el método perfil() y el parámetro id es ".$id[0];
+    public function perfil($parametros=NULL) {
+        if(is_array($parametros) && count($parametros) === 2){
+            if(isset($parametros['id']) && isset($parametros['token']))
+            {
+                
+                if(strlen($parametros['token']) === 14) {
+                    //Creo un objeto usuario
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                        //Construyo la cadena JSON
+                        $usuario = $this->construyeJSON($usuario);
+                        //Devuelvo lo datos del usuario a la vista
+                        //var_dump($usuario);
+                        extract($usuario);
+                    }
+                }
+                
+                $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
+                require_once $ruta_vista_perfil;
+            }
+        }
         //Compruebo la validez del token del usuario con usuario_id = $id
     }
 
@@ -90,11 +113,17 @@ class usuarios extends Api\Api implements Rest {
         //echo "Estoy en la clase usuarios en el método login()";
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
-        $ruta_vista_login = VISTAS . 'usuarios/login.php';
-        require_once $ruta_vista_login;
 
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
+        
+        //Viene por GET
+        if($this->peticion === "GET")
+        {
+            //..muestra el forumulario de login
+            $ruta_vista_login = VISTAS . 'usuarios/login.php';
+            require_once $ruta_vista_login;
+        }
 
         //Si viene por POST
         if($this->peticion === "POST")

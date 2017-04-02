@@ -9,47 +9,67 @@ if(isset($nombre_archivo)) {
 <?php 
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
-    //var_dump($usuario_json->token);
+    var_dump($usuario_json);
     
 ?>
-    <button type="button" class="btn btn-default btn-lg btn-block" data-ng-click="abreFormSubida()" data-ng-app="RepositorioApp" data-ng-controller="SubidaArchivoFormController">Subir al repositorio</button>
+    <div  data-ng-app="RepositorioApp" data-ng-controller="SubidaArchivoFormController">
+    <button type="button" class="btn btn-default btn-lg btn-block" data-ng-click="abreFormSubida()">Subir al repositorio</button>
     <div class="modal modal-content">
         <script type="text/ng-template" id="formSubidaArchivo.html">
                 <div class="modal-header">
                     <h3 class="modal-title">Formulario de subida de archivos</h3>
                 </div>
-                <div class="modal-body">
-                    <form name="guardarArchivo" class="form-horizontal" role="form" action="" method="POST">
-                        <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $usuario_json->usuario_id; ?>">
-                        <div class="form-group">
-                            <label class="control-label ">Nombre</label>
-                            <input type="text" 
-                                   name="nombre" 
-                                   class="form-control" 
-                                   id="nombre" 
-                                   data-ng-model="altaModelo.nombre"
-                                   data-ng-minlength="3"
-                                   required>
-                            <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
-                            <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label ">Categorías</label>
-                            <select class="form-control">
-                                <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
-                                <option>Categoría 1</option>
-                                <option>Categoría 2</option>
-                                <option>Categoría 3</option>
-                                <option>Categoría 4</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Subir</a>
-                    <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
-                </div>
+                <form name="guardarArchivo" class="form-horizontal" role="form" action="?archivos/alta/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <input 
+                                    type="hidden"
+                                    disabled
+                                    name="usuario_id"
+                                    id="usuario_id"
+                                    data-ng-model="altaModelo.usuario_id"
+                                    data-ng-init="altaModelo.usuario_id = <?php echo $usuario_json->usuario_id; ?>"
+                                    value="<?php echo $usuario_json->usuario_id; ?>">{{altaModelo.usuario_id}}
+                            </div>
+                            <div class="form-group">
+                                <input 
+                                    type="text"
+                                    name="token"
+                                    id="token"
+                                    data-ng-model="altaModelo.token"
+                                    data-ng-init="altaModelo.token = <?php echo $usuario_json->token; ?>"
+                                    value="<?php echo $usuario_json->token; ?>">{{altaModelo.token}}
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label ">Nombre</label>
+                                <input type="text" 
+                                       name="nombre" 
+                                       class="form-control" 
+                                       id="nombre" 
+                                       data-ng-model="altaModelo.nombre"
+                                       data-ng-minlength="3"
+                                       required>
+                                <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
+                                <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label ">Categorías</label>
+                                <select class="form-control">
+                                    <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
+                                    <option>Categoría 1</option>
+                                    <option>Categoría 2</option>
+                                    <option>Categoría 3</option>
+                                    <option>Categoría 4</option>
+                                </select>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a data-ng-click="subirArchivo(altaModelo)" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>
+                        <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
+                    </div>
+                </form>
         </script>
+    </div>
     </div>
 <?php
 }

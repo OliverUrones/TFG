@@ -23,8 +23,9 @@ use app\modelos\archivosModelo\archivosModelo;
 class archivos extends Api implements Rest {
 
     /*POST*/
-    public function alta() {
-        
+    public function alta($parametros=NULL) {
+        echo "Estoy en el método alta del controlador archivos.";
+        var_dump($parametros);
     }
     
     public function baja() {
@@ -73,7 +74,7 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Función para subir los archivos automáticamente cuando se añaden a la zona Drag and Drop del formulario de convertir
+     * Función para subir las fotos automáticamente cuando se añaden a la zona Drag and Drop del formulario de convertir
      * @param type $parametros
      */
     public function subir($parametros=NULL) {
@@ -130,7 +131,7 @@ class archivos extends Api implements Rest {
     }
 
     /**
-     * Método que realiza la conversión cuando se pulsa el votón enviar y se han subido archivos automáticamente a través de la zona
+     * Método que realiza la conversión cuando se pulsa el botón enviar y se han subido archivos automáticamente a través de la zona
      * de Drag and Drop
      * @param type $parametros
      */

@@ -33,11 +33,12 @@ if(isset($usuario)) {
                             </div>
                             <div class="form-group">
                                 <input 
-                                    type="text"
+                                    type="hidden"
                                     name="token"
+                                    disabled
                                     id="token"
                                     data-ng-model="altaModelo.token"
-                                    data-ng-init="altaModelo.token = <?php echo $usuario_json->token; ?>"
+                                    data-ng-init="altaModelo.token = '<?php echo $usuario_json->token; ?>'"
                                     value="<?php echo $usuario_json->token; ?>">{{altaModelo.token}}
                             </div>
                             <div class="form-group">

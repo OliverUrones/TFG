@@ -65,10 +65,10 @@ class Api {
             $this->controlador = array_shift($parametros);
             /*Extraigo el método del array de parámetros*/
             $this->metodo = array_shift($parametros);
-            
+
 //            echo '<br/>'.$this->clase;
 //            echo '<br/>'.$this->metodo;
-            
+
             //var_dump($parametros);
             /*Si todavía quedan elementos en el array., en concreto 2 o 3.*/
             if(count($parametros) > 0 && count($parametros) < 3) {
@@ -99,7 +99,7 @@ class Api {
              */
             $this->controlador = 'home';
             $this->metodo = 'index';
-            
+
 //            echo '<br/>'.$this->clase;
 //            echo '<br/>'.$this->metodo;
         }

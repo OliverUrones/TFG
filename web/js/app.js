@@ -10,13 +10,18 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
     }
 }]);
 
-formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', function($scope, ngDialog) {
+formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
     $scope.abreFormSubida = function() {
         ngDialog.open({template: 'formSubidaArchivo.html', className: 'ngdialog-theme-default', scope: $scope});
     }
     
     $scope.subirArchivo = function (altaArchivoModelo) {
         console.log(altaArchivoModelo);
+        $http.get("index.php?categorias/listarAjax", altaArchivoModelo)
+                .then(function (respuesta) {
+                    console.log(respuesta.data);
+        });
+        
     }
 }]);
 

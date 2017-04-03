@@ -25,6 +25,16 @@ if(isset($usuario)) {
                                 <input 
                                     type="hidden"
                                     disabled
+                                    name="archivo"
+                                    id="archivo"
+                                    data-ng-model="altaModelo.archivo"
+                                    data-ng-init="altaModelo.archivo = '<?php echo $nombre_archivo_json->nombre; ?>'"
+                                    value="<?php echo $nombre_archivo_json->nombre; ?>">{{altaModelo.archivo}}
+                            </div>
+                            <div class="form-group">
+                                <input 
+                                    type="hidden"
+                                    disabled
                                     name="usuario_id"
                                     id="usuario_id"
                                     data-ng-model="altaModelo.usuario_id"

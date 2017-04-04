@@ -15,7 +15,7 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$h
             .then(function (respuesta) {
                 //console.log(JSON.stringify(respuesta.data));
                 $scope.altaModelo.categorias = respuesta.data;
-                console.log($scope.altaModelo.categorias);
+                //console.log($scope.altaModelo.categorias);
     });
     
     $scope.abreFormSubida = function() {
@@ -25,7 +25,11 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$h
     
     
     $scope.subirArchivo = function (altaModelo) {
-        console.log(altaModelo);
+        console.log("Modelo de datos que le envío desde el formulario: "+altaModelo);
+        $http.post("?archivos/alta", altaModelo)
+                .then(function (respuesta) {
+                    console.log("Datos que me devuelve el servidor: " + respuesta.data);
+                });
     };
 }]);
 

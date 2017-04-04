@@ -25,8 +25,17 @@ class archivos extends Api implements Rest {
 
     /*POST*/
     public function alta($parametros=NULL) {
-        echo "Estoy en el método alta del controlador archivos.";
-        var_dump($parametros);
+        //echo "Estoy en el método alta del controlador archivos.";
+        //var_dump($parametros);
+        
+        //Recojo los datos en formato JSON que mando desde el servidor a través de Ajax
+        $json = file_get_contents('php://input');
+        $obj = json_decode($json);
+        var_dump($obj->archivo);
+        var_dump($obj->usuario_id);
+        var_dump($obj->token);
+        var_dump($obj->nombre);
+        var_dump($obj->categoria);
     }
     
     public function baja() {

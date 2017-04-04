@@ -11,18 +11,36 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
 }]);
 
 formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
+    $http.get("index.php?categorias/listarAjax",$scope.altaModelo.categorias)
+            .then(function (respuesta) {
+                //console.log(JSON.stringify(respuesta.data));
+                $scope.altaModelo.categorias = respuesta.data;
+                console.log($scope.altaModelo.categorias);
+    });
+    
     $scope.abreFormSubida = function() {
-        ngDialog.open({template: 'formSubidaArchivo.html', className: 'ngdialog-theme-default', scope: $scope});
+        ngDialog.open({template: 'formSubidaArchivo.html', className: 'ngdialog-theme-default', scope: $scope});    
+        //console.log($scope.altaModelo.categoria.$$state);
     }
     
-    $scope.subirArchivo = function (altaArchivoModelo) {
-        console.log(altaArchivoModelo);
-        $http.get("index.php?categorias/listarAjax", altaArchivoModelo)
-                .then(function (respuesta) {
-                    console.log(respuesta.data);
-        });
-        
-    }
+    
+    $scope.subirArchivo = function (altaModelo) {
+        console.log(altaModelo);
+    };
+}]);
+
+formularios.controller('DameCategoriasController', ['$scope', '$http', function ($scope, $http) {
+//    $scope.altaModelo = {};
+    
+//    $scope.dameCategorias = function ($scope) {
+//        //console.log($scope);
+//            $http.get("index.php?categorias/listarAjax",$scope.altaModelo.categorias)
+//                .then(function (respuesta) {
+//                    //console.log(JSON.stringify(respuesta.data));
+//                    $scope.altaModelo.categorias = respuesta.data;
+//                    console.log($scope.altaModelo.categorias);
+//            });
+//    }
 }]);
 
 formularios.controller('LoginFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {

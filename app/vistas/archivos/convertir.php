@@ -1,7 +1,7 @@
 <?php //var_dump($usuario); 
-    if(isset($usuario)) {
-        $usuario_json = json_decode($usuario);
-    }
+//    if(isset($usuario)) {
+//        $usuario_json = json_decode($usuario);
+//    }
 ?>
 <?php ob_start() ?>
     <h2>Convierta documentos escaneados a PDF</h2>

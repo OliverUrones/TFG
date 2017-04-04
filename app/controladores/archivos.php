@@ -14,6 +14,7 @@ use app\interfaz\Rest\Rest;
 //use modelo archivos
 use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\archivosModelo\archivosModelo;
+use app\modelos\categoriasModelo\categoriasModelo;
 
 /**
  * Description of archivos

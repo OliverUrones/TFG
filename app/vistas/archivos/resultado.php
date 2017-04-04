@@ -2,6 +2,10 @@
 if(isset($nombre_archivo)) {
     $nombre_archivo_json = json_decode($nombre_archivo);
     var_dump($nombre_archivo_json);
+    if(isset($categorias)) {
+        $categorias_json = json_decode($categorias);
+        var_dump($categorias_json);
+    }
 ?>
 <?php ob_start() ?>
     <h2>Resultado de la conversión</h2>
@@ -12,75 +16,73 @@ if(isset($usuario)) {
     var_dump($usuario_json);
     
 ?>
-    <div  data-ng-app="RepositorioApp" data-ng-controller="SubidaArchivoFormController">
-    <button type="button" class="btn btn-default btn-lg btn-block" data-ng-click="abreFormSubida()">Subir al repositorio</button>
-    <div class="modal modal-content">
-        <script type="text/ng-template" id="formSubidaArchivo.html">
-                <div class="modal-header">
-                    <h3 class="modal-title">Formulario de subida de archivos</h3>
-                </div>
-                <form name="guardarArchivo" class="form-horizontal" role="form" action="?archivos/alta/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
-                    <div class="modal-body">
-                            <div class="form-group">
-                                <input 
-                                    type="hidden"
-                                    disabled
-                                    name="archivo"
-                                    id="archivo"
-                                    data-ng-model="altaModelo.archivo"
-                                    data-ng-init="altaModelo.archivo = '<?php echo $nombre_archivo_json->nombre; ?>'"
-                                    value="<?php echo $nombre_archivo_json->nombre; ?>">{{altaModelo.archivo}}
-                            </div>
-                            <div class="form-group">
-                                <input 
-                                    type="hidden"
-                                    disabled
-                                    name="usuario_id"
-                                    id="usuario_id"
-                                    data-ng-model="altaModelo.usuario_id"
-                                    data-ng-init="altaModelo.usuario_id = <?php echo $usuario_json->usuario_id; ?>"
-                                    value="<?php echo $usuario_json->usuario_id; ?>">{{altaModelo.usuario_id}}
-                            </div>
-                            <div class="form-group">
-                                <input 
-                                    type="hidden"
-                                    name="token"
-                                    disabled
-                                    id="token"
-                                    data-ng-model="altaModelo.token"
-                                    data-ng-init="altaModelo.token = '<?php echo $usuario_json->token; ?>'"
-                                    value="<?php echo $usuario_json->token; ?>">{{altaModelo.token}}
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label ">Nombre</label>
-                                <input type="text" 
-                                       name="nombre" 
-                                       class="form-control" 
-                                       id="nombre" 
-                                       data-ng-model="altaModelo.nombre"
-                                       data-ng-minlength="3"
-                                       required>
-                                <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
-                                <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label ">Categorías</label>
-                                <select class="form-control">
-                                    <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
-                                    <option>Categoría 1</option>
-                                    <option>Categoría 2</option>
-                                    <option>Categoría 3</option>
-                                    <option>Categoría 4</option>
-                                </select>
-                            </div>
+    <div  data-ng-app="RepositorioApp" data-ng-controller="SubidaArchivoFormController" data-ng-controller="DameCategoriasController">
+        <button type="button" class="btn btn-default btn-lg btn-block" data-ng-click="abreFormSubida()">Subir al repositorio</button>
+        <div class="modal modal-content" data-ng-app="RepositorioApp">
+            <script type="text/ng-template" id="formSubidaArchivo.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Formulario de subida de archivos</h3>
                     </div>
-                    <div class="modal-footer">
-                        <a data-ng-click="subirArchivo(altaModelo)" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>
-                        <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
-                    </div>
-                </form>
-        </script>
-    </div>
+                    <form name="guardarArchivo" class="form-horizontal" role="form" action="?archivos/alta/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <input 
+                                        type="hidden"
+                                        disabled
+                                        name="archivo"
+                                        id="archivo"
+                                        data-ng-model="altaModelo.archivo"
+                                        data-ng-init="altaModelo.archivo = '<?php echo $nombre_archivo_json->nombre; ?>'"
+                                        value="<?php echo $nombre_archivo_json->nombre; ?>">{{altaModelo.archivo}}
+                                </div>
+                                <div class="form-group">
+                                    <input 
+                                        type="hidden"
+                                        disabled
+                                        name="usuario_id"
+                                        id="usuario_id"
+                                        data-ng-model="altaModelo.usuario_id"
+                                        data-ng-init="altaModelo.usuario_id = <?php echo $usuario_json->usuario_id; ?>"
+                                        value="<?php echo $usuario_json->usuario_id; ?>">{{altaModelo.usuario_id}}
+                                </div>
+                                <div class="form-group">
+                                    <input 
+                                        type="hidden"
+                                        name="token"
+                                        disabled
+                                        id="token"
+                                        data-ng-model="altaModelo.token"
+                                        data-ng-init="altaModelo.token = '<?php echo $usuario_json->token; ?>'"
+                                        value="<?php echo $usuario_json->token; ?>">{{altaModelo.token}}
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label ">Nombre</label>
+                                    <input type="text" 
+                                           name="nombre" 
+                                           class="form-control" 
+                                           id="nombre" 
+                                           data-ng-model="altaModelo.nombre"
+                                           data-ng-minlength="3"
+                                           required>
+                                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
+                                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label ">Categorías</label>
+                                    <select class="form-control" data-ng-model="altaModelo.categoria">
+                                        <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
+                                        <option ng-repeat="cat in altaModelo.categorias" value="{{cat.categoria_id}}">{{cat.nombre}}</option>
+                                    </select>
+                                </div>
+                                {{altaModelo.categoria}}
+                        </div>
+                        <div class="modal-footer">
+                            <a data-ng-click="subirArchivo(altaModelo)" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>
+                            <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
+                        </div>
+                    </form>
+            </script>
+        </div>
     </div>
 <?php
 }

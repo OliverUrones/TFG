@@ -21,8 +21,7 @@ class archivosModelo {
     public $usuario_id = NULL;
     public $categoria_id = NULL;
     public $nombre = NULL;
-    public $enlace_descarga = NULL;
-    
+    public $enlace_descarga = NULL;    
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
         $this->__conexion();
@@ -44,6 +43,53 @@ class archivosModelo {
         }
     }
     
+    /**
+     * Método que guarda un archivo en la base de datos. Los parámetros son de una llamada Ajax
+     * @param array $params
+     */
+    public function subeArchivo($params) {
+        //Establezco los atributos de la clase
+        $this->__settersPorAjax($params);
+        
+        //Construyo la consulta de inserción
+        $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`)"
+                . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."');";
+        var_dump($sql);
+        //La ejecuto
+        $recordSet = $this->conexion->execute($sql);
+        
+        //Si $recorSet es distinto de falso la consulta se ha ejecutado con éxtio
+        if($recordSet !== false) {
+            //Mensaje correspondiente
+            var_dump('200 OK');
+            return array('estado' => '200 OK', 'Mensaje' => 'El archivo se ha añadido al repositorio correctamente.');
+        } else {
+            //Menaje correspondiente
+            var_dump('400 KO');
+            return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido añadir el archivo al repositorio.');
+        }
+    }
+    
+    /**
+     * Función que sirve para establecer los valores de los atributos de la clase para añadir un archivo a la base de datos.
+     * @param type $params
+     */
+    private function __settersPorAjax($params) {
+        if(isset($params['usuario_id'])) {
+            $this->usuario_id = $this->conexion->qStr($params['usuario_id']);
+        }
+        if(isset($params['nombre_archivo'])) {
+            $this->nombre = $this->conexion->qStr($params['nombre_archivo']);
+        }
+        if(isset($params['categoria_id'])) {
+            $this->categoria_id = $this->conexion->qStr($params['categoria_id']);
+        }
+        if(isset($params['archivo'])) {
+            //para generar bien el enlace descarga hay que mover el archivo $params['archivo'] de la carpeta temporales a app/archivos/
+            $this->enlace_descarga = DIRECTORIO_ARCHIVOS.str_replace("'", "", $this->conexion->qStr($params['archivo']));
+        }
+    }
+
     /**
      * Método que devuelve los archivos y el nombre de la categoría a la que pertenecen de un usuario en concreto, a través del id
      * @param type $id

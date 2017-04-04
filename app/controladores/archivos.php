@@ -30,12 +30,34 @@ class archivos extends Api implements Rest {
         
         //Recojo los datos en formato JSON que mando desde el servidor a través de Ajax
         $json = file_get_contents('php://input');
+        //var_dump($json);
         $obj = json_decode($json);
-        var_dump($obj->archivo);
-        var_dump($obj->usuario_id);
-        var_dump($obj->token);
-        var_dump($obj->nombre);
-        var_dump($obj->categoria);
+//        var_dump($obj);
+//        var_dump($obj->usuario_id);
+//        var_dump($obj->token);
+//        var_dump($obj->archivo);
+//        var_dump($obj->nombre);
+//        var_dump($obj->categoria);
+       
+        //Opción para subir con autentificación previa de token
+        //$parametros = ["token" => $obj->token, "usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria];
+        
+        //Opción sin token para que el resultado se pueda subir igualmente.
+        $parametros = ["usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria];
+        
+        //var_dump($parametros);
+        
+        $archivosModel = new archivosModelo();
+        $respuesta = $archivosModel->subeArchivo($parametros);
+        
+        $respuesta = $this->construyeJSON($respuesta);
+        
+        $this->tipo = "application/json";
+        $this->EstablecerCabeceras();
+        var_dump($respuesta);
+        //Da problemas al enviar la respuesta JSON
+        //echo $respuesta;
+        
     }
     
     public function baja() {

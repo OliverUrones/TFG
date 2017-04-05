@@ -54,18 +54,18 @@ class archivosModelo {
         //Construyo la consulta de inserción
         $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`)"
                 . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."');";
-        var_dump($sql);
+        //var_dump($sql);
         //La ejecuto
         $recordSet = $this->conexion->execute($sql);
         
         //Si $recorSet es distinto de falso la consulta se ha ejecutado con éxtio
         if($recordSet !== false) {
             //Mensaje correspondiente
-            var_dump('200 OK');
+            //var_dump('200 OK');
             return array('estado' => '200 OK', 'Mensaje' => 'El archivo se ha añadido al repositorio correctamente.');
         } else {
             //Menaje correspondiente
-            var_dump('400 KO');
+            //var_dump('400 KO');
             return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido añadir el archivo al repositorio.');
         }
     }
@@ -128,6 +128,6 @@ class archivosModelo {
         $this->conexion->connect($host, $usuario, $pass, $db);
         
         //Para debuggear ADODB
-        $this->conexion->debug = true;
+        //$this->conexion->debug = true;
     }
 }

@@ -69,7 +69,7 @@ if(isset($usuario)) {
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label ">Categorías</label>
-                                    <select class="form-control" data-ng-model="altaModelo.categoria">
+                                    <select class="form-control" data-ng-model="altaModelo.categoria" required>
                                         <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
                                         <option ng-repeat="cat in altaModelo.categorias" value="{{cat.categoria_id}}">{{cat.nombre}}</option>
                                     </select>
@@ -77,10 +77,23 @@ if(isset($usuario)) {
                                 {{altaModelo.categoria}}
                         </div>
                         <div class="modal-footer">
-                            <a data-ng-click="subirArchivo(altaModelo)" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>
+                            <a data-ng-click="subirArchivo(altaModelo); abreResultadoSubida();" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>
                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
                         </div>
                     </form>
+            </script>
+        </div>
+        <div class="modal modal-content" data-ng-app="RepositorioApp">
+            <script type="text/ng-template" id="resultadoSubida.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Resultado de la subida del archivo</h3>
+                </div>
+                <div class="modal-body">
+                    {{altaModelo.respuesta.Mensaje}}
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-primary" href="?archivos/convertir/<?php echo $usuario_json->token; ?>">Volver</a>
+                </div>
             </script>
         </div>
     </div>

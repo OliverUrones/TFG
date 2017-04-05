@@ -52,8 +52,8 @@ class archivos extends Api implements Rest {
         
         $respuesta = $this->construyeJSON($respuesta);
         
-        //$this->tipo = "application/json";
-        //$this->EstablecerCabeceras();
+        $this->tipo = "application/json";
+        $this->EstablecerCabeceras();
         //var_dump($respuesta);
         //Da problemas al enviar la respuesta JSON
         echo $respuesta;

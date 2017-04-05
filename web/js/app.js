@@ -21,7 +21,7 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$h
     $scope.abreFormSubida = function() {
         $scope.miDialog = ngDialog.open({template: 'formSubidaArchivo.html', className: 'ngdialog-theme-default', scope: $scope});
         //console.log($scope.altaModelo.categoria.$$state);
-    }
+    };
     
     
     $scope.subirArchivo = function (altaModelo) {
@@ -30,10 +30,17 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$h
         $http.post("?archivos/alta", altaModelo)
                 .then(function (respuesta) {
                     altaModelo.respuesta = respuesta.data;
-                    console.log(altaModelo.respuesta);
-                    console.log($scope.miDialog);
+                    //console.log(altaModelo.respuesta);
+                    //console.log($scope.miDialog);
                     $scope.miDialog.close();
                 });
+    };
+    
+    $scope.abreResultadoSubida = function () {
+        $scope.resultadoSubidaDialog = ngDialog.open({template: 'resultadoSubida.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
+        console.log($scope.resultadoSubidaDialog);
+        //console.log(altaModelo.respuesta);
+        //console.log("Estoy aquí");
     };
 }]);
 

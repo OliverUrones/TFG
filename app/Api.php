@@ -118,14 +118,14 @@ class Api {
     /**
      * Método que establece las cabeceras del servicio
      */
-    public function EstablecerCabeceras($filename=NULL) {
+    public function EstablecerCabeceras($ruta=NULL, $nombre=NULL) {
         header("HTTP/1.1 " . $this->codEstado . " " . $this->GetCodEstado());  
         header("Content-Type:" . $this->tipo . ';charset=utf-8');
         //Si se le pasas como argumento un archivo...
-        if(isset($filename) && $filename !== NULL) {
+        if(isset($ruta) && $ruta !== NULL) {
             //...Se establece Content-Disposition: attachment; filename=$filename para descargar el archivo
-            header("Content-Disposition: attachment; filename=$filename");
-            readfile(CARPETA_TEMPORALES.SEPARADOR.$filename);
+            header("Content-Disposition: attachment; filename=$nombre");
+            readfile($ruta);
         }
      }
      

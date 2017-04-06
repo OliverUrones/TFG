@@ -6,7 +6,7 @@
     
     if(isset($archivos)) {
         $archivos_json = json_decode($archivos);
-        var_dump($archivos_json);
+        //var_dump($archivos_json);
     }
 ?>
 <?php ob_start(); ?>
@@ -25,6 +25,9 @@
         </ul>
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <?php if(isset($archivos_json->Mensaje)) { ?>
+                <h2><?php echo $archivos_json->Mensaje; ?></h2>
+            <?php } else { ?>
                 <?php //var_dump($archivos_json); ?>
             <table class="table table-responsive table-bordered text-center table-hover">
                 <thead>
@@ -39,13 +42,14 @@
                     <?php foreach ($archivos_json as $obj) { ?>
                         <tr>
                             <td><?php echo $obj->nombre; ?><span class="glyphicon glyphicon-file"></span></td>
-                            <td><?php echo $obj->nombre_categoria; ?><span class=".glyphicon .glyphicon-list-alt"></span></td>
-                            <td><a href="<?php echo $obj->enlace_descarga; ?>"><span class=".glyphicon .glyphicon-save"></span>Descargar</a></td>
+                            <td><?php echo $obj->nombre_categoria; ?><span class="glyphicon glyphicon-list-alt"></span></td>
+                            <td><a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>"><span class="glyphicon glyphicon-save"></span>Descargar2</a></td>
 <!--                            <td><span class=".glyphicon .glyphicon-remove"></span></td>-->
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
+            <?php } ?>
         </div>
     <?php } else { ?>
         <ul class="nav nav-tabs nav-justified">

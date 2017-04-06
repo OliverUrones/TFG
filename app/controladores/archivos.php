@@ -67,7 +67,11 @@ class archivos extends Api implements Rest {
     public function modificar() {
         
     }    
-    /*GET*/
+    
+    /**
+     * Función que lista los archivos que un usuario tiene subidos en su perfil.
+     * @param type $parametros
+     */
     public function listar($parametros=NULL) {
         if(is_array($parametros) && count($parametros) === 2){
             if(isset($parametros['id']) && isset($parametros['token']))
@@ -101,6 +105,7 @@ class archivos extends Api implements Rest {
             }
         }
     }
+    
     public function ver($id) {
         
     }
@@ -382,6 +387,24 @@ class archivos extends Api implements Rest {
         }
     }
     
+    /**
+     * Método para establecer las cabeceras a la hora de descargar los archivos que hacen referencia en la base de datos.
+     * @param array $parametros
+     */
+    public function descargarArchivo($parametros=NULL) {
+        if(isset($parametros['archivo'])) {
+            var_dump($parametros['archivo']);
+            $this->tipo = "application/pdf";
+            $file = DIRECTORIO_ARCHIVOS_ABSOLUTA.$parametros['archivo'];
+            $this->EstablecerCabeceras($file, $parametros['archivo']);
+        }
+    }
+
+
+    /**
+     * Método para descargar el archivo inmediatamente después de ejecutar la conversión
+     * @param array $parametros
+     */
     public function descargar($parametros=NULL) {
         //Si viene el nombre del archivo...
         if(isset($parametros['archivo'])) {
@@ -392,7 +415,7 @@ class archivos extends Api implements Rest {
             //Se construye la ruta del archivo para ser descargado
             $file = CARPETA_TEMPORALES.$parametros['archivo'];
             //Se establece la cabecera pasándole el archivo a ser descargado.
-            $this->EstablecerCabeceras($parametros['archivo']);
+            $this->EstablecerCabeceras($file, $parametros['archivo']);
         }
         
     }

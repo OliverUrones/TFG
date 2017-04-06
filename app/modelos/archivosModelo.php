@@ -83,7 +83,7 @@ class archivosModelo {
             $new_name = DIRECTORIO_ARCHIVOS_ABSOLUTA.$params['nombre_archivo'].$fecha.'.pdf';
             
             if(rename($old_name, $new_name)) {
-                $this->enlace_descarga = DIRECTORIO_ARCHIVOS_RELATIVA.$params['nombre_archivo'].$fecha.'.pdf';
+                $this->enlace_descarga = $params['nombre_archivo'].$fecha.'.pdf';
             } else {
                 return false;
             }
@@ -117,16 +117,20 @@ class archivosModelo {
     public function dameArchivos($id) {
         $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria' FROM `archivos`, `categorias` WHERE `archivos`.`usuario_id` = '".$id."' AND `categorias`.`categoria_id`=`archivos`.`categoria_id`;";
         $recordset = $this->conexion->execute($sql)->getAssoc();
-        foreach ($recordset as $key => $value) {
-            //echo '<br/>'.$key.' -- '.$value;
-            foreach ($value as $columna => $valor) {
-                if(is_string($columna)) {
-                    $archivos[$key][$columna] = $valor;
+        if($recordset) {
+            foreach ($recordset as $key => $value) {
+                //echo '<br/>'.$key.' -- '.$value;
+                foreach ($value as $columna => $valor) {
+                    if(is_string($columna)) {
+                        $archivos[$key][$columna] = $valor;
+                    }
                 }
             }
+            //var_dump($archivos);
+            return $archivos;
+        } else {
+            return array("estado" => '200 OK', "Mensaje" => "No tiene archivos guardados");
         }
-        //var_dump($archivos);
-        return $archivos;
     }
 
     /**

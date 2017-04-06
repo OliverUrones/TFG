@@ -8,8 +8,9 @@
 
 namespace app\modelos\envioEmailModelo;
 
-require_once PHPMAILER;
-require_once PHPMAILER_SMTP;
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'PHPMailer/PHPMailerAutoload.php';
+//require_once PHPMAILER;
+//require_once PHPMAILER_SMTP;
 
 /**
  * Description of envioEmailModelo

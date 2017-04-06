@@ -7,7 +7,8 @@
  */
 
 namespace app\modelos\usuariosModelo;
-require_once ADODB;
+//require_once ADODB;
+//require_once ADODB_ADMIN;
 require_once APLICACION.'modelos'.SEPARADOR.'envioEmailModelo.php';
 
 /**

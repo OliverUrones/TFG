@@ -53,4 +53,8 @@ class home extends Api\Api {
 //        require_once $ruta_vista_login;
         require_once $ruta_vista_home;
     }
+    
+    public function admin($parametros=NULL) {
+        echo "Estoy en el método admin() de la clase home";
+    }
 }

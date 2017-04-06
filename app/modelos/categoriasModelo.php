@@ -7,7 +7,8 @@
  */
 
 namespace app\modelos\categoriasModelo;
-require_once ADODB;
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
+//require_once ADODB;
 
 /**
  * Description of categoriasModelo

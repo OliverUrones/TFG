@@ -85,8 +85,21 @@ class archivosModelo {
             $this->categoria_id = $this->conexion->qStr($params['categoria_id']);
         }
         if(isset($params['archivo'])) {
+            //var_dump($params['archivo']);
+            $ruta_archivo_temporal = CARPETA_TEMPORALES.'/'.str_replace("'", "", $this->conexion->qStr($params['archivo']));
+            //Esta ruta hay que construirla 
+            $ruta_archivo_subido = DIRECTORIO_ARCHIVOS. str_replace("'", "", $this->nombre).'.pdf';
+            var_dump($ruta_archivo_temporal);
+            var_dump($ruta_archivo_subido);
+            var_dump(rename($ruta_archivo_temporal, $ruta_archivo_subido));
+                $this->enlace_descarga = $ruta_archivo_subido;
+            if(rename($ruta_archivo_temporal, $ruta_archivo_subido)) {
+                var_dump("rename() bien!!!");
+            } else {
+                return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido subir el archivo al repositorio');
+            }
+            
             //para generar bien el enlace descarga hay que mover el archivo $params['archivo'] de la carpeta temporales a app/archivos/
-            $this->enlace_descarga = DIRECTORIO_ARCHIVOS.str_replace("'", "", $this->conexion->qStr($params['archivo']));
         }
     }
 

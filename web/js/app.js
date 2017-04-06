@@ -7,7 +7,7 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
     $scope.resgistroDialog = function() {
         //Abro el diálogo con la plantilla con id 'respuestaRegistro.html', con la clase 'ngdialog-theme-default' y le paso el scope para poder usar closeThisDialog() en la vista
         ngDialog.open({template: 'respuestaRegistro.html', className: 'ngdialog-theme-default', scope: $scope});
-    }
+    };
 }]);
 
 formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
@@ -15,7 +15,7 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$h
             .then(function (respuesta) {
                 //console.log(JSON.stringify(respuesta.data));
                 $scope.altaModelo.categorias = respuesta.data;
-                //console.log($scope.altaModelo.categorias);
+                console.log($scope.altaModelo.categorias);
     });
     
     $scope.abreFormSubida = function() {

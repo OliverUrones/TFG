@@ -125,7 +125,6 @@ class archivos extends Api implements Rest {
                 {
                     $images = '';
                     //Para cada nombre temporal del archivo subido..
-                    $i = 0;
                     foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
                         //Se recoge la ruta de origen
                         $origen = $_FILES['archivos']['tmp_name'][$key];
@@ -134,7 +133,7 @@ class archivos extends Api implements Rest {
                         $nombre_temp = $nombre_temp[2];
                         //echo $nombre_temp;
                         //El destino será en la carpeta temp/$nombre_temp extraído
-                        $destino = CARPETA_TEMPORALES . SEPARADOR . $i.$nombre_temp;
+                        $destino = CARPETA_TEMPORALES .$nombre_temp;
                         //echo "<p>".$destino."</p>";
                         //Si se ha movido con éxtio...
                         if(move_uploaded_file($origen, $destino))
@@ -149,7 +148,6 @@ class archivos extends Api implements Rest {
                         } else {
                             echo "<br/>NO se ha movido el archivo subido.";
                         }
-                        $i++;
                     }
                 } else 
                 {

@@ -50,27 +50,50 @@ class archivosModelo {
     public function subeArchivo($params) {
         //Establezco los atributos de la clase
         $this->__settersPorAjax($params);
-        
-        //Construyo la consulta de inserción
-        $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`)"
-                . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."');";
-        //var_dump($sql);
-        //La ejecuto
-        $recordSet = $this->conexion->execute($sql);
-        
-        //Si $recorSet es distinto de falso la consulta se ha ejecutado con éxtio
-        if($recordSet !== false) {
-            //Mensaje correspondiente
-            //var_dump('200 OK');
-            return array('estado' => '200 OK', 'Mensaje' => 'El archivo se ha añadido al repositorio correctamente.');
-        } else {
-            //Menaje correspondiente
-            //var_dump('400 KO');
-            return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido añadir el archivo al repositorio.');
+        if($this->__mueveArchivo($params)) {
+            //Construyo la consulta de inserción
+            $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`)"
+                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."');";
+            //var_dump($sql);
+            //La ejecuto
+            $recordSet = $this->conexion->execute($sql);
+
+            //Si $recorSet es distinto de falso la consulta se ha ejecutado con éxtio
+            if($recordSet !== false) {
+                //Mensaje correspondiente
+                //var_dump('200 OK');
+                return array('estado' => '200 OK', 'Mensaje' => 'El archivo se ha añadido al repositorio correctamente.');
+            } else {
+                //Menaje correspondiente
+                //var_dump('400 KO');
+                return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido añadir el archivo al repositorio.');
+            }
         }
     }
     
     /**
+     * 
+     * @param type $params
+     */
+    private function __mueveArchivo($params) {
+        if(isset($params['archivo'])) {
+            $fecha = date("-d-m-Y-H-i-s");
+            
+            $old_name = CARPETA_TEMPORALES.$params['archivo'];
+            $new_name = DIRECTORIO_ARCHIVOS_ABSOLUTA.$params['nombre_archivo'].$fecha.'.pdf';
+            
+            if(rename($old_name, $new_name)) {
+                $this->enlace_descarga = DIRECTORIO_ARCHIVOS_RELATIVA.$params['nombre_archivo'].$fecha.'.pdf';
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+        /**
      * Función que sirve para establecer los valores de los atributos de la clase para añadir un archivo a la base de datos.
      * @param type $params
      */
@@ -83,23 +106,6 @@ class archivosModelo {
         }
         if(isset($params['categoria_id'])) {
             $this->categoria_id = $this->conexion->qStr($params['categoria_id']);
-        }
-        if(isset($params['archivo'])) {
-            //var_dump($params['archivo']);
-            $ruta_archivo_temporal = CARPETA_TEMPORALES.'/'.str_replace("'", "", $this->conexion->qStr($params['archivo']));
-            //Esta ruta hay que construirla 
-            $ruta_archivo_subido = DIRECTORIO_ARCHIVOS. str_replace("'", "", $this->nombre).'.pdf';
-            var_dump($ruta_archivo_temporal);
-            var_dump($ruta_archivo_subido);
-            var_dump(rename($ruta_archivo_temporal, $ruta_archivo_subido));
-                $this->enlace_descarga = $ruta_archivo_subido;
-            if(rename($ruta_archivo_temporal, $ruta_archivo_subido)) {
-                var_dump("rename() bien!!!");
-            } else {
-                return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido subir el archivo al repositorio');
-            }
-            
-            //para generar bien el enlace descarga hay que mover el archivo $params['archivo'] de la carpeta temporales a app/archivos/
         }
     }
 

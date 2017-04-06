@@ -27,7 +27,7 @@ formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$h
     $scope.subirArchivo = function (altaModelo) {
         //console.log(altaModelo);
         //console.log(altaModelo.categorias);
-        $http.post("?archivos/alta", altaModelo)
+        $http.post("index.php?archivos/alta", altaModelo)
                 .then(function (respuesta) {
                     altaModelo.respuesta = respuesta.data;
                     //console.log(altaModelo.respuesta);

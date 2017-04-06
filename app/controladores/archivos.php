@@ -209,7 +209,7 @@ class archivos extends Api implements Rest {
                     //var_dump($temporales[$i]);
                     if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
                         //echo '<br/>'.$temporales[$i];
-                        $images = CARPETA_TEMPORALES . SEPARADOR . $temporales[$i].' '.$images;
+                        $images = CARPETA_TEMPORALES . $temporales[$i].' '.$images;
                     }
                 }
                 //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
@@ -313,7 +313,7 @@ class archivos extends Api implements Rest {
                         $nombre_temp = $nombre_temp[2];
                         //echo $nombre_temp;
                         //El destino será en la carpeta temp/$nombre_temp extraído
-                        $destino = CARPETA_TEMPORALES . SEPARADOR . $nombre_temp;
+                        $destino = CARPETA_TEMPORALES . $nombre_temp;
                         //echo "<p>".$destino."</p>";
                         //Si se ha movido con éxtio...
                         if(move_uploaded_file($origen, $destino))
@@ -390,7 +390,7 @@ class archivos extends Api implements Rest {
             //$this->tipo = 'application/force-download';
             $this->tipo = 'application/pdf';
             //Se construye la ruta del archivo para ser descargado
-            $file = CARPETA_TEMPORALES.SEPARADOR.$parametros['archivo'];
+            $file = CARPETA_TEMPORALES.$parametros['archivo'];
             //Se establece la cabecera pasándole el archivo a ser descargado.
             $this->EstablecerCabeceras($parametros['archivo']);
         }
@@ -487,14 +487,14 @@ class archivos extends Api implements Rest {
             //Le pongo la extensión .pdf al archivo de salida que genera el algoritmo y le añado la ruta
             if(isset($params['-o']))
             {
-                $params['-o'] = CARPETA_TEMPORALES.SEPARADOR.$params['-o'].'.pdf';
+                $params['-o'] = CARPETA_TEMPORALES.$params['-o'].'.pdf';
                 //var_dump($params);
             }
             
             //Estalbezco la ruta de la carpeta temporal donde se van a guardar las imágenes .png mejoradas
             if(isset($params['-b']))
             {
-                $params['-b'] = CARPETA_TEMPORALES.SEPARADOR.$params['-b'];
+                $params['-b'] = CARPETA_TEMPORALES.$params['-b'];
                 //var_dump($params);
             }
             foreach ($params as $opcion => $value) {

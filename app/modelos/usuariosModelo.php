@@ -78,7 +78,28 @@ class usuariosModelo {
         }
     }
 
-    /**
+    public function listadoUsuarios() {
+        $sql = "SELECT `usuarios`.*, `roles`.tipo FROM `usuarios`, `roles` WHERE `usuarios`.rol_id = `roles`.rol_id;";
+        
+        $recordset = $this->conexion->execute($sql)->getAssoc();
+        
+        //var_dump($recordset);
+        if($recordset) {
+            foreach ($recordset as $key => $value) {
+                //echo '<br/>'.$key.' -- '.$value;
+                foreach ($value as $columna => $valor) {
+                    if(is_string($columna)) {
+                        $usuarios[$key][$columna] = $valor;
+                    }
+                }
+            }
+            //var_dump($archivos);
+            return $usuarios;
+        }
+        
+    }
+
+        /**
      * Función que introduce un usuario en la base de datos
      */
     public function altaUsuario() {
@@ -318,7 +339,7 @@ class usuariosModelo {
                         }
                         
                         //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
-                        $usuario['estado'] = '200 OK';
+                        $usuario['estado_p'] = '200 OK';
                         $usuario['Mensaje'] = 'Usuario logeado correctamente';
                         return $usuario;
                     } else {
@@ -419,7 +440,7 @@ class usuariosModelo {
             }
         }
         //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
-        $usuario['estado'] = '200 OK';
+        $usuario['estado_p'] = '200 OK';
         $usuario['Mensaje'] = 'Sesión establecida correctamente';
         return $usuario;
     }

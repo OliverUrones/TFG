@@ -23,6 +23,7 @@ class archivosModelo {
     public $categoria_id = NULL;
     public $nombre = NULL;
     public $enlace_descarga = NULL;    
+    
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
         $this->__conexion();
@@ -132,6 +133,29 @@ class archivosModelo {
         } else {
             return array("estado" => '200 OK', "Mensaje" => "No tiene archivos guardados");
         }
+    }
+    
+    public function listadoArchivos() {
+        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
+                . "FROM `usuarios`, `archivos`, `categorias` "
+                . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
+                . "AND `categorias`.categoria_id = `archivos`.categoria_id;";
+        //var_dump($sql);
+        $recordset = $this->conexion->execute($sql)->getAssoc();
+        
+        //var_dump($recordset);
+        if($recordset) {
+            foreach ($recordset as $key => $value) {
+                //echo '<br/>'.$key.' -- '.$value;
+                foreach ($value as $columna => $valor) {
+                    if(is_string($columna)) {
+                        $usuarios[$key][$columna] = $valor;
+                    }
+                }
+            }
+            //var_dump($archivos);
+            return $usuarios;
+        }        
     }
 
     /**

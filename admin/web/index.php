@@ -8,6 +8,7 @@ require_once dirname(__DIR__, 2).DIRECTORY_SEPARATOR.PHPMAILER;
 require_once dirname(__DIR__,2). '/app/modelos/usuariosModelo.php';
 require_once dirname(__DIR__,2). '/app/modelos/archivosModelo.php';
 require_once dirname(__DIR__,2). '/app/modelos/categoriasModelo.php';
+require_once dirname(__DIR__,2). '/app/modelos/rolesModelo.php';
 //require_once ADODB;
 require_once dirname(__DIR__,2).DIRECTORY_SEPARATOR.ADODB_DRIVER_MYSQLI;
 //require_once PHPMAILER;

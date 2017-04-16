@@ -54,7 +54,61 @@ class home extends Api\Api {
         require_once $ruta_vista_home;
     }
     
+    /**
+     * Método para el acceso a la parte de administración
+     * @param array $parametros
+     */
     public function admin($parametros=NULL) {
-        echo "Estoy en el método admin() de la clase home";
+        //echo "Estoy en el método admin() de la clase home";
+        
+        $ruta_vista_login = VISTAS.'usuarios/admin_login.php';
+        
+        if(isset($parametros['token']))
+        {
+            if(strlen($parametros['token']) === 14) {
+                //Creo un objeto usuario
+                $modeloUsuario = new usuariosModelo();
+                //Si el token es válido...
+                if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                    //...recupero los datos del usuario
+                    $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                    
+                    //Construyo la cadena JSON
+                    $usuario = $this->construyeJSON($usuario);
+                    //Devuelvo lo datos del usuario a la vista
+                    //var_dump($usuario);
+                    extract($usuario);
+                }
+            }
+        } else {
+            require_once $ruta_vista_login;
+        }
+    }
+    
+    public function adminIndex($parametros=NULL) {
+        $ruta_vista_home = VISTAS.'admin_home.php';
+        
+        //Si vienen parámetros, compruebo que la longitud sea de 14 caracteres que es la longitud de un token
+        if(isset($parametros['token']))
+        {
+            if(strlen($parametros['token']) === 14) {
+                //Creo un objeto usuario
+                $modeloUsuario = new usuariosModelo();
+                //Si el token es válido...
+                if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                    //...recupero los datos del usuario
+                    $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                    
+                    //Construyo la cadena JSON
+                    $usuario = $this->construyeJSON($usuario);
+                    //Devuelvo lo datos del usuario a la vista
+                    //var_dump($usuario);
+                    extract($usuario);
+                    require_once $ruta_vista_home;
+                }
+            }
+        } else {
+            echo "No tiene permiso para ver la página.";
+        }
     }
 }

@@ -62,8 +62,44 @@ class usuarios extends Api\Api implements Rest {
         echo "Estoy en la clase usuarios en el métod baja()";
     }
     
-    public function listar() {
+    public function listar($parametros=NULL) {
         echo "Estoy en la clase usuarios en el método listar";
+        if(is_array($parametros)){
+            if(isset($parametros['token']))
+            {
+                if(strlen($parametros['token']) === 14) {
+                    //Creo un objeto usuario
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                        
+                        if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                        {
+
+                            //Construyo la cadena JSON
+                            $usuario = $this->construyeJSON($usuario);
+                            //Devuelvo lo datos del usuario a la vista
+                            //var_dump($usuario);
+                            extract($usuario);
+                            
+                            $usuarios = $modeloUsuario->listadoUsuarios();
+                            $usuarios = $this->construyeJSON($usuarios);
+                            
+                            extract($usuarios);
+                            
+                            //var_dump($usuarios);
+
+                            $ruta_vista_admin_listado = VISTAS .'usuarios/admin_listado.php';
+                            require_once $ruta_vista_admin_listado;
+                        } else {
+                            //No tiene permiso
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public function ver($id) {
@@ -105,9 +141,48 @@ class usuarios extends Api\Api implements Rest {
         }
         //Compruebo la validez del token del usuario con usuario_id = $id
     }
+    
+    public function admin() {
+        //echo "Estoy en el método admin() de la clase usuarios";
+        
+        //Recojo el tipo de petición
+        $this->DamePeticion();
+        
+        //Si viene por post...
+        if($this->peticion === "POST")
+        {
+            //Creo un modelo usuarios;
+            $usuarioModelo = new usuariosModelo();
+            
+            //Recupero los datos del usuario logueado
+            $usuario = $usuarioModelo->dameUsuarioLogueado();
+            //var_dump($usuario);
+            
+            //Si el usuaario logueado es de tipo administrador (rol_id = 1) ...
+            if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+            {
+                //echo "Soy administrador";
+                //Cargo la página inicial del back end
+                $usuario = $this->construyeJSON($usuario);
+                extract($usuario);
+                $ruta_vista_admin_home = VISTAS.'admin_home.php';
+
+                require_once $ruta_vista_admin_home;
+            } else {
+                //echo "NO soy administrador";
+                //Recargo la página de index del directorio admin
+                $usuario = $this->construyeJSON(array('estado' => '400 KO', 'Mensaje' => 'No está permitido el acceso a los usuarios que no son administradores.'));
+                extract($usuario);
+                
+                $ruta_vista_login = VISTAS.'usuarios/admin_login.php';
+
+                require_once $ruta_vista_login;
+            }
+        }
+    }
 
     /**
-     * Función para loguearse
+     * Función para loguearse en la parte pública
      */
     public function login() {
         //echo "Estoy en la clase usuarios en el método login()";

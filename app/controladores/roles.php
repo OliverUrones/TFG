@@ -6,26 +6,25 @@
  * and open the template in the editor.
  */
 
-namespace app\controladores\categorias;
+namespace app\controladores\roles;
 
 use app\Api\Api;
 use app\interfaz\Rest\Rest;
 
-//Uso de los modelos
 use app\modelos\usuariosModelo\usuariosModelo;
-use app\modelos\categoriasModelo\categoriasModelo;
+use app\modelos\rolesModelo\rolesModelo;
 
 /**
- * Description of categorias
+ * Description of roles
  *
  * @author oliver
  */
-class categorias extends Api implements Rest {
-    //put your code here
+class roles extends Api implements Rest {
+    
     public function alta() {
         
     }
-
+    
     public function baja() {
         
     }
@@ -35,6 +34,7 @@ class categorias extends Api implements Rest {
     }
     
     public function listar($parametros=NULL) {
+        //echo "Voy a listar los roles";
         if(is_array($parametros)){
             if(isset($parametros['token']))
             {
@@ -55,15 +55,16 @@ class categorias extends Api implements Rest {
                             //var_dump($usuario);
                             extract($usuario);
                             
-                            $modeloCategorias = new categoriasModelo();
-                            $categorias = $modeloCategorias->dameCategorias();
-                            $categorias = $this->construyeJSON($categorias);
+                            $rolesModelo = new rolesModelo();
+                            $roles = $rolesModelo->listadoRoles();
                             
-                            extract($categorias);
+                            $roles = $this->construyeJSON($roles);
                             
+                            extract($roles);
+
                             //var_dump($usuarios);
 
-                            $ruta_vista_admin_listado = VISTAS .'categorias/admin_listado.php';
+                            $ruta_vista_admin_listado = VISTAS .'roles/admin_listado.php';
                             require_once $ruta_vista_admin_listado;
                         } else {
                             //No tiene permiso
@@ -73,18 +74,8 @@ class categorias extends Api implements Rest {
             }
         }
     }
-
-    public function listarAjax($params=NULL) {
-        $categorias = new categoriasModelo();
-        $categorias = $categorias->dameCategorias();
-        
-        $categorias = $this->construyeJSON($categorias);
-        $this->tipo = "application/json";
-        $this->EstablecerCabeceras();
-        echo $categorias;
-    }
     
-    public function ver($parametros=NULL) {
+    public function ver($id) {
         
     }
 }

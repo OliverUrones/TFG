@@ -48,6 +48,9 @@
                                 <li>
                                     <a href="?categorias/listar/<?php echo $usuario_json->token ?>">Categorías</a>
                                 </li>
+                                <li>
+                                    <a href="?usuarios/adminLogout/<?php echo $usuario_json->usuario_id ?>">Salir</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

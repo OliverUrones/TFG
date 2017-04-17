@@ -444,6 +444,28 @@ class usuariosModelo {
         $usuario['Mensaje'] = 'Sesión establecida correctamente';
         return $usuario;
     }
+    
+    /**
+     * Función que devuelve los datos del usuario a traves del id
+     * @param type $id
+     */
+    public function dameUsuarioId($id) {
+        $sql = "SELECT * FROM `usuarios` WHERE usuario_id='".$id."'";
+        
+        $resultado = $this->conexion->getRow($sql);
+        //var_dump($resultado);
+        foreach ($resultado as $key => $value) {
+            if(is_string($key))
+            {
+                $usuario[$key] = utf8_decode($value);
+                //echo '<br/>resultado['.$key.'] = '.$value;
+            }
+        }
+        //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
+        $usuario['estado_p'] = '200 OK';
+        $usuario['Mensaje'] = 'Usuario recuperado correctamente';
+        return $usuario;
+    }
 
     /**
      * Función que actualiza el campo token y validez_token a NULL para cerrar la sesión de un usuario

@@ -28,7 +28,7 @@ if(isset($roles)) {
                             <td><?php echo $obj->rol_id ?></td>
                             <td><?php echo utf8_decode($obj->tipo); ?></td>
                             <td>
-                                <span class="glyphicon glyphicon-edit"></span>
+                                <a href="?roles/modificar/<?php echo $obj->rol_id; ?>/<?php echo $usuario_json->token; ?>"><span class="glyphicon glyphicon-edit"></span></a>
                                 <span class="glyphicon glyphicon-remove"></span>
                             </td>                        </tr>
                     <?php } ?>

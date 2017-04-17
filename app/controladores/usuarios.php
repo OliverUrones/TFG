@@ -63,7 +63,7 @@ class usuarios extends Api\Api implements Rest {
     }
     
     public function listar($parametros=NULL) {
-        echo "Estoy en la clase usuarios en el método listar";
+        //echo "Estoy en la clase usuarios en el método listar";
         if(is_array($parametros)){
             if(isset($parametros['token']))
             {
@@ -106,8 +106,44 @@ class usuarios extends Api\Api implements Rest {
         echo "Estoy en la clase usuarios en el método ver() y el parámetro id es ".$id[0];
     }
     
-    public function modificar() {
+    public function modificar($parametros=NULL) {
         echo "Estoy en la clase usuarios en el método modificar()";
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2){
+                if(isset($parametros['id']) && isset($parametros['token']))
+                {
+
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        //var_dump($parametros);
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            //Construyo la cadena JSON
+                            $usuario = $this->construyeJSON($usuario);
+                            $admin = $this->construyeJSON($admin);
+                            //Devuelvo lo datos del usuario a la vista
+                            //var_dump($usuario);
+                            extract($usuario);
+                            extract($admin);
+
+                            $ruta_vista_admin_modificar = VISTAS .'usuarios/admin_modificar.php';
+                            require_once $ruta_vista_admin_modificar;
+                        }
+                    }
+
+                }
+            }
+        }
+        
+        if($this->peticion === "POST") {
+            //Si viene la modificación por formulario
+        }
     }
     
     /**
@@ -244,6 +280,29 @@ class usuarios extends Api\Api implements Rest {
                 //Requerir la vista correspondiente
             }
         }   
+    }
+    
+    /**
+     * Función para cerrar la sesión de la parte privada de administración
+     * @param array $parametros
+     */
+    public function adminLogout($parametros=NULL) {
+        //Recogo el tipo de petición realizada
+        $this->DamePeticion();
+        //si viene por GET...
+        if($this->peticion === "GET") {
+            //Compruebo si viene el id
+            if(isset($parametros['id']))
+            {
+                var_dump($parametros);
+                //Se crea un objeto del modelo usuarios
+                $usuariosModelo = new usuariosModelo();
+                $estado_peticion = $usuariosModelo->borraDatosSesion($parametros['id']);
+                echo $estado_peticion['Mensaje'];
+                
+                //Requerir la vista correspondiente
+            }
+        }
     }
 
     public function activar($parametros = NULL) {

@@ -1,6 +1,7 @@
 <?php
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
+    var_dump($usuario_json);
 }
 
 if(isset($usuarios)) {
@@ -40,7 +41,7 @@ if(isset($usuarios)) {
                             <td><?php echo $obj->fecha_creacion ?></td>
                             <td><?php echo $obj->estado ?></td>
                             <td>
-                                <span class="glyphicon glyphicon-edit"></span>
+                                <a href="?usuarios/modificar/<?php echo $obj->usuario_id; ?>/<?php echo $usuario_json->token; ?>"><span class="glyphicon glyphicon-edit"></span></a>
                                 <span class="glyphicon glyphicon-remove"></span>
                             </td>
                         </tr>

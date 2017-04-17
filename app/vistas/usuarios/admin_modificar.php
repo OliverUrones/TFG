@@ -1,0 +1,126 @@
+<?php
+if(isset($usuario)) {
+    $usuario_json = json_decode($usuario);
+    var_dump($usuario_json);
+}
+
+if(isset($admin)) {
+    $admin_json = json_decode($admin);
+    //var_dump($admin_json);
+}
+?>
+<?php ob_start() ?>
+<div class="container">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <h2>Modificar usuario</h2>
+        <form>
+            <div class="form-group">
+                <label class="control-label">ID</label>
+                <input type="text"
+                       name="usuario_id"
+                       class="form-control"
+                       id="usuario_id"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->usuario_id; ?>"
+                       required
+                       readonly>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Rol ID</label>
+                <input type="text"
+                       name="rol_id"
+                       class="form-control"
+                       id="rol_id"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->rol_id; ?>"
+                       required
+                       >
+            </div>
+            <div class="form-group">
+                <label class="control-label">Email</label>
+                <input type="text"
+                       name="email"
+                       class="form-control"
+                       id="email"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->email; ?>"
+                       required
+                       readonly>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Nombre</label>
+                <input type="text"
+                       name="nombre"
+                       class="form-control"
+                       id="nombre"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->nombre; ?>"
+                       required>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Apellidos</label>
+                <input type="text"
+                       name="apellidos"
+                       class="form-control"
+                       id="apellidos"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->apellidos; ?>"
+                       required>
+            </div>
+            <?php if(strlen($usuario_json->token)) { ?>
+            <div class="form-group">
+                <label class="control-label">Token</label>
+                <input type="text"
+                       name="token"
+                       class="form-control"
+                       id="token"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->token; ?>"
+                       >
+            </div>
+            <?php } ?>
+            <?php if(strlen($usuario_json->validez_token)) { ?>
+            <div class="form-group">
+                <label class="control-label">Validez token</label>
+                <input type="text"
+                       name="validez_token"
+                       class="form-control"
+                       id="validez_token"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->validez_token; ?>"
+                       >
+            </div>
+            <?php } ?>
+            <div class="form-group">
+                <label class="control-label">Fecha de Creación</label>
+                <input type="text"
+                       name="fecha_creacion"
+                       class="form-control"
+                       id="fecha_creacion"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->fecha_creacion; ?>"
+                       required
+                       readonly>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Estado</label>
+                <input type="text"
+                       name="estado"
+                       class="form-control"
+                       id="estado"
+                       data-ng-model=""
+                       value="<?php echo $usuario_json->estado; ?>">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<?php $contenido = ob_get_clean(); ?>
+<?php 
+    /*Función para cargar plantilla en la configuración*/
+    $ruta_plantillas = PLANTILLAS.'plantilla_admin.php';
+    //echo '<br/>'.$ruta_plantillas;
+    require_once $ruta_plantillas;
+?>

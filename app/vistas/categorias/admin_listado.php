@@ -18,7 +18,8 @@ if(isset($categorias)) {
                 <tr>
                     <td>ID Categoria</td>
                     <td>Nombre</td>
-                    <td>Categoría Padre</td>
+                    <td>ID Categoría Padre</td>
+                    <td>Nombre Categoría Padre</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -29,6 +30,7 @@ if(isset($categorias)) {
                             <td><?php echo $obj->categoria_id ?></td>
                             <td><?php echo utf8_decode($obj->nombre); ?></td>
                             <td><?php echo $obj->categoria_padre ?></td>
+                            <td><?php echo $obj->padre ?></td>
                             <td>
                                 <span class="glyphicon glyphicon-edit"></span>
                                 <span class="glyphicon glyphicon-remove"></span>

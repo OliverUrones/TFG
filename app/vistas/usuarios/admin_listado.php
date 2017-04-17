@@ -42,7 +42,7 @@ if(isset($usuarios)) {
                             <td><?php echo $obj->estado ?></td>
                             <td>
                                 <a href="?usuarios/modificar/<?php echo $obj->usuario_id; ?>/<?php echo $usuario_json->token; ?>"><span class="glyphicon glyphicon-edit"></span></a>
-                                <span class="glyphicon glyphicon-remove"></span>
+                                <a href="?usuarios/baja/<?php echo $obj->usuario_id; ?>/<?php echo $usuario_json->token; ?>"><span class="glyphicon glyphicon-remove"></span></a>
                             </td>
                         </tr>
                     <?php } ?>

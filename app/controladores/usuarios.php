@@ -58,7 +58,7 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
-    public function baja() {
+    public function baja($parametros=NULL) {
         echo "Estoy en la clase usuarios en el métod baja()";
     }
     

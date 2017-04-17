@@ -37,8 +37,13 @@ class categoriasModelo {
         }
     }
     
+    /**
+     * Método que devuelve las categorías
+     * @return array Array asociativo con las categorías devueltas
+     */
     public function dameCategorias() {
-        $sql = "SELECT * FROM categorias";
+        //$sql = "SELECT * FROM categorias";
+        $sql = "SELECT c1.categoria_id, c1.nombre, c1.categoria_padre, c2.nombre AS padre FROM categorias AS c1 LEFT OUTER JOIN categorias AS c2 ON c1.categoria_padre =c2.categoria_id";
         $recordset = $this->conexion->execute($sql)->getAssoc();
         foreach ($recordset as $key => $value) {
             //echo '<br/>'.$key.' -- '.$value;

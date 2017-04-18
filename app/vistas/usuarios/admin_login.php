@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 <!--    <div data-ng-app="loginApp" data-ng-controller="loginAppCtrl">-->
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3" data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3" data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
         <h2>Login</h2>
         <form name="loginForm" role="form" action="?usuarios/admin" method="POST">
             <div class="form-group">

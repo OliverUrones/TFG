@@ -74,13 +74,13 @@ class usuarios extends Api\Api implements Rest {
                         //Si el token es válido...
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                             //...recupero los datos del usuario
-                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
-                            if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
                             {
 
                                 //Construyo la cadena JSON
-                                $usuario = $this->construyeJSON($usuario);
+                                $admin = $this->construyeJSON($admin);
                                 //Devuelvo lo datos del usuario a la vista
                                 //var_dump($usuario);
                                 extract($usuario);
@@ -115,26 +115,27 @@ class usuarios extends Api\Api implements Rest {
                         //Si el token es válido...
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                             //...recupero los datos del usuario
-                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
-                            if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
                             {
 
                                 //Construyo la cadena JSON
-                                $usuario = $this->construyeJSON($usuario);
+                                $admin = $this->construyeJSON($admin);
                                 //Devuelvo lo datos del usuario a la vista
                                 //var_dump($usuario);
-                                extract($usuario);
+                                extract($admin);
 
                                 $borrado = $modeloUsuario->borraUsuarioId();
                                 $borrado = $this->construyeJSON($borrado);
 
+                                //$borrado es la respuesta json para devolver a la vista el mensaje
                                 extract($borrado);
 
                                 //var_dump($usuarios);
 
-                                //$ruta_vista_admin_borrar = VISTAS .'usuarios/admin_borrar.php';
-                                //require_once $ruta_vista_admin_borrar;
+                                $ruta_vista_admin_borrar = VISTAS .'usuarios/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
                             } else {
                                 //No tiene permiso
                             }
@@ -156,16 +157,16 @@ class usuarios extends Api\Api implements Rest {
                     //Si el token es válido...
                     if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                         //...recupero los datos del usuario
-                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                        $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
                         
-                        if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                        if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
                         {
 
                             //Construyo la cadena JSON
-                            $usuario = $this->construyeJSON($usuario);
+                            $admin = $this->construyeJSON($admin);
                             //Devuelvo lo datos del usuario a la vista
                             //var_dump($usuario);
-                            extract($usuario);
+                            extract($admin);
                             
                             $usuarios = $modeloUsuario->listadoUsuarios();
                             $usuarios = $this->construyeJSON($usuarios);
@@ -205,14 +206,13 @@ class usuarios extends Api\Api implements Rest {
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                             //...recupero los datos del usuario
                             $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+                            $usuario = $this->construyeJSON($usuario);
                             $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
                             //Construyo la cadena JSON
-                            $usuario = $this->construyeJSON($usuario);
                             $admin = $this->construyeJSON($admin);
-                            //Devuelvo lo datos del usuario a la vista
-                            //var_dump($usuario);
                             extract($usuario);
+                            //Devuelvo lo datos del usuario a la vista
                             extract($admin);
 
                             $ruta_vista_admin_modificar = VISTAS .'usuarios/admin_modificar.php';
@@ -226,6 +226,8 @@ class usuarios extends Api\Api implements Rest {
         
         if($this->peticion === "POST") {
             //Si viene la modificación por formulario
+            echo "La petición de modificar viene por POST";
+            var_dump($_POST);
         }
     }
     
@@ -237,7 +239,6 @@ class usuarios extends Api\Api implements Rest {
         if(is_array($parametros) && count($parametros) === 2){
             if(isset($parametros['id']) && isset($parametros['token']))
             {
-                
                 if(strlen($parametros['token']) === 14) {
                     //Creo un objeto usuario
                     $modeloUsuario = new usuariosModelo();
@@ -274,16 +275,16 @@ class usuarios extends Api\Api implements Rest {
             $usuarioModelo = new usuariosModelo();
             
             //Recupero los datos del usuario logueado
-            $usuario = $usuarioModelo->dameUsuarioLogueado();
+            $admin = $usuarioModelo->dameUsuarioLogueado();
             //var_dump($usuario);
             
             //Si el usuaario logueado es de tipo administrador (rol_id = 1) ...
-            if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
             {
                 //echo "Soy administrador";
                 //Cargo la página inicial del back end
-                $usuario = $this->construyeJSON($usuario);
-                extract($usuario);
+                $admin = $this->construyeJSON($admin);
+                extract($admin);
                 $ruta_vista_admin_home = VISTAS.'admin_home.php';
 
                 require_once $ruta_vista_admin_home;

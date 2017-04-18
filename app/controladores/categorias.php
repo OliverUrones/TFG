@@ -44,16 +44,16 @@ class categorias extends Api implements Rest {
                     //Si el token es válido...
                     if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                         //...recupero los datos del usuario
-                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                        $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
                         
-                        if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                        if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
                         {
 
                             //Construyo la cadena JSON
-                            $usuario = $this->construyeJSON($usuario);
+                            $admin = $this->construyeJSON($admin);
                             //Devuelvo lo datos del usuario a la vista
                             //var_dump($usuario);
-                            extract($usuario);
+                            extract($admin);
                             
                             $modeloCategorias = new categoriasModelo();
                             $categorias = $modeloCategorias->dameCategorias();

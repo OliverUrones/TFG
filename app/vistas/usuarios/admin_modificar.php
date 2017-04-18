@@ -11,9 +11,9 @@ if(isset($admin)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
         <h2>Modificar usuario</h2>
-        <form>
+        <form name="modificar" class="form-horizontal" role="form" action="?usuarios/modificar/<?php echo $usuario_json->token; ?>" method="POST">
             <div class="form-group">
                 <label class="control-label">ID</label>
                 <input type="text"
@@ -38,14 +38,15 @@ if(isset($admin)) {
             </div>
             <div class="form-group">
                 <label class="control-label">Email</label>
-                <input type="text"
+                <p class="form-control-static"><?php echo $usuario_json->email; ?></p>
+<!--                <input type="text"
                        name="email"
                        class="form-control"
                        id="email"
                        data-ng-model=""
-                       value="<?php echo $usuario_json->email; ?>"
+                       value="<?php //echo $usuario_json->email; ?>"
                        required
-                       readonly>
+                       readonly>-->
             </div>
             <div class="form-group">
                 <label class="control-label">Nombre</label>
@@ -67,49 +68,51 @@ if(isset($admin)) {
                        value="<?php echo $usuario_json->apellidos; ?>"
                        required>
             </div>
-            <?php if(strlen($usuario_json->token)) { ?>
-            <div class="form-group">
-                <label class="control-label">Token</label>
-                <input type="text"
-                       name="token"
-                       class="form-control"
-                       id="token"
-                       data-ng-model=""
-                       value="<?php echo $usuario_json->token; ?>"
-                       >
-            </div>
-            <?php } ?>
             <?php if(strlen($usuario_json->validez_token)) { ?>
             <div class="form-group">
                 <label class="control-label">Validez token</label>
-                <input type="text"
+            <p class="form-control-static"><?php echo $usuario_json->validez_token; ?></p>
+<!--                <input type="text"
                        name="validez_token"
                        class="form-control"
                        id="validez_token"
                        data-ng-model=""
-                       value="<?php echo $usuario_json->validez_token; ?>"
-                       >
+                       value="<?php //echo $usuario_json->validez_token; ?>"
+                       >-->
             </div>
             <?php } ?>
             <div class="form-group">
                 <label class="control-label">Fecha de Creación</label>
-                <input type="text"
+                <p class="form-control-static" name="fecha_creacion" id="fecha_creacion"><?php echo $usuario_json->fecha_creacion; ?></p>
+<!--                <input type="text"
                        name="fecha_creacion"
                        class="form-control"
                        id="fecha_creacion"
                        data-ng-model=""
-                       value="<?php echo $usuario_json->fecha_creacion; ?>"
+                       value="<?php //echo $usuario_json->fecha_creacion; ?>"
                        required
-                       readonly>
+                       readonly>-->
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label class="control-label">Estado</label>
                 <input type="text"
                        name="estado"
                        class="form-control"
                        id="estado"
                        data-ng-model=""
-                       value="<?php echo $usuario_json->estado; ?>">
+                       value="<?php //echo $usuario_json->estado; ?>">
+            </div>-->
+            <div class="form-group">
+                <label class="control-label">Estado de la cuenta</label>
+                <select class="form-control">
+                    <?php if(strcmp($usuario_json->estado, '1')==0) { ?>
+                        <option value="<?php echo $usuario_json->estado; ?>">Activada</option>
+                        <option value="0">Desactivada</option>
+                    <?php } else { ?>
+                        <option value="<?php echo $usuario_json->estado; ?>">Desactivada</option>
+                        <option value="1">Activada</option>
+                    <?php }  ?>
+                </select>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>

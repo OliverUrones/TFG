@@ -1,18 +1,24 @@
 <?php
-if(isset($usuario)) {
-    $usuario_json = json_decode($usuario);
+if(isset($admin)) {
+    $admin_json = json_decode($admin);
 }
 
 if(isset($usuarioBorrar)) {
     $usuarioBorrar_json = json_decode($usuarioBorrar);
     var_dump($usuarioBorrar_json);
 }
+
+if(isset($borrado)) {
+    $borrado_json = json_decode($borrado);
+    //var_dump("Usuario Borrado: ".$borrado_json);
+}
 ?>
 <?php ob_start() ?>
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <?php if(isset($admin_json) && isset($usuarioBorrar_json)) { ?>
         <h2>Borrar usuario</h2>
-        <form name="baja" class="form-horizontal" role="form" action="?usuarios/baja/<?php echo $usuario_json->token; ?>" method="POST">
+        <form name="baja" class="form-horizontal" role="form" action="?usuarios/baja/<?php echo $admin_json->token; ?>" method="POST">
             <div class="form-group">
                 <input type="hidden"
                        name="usuario_id"
@@ -48,6 +54,13 @@ if(isset($usuarioBorrar)) {
                 <button type="button" class="btn btn-danger" value="Enviar"onclick="window.history.back();">Cancelar</button>
             </div>
         </form>
+    <?php } elseif (isset($admin_json) && isset ($borrado_json) ) { ?>
+        <?php if(strcmp($borrado_json->estado_p, "200 OK")== 0) {?>
+            <div class="alert alert-success"><?php echo $borrado_json->Mensaje ?></div>
+        <?php } else { ?>
+            <div class="alert alert-danger"><?php echo $borrado_json->Mensaje ?></div>
+        <?php } ?>
+    <?php } ?>
     </div>
 </div>
 <?php $contenido = ob_get_clean(); ?>

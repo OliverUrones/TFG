@@ -1,6 +1,6 @@
 <?php
-if(isset($usuario)) {
-    $usuario_json = json_decode($usuario);
+if(isset($admin)) {
+    $admin_json = json_decode($admin);
 }
 
 if(isset($roles)) {
@@ -28,9 +28,10 @@ if(isset($roles)) {
                             <td><?php echo $obj->rol_id ?></td>
                             <td><?php echo utf8_decode($obj->tipo); ?></td>
                             <td>
-                                <a href="?roles/modificar/<?php echo $obj->rol_id; ?>/<?php echo $usuario_json->token; ?>"><span class="glyphicon glyphicon-edit"></span></a>
+                                <a href="?roles/modificar/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>"><span class="glyphicon glyphicon-edit"></span></a>
                                 <span class="glyphicon glyphicon-remove"></span>
-                            </td>                        </tr>
+                            </td>
+                        </tr>
                     <?php } ?>
                 <?php } ?>
             </tbody>

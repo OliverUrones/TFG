@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php 
-    if(isset($usuario)) {
-        $usuario_json = json_decode($usuario);
+    if(isset($admin)) {
+        $admin_json = json_decode($admin);
         //var_dump($usuario_json);
     }
 ?>
@@ -26,7 +26,7 @@
 
     </head>
     <body>
-        <?php if(isset($usuario_json) && $usuario_json->rol_id === '1') { ?>
+        <?php if(isset($admin_json) && $admin_json->rol_id === '1') { ?>
         <header class="navbar navbar-inverse">
             <div class="clearfix visible-lg-inline-block"></div>
                 <div class="container">
@@ -34,22 +34,22 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             <ul class="nav nav-pills nav-justified">
                                 <li>
-                                    <a href="?home/adminIndex/<?php echo $usuario_json->token ?>">Inicio</a>
+                                    <a href="?home/adminIndex/<?php echo $admin_json->token ?>">Inicio</a>
                                 </li>
                                 <li>
-                                    <a href="?usuarios/listar/<?php echo $usuario_json->token ?>">Usuarios</a>
+                                    <a href="?usuarios/listar/<?php echo $admin_json->token ?>">Usuarios</a>
                                 </li>
                                 <li>
-                                    <a href="?roles/listar/<?php echo $usuario_json->token ?>">Roles</a>
+                                    <a href="?roles/listar/<?php echo $admin_json->token ?>">Roles</a>
                                 </li>
                                 <li>
-                                    <a href="?archivos/listarTodos/<?php echo $usuario_json->token ?>">Archivos</a>
+                                    <a href="?archivos/listarTodos/<?php echo $admin_json->token ?>">Archivos</a>
                                 </li>
                                 <li>
-                                    <a href="?categorias/listar/<?php echo $usuario_json->token ?>">Categorías</a>
+                                    <a href="?categorias/listar/<?php echo $admin_json->token ?>">Categorías</a>
                                 </li>
                                 <li>
-                                    <a href="?usuarios/adminLogout/<?php echo $usuario_json->usuario_id ?>">Salir</a>
+                                    <a href="?usuarios/adminLogout/<?php echo $admin_json->usuario_id ?>">Salir</a>
                                 </li>
                             </ul>
                         </div>

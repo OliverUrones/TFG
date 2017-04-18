@@ -148,12 +148,13 @@ class usuariosModelo {
         //var_dump($sql);
         $recordSet = $this->conexion->execute($sql);
         var_dump($recordSet);
+        //Comprobar mejor el recordSet
         if($recordSet) {
             //El usuario se ha borrado
-            $resultado = array('estado' => '200 OK', 'Mensaje' => 'El usuario se ha borrado correctamente.');
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'El usuario se ha borrado correctamente.');
         } else {
             //El usuario no se ha borrado
-            $resultado = array('estado' => '400 KO', 'Mensaje' => 'El usuario no se ha podido borrar.');
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'El usuario no se ha podido borrar.');
         }
         
         return $resultado;

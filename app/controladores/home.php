@@ -97,13 +97,13 @@ class home extends Api\Api {
                 //Si el token es válido...
                 if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                     //...recupero los datos del usuario
-                    $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                    $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
                     
                     //Construyo la cadena JSON
-                    $usuario = $this->construyeJSON($usuario);
+                    $admin = $this->construyeJSON($admin);
                     //Devuelvo lo datos del usuario a la vista
                     //var_dump($usuario);
-                    extract($usuario);
+                    extract($admin);
                     require_once $ruta_vista_home;
                 }
             }

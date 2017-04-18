@@ -60,6 +60,89 @@ class usuarios extends Api\Api implements Rest {
     
     public function baja($parametros=NULL) {
         echo "Estoy en la clase usuarios en el métod baja()";
+        $this->DamePeticion();
+        
+        if($this->peticion === "GET") {
+            echo "Vengo por GET";
+            var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']) && isset($parametros['id']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $usuario = $this->construyeJSON($usuario);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($usuario);
+
+                                $usuarioBorrar = $modeloUsuario->dameUsuarioId($parametros['id']);
+                                $usuarioBorrar = $this->construyeJSON($usuarioBorrar);
+
+                                extract($usuarioBorrar);
+
+                                //var_dump($usuarioBorrar);
+
+                                $ruta_vista_admin_borrar = VISTAS .'usuarios/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if($this->peticion === "POST") {
+            echo "Vengo por POST";
+            var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($usuario['rol_id']) && $usuario['rol_id'] === '1' && $usuario['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $usuario = $this->construyeJSON($usuario);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($usuario);
+
+                                $borrado = $modeloUsuario->borraUsuarioId();
+                                $borrado = $this->construyeJSON($borrado);
+
+                                extract($borrado);
+
+                                //var_dump($usuarios);
+
+                                //$ruta_vista_admin_borrar = VISTAS .'usuarios/admin_borrar.php';
+                                //require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public function listar($parametros=NULL) {

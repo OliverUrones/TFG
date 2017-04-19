@@ -1,6 +1,6 @@
 <?php
-if(isset($usuario)) {
-    $usuario_json = json_decode($usuario);
+if(isset($admin)) {
+    $admin_json = json_decode($admin);
 }
 
 if(isset($categorias)) {
@@ -10,7 +10,7 @@ if(isset($categorias)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  table-responsive">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
         <h2>Listado de categorías</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
@@ -32,7 +32,7 @@ if(isset($categorias)) {
                             <td><?php echo $obj->categoria_padre ?></td>
                             <td><?php echo $obj->padre ?></td>
                             <td>
-                                <img class="img" src="../web/imagenes/Admin/administracion_editar.png" >
+                                <a href="?categorias/modificar/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png" ></a>
                                 <img class="img" src="../web/imagenes/Admin/administracion_borrar.png" >
                             </td>
                         </tr>

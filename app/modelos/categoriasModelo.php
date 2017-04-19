@@ -56,6 +56,25 @@ class categoriasModelo {
         //var_dump($categorias);
         return $categorias;
     }
+    
+    public function dameCategoriaId($id) {
+        $sql = "SELECT c1.categoria_id, c1.nombre, c1.categoria_padre, c2.nombre AS padre FROM categorias AS c1 LEFT OUTER JOIN categorias AS c2 ON c1.categoria_padre =c2.categoria_id WHERE c1.categoria_id=".$id.";";
+        
+        $resultado = $this->conexion->getRow($sql);
+        //var_dump($resultado);
+        foreach ($resultado as $key => $value) {
+            if(is_string($key))
+            {
+                $categoria[$key] = utf8_decode($value);
+                //echo '<br/>resultado['.$key.'] = '.$value;
+            }
+        }
+        //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
+        $categoria['estado_p'] = '200 OK';
+        $categoria['Mensaje'] = 'Categoria recuperada correctamente';
+        //var_dump($categoria);
+        return $categoria;
+    }
 
     /**
      * Función que conecta con la base de datos

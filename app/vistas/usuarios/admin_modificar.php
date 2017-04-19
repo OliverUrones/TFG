@@ -1,7 +1,7 @@
 <?php
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
-    //var_dump($usuario_json);
+    var_dump($usuario_json);
 }
 
 if(isset($admin)) {
@@ -12,6 +12,9 @@ if(isset($admin)) {
 <?php ob_start() ?>
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <?php if( (isset($usuario_json->accion) && $usuario_json->accion === 'modificar') && (isset($usuario_json->estado_p) && $usuario_json->estado_p === '200 OK') ) { ?>
+            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $usuario_json->Mensaje; ?></div>
+        <?php } ?>
         <h2>Modificar usuario</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?usuarios/modificar/<?php echo $admin_json->token; ?>" method="POST">
             <div class="form-group">
@@ -123,7 +126,7 @@ if(isset($admin)) {
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
-                <button type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid" onclick="window.history.back();">Cancelar</button>
+                <a href="?usuarios/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
             </div>
         </form>
     </div>

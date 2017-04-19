@@ -52,8 +52,27 @@ class rolesModelo {
             return $roles;
         }
     }
+    
+    public function dameRolId($id) {
+        $sql = "SELECT * FROM roles WHERE rol_id='".$id."';";
+        
+        $resultado = $this->conexion->getRow($sql);
+        //var_dump($resultado);
+        foreach ($resultado as $key => $value) {
+            if(is_string($key))
+            {
+                $rol[$key] = utf8_decode($value);
+                //echo '<br/>resultado['.$key.'] = '.$value;
+            }
+        }
+        //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
+        $rol['estado_p'] = '200 OK';
+        $rol['Mensaje'] = 'Rol recuperado correctamente';
+        var_dump($rol);
+        return $rol;
+    }
 
-        /**
+    /**
      * Función que conecta con la base de datos
      */
     private function __conexion() {

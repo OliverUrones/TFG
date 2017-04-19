@@ -29,8 +29,39 @@ class roles extends Api implements Rest {
         
     }
     
-    public function modificar() {
-        
+    public function modificar($parametros=NULL) {
+        var_dump($parametros);
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2){
+                if(isset($parametros['id']) && isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        //var_dump($parametros);
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $modeloRoles = new rolesModelo();
+                            $rol = $modeloRoles->dameRolId($parametros['id']);
+                            $rol = $this->construyeJSON($rol);
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            //Construyo la cadena JSON
+                            $admin = $this->construyeJSON($admin);
+                            extract($rol);
+                            //Devuelvo lo datos del usuario a la vista
+                            extract($admin);
+
+                            $ruta_vista_admin_modificar = VISTAS .'roles/admin_modificar.php';
+                            require_once $ruta_vista_admin_modificar;
+                        }
+                    }
+
+                }
+            }
+        }
     }
     
     public function listar($parametros=NULL) {

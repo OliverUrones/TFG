@@ -10,7 +10,7 @@ if(isset($categorias)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12  table-responsive">
         <h2>Listado de categorías</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
@@ -32,8 +32,8 @@ if(isset($categorias)) {
                             <td><?php echo $obj->categoria_padre ?></td>
                             <td><?php echo $obj->padre ?></td>
                             <td>
-                                <span class="glyphicon glyphicon-edit"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
+                                <img class="img" src="../web/imagenes/Admin/administracion_editar.png" >
+                                <img class="img" src="../web/imagenes/Admin/administracion_borrar.png" >
                             </td>
                         </tr>
                     <?php } ?>

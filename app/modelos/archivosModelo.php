@@ -135,7 +135,29 @@ class archivosModelo {
         }
     }
     
-    public function listadoArchivos() {
+    public function dameArchivoId($id) {
+        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
+                . "FROM `usuarios`, `archivos`, `categorias` "
+                . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
+                . "AND `categorias`.categoria_id = `archivos`.categoria_id "
+                . "AND `archivos`.archivo_id = ".$id.";";
+        var_dump($sql);
+        $resultado = $this->conexion->getRow($sql);
+        var_dump($resultado);
+        foreach ($resultado as $key => $value) {
+            if(is_string($key))
+            {
+                $archivo[$key] = utf8_decode($value);
+                //echo '<br/>resultado['.$key.'] = '.$value;
+            }
+        }
+        //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
+        $archivo['estado_p'] = '200 OK';
+        $archivo['Mensaje'] = 'Datos del archivo recuperado correctamente';
+        return $archivo;
+    }
+
+        public function listadoArchivos() {
         $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
                 . "FROM `usuarios`, `archivos`, `categorias` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "

@@ -64,8 +64,44 @@ class archivos extends Api implements Rest {
         
     }
     
-    public function modificar() {
+    public function modificar($parametros=NULL) {
+        echo "Estoy en la controlador archivos en el método modificar()";
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2){
+                if(isset($parametros['id']) && isset($parametros['token']))
+                {
+
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        //var_dump($parametros);
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $modeloArchivos = new archivosModelo();
+                            $archivo = $modeloArchivos->dameArchivoId($parametros['id']);
+                            $archivo = $this->construyeJSON($archivo);
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            //Construyo la cadena JSON
+                            $admin = $this->construyeJSON($admin);
+                            extract($archivo);
+                            //Devuelvo lo datos del usuario a la vista
+                            extract($admin);
+
+                            $ruta_vista_admin_modificar = VISTAS .'archivos/admin_modificar.php';
+                            require_once $ruta_vista_admin_modificar;
+                        }
+                    }
+
+                }
+            }
+        }
         
+        if($this->peticion === "POST") {
+            
+        }
     }
     
     public function listarTodos($parametros=NULL) {

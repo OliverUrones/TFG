@@ -8,7 +8,7 @@ if(isset($admin)) {
 <!--Contenedor principal-->
 <div class="container text-center">
     
-    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-7 col-lg-offset-2">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <a href="?usuarios/listar/<?php echo $admin_json->token; ?>">
                 <div class="btn">
@@ -29,7 +29,7 @@ if(isset($admin)) {
 
         <div class="clearfix"></div>
         
-    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="row col-xs-12 col-sm-12 col-md-12 col-lg-7 col-lg-offset-2">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>">
                 <div class="btn">

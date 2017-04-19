@@ -7,11 +7,16 @@ if(isset($archivos)) {
     $archivos_json = json_decode($archivos);
     //var_dump($archivos_json);
 }
+
+if(isset($admin)) {
+    $admin_json = json_decode($admin);
+    //var_dump($admin_json);
+}
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <h2>Listado de usuarios</h2>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
+        <h2>Listado de archivos</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
             <thead>
@@ -38,8 +43,8 @@ if(isset($archivos)) {
                             <td><?php echo $obj->nombre_usuario ?></td>
                             <td><?php echo $obj->nombre_categoria ?></td>
                             <td>
-                                <span class="glyphicon glyphicon-edit"></span>
-                                <span class="glyphicon glyphicon-remove"></span>
+                                <a href="?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png"></a>
+                                <a href="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_borrar.png">
                             </td>
                         </tr>
                     <?php } ?>

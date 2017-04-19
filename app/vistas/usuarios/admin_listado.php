@@ -11,7 +11,7 @@ if(isset($usuarios)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive">
         <h2>Listado de usuarios</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
@@ -41,8 +41,8 @@ if(isset($usuarios)) {
                             <td><?php echo $obj->fecha_creacion ?></td>
                             <td><?php echo $obj->estado ?></td>
                             <td>
-                                <a href="?usuarios/modificar/<?php echo $obj->usuario_id; ?>/<?php echo $admin_json->token; ?>"><span class="glyphicon glyphicon-edit"></span></a>
-                                <a href="?usuarios/baja/<?php echo $obj->usuario_id; ?>/<?php echo $admin_json->token; ?>"><span class="glyphicon glyphicon-remove"></span></a>
+                                <a href="?usuarios/modificar/<?php echo $obj->usuario_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png" ></a>
+                                <a href="?usuarios/baja/<?php echo $obj->usuario_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_borrar.png" ></a>
                             </td>
                         </tr>
                     <?php } ?>

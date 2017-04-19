@@ -104,7 +104,7 @@ if(isset($admin)) {
             </div>-->
             <div class="form-group">
                 <label class="control-label">Estado de la cuenta</label>
-                <select class="form-control">
+                <select class="form-control" id="estado" name="estado">
                     <?php if(strcmp($usuario_json->estado, '1')==0) { ?>
                         <option value="<?php echo $usuario_json->estado; ?>">Activada</option>
                         <option value="0">Desactivada</option>

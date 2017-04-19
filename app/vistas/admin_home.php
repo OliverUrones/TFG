@@ -20,7 +20,7 @@ if(isset($admin)) {
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <a href="?roles/listar/<?php echo $admin_json->token; ?>">
                 <div class="btn">
-                    <img class="img img-thumbnail" src="../web/imagenes/Admin/administracion_roles.png">
+                    <img class="img" src="../web/imagenes/Admin/administracion_roles.png">
                     <h1 class="">Roles</h1>
                 </div>
             </a>
@@ -33,7 +33,7 @@ if(isset($admin)) {
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>">
                 <div class="btn">
-                    <img class="img img-thumbnail" src="../web/imagenes/Admin/administracion_archivos.png">
+                    <img class="img" src="../web/imagenes/Admin/administracion_archivos.png">
                     <h1 class="">Archivos</h1>
                 </div>
             </a>
@@ -41,7 +41,7 @@ if(isset($admin)) {
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
             <a href="?categorias/listar/<?php echo $admin_json->token; ?>">
                 <div class="btn">
-                    <img class="img img-thumbnail" src="../web/imagenes/Admin/administracion_categorias.png">
+                    <img class="img" src="../web/imagenes/Admin/administarcion_categorias.png">
                     <h1 class="">Categorias</h1>
                 </div>
             </a>

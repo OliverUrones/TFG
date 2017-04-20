@@ -18,8 +18,8 @@ if(isset($admin)) {
         <h2>Modificar usuario</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?usuarios/modificar/<?php echo $admin_json->token; ?>" method="POST">
             <div class="form-group">
-                <label class="control-label">ID</label>
-                <input type="text"
+<!--                <label class="control-label">ID</label>-->
+                <input type="hidden"
                        name="usuario_id"
                        class="form-control"
                        id="usuario_id"

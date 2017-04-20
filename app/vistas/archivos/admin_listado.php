@@ -19,15 +19,12 @@ if(isset($admin)) {
         <h2>Listado de archivos</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
-            <thead>
+            <thead class="bg-primary">
                 <tr>
-                    <td>ID Archivo</td>
-                    <td>ID Usuario</td>
-                    <td>Categoría</td>
                     <td>Nombre del Archivo</td>
                     <td>Enlace_descarga</td>
-                    <td>Nombre del usuario</td>
-                    <td>Nombre de la categoría</td>
+                    <td>Propietario</td>
+                    <td>Categoría</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -35,9 +32,6 @@ if(isset($admin)) {
                 <?php if(isset($archivos_json)) { ?>
                     <?php foreach ($archivos_json as $obj) { ?>
                         <tr>
-                            <td><?php echo $obj->archivo_id ?></td>
-                            <td><?php echo $obj->usuario_id ?></td>
-                            <td><?php echo $obj->categoria_id ?></td>
                             <td><?php echo $obj->nombre ?></td>
                             <td><?php echo $obj->enlace_descarga ?></td>
                             <td><?php echo $obj->nombre_usuario ?></td>

@@ -12,8 +12,11 @@ if(isset($admin)) {
 <?php ob_start() ?>
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <?php if( (isset($rol_json->accion) && $rol_json->accion === 'modificar') && (isset($rol_json->estado_p) && $rol_json->estado_p === '200 OK') ) { ?>
+            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $rol_json->Mensaje; ?></div>
+        <?php } ?>
         <h2>Modificar rol</h2>
-        <form name="modificar" class="form-horizontal" role="form" action="?rol/modificar/<?php echo $admin_json->token; ?>" method="POST">
+        <form name="modificar" class="form-horizontal" role="form" action="?roles/modificar/<?php echo $admin_json->token; ?>" method="POST">
             <div class="form-group">
                 <label class="control-label">ID</label>
                 <input type="text"
@@ -28,9 +31,9 @@ if(isset($admin)) {
             <div class="form-group">
                 <label class="control-label">Rol ID</label>
                 <input type="text"
-                       name="rol_id"
+                       name="tipo"
                        class="form-control"
-                       id="rol_id"
+                       id="tipo"
                        data-ng-model=""
                        value="<?php echo $rol_json->tipo; ?>"
                        required

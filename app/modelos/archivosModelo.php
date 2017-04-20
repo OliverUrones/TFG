@@ -141,9 +141,9 @@ class archivosModelo {
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
                 . "AND `categorias`.categoria_id = `archivos`.categoria_id "
                 . "AND `archivos`.archivo_id = ".$id.";";
-        var_dump($sql);
+        //var_dump($sql);
         $resultado = $this->conexion->getRow($sql);
-        var_dump($resultado);
+        //var_dump($resultado);
         foreach ($resultado as $key => $value) {
             if(is_string($key))
             {
@@ -178,6 +178,26 @@ class archivosModelo {
             //var_dump($archivos);
             return $usuarios;
         }        
+    }
+    
+    public function modificaArchivoId() {
+        var_dump($_POST);
+        $sql = "UPDATE `archivos` SET nombre=".$this->nombre.", categoria_id=".$this->categoria_id." WHERE archivo_id=".$this->archivo_id.";";
+        var_dump($sql);
+        $resultado = $this->conexion->execute($sql);
+
+        if(!$resultado)
+        {
+            return array('estado' => '400 KO', 'Mensaje' => 'Error al activar la cuenta');
+        }else
+        {
+            $archivo = $this->dameArchivoId(str_replace("'", "", $this->archivo_id));
+            $archivo['estado_p'] = '200 OK';
+            $archivo['Mensaje'] = 'Archivo modificado correctamente';
+            $archivo['accion'] = 'modificar';
+            var_dump($archivo);
+            return $archivo;
+        }
     }
 
     /**

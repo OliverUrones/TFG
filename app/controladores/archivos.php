@@ -80,7 +80,10 @@ class archivos extends Api implements Rest {
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                             //...recupero los datos del usuario
                             $modeloArchivos = new archivosModelo();
+                            $modeloCategorias = new categoriasModelo();
+                            $categorias = $modeloCategorias->dameCategorias();
                             $archivo = $modeloArchivos->dameArchivoId($parametros['id']);
+                            $archivo['categorias'] = $categorias;
                             $archivo = $this->construyeJSON($archivo);
                             $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
@@ -100,7 +103,51 @@ class archivos extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                                $modeloArchivo = new archivosModelo();
+                                $archivo = $modeloArchivo->modificaArchivoId();
+                                
+                                //Recupero los categorias
+                                $modeloCategorias = new categoriasModelo();
+                                $categorias = $modeloCategorias->dameCategorias();
+                                
+                                //Añado las categorias al archivo recuperado para mostrar el tipo del rol en vez de el id
+                                $archivo['categorias'] = $categorias;
+                                $archivo = $this->construyeJSON($archivo);
+
+                                //$borrado es la respuesta json para devolver a la vista el mensaje
+                                extract($archivo);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_modificar = VISTAS .'archivos/admin_modificar.php';
+                                require_once $ruta_vista_admin_modificar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     

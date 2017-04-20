@@ -14,7 +14,7 @@ if(isset($roles)) {
         <h2>Listado de roles</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
-            <thead>
+            <thead class="bg-primary">
                 <tr>
                     <td>ID Rol</td>
                     <td>Tipo</td>

@@ -14,7 +14,7 @@ if(isset($categorias)) {
         <h2>Listado de categorías</h2>
         <div>BUSCAR</div>
         <table class="table table-striped table-hover">
-            <thead>
+            <thead class="bg-primary">
                 <tr>
                     <td>ID Categoria</td>
                     <td>Nombre</td>

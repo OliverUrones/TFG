@@ -71,6 +71,25 @@ class rolesModelo {
         var_dump($rol);
         return $rol;
     }
+    
+    public function modificarRolId() {
+        $sql = "UPDATE `roles` SET tipo=".$this->tipo." WHERE rol_id=".$this->rol_id.";";
+        var_dump($sql);
+        $resultado = $this->conexion->execute($sql);
+
+        if(!$resultado)
+        {
+            return array('estado' => '400 KO', 'Mensaje' => 'Error al modificar el rol.');
+        }else
+        {
+            $rol = $this->dameRolId(str_replace("'", "", $this->rol_id));
+            $rol['estado_p'] = '200 OK';
+            $rol['Mensaje'] = 'Rol modificado correctamente';
+            $rol['accion'] = 'modificar';
+            var_dump($rol);
+            return $rol;
+        }
+    }
 
     /**
      * Función que conecta con la base de datos

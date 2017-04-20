@@ -173,7 +173,7 @@ class usuariosModelo {
 
         if(!$resultado)
         {
-            return array('estado' => '400 KO', 'Mensaje' => 'Error al activar la cuenta');
+            return array('estado' => '400 KO', 'Mensaje' => 'Error al modificar la cuenta.');
         }else
         {
             $usuario = $this->dameUsuarioId(str_replace("'", "", $this->usuario_id));

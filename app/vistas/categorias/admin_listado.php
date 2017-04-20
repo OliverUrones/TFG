@@ -16,9 +16,7 @@ if(isset($categorias)) {
         <table class="table table-striped table-hover">
             <thead class="bg-primary">
                 <tr>
-                    <td>ID Categoria</td>
                     <td>Nombre</td>
-                    <td>ID Categoría Padre</td>
                     <td>Nombre Categoría Padre</td>
                     <td>Acciones</td>
                 </tr>
@@ -27,9 +25,7 @@ if(isset($categorias)) {
                 <?php if(isset($categorias_json))  { ?>
                     <?php foreach ($categorias_json as $obj) { ?>
                         <tr>
-                            <td><?php echo $obj->categoria_id ?></td>
                             <td><?php echo utf8_decode($obj->nombre); ?></td>
-                            <td><?php echo $obj->categoria_padre ?></td>
                             <td><?php echo $obj->padre ?></td>
                             <td>
                                 <a href="?categorias/modificar/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png" ></a>

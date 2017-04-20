@@ -16,16 +16,14 @@ if(isset($roles)) {
         <table class="table table-striped table-hover">
             <thead class="bg-primary">
                 <tr>
-                    <td>ID Rol</td>
                     <td>Tipo</td>
-                    <td>Acciones</td>
+                    <td class="">Acciones</td>
                 </tr>
             </thead>
             <tbody>
                 <?php if(isset($roles_json))  { ?>
                     <?php foreach ($roles_json as $obj) { ?>
                         <tr>
-                            <td><?php echo $obj->rol_id ?></td>
                             <td><?php echo utf8_decode($obj->tipo); ?></td>
                             <td>
                                 <a href="?roles/modificar/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png" ></a>

@@ -75,6 +75,28 @@ class categoriasModelo {
         //var_dump($categoria);
         return $categoria;
     }
+    
+    public function modificarCategoriaId() {
+        if(strcmp($this->categoria_padre, '\'\'')===0){
+            $this->categoria_padre = 'NULL';
+        }
+        $sql = "UPDATE `categorias` SET nombre=".$this->nombre.", categoria_padre=".$this->categoria_padre." WHERE categoria_id = ".$this->categoria_id.";";
+        var_dump($sql);
+        
+        $resultado = $this->conexion->execute($sql);
+
+        if(!$resultado)
+        {
+            return array('estado' => '400 KO', 'Mensaje' => 'Error al modificar la categoria');
+        }else
+        {
+            $categoria = $this->dameCategoriaId(str_replace("'", "", $this->categoria_id));
+            $categoria['estado_p'] = '200 OK';
+            $categoria['Mensaje'] = 'Categoria modificada correctamente';
+            $categoria['accion'] = 'modificar';
+            return $categoria;
+        }
+    }
 
     /**
      * Función que conecta con la base de datos

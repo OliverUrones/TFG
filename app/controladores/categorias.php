@@ -46,6 +46,7 @@ class categorias extends Api implements Rest {
                             //...recupero los datos del usuario
                             $modeloCategoria = new categoriasModelo();
                             $categoria = $modeloCategoria->dameCategoriaId($parametros['id']);
+                            $categoria['categorias'] = $modeloCategoria->dameCategorias();
                             $categoria = $this->construyeJSON($categoria);
                             $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
@@ -68,6 +69,43 @@ class categorias extends Api implements Rest {
             //Si viene la modificación por formulario
             echo "La petición de modificar viene por POST";
             var_dump($_POST);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+                                
+                                $modeloCategoria = new categoriasModelo();
+                                $categoria = $modeloCategoria->modificarCategoriaId();
+                                
+                                $categorias = $modeloCategoria->dameCategorias();
+                                $categoria['categorias'] = $categorias;
+                                $categoria = $this->construyeJSON($categoria);
+                                
+                                extract($categoria);
+                                var_dump($categoria);
+                                
+                                $ruta_vista_admin_modificar = VISTAS .'categorias/admin_modificar.php';
+                                require_once $ruta_vista_admin_modificar;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     

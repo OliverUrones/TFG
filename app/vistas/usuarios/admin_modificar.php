@@ -28,22 +28,27 @@ if(isset($admin)) {
                        required
                        readonly>
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label class="control-label">Rol ID</label>
                 <input type="text"
                        name="rol_id"
                        class="form-control"
                        id="rol_id"
                        data-ng-model=""
-                       value="<?php echo $usuario_json->rol_id; ?>"
+                       value="<?php // echo $usuario_json->rol_id; ?>"
                        required
                        >
-            </div>
+            </div>-->
             <div class="form-group">
                 <label class="control-label">Tipo de Rol</label>
-                <select class="form-control">
-                    <option value="1">Rol 1</option>
-                    <option value="2">Rol 2</option>
+                <select class="form-control" name="rol_id" id="rol_id">
+                    <?php foreach ($usuario_json->roles as $key => $value) { ?>
+                        <?php if($value->rol_id === $usuario_json->rol_id) { ?>
+                            <option selected value="<?php echo $value->rol_id; ?>"><?php echo $value->tipo; ?></option>
+                        <?php } else {?>
+                            <option value="<?php echo $value->rol_id; ?>"><?php echo $value->tipo; ?></option>
+                        <?php } ?>
+                    <?php } ?>
                 </select>
             </div>
             <div class="form-group">

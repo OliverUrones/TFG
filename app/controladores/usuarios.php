@@ -11,6 +11,7 @@ use app\Api;
 use app\interfaz\Rest\Rest;
 
 use app\modelos\usuariosModelo\usuariosModelo;
+use app\modelos\rolesModelo\rolesModelo;
 /**
  * Description of usuarios
  *
@@ -190,6 +191,14 @@ class usuarios extends Api\Api implements Rest {
         echo "Estoy en la clase usuarios en el método ver() y el parámetro id es ".$id[0];
     }
     
+    /**
+     * Método para modificar un usuario.
+     * Si la petición viene por GET se muestran los datos en el formulario de modificación.
+     * Si la petición viene por POST se modificará el usuario en la base de datos.
+     * Devuelve a la vista los datos del usuario que se va a modificar o que se ha modificado y los datos del administrador conectado.
+     * @param array $parametros Con el id del usuario a modificar y el token del administrador conectado que va a modificar el usuario.
+     * 
+     */
     public function modificar($parametros=NULL) {
         echo "Estoy en la clase usuarios en el método modificar()";
         $this->DamePeticion();
@@ -197,7 +206,6 @@ class usuarios extends Api\Api implements Rest {
             if(is_array($parametros) && count($parametros) === 2){
                 if(isset($parametros['id']) && isset($parametros['token']))
                 {
-
                     if(strlen($parametros['token']) === 14) {
                         //Creo un objeto usuario
                         //var_dump($parametros);
@@ -206,6 +214,13 @@ class usuarios extends Api\Api implements Rest {
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                             //...recupero los datos del usuario
                             $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+                            
+                            //Recupero los roles
+                            $roles = new rolesModelo();
+                            $roles = $roles->listadoRoles();
+                            
+                            //Añado los roles al usuario recuperado para mostrar el tipo del rol en vez de el id
+                            $usuario['roles'] = $roles;
                             $usuario = $this->construyeJSON($usuario);
                             $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
@@ -249,6 +264,13 @@ class usuarios extends Api\Api implements Rest {
                                 extract($admin);
 
                                 $usuario = $modeloUsuario->modificaUsuarioId();
+                                
+                                //Recupero los roles
+                                $roles = new rolesModelo();
+                                $roles = $roles->listadoRoles();
+                                
+                                //Añado los roles al usuario recuperado para mostrar el tipo del rol en vez de el id
+                                $usuario['roles'] = $roles;
                                 $usuario = $this->construyeJSON($usuario);
 
                                 //$borrado es la respuesta json para devolver a la vista el mensaje

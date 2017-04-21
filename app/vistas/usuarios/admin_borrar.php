@@ -15,7 +15,7 @@ if(isset($borrado)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
     <?php if(isset($admin_json) && isset($usuarioBorrar_json)) { ?>
         <h2>Borrar usuario</h2>
         <form name="baja" class="form-horizontal" role="form" action="?usuarios/baja/<?php echo $admin_json->token; ?>" method="POST">
@@ -51,14 +51,15 @@ if(isset($borrado)) {
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar">Borrar</button>
-                <button type="button" class="btn btn-danger" value="Enviar"onclick="window.history.back();">Cancelar</button>
+                <a href="?usuarios/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
             </div>
         </form>
     <?php } elseif (isset($admin_json) && isset ($borrado_json) ) { ?>
         <?php if(strcmp($borrado_json->estado_p, "200 OK")== 0) {?>
-            <div class="alert alert-success"><?php echo $borrado_json->Mensaje ?></div>
+            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $borrado_json->Mensaje ?></div>
+            <a href="?usuarios/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
         <?php } else { ?>
-            <div class="alert alert-danger"><?php echo $borrado_json->Mensaje ?></div>
+            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $borrado_json->Mensaje ?></div>
         <?php } ?>
     <?php } ?>
     </div>

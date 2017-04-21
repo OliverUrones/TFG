@@ -17,10 +17,10 @@
     <?php if(isset($archivos_json)) { ?>
         <ul class="nav nav-tabs nav-justified">
             <li class="">
-                <a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon glyphicon-user"></span>Mis datos</a>
+                <a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon glyphicon-user"></span> Mis datos</a>
             </li>
             <li class="active">
-                <a href="?archivos/listar/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon-file"></span>Mis archivos</a>
+                <a href="?archivos/listar/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon-file"></span> Mis archivos</a>
             </li>
         </ul>
 
@@ -41,9 +41,9 @@
                 <tbody>
                     <?php foreach ($archivos_json as $obj) { ?>
                         <tr>
-                            <td><?php echo $obj->nombre; ?><span class="glyphicon glyphicon-file"></span></td>
-                            <td><?php echo $obj->nombre_categoria; ?><span class="glyphicon glyphicon-list-alt"></span></td>
-                            <td><a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>"><span class="glyphicon glyphicon-save"></span>Descargar2</a></td>
+                            <td><?php echo $obj->nombre; ?> <span class="glyphicon glyphicon-file"></span></td>
+                            <td><?php echo $obj->nombre_categoria; ?> <span class="glyphicon glyphicon-list-alt"></span></td>
+                            <td><a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>">Descargar</a> <span class="glyphicon glyphicon-save"></span></td>
 <!--                            <td><span class=".glyphicon .glyphicon-remove"></span></td>-->
                         </tr>
                     <?php } ?>
@@ -54,10 +54,10 @@
     <?php } else { ?>
         <ul class="nav nav-tabs nav-justified">
             <li class="active">
-                <a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon glyphicon-user"></span>Mis datos</a>
+                <a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon glyphicon-user"></span> Mis datos</a>
             </li>
             <li class="">
-                <a href="?archivos/listar/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon-file"></span>Mis archivos</a>
+                <a href="?archivos/listar/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario_json->token ?>"><span class="glyphicon glyphicon-file"></span> Mis archivos</a>
             </li>
         </ul>
     

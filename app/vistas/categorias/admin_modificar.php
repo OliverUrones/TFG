@@ -80,7 +80,7 @@ if(isset($admin)) {
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
-                <button type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid" onclick="window.history.back();">Cancelar</button>
+                <a href="?categorias/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
             </div>
         </form>
     </div>

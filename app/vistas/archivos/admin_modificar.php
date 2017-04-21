@@ -85,6 +85,17 @@ if(isset($admin)) {
                        required>-->
             </div>
             <div class="form-group">
+                <label class="control-label">Puntuacion</label>
+                <p class="form-control-static"><?php echo $archivo_json->puntuacion; ?></p>
+<!--                <input type="text"
+                       name="enlace_descarga"
+                       class="form-control"
+                       id="enlace_descarga"
+                       data-ng-model=""
+                       value="<?php //echo $archivo_json->enlace_descarga; ?>"
+                       required>-->
+            </div>
+            <div class="form-group">
                 <label class="control-label">Nombre de la categoría</label>
                 <select class="form-control" name="categoria_id" id="categoria_id">
                     <?php foreach ($archivo_json->categorias as $key => $value) { ?>
@@ -106,7 +117,7 @@ if(isset($admin)) {
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
-                <button type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid" onclick="window.history.back();">Cancelar</button>
+                <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
             </div>
         </form>
     </div>

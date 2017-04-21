@@ -117,7 +117,16 @@ class archivosModelo {
      * @return type
      */
     public function dameArchivos($id) {
-        $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria' FROM `archivos`, `categorias` WHERE `archivos`.`usuario_id` = '".$id."' AND `categorias`.`categoria_id`=`archivos`.`categoria_id`;";
+        $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria', `valoracion`.puntuacion "
+                . "FROM `archivos`, `categorias`, `valoracion` "
+                . "WHERE `archivos`.`usuario_id` = '".$id."' "
+                . "AND `categorias`.`categoria_id`=`archivos`.`categoria_id` "
+                . "AND `archivos`.archivo_id = `valoracion`.archivo_id "
+                . "AND `valoracion`.usuario_id = '".$id."';";
+//        $sql2 = "SELECT valoracion.valoracion_id, valoracion.usuario_id, valoracion.archivo_id, valoracion.puntuacion, archivos.archivo_id, archivos.usuario_id, archivos.categoria_id, archivos.nombre, archivos.enlace_descarga, usuarios.usuario_id FROM valoracion, archivos, usuarios
+//WHERE valoracion.usuario_id = archivos.usuario_id
+//AND usuarios.usuario_id = valoracion.usuario_id
+//GROUP by archivos.archivo_id"
         $recordset = $this->conexion->execute($sql)->getAssoc();
         if($recordset) {
             foreach ($recordset as $key => $value) {
@@ -136,11 +145,12 @@ class archivosModelo {
     }
     
     public function dameArchivoId($id) {
-        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
-                . "FROM `usuarios`, `archivos`, `categorias` "
+        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria', `valoracion`.puntuacion "
+                . "FROM `usuarios`, `archivos`, `categorias`, `valoracion` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
                 . "AND `categorias`.categoria_id = `archivos`.categoria_id "
-                . "AND `archivos`.archivo_id = ".$id.";";
+                . "AND `archivos`.archivo_id = ".$id." "
+                . "AND `valoracion`.archivo_id = ".$id.";";
         //var_dump($sql);
         $resultado = $this->conexion->getRow($sql);
         //var_dump($resultado);
@@ -158,10 +168,12 @@ class archivosModelo {
     }
 
         public function listadoArchivos() {
-        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
-                . "FROM `usuarios`, `archivos`, `categorias` "
+        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria', `valoracion`.puntuacion "
+                . "FROM `usuarios`, `archivos`, `categorias`, `valoracion` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
-                . "AND `categorias`.categoria_id = `archivos`.categoria_id;";
+                . "AND `categorias`.categoria_id = `archivos`.categoria_id "
+                . "AND `archivos`.archivo_id = `valoracion`.archivo_id "
+                . "ORDER BY `archivos`.archivo_id;";
         //var_dump($sql);
         $recordset = $this->conexion->execute($sql)->getAssoc();
         

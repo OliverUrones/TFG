@@ -239,8 +239,8 @@ class archivos extends Api implements Rest {
      * @param type $parametros
      */
     public function subir($parametros=NULL) {
-        echo "Estoy en el método subir() del controlador archivos";
-        var_dump($_FILES);
+        //echo "Estoy en el método subir() del controlador archivos";
+        //var_dump($_FILES['archivos']);
         $this->DamePeticion();
         if($this->peticion === "POST") {
             //Si existe la clave type del array de ficheros subidos...
@@ -262,10 +262,10 @@ class archivos extends Api implements Rest {
                         $nombre_temp = $nombre_temp[2];
                         //echo $nombre_temp;
                         //El destino será en la carpeta temp/$nombre_temp extraído
-                        $destino = CARPETA_TEMPORALES .$nombre_temp;
+                        $destino = CARPETA_TEMPORALES . microtime()."-".$nombre_temp;
                         //echo "<p>".$destino."</p>";
                         //Si se ha movido con éxtio...
-                        if(move_uploaded_file($origen, $destino))
+                        if(move_uploaded_file($origen, str_replace(" ", "-", $destino)))
                         {
                             //var_dump($origen);
                             //var_dump($destino);
@@ -273,7 +273,7 @@ class archivos extends Api implements Rest {
                             //Quedará algo como /var/www/html/app/temp/archivo1 /var/www/html/app/temp/archivo2 ...
                             $images = $destino.' '.$images;
                             //var_dump($images);
-                            echo "<br/>Se ha movido el archivo subido correctamente.";
+                            //echo "<br/>Se ha movido el archivo subido correctamente.";
                         } else {
                             echo "<br/>NO se ha movido el archivo subido.";
                         }
@@ -285,6 +285,18 @@ class archivos extends Api implements Rest {
             } else {
                 //Mensaje de error no se han subido los ficheros correctamente
                 echo 'Error al subir los ficheros';
+            }
+        }
+    }
+    
+    /**
+     * Función que borra todos los archivos en la carpeta temp de la aplicación
+     */
+    private function __borrarTodosTemporales() {
+        $manejador = opendir(CARPETA_TEMPORALES);
+        while ($archivo = readdir($manejador)) {
+            if($archivo !== '.' && $archivo !== '..') {
+                unlink(CARPETA_TEMPORALES.$archivo);
             }
         }
     }
@@ -300,9 +312,13 @@ class archivos extends Api implements Rest {
 //        $ruta_vista_login = VISTAS . 'usuarios/login.php';
 //        require_once $ruta_vista_login;
         
-        //Recoge el tipo de petición realizada
         $this->DamePeticion();
-        //var_dump($parametros);
+        //Viene por GET
+        if($this->peticion === "GET")
+        {
+            //Borrar todos los temporales
+            
+            //Recoge el tipo de petición realizada
             //var_dump($parametros);
             if(isset($parametros['token'])) {
                 if(strlen($parametros['token']) === 14) {
@@ -316,18 +332,17 @@ class archivos extends Api implements Rest {
                         $usuario = $this->construyeJSON($usuario);
                         //var_dump($usuario);
                         extract($usuario);
+                        
                     }
                 }
             }
-        //Viene por GET
-        if($this->peticion === "GET")
-        {
-            //..muestra el forumulario de registro
-            $ruta_vista = VISTAS .'archivos/convertir.php' ;
-            require_once $ruta_vista;
+                        //..muestra el forumulario de registro
+                        $ruta_vista = VISTAS .'archivos/convertir.php' ;
+                        require_once $ruta_vista;
         }
         
         if($this->peticion === "POST") {
+            var_dump($_POST);
             //Compruebo que se hayan archivos en la carpeta de los archivos temporales
                 //Si los hay
                 //var_dump(CARPETA_TEMPORALES);
@@ -339,6 +354,7 @@ class archivos extends Api implements Rest {
                     if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
                         //echo '<br/>'.$temporales[$i];
                         $images = CARPETA_TEMPORALES . $temporales[$i].' '.$images;
+                        var_dump($images);
                     }
                 }
                 //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
@@ -349,12 +365,12 @@ class archivos extends Api implements Rest {
                 $argumentos = $this->procesarParametros($images, $_POST);
                 //echo $argumentos.'<br/';
                 $salida = $this->ejecutarNoteshrink($argumentos);
+                var_dump($salida);
                 if($salida !== NULL) {
                     //Se ha ejecutado el script noteshrink.py correctamente
                     //Se debería gestionar los archivos que ha generado el script
                     //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
                     //var_dump($salida[count($salida)-1]);
-                    //var_dump($salida);
                     $this->borrarTemporales($salida);
 
                     //
@@ -366,7 +382,7 @@ class archivos extends Api implements Rest {
                     $ruta_vista = VISTAS .'archivos/resultado.php' ;
                     require_once $ruta_vista;
                 } else {
-                    //El script noteshrink.py ha tirado algún error
+                    echo "El script noteshrink.py ha tirado algún error.";
                 }
         }
     }
@@ -385,7 +401,12 @@ class archivos extends Api implements Rest {
         
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
-        //var_dump($parametros);
+        //Viene por GET
+        //Borro todos los temporales para evitar errores y conflictos
+        if($this->peticion === "GET")
+        {
+        $this->__borrarTodosTemporales();
+            //var_dump($parametros);
             //var_dump($parametros);
             if(isset($parametros['token'])) {
                 if(strlen($parametros['token']) === 14) {
@@ -402,9 +423,6 @@ class archivos extends Api implements Rest {
                     }
                 }
             }
-        //Viene por GET
-        if($this->peticion === "GET")
-        {
             //..muestra el forumulario de registro
             $ruta_vista = VISTAS .'archivos/convertir.php' ;
             require_once $ruta_vista;
@@ -413,8 +431,8 @@ class archivos extends Api implements Rest {
         //Viene por POST
         if($this->peticion === "POST")
         {
-            //var_dump($_POST);
-            //var_dump($_GET);
+//            var_dump($_POST);
+//            var_dump($_GET);
             var_dump($_FILES);
 //            echo "<br/>Nombre: ".print_r($_FILES['archivos']['name']);
 //            echo "<br/>Tipo: ".print_r($_FILES['archivos']['type']);
@@ -442,10 +460,10 @@ class archivos extends Api implements Rest {
                         $nombre_temp = $nombre_temp[2];
                         //echo $nombre_temp;
                         //El destino será en la carpeta temp/$nombre_temp extraído
-                        $destino = CARPETA_TEMPORALES . $nombre_temp;
+                        $destino = CARPETA_TEMPORALES . microtime()."-".$nombre_temp;
                         //echo "<p>".$destino."</p>";
                         //Si se ha movido con éxtio...
-                        if(move_uploaded_file($origen, $destino))
+                        if(move_uploaded_file($origen, str_replace(" ", "-", $destino)))
                         {
                             //var_dump($origen);
                             //var_dump($destino);
@@ -486,7 +504,7 @@ class archivos extends Api implements Rest {
                 }
             } else {
                 //Mensaje de error no se han subido los ficheros correctamente
-                echo 'Error al subir los ficheros';
+                echo 'AQUÍ--Error al subir los ficheros';
             }
             //..muestra el forumulario de registro
             $ruta_vista = VISTAS .'archivos/resultado.php' ;
@@ -581,9 +599,9 @@ class archivos extends Api implements Rest {
             $comando = '2>&1 app/noteshrink/./noteshrink.py '.$argumentos;
             //var_dump($comando);
             //echo exec('pwd').'<br/>';
-            //var_dump($comando);
+            var_dump($comando);
             exec($comando, $salida, $valor_retorno);
-            //var_dump($salida);
+            var_dump($salida);
             foreach ($salida as $key => $value) {
                 //echo $key.' '.$value.'<br/>';
             }

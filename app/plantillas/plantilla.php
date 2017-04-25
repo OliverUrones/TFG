@@ -80,8 +80,8 @@
         </div>
         
         <div class="container" data-ng-app="RepositorioApp" data-ng-controller="ValidacionFormsController">
-            <section class="main row">
-                <article class="col-xs-12 col-sm-8 col-md-9">
+<!--            <section class="main row">-->
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <?php echo $contenido ?>
                 </article>
                 
@@ -92,13 +92,13 @@
 //                    }
                 ?>
 
-                <aside class="col-xs-12 col-sm-4 col-md-3">
+<!--                <aside class="col-xs-12 col-sm-4 col-md-3">
                     <h2>Categorías</h2>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </p>
-                </aside>
-            </section>
+                </aside>-->
+<!--            </section>-->
         </div>
         <div class="clearfix visible-xs-inline-block"></div>
 

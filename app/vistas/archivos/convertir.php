@@ -14,37 +14,46 @@ if(isset($usuario)) {
     //var_dump($usuario_json->token);
     //Al action del formulario se le añade el token
 ?>
-<!--    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data">-->
-    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data">
+    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
+<!--    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" enctype="multipart/form-data" method="POST">-->
+<!--    <form role="form" class="form-horizontal" action="" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController">-->
 <?php } else { ?>
-<!--    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data"> -->
-    <form role="form" class="form-horizontal" action="?archivos/conversion" method="POST" enctype="multipart/form-data"> 
+    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> 
+<!--    <form role="form" class="form-horizontal" action="?archivos/conversion" enctype="multipart/form-data" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
+<!--    <form role="form" class="form-horizontal" action="" method="POST"  ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
 <?php } ?>
-    <div ng-model="archivos">
-        <div class="form-group" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
+    <div ng-model="convertir.archivos">
+        <div class="dropzone form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone>
+            <div class="dz-message">
+                Arrastre aquí sus archivos escaneados
+            </div>
+        </div>
+<!--        <div class="form-group" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
             <div id="archivos" class="dropzone dz-clickable dz-started" options="dzOptions" methods="dzMethods" callbacks="dzCallbacks" ng-dropzone name="archivos">
                 <div class="dz-message">
                     <span>Arrastre y suelte sus archivos escaneados</span>
                 </div>
-<!--            <label>Seleccione uno o varios archivos</label>-->
-            </div>
-        {{archivos}}
-        </div>
+            <label>Seleccione uno o varios archivos</label>
+            </div>-->
+    </div>
+<div ng-repeat="archivo in convertir.archivos">{{archivo}}</div>
 <!--            <input type="file" id="archivos" multiple="multiple" class="form-control" name="archivos[{{archivos}}]">-->
             <p class="help-block">Formatos: JPG y/o PNG</p>
     </div>
         <!-- Este archivo de salida se podría omitir-->
         <div class="form-group">
-            <label>Nombre del archivo de salida</label>
-            <input type="text" placeholder="página.png" class="form-control" name="-b" value="pagina">
-            <p class="help-block">Por defecto será pagina.png</p>
+<!--            <label>Nombre del archivo de salida</label>-->
+            <input type="text" placeholder="página.png" class="form-control" name="-b" value="pagina" ng-model="convertir.b">
+<!--            <p class="help-block">Por defecto será pagina.png</p>-->
         </div>
         <div class="form-group">
-            <label>Nombre del archivo de salida en formato .PDF</label>
-            <input type="text" placeholder="salida.pdf" class="form-control" name="-o" value="output">
-            <p class="help-block">Por defecto será output.pdf</p>
+<!--            <label>Nombre del archivo de salida en formato .PDF</label>-->
+            <input type="text" placeholder="salida.pdf" class="form-control" name="-o" value="output" ng-model="convertir.o">
+<!--            <p class="help-block">Por defecto será output.pdf</p>-->
         </div>
-        <div ng-app="avanzadasApp" ng-controller="avanzadasAppCtrl as vm">
+            {{convertir.b}}
+            {{convertir.o}}
+<!--        <div ng-app="avanzadasApp" ng-controller="avanzadasAppCtrl as vm">
             <div ng-class="vm.clase">
                 <div class="form-group">
                     <label>Umbral de saturación</label>
@@ -99,9 +108,9 @@ if(isset($usuario)) {
             <div class="form-group">
                 <button type="button" class="btn btn-default" ng-click="vm.ver()">{{vm.texto_boton}}</button>
             </div>
-        </div>
+        </div>-->
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="EnviarArchivos" ng-click="dzMethods.processQueue();">Enviar</button>
+                <button type="submit" class="btn btn-success" id="EnviarArchivos" value="EnviarArchivos">Enviar</button>
             </div>
     </form>
 </div>

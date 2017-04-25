@@ -1,11 +1,11 @@
 <?php
 if(isset($archivo)) {
     $archivo_json = json_decode($archivo);
-    //var_dump($archivo_json);
+    var_dump($archivo_json->archivo_id);
 }
 
-if(isset($admin)) {
-    $admin_json = json_decode($admin);
+if(isset($usuario)) {
+    $usuario_json = json_decode($usuario);
     //var_dump($admin_json);
 }
 ?>
@@ -16,14 +16,14 @@ if(isset($admin)) {
             <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $archivo_json->Mensaje; ?></div>
         <?php } ?>
         <h2>Modificar archivo</h2>
-        <form name="modificar" class="form-horizontal" role="form" action="?archivos/modificarAdmin/<?php echo $admin_json->token; ?>" method="POST">
+        <form name="modificar" class="form-horizontal" role="form" action="?archivos/modificar/<?php echo $usuario_json->token; ?>" method="POST">
 <!--            <div class="form-group">-->
-<!--                <label class="control-label">ArchivoID</label>-->
-                <input type="hidden"
+                <label class="control-label">ArchivoID</label>
+                <label class="control-label"><?php echo $archivo_json->archivo_id; ?></label>
+                <input type="text"
                        name="archivo_id"
                        class="form-control"
                        id="archivo_id"
-                       data-ng-model=""
                        value="<?php echo $archivo_json->archivo_id; ?>"
                        required
                        readonly>
@@ -34,7 +34,6 @@ if(isset($admin)) {
                        name="usuario_id"
                        class="form-control"
                        id="usuario_id"
-                       data-ng-model=""
                        value="<?php echo $archivo_json->usuario_id; ?>"
                        required
                        readonly>
@@ -69,7 +68,6 @@ if(isset($admin)) {
                        name="nombre"
                        class="form-control"
                        id="nombre"
-                       data-ng-model=""
                        value="<?php echo $archivo_json->nombre; ?>"
                        required>
             </div>
@@ -116,8 +114,8 @@ if(isset($admin)) {
                        readonly>-->
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
-                <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
+                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Modificar</button>
+                <a href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Volver</a>
             </div>
         </form>
     </div>
@@ -125,7 +123,7 @@ if(isset($admin)) {
 <?php $contenido = ob_get_clean(); ?>
 <?php 
     /*Función para cargar plantilla en la configuración*/
-    $ruta_plantillas = PLANTILLAS.'plantilla_admin.php';
+    $ruta_plantillas = PLANTILLAS.'plantilla.php';
     //echo '<br/>'.$ruta_plantillas;
     require_once $ruta_plantillas;
 ?>

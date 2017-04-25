@@ -75,6 +75,14 @@ if(isset($usuario)) {
                                     </select>
                                 </div>
                                 {{altaModelo.categoria}}
+                                <div class="form-group">
+                                    <label class="control-label ">Ámbito del archivo</label>
+                                    <select class="form-control" required>
+                                        <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
+                                        <option value="0">Privado</option>
+                                        <option value="1">Público</option>
+                                    </select>
+                                </div>
                         </div>
                         <div class="modal-footer">
                             <a data-ng-click="subirArchivo(altaModelo); abreResultadoSubida();" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>

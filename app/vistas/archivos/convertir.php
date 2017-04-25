@@ -14,12 +14,12 @@ if(isset($usuario)) {
     //var_dump($usuario_json->token);
     //Al action del formulario se le añade el token
 ?>
-    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
-<!--    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" enctype="multipart/form-data" method="POST">-->
+<!--    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController">-->
+    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" enctype="multipart/form-data" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
 <!--    <form role="form" class="form-horizontal" action="" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController">-->
 <?php } else { ?>
-    <form role="form" class="form-horizontal" action="?archivos/convertir" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> 
-<!--    <form role="form" class="form-horizontal" action="?archivos/conversion" enctype="multipart/form-data" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
+<!--<form id="formConvertir" role="form" class="form-horizontal" action="" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
+    <form role="form" class="form-horizontal" action="?archivos/conversion" enctype="multipart/form-data" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> 
 <!--    <form role="form" class="form-horizontal" action="" method="POST"  ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
 <?php } ?>
     <div ng-model="convertir.archivos">

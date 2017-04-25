@@ -5,10 +5,10 @@ dragAndDrop.controller('DragAndDropController', function($scope){
     //console.log($scope);
     $scope.convertir = { 'archivos' : []};
     $scope.dzOptions = {
-        //url: '?archivos/subir',
-        url: '?archivos/convertir',
+        url: '?archivos/subir',
+        //url: '?archivos/convertir',
         method: 'post',
-        parallelUpload: 100,
+        parallelUpload: 1,
         maxFiles: 100,
         paramName: 'archivos',
         uploadMultiple: true,
@@ -18,7 +18,7 @@ dragAndDrop.controller('DragAndDropController', function($scope){
         dictDefaultMessage : 'Arrastre aquí sus archivos escaneados',
         dictRemoveFile : 'Borrar',
         dictResponseError : 'No se puede subir la foto',
-        autoProcessQueue: false,
+        autoProcessQueue: true,
         init: function() {
             var botonEnviar = document.querySelector('#EnviarArchivos');
             botonEnviar.addEventListener("click", function() {
@@ -50,8 +50,10 @@ dragAndDrop.controller('DragAndDropController', function($scope){
                 console.log("Eliminado archivo");
                 console.log(file);
             },
-            'sendingmultiple' : function(file, xhr) {
+            'sendingmultiple' : function(file, xhr, formData) {
                 console.log('Enviando múltiples');
+                console.log(formData);
+                console.log(xhr);
             },
             'successmultiple' : function(file, xhr) {
                 console.log('Múltiple exitoso');

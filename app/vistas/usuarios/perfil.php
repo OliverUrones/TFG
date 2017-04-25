@@ -29,22 +29,33 @@
                 <h2><?php echo $archivos_json->Mensaje; ?></h2>
             <?php } else { ?>
                 <?php //var_dump($archivos_json); ?>
-            <table class="table table-responsive table-bordered text-center table-hover">
-                <thead>
+            <table class="table table-responsive table-bordered table-hover">
+                <thead class="bg-primary">
                     <tr>
                         <td>Nombre</td>
                         <td>Categoría</td>
                         <td>Enlace de descarga</td>
-<!--                        <td>Acciones</td>-->
+                        <td>Ámbito</td>
+                        <td>Acciones</td>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($archivos_json as $obj) { ?>
                         <tr>
-                            <td><?php echo $obj->nombre; ?> <span class="glyphicon glyphicon-file"></span></td>
-                            <td><?php echo $obj->nombre_categoria; ?> <span class="glyphicon glyphicon-list-alt"></span></td>
-                            <td><a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>">Descargar</a> <span class="glyphicon glyphicon-save"></span></td>
-<!--                            <td><span class=".glyphicon .glyphicon-remove"></span></td>-->
+                            <td><span class="glyphicon glyphicon-file"></span> <?php echo $obj->nombre; ?></td>
+                            <td><span class="glyphicon glyphicon-list-alt"></span> <?php echo $obj->nombre_categoria; ?></td>
+                            <td><span class="glyphicon glyphicon-save"></span> <a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>">Descargar</a></td>
+                            <td>
+                                <?php if($obj->ambito==0) { ?>
+                                    <span class="glyphicon glyphicon-eye-close"></span> Privado
+                                <?php } else { ?>
+                                    <span class="glyphicon glyphicon-eye-open"></span> Público
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <a href="?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>"><img class="img" src="web/imagenes/Admin/administracion_editar.png" ></a>
+                                <a href="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>"><img class="img" src="web/imagenes/Admin/administracion_borrar.png" ></a>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>

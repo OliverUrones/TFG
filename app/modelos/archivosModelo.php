@@ -120,9 +120,7 @@ class archivosModelo {
         $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria', `valoracion`.puntuacion "
                 . "FROM `archivos`, `categorias`, `valoracion` "
                 . "WHERE `archivos`.`usuario_id` = '".$id."' "
-                . "AND `categorias`.`categoria_id`=`archivos`.`categoria_id` "
-                . "AND `archivos`.archivo_id = `valoracion`.archivo_id "
-                . "AND `valoracion`.usuario_id = '".$id."';";
+                . "AND `categorias`.`categoria_id`=`archivos`.`categoria_id`;";
 //        $sql2 = "SELECT valoracion.valoracion_id, valoracion.usuario_id, valoracion.archivo_id, valoracion.puntuacion, archivos.archivo_id, archivos.usuario_id, archivos.categoria_id, archivos.nombre, archivos.enlace_descarga, usuarios.usuario_id FROM valoracion, archivos, usuarios
 //WHERE valoracion.usuario_id = archivos.usuario_id
 //AND usuarios.usuario_id = valoracion.usuario_id
@@ -149,8 +147,7 @@ class archivosModelo {
                 . "FROM `usuarios`, `archivos`, `categorias`, `valoracion` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
                 . "AND `categorias`.categoria_id = `archivos`.categoria_id "
-                . "AND `archivos`.archivo_id = ".$id." "
-                . "AND `valoracion`.archivo_id = ".$id.";";
+                . "AND `archivos`.archivo_id = ".$id.";";
         //var_dump($sql);
         $resultado = $this->conexion->getRow($sql);
         //var_dump($resultado);

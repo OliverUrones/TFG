@@ -64,8 +64,98 @@ class archivos extends Api implements Rest {
         
     }
     
+    public function bajaAdmin() {
+        
+    }
+    
     public function modificar($parametros=NULL) {
-        echo "Estoy en la controlador archivos en el método modificar()";
+        echo "Estoy en el controlador archivos en el método modificar()";
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2){
+                if(isset($parametros['id']) && isset($parametros['token'])) {
+
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        //var_dump($parametros);
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $modeloArchivos = new archivosModelo();
+                            $modeloCategorias = new categoriasModelo();
+                            $categorias = $modeloCategorias->dameCategorias();
+                            $archivo = $modeloArchivos->dameArchivoId($parametros['id']);
+                            $archivo['categorias'] = $categorias;
+                            $archivo = $this->construyeJSON($archivo);
+                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            //Construyo la cadena JSON
+                            $usuario = $this->construyeJSON($usuario);
+                            extract($archivo);
+
+                            //Devuelvo lo datos del usuario a la vista
+                            extract($usuario);
+
+                            $ruta_vista_admin_modificar = VISTAS .'archivos/modificar.php';
+                            require_once $ruta_vista_admin_modificar;
+                        }
+                    }
+
+                }
+            }
+        }
+        
+        if($this->peticion === "POST") {
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if($usuario['estado'] === '1') {
+
+                                //Construyo la cadena JSON
+                                $usuario = $this->construyeJSON($usuario);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($usuario);
+
+                                $modeloArchivo = new archivosModelo();
+                                $archivo = $modeloArchivo->modificaArchivoId();
+                                
+                                //Recupero los categorias
+                                $modeloCategorias = new categoriasModelo();
+                                $categorias = $modeloCategorias->dameCategorias();
+                                
+                                //Añado las categorias al archivo recuperado para mostrar el tipo del rol en vez de el id
+                                $archivo['categorias'] = $categorias;
+                                $archivo = $this->construyeJSON($archivo);
+
+                                //$borrado es la respuesta json para devolver a la vista el mensaje
+                                extract($archivo);
+
+                                var_dump($archivo);
+
+                                $ruta_vista_admin_modificar = VISTAS .'archivos/modificar.php';
+                                require_once $ruta_vista_admin_modificar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public function modificarAdmin($parametros=NULL) {
+        echo "Estoy en la controlador archivos en el método modificarAdmin()";
         $this->DamePeticion();
         if($this->peticion === "GET") {
             if(is_array($parametros) && count($parametros) === 2){
@@ -342,48 +432,65 @@ class archivos extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            var_dump($_POST);
+            sleep(5);// Hago un sleep para que le de tiempo al Dropzone a subir los ficheros al servidor
+            //var_dump($_POST);
             //Compruebo que se hayan archivos en la carpeta de los archivos temporales
-                //Si los hay
-                //var_dump(CARPETA_TEMPORALES);
-                $temporales = scandir(CARPETA_TEMPORALES, SCANDIR_SORT_ASCENDING);
-                //var_dump($temporales);
-                $images = '';
-                for ($i=0; $i<=count($temporales)-1; $i++) {
-                    //var_dump($temporales[$i]);
-                    if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
-                        //echo '<br/>'.$temporales[$i];
-                        $images = CARPETA_TEMPORALES . $temporales[$i].' '.$images;
-                        var_dump($images);
+            if(isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                        //Construyo la cadena JSON
+                        $usuario = $this->construyeJSON($usuario);
+                        //var_dump($usuario);
+                        extract($usuario);
+                        
+                        //Si los hay
+                        //var_dump(CARPETA_TEMPORALES);
+                        $temporales = scandir(CARPETA_TEMPORALES, SCANDIR_SORT_ASCENDING);
+                        //var_dump($temporales);
+                        $images = '';
+                        for ($i=0; $i<=count($temporales)-1; $i++) {
+                            //var_dump($temporales[$i]);
+                            if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
+                                //echo '<br/>'.$temporales[$i];
+                                $images = CARPETA_TEMPORALES . $temporales[$i].' '.$images;
+                                //var_dump($images);
+                            }
+                        }
+                        //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
+                            //echo '<br/>'.$images;
+                        //var_dump($images);
+                        //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
+                        //Será de la forma: /var/www/html/TFG/app/temp/archivo1 [/var/www/html/TFG/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
+                        $argumentos = $this->procesarParametros($images, $_POST);
+                        //echo $argumentos.'<br/';
+                        $salida = $this->ejecutarNoteshrink($argumentos);
+                        //var_dump($salida);
+                        if($salida !== NULL) {
+                            //Se ha ejecutado el script noteshrink.py correctamente
+                            //Se debería gestionar los archivos que ha generado el script
+                            //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
+                            //var_dump($salida[count($salida)-1]);
+                            $this->borrarTemporales($salida);
+
+                            //
+                            $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
+                            //var_dump($ruta_archivo_temporal);
+                            extract($nombre_archivo);
+
+                            //..muestra el forumulario de registro
+                            $ruta_vista = VISTAS .'archivos/resultado.php' ;
+                            require_once $ruta_vista;
+                        } else {
+                            echo "El script noteshrink.py ha tirado algún error.";
+                        }
                     }
                 }
-                //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
-                    //echo '<br/>'.$images;
-                //var_dump($images);
-                //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
-                //Será de la forma: /var/www/html/TFG/app/temp/archivo1 [/var/www/html/TFG/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
-                $argumentos = $this->procesarParametros($images, $_POST);
-                //echo $argumentos.'<br/';
-                $salida = $this->ejecutarNoteshrink($argumentos);
-                var_dump($salida);
-                if($salida !== NULL) {
-                    //Se ha ejecutado el script noteshrink.py correctamente
-                    //Se debería gestionar los archivos que ha generado el script
-                    //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
-                    //var_dump($salida[count($salida)-1]);
-                    $this->borrarTemporales($salida);
-
-                    //
-                    $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
-                    //var_dump($ruta_archivo_temporal);
-                    extract($nombre_archivo);
-                    
-                    //..muestra el forumulario de registro
-                    $ruta_vista = VISTAS .'archivos/resultado.php' ;
-                    require_once $ruta_vista;
-                } else {
-                    echo "El script noteshrink.py ha tirado algún error.";
-                }
+            }
         }
     }
 
@@ -433,7 +540,7 @@ class archivos extends Api implements Rest {
         {
 //            var_dump($_POST);
 //            var_dump($_GET);
-            var_dump($_FILES);
+//            var_dump($_FILES);
 //            echo "<br/>Nombre: ".print_r($_FILES['archivos']['name']);
 //            echo "<br/>Tipo: ".print_r($_FILES['archivos']['type']);
 //            echo "<br/>tmp_name: ".print_r($_FILES['archivos']['tmp_name']);
@@ -599,9 +706,9 @@ class archivos extends Api implements Rest {
             $comando = '2>&1 app/noteshrink/./noteshrink.py '.$argumentos;
             //var_dump($comando);
             //echo exec('pwd').'<br/>';
-            var_dump($comando);
+            //var_dump($comando);
             exec($comando, $salida, $valor_retorno);
-            var_dump($salida);
+            //var_dump($salida);
             foreach ($salida as $key => $value) {
                 //echo $key.' '.$value.'<br/>';
             }

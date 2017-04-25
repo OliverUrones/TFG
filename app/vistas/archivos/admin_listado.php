@@ -39,8 +39,8 @@ if(isset($admin)) {
                             <td><?php echo $obj->nombre_categoria ?></td>
                             <td><?php echo $obj->puntuacion ?></td>
                             <td>
-                                <a href="?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png"></a>
-                                <a href="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_borrar.png">
+                                <a href="?archivos/modificarAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png"></a>
+                                <a href="?archivos/bajaAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_borrar.png">
                             </td>
                         </tr>
                     <?php } ?>

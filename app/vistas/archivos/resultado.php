@@ -1,10 +1,10 @@
 <?php
 if(isset($nombre_archivo)) {
     $nombre_archivo_json = json_decode($nombre_archivo);
-    var_dump($nombre_archivo_json);
+    //var_dump($nombre_archivo_json);
     if(isset($categorias)) {
         $categorias_json = json_decode($categorias);
-        var_dump($categorias_json);
+        //var_dump($categorias_json);
     }
 ?>
 <?php ob_start() ?>
@@ -13,7 +13,7 @@ if(isset($nombre_archivo)) {
 <?php 
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
-    var_dump($usuario_json);
+    //var_dump($usuario_json);
     
 ?>
     <div  data-ng-app="RepositorioApp" data-ng-controller="SubidaArchivoFormController" data-ng-controller="DameCategoriasController">
@@ -33,7 +33,8 @@ if(isset($usuario)) {
                                         id="archivo"
                                         data-ng-model="altaModelo.archivo"
                                         data-ng-init="altaModelo.archivo = '<?php echo $nombre_archivo_json->nombre; ?>'"
-                                        value="<?php echo $nombre_archivo_json->nombre; ?>">{{altaModelo.archivo}}
+                                        value="<?php echo $nombre_archivo_json->nombre; ?>">
+<!--                                        {{altaModelo.archivo}}-->
                                 </div>
                                 <div class="form-group">
                                     <input 
@@ -43,7 +44,8 @@ if(isset($usuario)) {
                                         id="usuario_id"
                                         data-ng-model="altaModelo.usuario_id"
                                         data-ng-init="altaModelo.usuario_id = <?php echo $usuario_json->usuario_id; ?>"
-                                        value="<?php echo $usuario_json->usuario_id; ?>">{{altaModelo.usuario_id}}
+                                        value="<?php echo $usuario_json->usuario_id; ?>">
+<!--                                        {{altaModelo.usuario_id}}-->
                                 </div>
                                 <div class="form-group">
                                     <input 
@@ -53,7 +55,8 @@ if(isset($usuario)) {
                                         id="token"
                                         data-ng-model="altaModelo.token"
                                         data-ng-init="altaModelo.token = '<?php echo $usuario_json->token; ?>'"
-                                        value="<?php echo $usuario_json->token; ?>">{{altaModelo.token}}
+                                        value="<?php echo $usuario_json->token; ?>">
+<!--                                        {{altaModelo.token}}-->
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label ">Nombre</label>
@@ -74,14 +77,15 @@ if(isset($usuario)) {
                                         <option ng-repeat="cat in altaModelo.categorias" value="{{cat.categoria_id}}">{{cat.nombre}}</option>
                                     </select>
                                 </div>
-                                {{altaModelo.categoria}}
+<!--                                {{altaModelo.categoria}}-->
                                 <div class="form-group">
                                     <label class="control-label ">Ámbito del archivo</label>
-                                    <select class="form-control" required>
+                                    <select class="form-control" required data-ng-model="altaModelo.ambito" required>
                                         <!--Debería devolver a esta vista las categorías ya existentes en la base de datos-->
                                         <option value="0">Privado</option>
                                         <option value="1">Público</option>
                                     </select>
+<!--                                {{altaModelo.ambito}}-->
                                 </div>
                         </div>
                         <div class="modal-footer">

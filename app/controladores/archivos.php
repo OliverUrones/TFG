@@ -43,7 +43,7 @@ class archivos extends Api implements Rest {
         //$parametros = ["token" => $obj->token, "usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria];
         
         //Opción sin token para que el resultado se pueda subir igualmente.
-        $parametros = ["usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria];
+        $parametros = ["usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria, "ambito" => $obj->ambito];
         
         //var_dump($parametros);
         

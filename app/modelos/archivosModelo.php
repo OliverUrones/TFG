@@ -23,6 +23,7 @@ class archivosModelo {
     public $categoria_id = NULL;
     public $nombre = NULL;
     public $enlace_descarga = NULL;    
+    public $ambito = NULL;
     
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
@@ -43,6 +44,9 @@ class archivosModelo {
         if(isset($_POST['enlace-descarga'])){
             $this->enlace_descarga = $this->conexion->qStr($_POST['enlace_descarga']);
         }
+        if(isset($_POST['ambito'])){
+            $this->ambito = $this->conexion->qStr($_POST['ambito']);
+        }
     }
     
     /**
@@ -54,8 +58,8 @@ class archivosModelo {
         $this->__settersPorAjax($params);
         if($this->__mueveArchivo($params)) {
             //Construyo la consulta de inserción
-            $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`)"
-                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."');";
+            $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`, `ambito`)"
+                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."', ".$this->ambito.");";
             //var_dump($sql);
             //La ejecuto
             $recordSet = $this->conexion->execute($sql);
@@ -63,11 +67,11 @@ class archivosModelo {
             //Si $recorSet es distinto de falso la consulta se ha ejecutado con éxtio
             if($recordSet !== false) {
                 //Mensaje correspondiente
-                //var_dump('200 OK');
+                //var_dump($recordSet);
                 return array('estado' => '200 OK', 'Mensaje' => 'El archivo se ha añadido al repositorio correctamente.');
             } else {
                 //Menaje correspondiente
-                //var_dump('400 KO');
+                //var_dump($recordSet);
                 return array('estado' => '400 KO', 'Mensaje' => 'No se ha podido añadir el archivo al repositorio.');
             }
         }
@@ -108,6 +112,9 @@ class archivosModelo {
         }
         if(isset($params['categoria_id'])) {
             $this->categoria_id = $this->conexion->qStr($params['categoria_id']);
+        }
+        if(isset($params['ambito'])) {
+            $this->ambito = $this->conexion->qStr($params['ambito']);
         }
     }
 

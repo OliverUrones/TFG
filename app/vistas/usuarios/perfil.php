@@ -42,8 +42,8 @@
                 <tbody>
                     <?php foreach ($archivos_json as $obj) { ?>
                         <tr>
-                            <td><span class="glyphicon glyphicon-file"></span> <?php echo $obj->nombre; ?></td>
-                            <td><span class="glyphicon glyphicon-list-alt"></span> <?php echo $obj->nombre_categoria; ?></td>
+                            <td><span class="glyphicon glyphicon-file"></span> <?php echo utf8_decode($obj->nombre); ?></td>
+                            <td><span class="glyphicon glyphicon-list-alt"></span> <?php echo utf8_decode($obj->nombre_categoria); ?></td>
                             <td><span class="glyphicon glyphicon-save"></span> <a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>">Descargar</a></td>
                             <td>
                                 <?php if($obj->ambito==0) { ?>

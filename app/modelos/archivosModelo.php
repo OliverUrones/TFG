@@ -59,7 +59,7 @@ class archivosModelo {
         if($this->__mueveArchivo($params)) {
             //Construyo la consulta de inserción
             $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`, `ambito`)"
-                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".$this->nombre.", '".$this->enlace_descarga."', ".$this->ambito.");";
+                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".$this->enlace_descarga."', ".$this->ambito.");";
             //var_dump($sql);
             //La ejecuto
             $recordSet = $this->conexion->execute($sql);
@@ -142,7 +142,7 @@ class archivosModelo {
                     }
                 }
             }
-            //var_dump($archivos);
+            var_dump($archivos);
             return $archivos;
         } else {
             return array("estado" => '200 OK', "Mensaje" => "No tiene archivos guardados");
@@ -197,7 +197,7 @@ class archivosModelo {
     
     public function modificaArchivoId() {
         //var_dump($_POST);
-        $sql = "UPDATE `archivos` SET nombre=".$this->nombre.", categoria_id=".$this->categoria_id.", ambito=".$this->ambito." WHERE archivo_id=".$this->archivo_id.";";
+        $sql = "UPDATE `archivos` SET nombre=".utf8_encode($this->nombre).", categoria_id=".$this->categoria_id.", ambito=".$this->ambito." WHERE archivo_id=".$this->archivo_id.";";
         //var_dump($sql);
         $resultado = $this->conexion->execute($sql);
 

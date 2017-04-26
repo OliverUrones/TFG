@@ -214,6 +214,18 @@ class archivosModelo {
             return $archivo;
         }
     }
+    
+    public function borraArchivo($id) {
+        $sql = "DELETE FROM archivos WHERE archivo_id=".$id.";";
+        
+        $resultado = $this->conexion->execute($sql);
+        
+        if(!$resultado) {
+            return array('estado' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
+        } else {
+            return array('estado' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
+        }
+    }
 
     /**
      * Función que conecta con la base de datos

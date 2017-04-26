@@ -60,8 +60,29 @@ class archivos extends Api implements Rest {
         
     }
     
-    public function baja() {
-        
+    public function baja($parametros=NULL) {
+        //echo "Método baja() de la parte pública";
+        //$json = "{"archivo_id":6,"token":"t5900c2ef88cc3"}"
+        $json = file_get_contents('php://input');
+        //var_dump($json);
+        $obj = json_decode($json);
+        $parametros = ['id' => $obj->archivo_id, 'token' => $obj->token];
+        if(isset($parametros) && count($parametros) === 2) {
+            if(isset($parametros['id']) && isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        $modeloArchivos = new archivosModelo();
+                        $resultado = $modeloArchivos->borraArchivo($parametros['id']);
+                        $respuesta = $this->construyeJSON($resultado);
+                        $this->tipo = "application/json";
+                        $this->EstablecerCabeceras();
+                        echo $respuesta;
+                    }
+                }
+            }
+        }
+        //echo $obj;
     }
     
     public function bajaAdmin() {

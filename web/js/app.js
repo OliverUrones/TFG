@@ -10,6 +10,15 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
     };
 }]);
 
+//Cuadro de diálog parar el borrado de archivos en el perfil del usuario de la parte pública
+formularios.controller('BorraArchivoController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
+    $scope.abreBorradoArchivo = function(archivo_id) {
+        ngDialog.open({template: 'confirmaBorrado.html', className: 'ngdialog-theme-default', scope: $scope});
+    $scope.archivo_id = archivo_id;
+        console.log($scope.archivo_id);
+    };
+}]);
+
 formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
     $http.get("index.php?categorias/listarAjax",$scope.altaModelo.categorias)
             .then(function (respuesta) {

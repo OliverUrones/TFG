@@ -172,11 +172,10 @@ class archivosModelo {
     }
 
         public function listadoArchivos() {
-        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria', `valoracion`.puntuacion "
-                . "FROM `usuarios`, `archivos`, `categorias`, `valoracion` "
+        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
+                . "FROM `usuarios`, `archivos`, `categorias` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
                 . "AND `categorias`.categoria_id = `archivos`.categoria_id "
-                . "AND `archivos`.archivo_id = `valoracion`.archivo_id "
                 . "ORDER BY `archivos`.archivo_id;";
         //var_dump($sql);
         $recordset = $this->conexion->execute($sql)->getAssoc();
@@ -197,9 +196,9 @@ class archivosModelo {
     }
     
     public function modificaArchivoId() {
-        var_dump($_POST);
-        $sql = "UPDATE `archivos` SET nombre=".$this->nombre.", categoria_id=".$this->categoria_id." WHERE archivo_id=".$this->archivo_id.";";
-        var_dump($sql);
+        //var_dump($_POST);
+        $sql = "UPDATE `archivos` SET nombre=".$this->nombre.", categoria_id=".$this->categoria_id.", ambito=".$this->ambito." WHERE archivo_id=".$this->archivo_id.";";
+        //var_dump($sql);
         $resultado = $this->conexion->execute($sql);
 
         if(!$resultado)
@@ -211,7 +210,7 @@ class archivosModelo {
             $archivo['estado_p'] = '200 OK';
             $archivo['Mensaje'] = 'Archivo modificado correctamente';
             $archivo['accion'] = 'modificar';
-            var_dump($archivo);
+            //var_dump($archivo);
             return $archivo;
         }
     }

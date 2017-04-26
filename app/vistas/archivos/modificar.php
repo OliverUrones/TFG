@@ -1,12 +1,12 @@
 <?php
 if(isset($archivo)) {
     $archivo_json = json_decode($archivo);
-    var_dump($archivo_json->archivo_id);
+    //var_dump($archivo_json);
 }
 
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
-    //var_dump($admin_json);
+    //var_dump($usuario_json);
 }
 ?>
 <?php ob_start() ?>
@@ -103,6 +103,26 @@ if(isset($usuario)) {
                             <option value="<?php echo $value->categoria_id; ?>"><?php echo $value->nombre; ?></option>
                         <?php } ?>
                     <?php } ?>
+                </select>
+<!--                <input type="text"
+                       name="fecha_creacion"
+                       class="form-control"
+                       id="fecha_creacion"
+                       data-ng-model=""
+                       value="<?php //echo $usuario_json->fecha_creacion; ?>"
+                       required
+                       readonly>-->
+            </div>
+            <div class="form-group">
+                <label class="control-label">Ámbito del archivo</label>
+                <select class="form-control" name="ambito" id="ambito">
+                        <?php if($archivo_json->ambito === '0') { ?>
+                            <option selected value="<?php echo $archivo_json->ambito; ?>">Privado</option>
+                            <option value="1">Público</option>
+                        <?php } else { ?>
+                            <option value="0">Privado</option>
+                            <option selected value="<?php echo $archivo_json->ambito; ?>">Público</option>
+                        <?php } ?>
                 </select>
 <!--                <input type="text"
                        name="fecha_creacion"

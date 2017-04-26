@@ -24,7 +24,7 @@
             </li>
         </ul>
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="RepositorioApp" data-ng-controller="BorraArchivoController">
             <?php if(isset($archivos_json->Mensaje)) { ?>
                 <h2><?php echo $archivos_json->Mensaje; ?></h2>
             <?php } else { ?>
@@ -54,9 +54,28 @@
                             </td>
                             <td>
                                 <a href="?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>"><img class="img" src="web/imagenes/Admin/administracion_editar.png" ></a>
-                                <a href="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>"><img class="img" src="web/imagenes/Admin/administracion_borrar.png" ></a>
+                                <a data-ng-click="abreBorradoArchivo(<?php echo $obj->archivo_id; ?>);" href="#"><img class="img" src="web/imagenes/Admin/administracion_borrar.png" ></a>
                             </td>
                         </tr>
+                        <div class="modal modal-content">
+                            <script type="text/ng-template" id="confirmaBorrado.html">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Borrar archivo</h3>
+                                    </div>
+                                    <form name="borrarArchivo" class="form-horizontal" role="form" action="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                {{archivo_id}}
+                                            </div>
+                                              <p>¿Está seguro que desea borrar el archivo?</p>  
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a data-ng-click="closeThisDialog()" data-ng-disabled="!borrarArchivo.$valid" type="submit" class="btn btn-primary">Confirmar</a>
+                                            <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
+                                        </div>
+                                    </form>
+                            </script>
+                        </div>
                     <?php } ?>
                 </tbody>
             </table>
@@ -84,7 +103,7 @@
     <h2>No tiene permiso para ver esta página</h2>
 <?php
     }
-?>
+?>  
 <?php $contenido = ob_get_clean(); ?>
 <?php 
     /*Función para cargar plantilla en la configuración*/

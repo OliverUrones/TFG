@@ -25,7 +25,7 @@ if(isset($admin)) {
                     <td>Enlace_descarga</td>
                     <td>Propietario</td>
                     <td>Categoría</td>
-                    <td>Valoración</td>
+<!--                    <td>Valoración</td>-->
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -37,7 +37,7 @@ if(isset($admin)) {
                             <td><?php echo $obj->enlace_descarga ?></td>
                             <td><?php echo $obj->nombre_usuario ?></td>
                             <td><?php echo $obj->nombre_categoria ?></td>
-                            <td><?php echo $obj->puntuacion ?></td>
+<!--                            <td><?php //echo $obj->puntuacion ?></td>-->
                             <td>
                                 <a href="?archivos/modificarAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png"></a>
                                 <a href="?archivos/bajaAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_borrar.png">

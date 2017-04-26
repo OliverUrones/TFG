@@ -140,7 +140,7 @@ class archivos extends Api implements Rest {
                                 //$borrado es la respuesta json para devolver a la vista el mensaje
                                 extract($archivo);
 
-                                var_dump($archivo);
+                                //var_dump($archivo);
 
                                 $ruta_vista_admin_modificar = VISTAS .'archivos/modificar.php';
                                 require_once $ruta_vista_admin_modificar;

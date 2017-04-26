@@ -64,15 +64,11 @@
                                     </div>
                                     <form name="borrarArchivo" class="form-horizontal" role="form" action="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
                                         <div class="modal-body">
-                                            <div class="form-group">
-                                                ID Archivo: {{archivo_id}}
-                                                Token: {{token}}
-                                            </div>
                                               <p>¿Está seguro que desea borrar el archivo?</p>  
-                                            {{datos}}
+                                            {{archivoBorradoModelo}}
                                         </div>
                                         <div class="modal-footer">
-                                            <a type="button" data-ng-click="borraArchivo(datos); abreResultadoBorrado();" data-ng-disabled="!borrarArchivo.$valid" type="submit" class="btn btn-primary">Confirmar</a>
+                                            <a type="button" data-ng-click="borraArchivo(archivoBorradoModelo); abreResultadoBorrado();" data-ng-disabled="!borrarArchivo.$valid" type="submit" class="btn btn-primary">Confirmar</a>
                                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
                                         </div>
                                     </form>

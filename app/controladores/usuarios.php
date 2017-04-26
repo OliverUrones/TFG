@@ -106,7 +106,7 @@ class usuarios extends Api\Api implements Rest {
         
         if($this->peticion === "POST") {
             echo "Vengo por POST";
-            var_dump($parametros);
+            //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
                 {

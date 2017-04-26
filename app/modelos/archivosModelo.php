@@ -142,13 +142,18 @@ class archivosModelo {
                     }
                 }
             }
-            var_dump($archivos);
+            //var_dump($archivos);
             return $archivos;
         } else {
             return array("estado" => '200 OK', "Mensaje" => "No tiene archivos guardados");
         }
     }
     
+    /**
+     * Método que devuelve los datos de un archivo a través de su id
+     * @param int $id ID del archivo a recuperar los datos
+     * @return array Datos del archivo buscado y el estado de la petición y el mensaje de ésta.
+     */
     public function dameArchivoId($id) {
         $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria', `valoracion`.puntuacion "
                 . "FROM `usuarios`, `archivos`, `categorias`, `valoracion` "
@@ -215,8 +220,13 @@ class archivosModelo {
         }
     }
     
+    /**
+     * Borra un archivo a través del id viniendo por get. Para la parte pública
+     * @param type $id
+     * @return type
+     */
     public function borraArchivo($id) {
-        $sql = "DELETE FROM archivos WHERE archivo_id=".$id.";";
+        $sql = "DELETE FROM archivos WHERE archivo_id='".$id."';";
         
         $resultado = $this->conexion->execute($sql);
         
@@ -224,6 +234,21 @@ class archivosModelo {
             return array('estado' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
             return array('estado' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
+        }
+    }
+    
+    /**
+     * Borra un archivo a través del id. Para la parte privada
+     */
+    public function borraArchivoId() {
+        $sql = "DELETE FROM archivos WHERE archivo_id=".$this->archivo_id.";";
+        var_dump($sql);
+        $resultado = $this->conexion->execute($sql);
+        
+        if(!$resultado) {
+            return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
+        } else {
+            return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }
 

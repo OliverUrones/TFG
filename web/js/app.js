@@ -13,29 +13,43 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
 
 //Cuadro de diálog parar el borrado de archivos en el perfil del usuario de la parte pública
 formularios.controller('BorraArchivoController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
-        $scope.datos = {};
+    
+    //Modelo del archivo que se va a borrar
+    $scope.archivoBorradoModelo = {};
+    console.log("Inicio controller");
+    console.log($scope);
+    
+    //Función que abre el cuadro modal de confirmación pasándole como parámetros el ID del archivo a borrar y el token del usuario
     $scope.abreBorradoArchivo = function(archivo_id, token) {
         $scope.borraArchivoDialog = ngDialog.open({template: 'confirmaBorrado.html', className: 'ngdialog-theme-default', scope: $scope});
-        $scope.datos.archivo_id = archivo_id;
-        $scope.datos.token = token;
-        $scope.datos.resultado = {};
-        //console.log($scope.data);
+        $scope.archivoBorradoModelo.archivo_id = archivo_id;
+        $scope.archivoBorradoModelo.token = token;
+        $scope.archivoBorradoModelo.resultado = {};
+        console.log("abreBorradoArchivo()");
+        console.log($scope);
     };
     
+//    //Función que abre el cuadro modal 
+//    $scope.abreResultadoBorrado = function () {
+//        $scope.resultadoBorradoDialog = ngDialog.open({template: 'resultadoBorrado.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
+//        console.log("abreResultadoBorrado()");
+//        console.log($scope);
+//    };
+    
     $scope.borraArchivo = function (datos) {
-        console.log($scope.datos);
-        $http.post("index.php?archivos/baja", datos)
+        console.log("borraArchivo(datos)");
+        console.log($scope.archivoBorradoModelo);
+        console.log("datos");
+        console.log(datos);
+        $http.post("index.php?archivos/baja", $scope.archivoBorradoModelo)
             .then(function (respuesta) {
-                console.log($scope.datos.resultado = respuesta.data);
-                console.log(datos.resultado);
-                //console.log(respuesta);
-                //$scope.borraArchivoDialog.close();
+                console.log("Respuesta de $http.post()");
+                console.log(respuesta);
+                //$scope.archivoBorradoModelo.resultado = respuesta.data;
+                //console.log($scope.archivoBorradoModelo.resultado);
             });
     };
     
-    $scope.abreResultadoBorrado = function () {
-        $scope.resultadoBorradoDialog = ngDialog.open({template: 'resultadoBorrado.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
-    };
 }]);
 
 formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {

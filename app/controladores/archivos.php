@@ -73,8 +73,8 @@ class archivos extends Api implements Rest {
                     $modeloUsuario = new usuariosModelo();
                     if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
                         $modeloArchivos = new archivosModelo();
-                        $resultado = $modeloArchivos->borraArchivo($parametros['id']);
-                        $respuesta = $this->construyeJSON($resultado);
+                        $respuesta = $modeloArchivos->borraArchivo($parametros['id']);
+                        $respuesta = $this->construyeJSON($respuesta);
                         $this->tipo = "application/json";
                         $this->EstablecerCabeceras();
                         echo $respuesta;
@@ -85,8 +85,76 @@ class archivos extends Api implements Rest {
         //echo $obj;
     }
     
-    public function bajaAdmin() {
+    public function bajaAdmin($parametros=NULL) {
+        echo "Estoy en el controlador archivos en el método bajaAdmin()";
+        $this->DamePeticion();
+        var_dump($parametros);
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2) {
+                if(isset($parametros['id']) && isset($parametros['token'])) {
+                    if(strlen($parametros['token']) === 14) {
+                        $modeloUsuario = new usuariosModelo();
+                        
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            $modeloArchivos = new archivosModelo();
+                            $archivoBorrar = $modeloArchivos->dameArchivoId($parametros['id']);
+                            $archivoBorrar = $this->construyeJSON($archivoBorrar);
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            $admin = $this->construyeJSON($admin);
+                            
+                            extract($admin);
+                            extract($archivoBorrar);
+                            
+                            $ruta_vista_admin_borrar = VISTAS.'archivos/admin_borrar.php';
+                            require_once $ruta_vista_admin_borrar;
+                        }
+                    }
+                }
+            }
+        }
         
+        if($this->peticion === "POST") {
+            echo "Vengo por POST";
+            //var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+                                
+                                $modeloArchivos = new archivosModelo();
+                                $borrado = $modeloArchivos->borraArchivoId();
+                                $borrado = $this->construyeJSON($borrado);
+
+                                //$borrado es la respuesta json para devolver a la vista el mensaje
+                                extract($borrado);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_borrar = VISTAS .'archivos/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public function modificar($parametros=NULL) {
@@ -663,7 +731,7 @@ class archivos extends Api implements Rest {
      */
     public function descargarArchivo($parametros=NULL) {
         if(isset($parametros['archivo'])) {
-            var_dump($parametros['archivo']);
+            //var_dump($parametros['archivo']);
             $this->tipo = "application/pdf";
             $file = DIRECTORIO_ARCHIVOS_ABSOLUTA.$parametros['archivo'];
             $this->EstablecerCabeceras($file, $parametros['archivo']);

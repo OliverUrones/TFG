@@ -26,6 +26,7 @@ if(isset($admin)) {
                     <td>Propietario</td>
                     <td>Categoría</td>
 <!--                    <td>Valoración</td>-->
+                    <td>Ámbito</td>
                     <td>Acciones</td>
                 </tr>
             </thead>
@@ -33,11 +34,18 @@ if(isset($admin)) {
                 <?php if(isset($archivos_json)) { ?>
                     <?php foreach ($archivos_json as $obj) { ?>
                         <tr>
-                            <td><?php echo $obj->nombre ?></td>
-                            <td><?php echo $obj->enlace_descarga ?></td>
-                            <td><?php echo $obj->nombre_usuario ?></td>
-                            <td><?php echo $obj->nombre_categoria ?></td>
+                            <td><?php echo utf8_decode($obj->nombre); ?></td>
+                            <td><?php echo $obj->enlace_descarga; ?></td>
+                            <td><?php echo utf8_decode($obj->nombre_usuario); ?></td>
+                            <td><?php echo utf8_decode($obj->nombre_categoria); ?></td>
 <!--                            <td><?php //echo $obj->puntuacion ?></td>-->
+                            <td>
+                                <?php if($obj->ambito==0) { ?>
+                                    <span class="glyphicon glyphicon-eye-close"></span> Privado
+                                <?php } else { ?>
+                                    <span class="glyphicon glyphicon-eye-open"></span> Público
+                                <?php } ?>
+                            </td>
                             <td>
                                 <a href="?archivos/modificarAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_editar.png"></a>
                                 <a href="?archivos/bajaAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $admin_json->token; ?>"><img class="img" src="../web/imagenes/Admin/administracion_borrar.png">

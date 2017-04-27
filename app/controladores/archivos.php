@@ -23,7 +23,11 @@ use app\modelos\categoriasModelo\categoriasModelo;
  */
 class archivos extends Api implements Rest {
 
-    /*POST*/
+    
+    /**
+     * Método que añade un archivo al repositorio desde la parte pública después de que un usuario logueado haya realizado una conversión
+     * @param type $parametros
+     */
     public function alta($parametros=NULL) {
         //echo "Estoy en el método alta del controlador archivos.";
         //var_dump($parametros);
@@ -60,11 +64,14 @@ class archivos extends Api implements Rest {
         
     }
     
+    /**
+     * Función que borra archivos desde la parte pública del perfil de usuario a través de ajax
+     * @param array $parametros Array asociativo que en este caso, al venir a través de Ajax, será nulo y se inicializarán con los valores recuperados de la cadena JSON a través de file_get_contents('php://input')
+     */
     public function baja($parametros=NULL) {
         //echo "Método baja() de la parte pública";
-        //$json = "{"archivo_id":6,"token":"t5900c2ef88cc3"}"
         $json = file_get_contents('php://input');
-        //var_dump($json);
+
         $obj = json_decode($json);
         $parametros = ['id' => $obj->archivo_id, 'token' => $obj->token];
         if(isset($parametros) && count($parametros) === 2) {
@@ -82,31 +89,35 @@ class archivos extends Api implements Rest {
                 }
             }
         }
-        //echo $obj;
     }
     
+    /**
+     * Método para borrar archivos desde la parte privada de la aplicación
+     * @param array $parametros Array asociativo que contiene el id del archivo y el token del administrador logueado
+     */
     public function bajaAdmin($parametros=NULL) {
-        echo "Estoy en el controlador archivos en el método bajaAdmin()";
+        //echo "Estoy en el controlador archivos en el método bajaAdmin()";
         $this->DamePeticion();
-        var_dump($parametros);
         if($this->peticion === "GET") {
             if(is_array($parametros) && count($parametros) === 2) {
                 if(isset($parametros['id']) && isset($parametros['token'])) {
                     if(strlen($parametros['token']) === 14) {
                         $modeloUsuario = new usuariosModelo();
+                        $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
                         
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
-                            $modeloArchivos = new archivosModelo();
-                            $archivoBorrar = $modeloArchivos->dameArchivoId($parametros['id']);
-                            $archivoBorrar = $this->construyeJSON($archivoBorrar);
-                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
-                            $admin = $this->construyeJSON($admin);
-                            
-                            extract($admin);
-                            extract($archivoBorrar);
-                            
-                            $ruta_vista_admin_borrar = VISTAS.'archivos/admin_borrar.php';
-                            require_once $ruta_vista_admin_borrar;
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1') {
+                                $modeloArchivos = new archivosModelo();
+                                $archivoBorrar = $modeloArchivos->dameArchivoId($parametros['id']);
+                                $archivoBorrar = $this->construyeJSON($archivoBorrar);
+                                $admin = $this->construyeJSON($admin);
+
+                                extract($admin);
+                                extract($archivoBorrar);
+
+                                $ruta_vista_admin_borrar = VISTAS.'archivos/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            }
                         }
                     }
                 }
@@ -127,9 +138,7 @@ class archivos extends Api implements Rest {
                             //...recupero los datos del usuario
                             $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
-                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
-                            {
-
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1') {
                                 //Construyo la cadena JSON
                                 $admin = $this->construyeJSON($admin);
                                 //Devuelvo lo datos del usuario a la vista
@@ -157,6 +166,10 @@ class archivos extends Api implements Rest {
         }
     }
     
+    /**
+     * Método para modificar los datos de un archivo cuando un usuario está logueado desde la parte del perfil
+     * @param array $parametros Array asociativo con el id del archivo y el token del usuario logueado
+     */
     public function modificar($parametros=NULL) {
         echo "Estoy en el controlador archivos en el método modificar()";
         $this->DamePeticion();
@@ -243,6 +256,10 @@ class archivos extends Api implements Rest {
         }
     }
 
+    /**
+     * Método para modificar un archivo desde la parte privada de la aplicacición
+     * @param array $parametros Array asociativo con el id del archivo y el token del administrador logueado
+     */
     public function modificarAdmin($parametros=NULL) {
         echo "Estoy en la controlador archivos en el método modificarAdmin()";
         $this->DamePeticion();
@@ -257,23 +274,25 @@ class archivos extends Api implements Rest {
                         $modeloUsuario = new usuariosModelo();
                         //Si el token es válido...
                         if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
-                            //...recupero los datos del usuario
-                            $modeloArchivos = new archivosModelo();
-                            $modeloCategorias = new categoriasModelo();
-                            $categorias = $modeloCategorias->dameCategorias();
-                            $archivo = $modeloArchivos->dameArchivoId($parametros['id']);
-                            $archivo['categorias'] = $categorias;
-                            $archivo = $this->construyeJSON($archivo);
                             $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            //...recupero los datos del usuario
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1') {
+                                $modeloArchivos = new archivosModelo();
+                                $modeloCategorias = new categoriasModelo();
+                                $categorias = $modeloCategorias->dameCategorias();
+                                $archivo = $modeloArchivos->dameArchivoId($parametros['id']);
+                                $archivo['categorias'] = $categorias;
+                                $archivo = $this->construyeJSON($archivo);
 
-                            //Construyo la cadena JSON
-                            $admin = $this->construyeJSON($admin);
-                            extract($archivo);
-                            //Devuelvo lo datos del usuario a la vista
-                            extract($admin);
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                extract($archivo);
+                                //Devuelvo lo datos del usuario a la vista
+                                extract($admin);
 
-                            $ruta_vista_admin_modificar = VISTAS .'archivos/admin_modificar.php';
-                            require_once $ruta_vista_admin_modificar;
+                                $ruta_vista_admin_modificar = VISTAS .'archivos/admin_modificar.php';
+                                require_once $ruta_vista_admin_modificar;
+                            }
                         }
                     }
 
@@ -330,6 +349,10 @@ class archivos extends Api implements Rest {
         }
     }
     
+    /**
+     * Método que lista todos los archivos guardados en la base de datos para la parte privada de la aplicación
+     * @param array $parametros Array asociativo con el token del administrador logueado
+     */
     public function listarTodos($parametros=NULL) {
         echo "Estoy en la clase archivos en el método listarTodos";
         if(is_array($parametros)){
@@ -373,7 +396,7 @@ class archivos extends Api implements Rest {
 
         /**
      * Función que lista los archivos que un usuario tiene subidos en su perfil.
-     * @param type $parametros
+     * @param array $parametros Array asociativo con el id  y el token del usuario logueado
      */
     public function listar($parametros=NULL) {
         if(is_array($parametros) && count($parametros) === 2){
@@ -409,13 +432,31 @@ class archivos extends Api implements Rest {
         }
     }
     
-    public function ver($id) {
-        
+    /**
+     * Método que devuelve en formato JSON los datos de un archivo para visualizarlo. Este método se usa para visualizar los datos del archivo que se va a querer borrar
+     * desde el perfil de la parte pública
+     * @param array $parametros Array asociativo con el id del archivo y el token del usuario logueado
+     */
+    public function ver($parametros=NULL) {
+        //echo "Estoy en el método ver() del controlador archivos";
+        if(is_array($parametros) && count($parametros) === 2) {
+            if(isset($parametros['id']) && isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        $archivoModelo = new archivosModelo();
+                        $archivo = $archivoModelo->dameArchivoId($parametros['id']);
+                        $archivo = $this->construyeJSON($archivo);
+                        echo $archivo;
+                    }
+                }
+            }
+        }
     }
     
     /**
      * Función para subir las fotos automáticamente cuando se añaden a la zona Drag and Drop del formulario de convertir
-     * @param type $parametros
+     * @param array $parametros Array con valor NULL para este método
      */
     public function subir($parametros=NULL) {
         //echo "Estoy en el método subir() del controlador archivos";
@@ -469,7 +510,7 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Función que borra todos los archivos en la carpeta temp de la aplicación
+     * Método que borra todos los archivos que permanecen en la carpeta temp de la aplicación
      */
     private function __borrarTodosTemporales() {
         $manejador = opendir(CARPETA_TEMPORALES);
@@ -483,7 +524,7 @@ class archivos extends Api implements Rest {
     /**
      * Método que realiza la conversión cuando se pulsa el botón enviar y se han subido archivos automáticamente a través de la zona
      * de Drag and Drop
-     * @param type $parametros
+     * @param array $parametros Array asociativo con el token del usuario logueado o NULL si no se ha logueado ningún usuario
      */
     public function conversion($parametros=NULL) {
         //Incluyo las otras partes del layout
@@ -496,7 +537,7 @@ class archivos extends Api implements Rest {
         if($this->peticion === "GET")
         {
             //Borrar todos los temporales
-            
+            $this->__borrarTodosTemporales();
             //Recoge el tipo de petición realizada
             //var_dump($parametros);
             if(isset($parametros['token'])) {
@@ -515,9 +556,9 @@ class archivos extends Api implements Rest {
                     }
                 }
             }
-                        //..muestra el forumulario de registro
-                        $ruta_vista = VISTAS .'archivos/convertir.php' ;
-                        require_once $ruta_vista;
+            //..muestra el forumulario de registro
+            $ruta_vista = VISTAS .'archivos/convertir.php' ;
+            require_once $ruta_vista;
         }
         
         if($this->peticion === "POST") {
@@ -537,7 +578,9 @@ class archivos extends Api implements Rest {
                         //var_dump($usuario);
                         extract($usuario);
                         
-                        //Si los hay
+                    }
+                }
+            }
                         //var_dump(CARPETA_TEMPORALES);
                         $temporales = scandir(CARPETA_TEMPORALES, SCANDIR_SORT_ASCENDING);
                         //var_dump($temporales);
@@ -577,14 +620,15 @@ class archivos extends Api implements Rest {
                         } else {
                             echo "El script noteshrink.py ha tirado algún error.";
                         }
-                    }
-                }
-            }
         }
     }
 
     /**
-     * Función que convierte los archivos que se suben tratados con NotheSrink.
+     * NOTA: Esta función no se usa en ningún sitio de la aplicación ya que el proceso de convertir archivos lo he dividido en dos:
+     * 1º se suben las fotos al servidor a través del drag And Drop del formulario de forma automática con Dropzone.js
+     * 2º se manda el resto de datos del formulario (parámetros para el script NoteShrink.py) para realiar la conversión
+     * Estas dos etapas las realizan los métodos subir() y conversion().
+     * Función que muestra el formulario de subida de darchivos si viene por GET.Si viene por POST sube los archivos y manda los parámetros del script a la vez para realizar la conversión con NoteShrink.py
      * @param type $parametros
      */
     public function convertir($parametros=NULL) {
@@ -727,7 +771,7 @@ class archivos extends Api implements Rest {
     
     /**
      * Método para establecer las cabeceras a la hora de descargar los archivos que hacen referencia en la base de datos.
-     * @param array $parametros
+     * @param array $parametros Array asociativo con el archivo para descargar
      */
     public function descargarArchivo($parametros=NULL) {
         if(isset($parametros['archivo'])) {
@@ -741,7 +785,7 @@ class archivos extends Api implements Rest {
 
     /**
      * Método para descargar el archivo inmediatamente después de ejecutar la conversión
-     * @param array $parametros
+     * @param array $parametros Array asociativo con el archivo para descargar
      */
     public function descargar($parametros=NULL) {
         //Si viene el nombre del archivo...
@@ -784,7 +828,7 @@ class archivos extends Api implements Rest {
 
         /**
      * Función que llama al script NoteShrink.py para tratar los archivos
-     * @param string $argumentos Los arqumentos del script
+     * @param string $argumentos Los argumentos del script
      * @return boolean False si ha habido algún error en la ejecución.
      * @return array Array con las líneas de salida de la ejecución del script
      */

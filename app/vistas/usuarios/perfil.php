@@ -64,8 +64,25 @@
                                     </div>
                                     <form name="borrarArchivo" class="form-horizontal" role="form" action="?archivos/baja/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
                                         <div class="modal-body">
-                                              <p>¿Está seguro que desea borrar el archivo?</p>  
-                                            {{archivoBorradoModelo}}
+                                            <p>¿Está seguro que desea borrar el archivo?</p>
+                                            <table class="table table-responsive table-bordered table-hover">
+                                                <thead class="bg-info">
+                                                    <tr>
+                                                        <td>Nombre</td>
+                                                        <td>Categoría</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <input
+                                                            type="hidden"
+                                                            value="{{archivoBorradoModelo.archivo_id}}"
+                                                            disabled>
+                                                        <td>{{archivoBorradoModelo.nombre}}</td>
+                                                        <td>{{archivoBorradoModelo.nombre_categoria}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                         <div class="modal-footer">
                                             <a type="button" data-ng-click="borraArchivo(archivoBorradoModelo); abreResultadoBorrado();" data-ng-disabled="!borrarArchivo.$valid" type="submit" class="btn btn-primary">Confirmar</a>
@@ -80,7 +97,7 @@
                                     <h3 class="modal-title">Resultado del borrado</h3>
                                 </div>
                                 <div class="modal-body">
-                                    {{datos.resultado}}
+                                    {{archivoBorradoModelo.resultado.Mensaje}}
                                 </div>
                                 <div class="modal-footer">
                                     <a type="button" class="btn btn-primary" href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Volver</a>

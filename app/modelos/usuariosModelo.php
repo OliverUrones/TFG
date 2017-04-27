@@ -202,7 +202,7 @@ class usuariosModelo {
         $this->conexion->connect($host, $usuario, $pass, $db);
         
         //Para debuggear ADODB
-        $this->conexion->debug = true;
+        //$this->conexion->debug = true;
     }
     
     /**
@@ -458,11 +458,11 @@ class usuariosModelo {
         $time = time();
         if($time > $validezToken) {
             //Token no válido
-            echo "token no válido";
+            //echo "token no válido";
             return false;
         } else {
             //Token válido
-            echo "token válido";
+            //echo "token válido";
             return true;
         }
     }

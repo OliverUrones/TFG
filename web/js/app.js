@@ -16,36 +16,44 @@ formularios.controller('BorraArchivoController', ['$scope', 'ngDialog', '$http',
     
     //Modelo del archivo que se va a borrar
     $scope.archivoBorradoModelo = {};
-    console.log("Inicio controller");
-    console.log($scope);
+    //console.log("Inicio controller");
+    //console.log($scope);
     
-    //Función que abre el cuadro modal de confirmación pasándole como parámetros el ID del archivo a borrar y el token del usuario
+    /**
+     * Función que recibe como parámetros el ID del archivo a borrar y el token del usuario para construir la 
+     * ruta para la petición get del archivo para obtener los datos de éste a través de su ID y presentarlos en el modal de confirmación para borrar.
+     * @param {int} archivo_id
+     * @param {string} token
+     * @returns {undefined}
+     */
     $scope.abreBorradoArchivo = function(archivo_id, token) {
         $scope.borraArchivoDialog = ngDialog.open({template: 'confirmaBorrado.html', className: 'ngdialog-theme-default', scope: $scope});
-        $scope.archivoBorradoModelo.archivo_id = archivo_id;
-        $scope.archivoBorradoModelo.token = token;
-        $scope.archivoBorradoModelo.resultado = {};
-        console.log("abreBorradoArchivo()");
+        var url = "index.php?archivos/ver/"+archivo_id+"/"+token
+        console.log("url : "+url);
+        $http.get(url)
+            .then(function (respuesta) {
+                $scope.archivoBorradoModelo = respuesta.data;
+                $scope.archivoBorradoModelo.token = token;
+                    //console.log($scope.archivoBorradoModelo);
+            });
+    };
+    
+    //Función que abre el cuadro modal 
+    $scope.abreResultadoBorrado = function () {
+        $scope.resultadoBorradoDialog = ngDialog.open({template: 'resultadoBorrado.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
+        console.log("abreResultadoBorrado()");
         console.log($scope);
     };
     
-//    //Función que abre el cuadro modal 
-//    $scope.abreResultadoBorrado = function () {
-//        $scope.resultadoBorradoDialog = ngDialog.open({template: 'resultadoBorrado.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
-//        console.log("abreResultadoBorrado()");
-//        console.log($scope);
-//    };
-    
     $scope.borraArchivo = function (datos) {
-        console.log("borraArchivo(datos)");
-        console.log($scope.archivoBorradoModelo);
-        console.log("datos");
-        console.log(datos);
+        //console.log("borraArchivo(datos)");
+        //console.log("Datos del archivo a borrar");
+        //console.log(datos);
         $http.post("index.php?archivos/baja", $scope.archivoBorradoModelo)
             .then(function (respuesta) {
-                console.log("Respuesta de $http.post()");
-                console.log(respuesta);
-                //$scope.archivoBorradoModelo.resultado = respuesta.data;
+                console.log("Éxito $http.post()");
+                console.log(JSON.stringify(respuesta.data));
+                $scope.archivoBorradoModelo.resultado = respuesta.data;
                 //console.log($scope.archivoBorradoModelo.resultado);
             });
     };

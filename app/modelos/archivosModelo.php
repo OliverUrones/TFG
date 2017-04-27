@@ -25,6 +25,9 @@ class archivosModelo {
     public $enlace_descarga = NULL;    
     public $ambito = NULL;
     
+    /**
+     * Constructor de la clase por defecto donde se establecen los valores de los atributos cuando vienen por POST
+     */
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
         $this->__conexion();
@@ -78,7 +81,7 @@ class archivosModelo {
     }
     
     /**
-     * 
+     * Método privado que mueve el archivo pdf del directorio temporal al directorio de archivos
      * @param type $params
      */
     private function __mueveArchivo($params) {
@@ -119,7 +122,7 @@ class archivosModelo {
     }
 
     /**
-     * Método que devuelve los archivos y el nombre de la categoría a la que pertenecen de un usuario en concreto, a través del id
+     * Método que devuelve los archivos y el nombre de la categoría a la que pertenecen de un usuario en concreto, a través del id del usuario
      * @param type $id
      * @return type
      */
@@ -176,7 +179,11 @@ class archivosModelo {
         return $archivo;
     }
 
-        public function listadoArchivos() {
+    /**
+     * Método que devuelve todos los archivos de la base de datos junto al usuario y la categoría a la que pertenecen ordenados por el id del archivo
+     * @return array $archivos Array asociativio con el listado de los archivos recuperados de la base de datos
+     */
+    public function listadoArchivos() {
         $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
                 . "FROM `usuarios`, `archivos`, `categorias` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
@@ -191,15 +198,19 @@ class archivosModelo {
                 //echo '<br/>'.$key.' -- '.$value;
                 foreach ($value as $columna => $valor) {
                     if(is_string($columna)) {
-                        $usuarios[$key][$columna] = $valor;
+                        $archivos[$key][$columna] = $valor;
                     }
                 }
             }
             //var_dump($archivos);
-            return $usuarios;
+            return $archivos;
         }        
     }
     
+    /**
+     * Método que modifica los datos de un archivo a través de su ID.
+     * @return array $archivo Datos del archivo modificado junto con el estado de la petición, el mensaje y la acción que se ha realizado
+     */
     public function modificaArchivoId() {
         //var_dump($_POST);
         $sql = "UPDATE `archivos` SET nombre=".utf8_encode($this->nombre).", categoria_id=".$this->categoria_id.", ambito=".$this->ambito." WHERE archivo_id=".$this->archivo_id.";";
@@ -239,6 +250,7 @@ class archivosModelo {
     
     /**
      * Borra un archivo a través del id. Para la parte privada
+     * @return array Array asociativo con el estado de la peticón y el mensaje
      */
     public function borraArchivoId() {
         $sql = "DELETE FROM archivos WHERE archivo_id=".$this->archivo_id.";";
@@ -270,6 +282,7 @@ class archivosModelo {
         $this->conexion->connect($host, $usuario, $pass, $db);
         
         //Para debuggear ADODB
+        //Si está activado en la peticiones por Ajax da error en la respuesta
         //$this->conexion->debug = true;
     }
 }

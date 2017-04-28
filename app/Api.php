@@ -8,24 +8,71 @@
 namespace app\Api;
 
 /**
- * Description of Api
+ * Clase para instanciar una petición al servidor.
+ * Se recogerá el tipo de petición para acceder al servicio.
+ * Se tratará la url para recoger el controlador, el método y los parámetros de la petición.
+ * Se establecerán unas cabeceras iniciales pudiendo cambiar durante la ejecución de la petición.
+ * Se ejecutará la petición al servicio con los parámetros recogidos.
  *
- * @author oliver
+ * @author Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version alfa
+ * 
  */
 class Api {
-    public $peticion = NULL;
+    
+    /**
+     * @var string $controlador Controlador a ejecutar. Por defecto es 'home'
+     */
     private $controlador = 'home';      /*controlador por defecto*/
+
+    /**
+     * @var string $metodo Método a ejecutar. Por defecto es 'index'
+     */
     private $metodo = 'index';     /*método por defecto*/
+    
+    /**
+     * @var string $peticion Método de petición para acceder al servicio (GET o POST)
+     */
     private $parametros = NULL; /*Parámetros provenientes de los formularios*/
-    public $tipo = "text/html";
+    
+    /**
+     * @var array $parametros Array asociativo con los parámetros adicionales procedentes de la url. Puede ser un id y/o un token
+     */
+    protected $peticion = NULL;
+    
+    /**
+     * @var string $tipo Content-Type de la cabecera
+     */
+    protected $tipo = "text/html";
     //private $tipo = "application/javascript";
     //private $tipo = "application/json";
-    private $codEstado = 200;
+
+    /**
+     * @var int $codEstado Código de estado de la petición. (Lo mismo no hace falta)
+     */
+    protected $codEstado = 200;
+
+    /**
+     * @var string $ruta_controlador Cadena con la ruta relativa a la carpeta de controladores.
+     */
     private $ruta_controlador = '/controladores/';
-    private $espacio_nombres = '\\app\\controladores\\';
     
-    /*Constructor*/
-    public function Api($params = array()) {
+    /**
+     * @var string $espacio_nombres Cadena con el espacio de nombres (namespace) de los controladores dentro de la aplicación
+     */
+    private $espacio_nombres = '\\app\\controladores\\';
+
+    
+    /**
+     * Constructor de la clase Api.
+     * Realiza la llamada para establecer el tipo de petición (GET o POST).
+     * Tratar la url que le viene.
+     * Establece una cabeceras iniciales de Content-Type como text/html
+     * Y por último, ejecuta la petición.
+     */
+    public function Api() {
         $this->DamePeticion();
         //var_dump($_SERVER['REQUEST_URI']);
         //echo $this->peticion;
@@ -177,9 +224,9 @@ class Api {
     }
     
     /**
-     * Función que establece la petición de acceso al servicio
+     * Método que establece el método de petición de acceso al servicio
      */
-    public function DamePeticion() {
+    protected function DamePeticion() {
         
         if(isset($_SERVER['REQUEST_METHOD'])) {
             $this->peticion = $_SERVER['REQUEST_METHOD'];
@@ -188,8 +235,10 @@ class Api {
     
     /**
      * Método que establece las cabeceras del servicio
+     * @param string|NULL $ruta Ruta del fichero para descargar.
+     * @param string|NULL $nombre Nombre del fichero para descargar.
      */
-    public function EstablecerCabeceras($ruta=NULL, $nombre=NULL) {
+    protected function EstablecerCabeceras($ruta=NULL, $nombre=NULL) {
         header("HTTP/1.1 " . $this->codEstado . " " . $this->GetCodEstado());  
         header("Content-Type:" . $this->tipo . ';charset=utf-8');
         //Si se le pasas como argumento un archivo...
@@ -202,7 +251,7 @@ class Api {
      
      /**
       * Método que devuelve el código del estado de la petición
-      * @return string  Mensaje correspondiente al código del estado de la petición
+      * @return string Mensaje correspondiente al código del estado de la petición
       */
     public function GetCodEstado() {  
         $estado = array(
@@ -285,10 +334,10 @@ class Api {
    
    /**
      * Función que codifica en JSON los datos recibidos como parámetros
-     * @param array $respuesta Estado de la petición
-     * @return JSON Datos en JSON
+     * @param array $respuesta Estado de la petición y/o datos
+     * @return string Cadena de respuesta en JSON
      */
-    public function construyeJSON($respuesta) {
+   protected function construyeJSON($respuesta) {
         return json_encode($respuesta);
         //var_dump($JSON);
     }

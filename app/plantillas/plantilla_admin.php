@@ -23,6 +23,10 @@
         <script src="../web/js/dropzone.js" type="text/javascript"></script>
         <script src="../web/js/ng-dropzone.min.js" type="text/javascript"></script>
         <script src="../web/js/app.js"></script>
+        <script src="../web/js/usuarios.js"></script>
+        <script src="../web/js/roles.js"></script>
+        <script src="../web/js/archivos.js"></script>
+        <script src="../web/js/categorias.js"></script>
 
     </head>
     <body>

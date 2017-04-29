@@ -116,6 +116,18 @@ if(isset($admin)) {
                        readonly>-->
             </div>
             <div class="form-group">
+                <label class="control-label">Ámbito del archivo</label>
+                <select class="form-control" id="ambito" name="ambito">
+                    <?php if(strcmp($archivo_json->ambito, '1')==0) { ?>
+                        <option value="<?php echo $archivo_json->ambito; ?>">Público</option>
+                        <option value="0">Privado</option>
+                    <?php } else { ?>
+                        <option value="<?php echo $archivo_json->ambito; ?>">Privado</option>
+                        <option value="1">Público</option>
+                    <?php }  ?>
+                </select>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
                 <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
             </div>

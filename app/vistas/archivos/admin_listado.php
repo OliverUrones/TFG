@@ -17,7 +17,6 @@ if(isset($admin)) {
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive" ng-app="archivos" ng-controller="ListadoArchivosController">
         <h2>Listado de archivos</h2>
-        <div>BUSCAR <input ng-model="textoBusqueda"></div>
 <!--        <div>{{archivos}}</div>-->
         <?php if(isset($archivos_json)) { ?>
             <?php $key=0; foreach ($archivos_json as $obj) { ?>
@@ -38,6 +37,14 @@ if(isset($admin)) {
                 </ng-model-options>
             <?php $key++; } ?>
         <?php } ?>
+        <form class="form-inline">
+            <div class="form-group has-feedback">
+                <button class="btn btn-default"><span class="glyphicon glyphicon-file"></span> <span class="glyphicon glyphicon-plus-sign"></span></button>
+                <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
+                <i class="glyphicon glyphicon-search form-control-feedback"></i>
+            </div>
+        </form>
+
         <table class="table table-striped table-hover">
             <thead class="bg-primary">
                 <tr>

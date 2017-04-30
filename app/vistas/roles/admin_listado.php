@@ -18,7 +18,7 @@ if(isset($roles)) {
                 <ng-model-options ng-model-options="{ getterSetter: true }">
                     <ng-model ng-model="roles[<?php echo $key; ?>].rol_id  = '<?php echo $obj->rol_id; ?>'"></ng-model>
                     <ng-model ng-model="roles[<?php echo $key; ?>].tipo  = '<?php echo utf8_decode($obj->tipo); ?>'"></ng-model>
-                    <ng-model ng-model="roles[<?php echo $key; ?>].enlace_modificar = '?roles/modifica/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
+                    <ng-model ng-model="roles[<?php echo $key; ?>].enlace_modificar = '?roles/modificar/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
                     <ng-model ng-model="roles[<?php echo $key; ?>].img_modificar = '../web/imagenes/Admin/administracion_editar.png'"></ng-model>
 <!--                    <ng-model ng-model="roles[<?php echo $key; ?>].enlace_borrar = '?roles/bajaAdmin/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>-->
                     <ng-model ng-model="roles[<?php echo $key; ?>].img_borrar = '../web/imagenes/Admin/administracion_borrar.png'"></ng-model>

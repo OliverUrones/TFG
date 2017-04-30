@@ -98,11 +98,45 @@ class usuariosModelo {
         }
         
     }
-
-        /**
-     * Función que introduce un usuario en la base de datos
+    /**
+     * Método que introduce un usuario en la base de datos realizando la llamada desde la parte privada.
+     * 
+     * En este método no se mandará un correo de activación de cuenta al email correspondiente ya que se realiza el alta desde la parte privada 
+     * y se deberá especificar en la vista si la cuenta se crea activada o desdactivada.
+     * @return array $resultado Array asociativo del estado de la petición y su mensaje con las claves estado_p y Mensaje
      */
     public function altaUsuario() {
+        //Establezco la fecha de creación con la fecha actual en formato año-mes-día hora:minutos:segundos
+        $this->fecha_creacion = $this->conexion->qStr(date('y-m-d h:m:s'));
+        
+        if(!$this->__existe($this->email))
+        {
+            //..si no existe es un usuario no registrado
+            //Genero el hash de la contraseña
+            $this->__creaHash($this->password);
+            //Consulta de inserción de un usuario a la base de datos
+            $sql = "INSERT INTO `usuarios` (`rol_id`, `email`, `password`, `nombre`, `apellidos`, `token`, `fecha_creacion`, `estado` )"
+                    . " VALUES (".$this->rol_id.", ".$this->email.", '".$this->password."', ". utf8_encode($this->nombre).", ". utf8_encode($this->apellidos).", "
+                    .$this->token.", ".$this->fecha_creacion.", ".$this->estado.");";
+            $recordSet = $this->conexion->execute($sql);
+            $sql = $this->conexion->getInsertSql($this->tabla, $_POST);
+            
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'Usuario dado de alta correctamente.');
+            //$json = $this->__construyeJSON('200 KO', 'Usuario añadido correctamente. Compruebe su correo para realizar la activación de la cuenta');
+        }else
+        {
+            //..si existe es que el usuario ya está en la base de datos
+            //echo 'Mensaje de que el correo ya existe';
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'El correo introducido ya existe');
+            //$json = $this->__construyeJSON('400 KO', 'El correo introducido ya existe', NULL, NULL);
+        }        
+            return $resultado;
+    }
+
+    /**
+     * Función que introduce un usuario en la base de datos realizando la llamada desde la parte pública
+     */
+    public function registroUsuario() {
         //Establezco la fecha de creación con la fecha actual en formato año-mes-día hora:minutos:segundos
         $this->fecha_creacion = $this->conexion->qStr(date('y-m-d h:m:s'));
         

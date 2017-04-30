@@ -46,7 +46,7 @@ class usuarios extends Api\Api implements Rest {
             $usuariosModelo = new usuariosModelo();
             
             //Se llama al método del modelo usuarios que añade un usuario a la base de datos
-            $registro = $usuariosModelo->altaUsuario();
+            $registro = $usuariosModelo->registroUsuario();
             
             $registro = $this->construyeJSON($registro);
             
@@ -147,7 +147,92 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
-    public function listar($parametros=NULL) {
+    /**
+     * Método que da de alata un usuario desde la parte de administración
+     * 
+     * Si la petición viene por GET se mostrará el formulario de alta y se le incluirán a la vista los datos del administrador y los roles del sistema en formato JSON.
+     * Si la petición viene por POST se procesara el alta del nuevo usuario en la base de datos y se le incluirán a la vista los datos del administrador y el resultado de la operación en formato JSON.
+     * @param array $parametros Array asociativo con el token del usuario administrador
+     */
+    public function altaAdmin($parametros=NULL) {
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros)) {
+                if(isset($parametros['token'])) {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1') {
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+                                
+                                $modeloRoles = new rolesModelo();
+                                $roles = $modeloRoles->listadoRoles();
+                                $roles = $this->construyeJSON($roles);
+                                
+                                extract($roles);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_listado = VISTAS .'usuarios/admin_alta.php';
+                                require_once $ruta_vista_admin_listado;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if($this->peticion === "POST") {
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                                $resultado = $modeloUsuario->altaUsuario();
+                                $resultado = $this->construyeJSON($resultado);
+
+                                extract($resultado);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_alta = VISTAS .'usuarios/admin_alta.php';
+                                require_once $ruta_vista_admin_alta;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+        public function listar($parametros=NULL) {
         //echo "Estoy en la clase usuarios en el método listar";
         if(is_array($parametros)){
             if(isset($parametros['token']))

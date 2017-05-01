@@ -33,6 +33,49 @@ class rolesModelo {
         }
     }
     
+    /**
+     * Método que añade un nuevo rol a la base de datos
+     * @return array $resultado Array asociativo con el estado de la petición y el mensaje correspondiente de ésta
+     */
+    public function nuevoRol() {
+        $sql = "INSERT INTO `roles` (`rol_id`, `tipo`) VALUES (NULL, ".$this->tipo.");";
+        
+        $recordSet = $this->conexion->execute($sql);
+        
+        if(!$recordSet) {
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'No se ha podido guardar el nuevo rol.');
+        } else {
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'Rol guardado correctamente.');
+        }
+        
+        return $resultado;
+    }
+    
+    /**
+     * Método para borrar un rol de la base de datos a través de su id
+     * @return array $resultado Array asociativo con el estado de la petición y el mensaje correspondiente de ésta.
+     */
+    public function borraRolId() {
+        $sql = "DELETE FROM roles WHERE rol_id=".$this->rol_id.";";
+        //var_dump($sql);
+        $recordSet = $this->conexion->execute($sql);
+        var_dump($recordSet);
+        //Comprobar mejor el recordSet
+        if($recordSet) {
+            //El usuario se ha borrado
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'El rol se ha borrado correctamente.');
+        } else {
+            //El usuario no se ha borrado
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'El rol no se ha podido borrar.');
+        }
+        
+        return $resultado;
+    }
+
+    /**
+     * Método que devuelve el listado de roles de la base de datos
+     * @return array $roles Array asociativo con los datos de los roles
+     */
     public function listadoRoles() {
         $sql = "SELECT * FROM `roles`;";
         
@@ -68,7 +111,7 @@ class rolesModelo {
         //Añado las claves de estado y Mensaje y devuelvo el usuario logueado con el estado de la petición
         $rol['estado_p'] = '200 OK';
         $rol['Mensaje'] = 'Rol recuperado correctamente';
-        var_dump($rol);
+        //var_dump($rol);
         return $rol;
     }
     

@@ -71,9 +71,9 @@ if(isset($admin)) {
                     <?php } ?>
                     <?php foreach ($categoria_json->categorias as $key => $value) { ?>
                         <?php if($value->categoria_id === $categoria_json->categoria_padre) { ?>
-                            <option selected value="<?php echo $value->categoria_id; ?>"><?php echo $value->nombre; ?></option>
+                        <option selected value="<?php echo $value->categoria_id; ?>"><?php echo utf8_decode($value->nombre); ?></option>
                         <?php } else {?>
-                            <option value="<?php echo $value->categoria_id; ?>"><?php echo $value->nombre; ?></option>
+                            <option value="<?php echo $value->categoria_id; ?>"><?php echo utf8_decode($value->nombre); ?></option>
                         <?php } ?>
                     <?php } ?>
                 </select>

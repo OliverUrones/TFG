@@ -21,13 +21,178 @@ use app\modelos\categoriasModelo\categoriasModelo;
  * @author oliver
  */
 class categorias extends Api implements Rest {
-    //put your code here
-    public function alta() {
+    /**
+     * Función para dar de alta una nueva categoría.
+     * @param array $parametros Array asociativo con el token del administrador conectado
+     */
+    public function alta($parametros=NULL) {
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros)) {
+                if(isset($parametros['token'])) {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1') {
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+                                
+                                $modeloCategorias = new categoriasModelo();
+                                $listaCategorias = $modeloCategorias->dameCategorias();
+                                $listaCategorias = $this->construyeJSON($listaCategorias);
+                                
+                                extract($listaCategorias);
+
+                                $ruta_vista_admin_alta = VISTAS .'categorias/admin_alta.php';
+                                require_once $ruta_vista_admin_alta;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
+        if($this->peticion === "POST") {
+            echo "Vengo por POST";
+            //var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                                $modeloCategorias = new categoriasModelo();
+                                $resultado = $modeloCategorias->nuevaCategoria();
+                                $resultado = $this->construyeJSON($resultado);
+                                
+                                extract($resultado);
+                                
+                                $ruta_vista_admin_alta = VISTAS .'categorias/admin_alta.php';
+                                require_once $ruta_vista_admin_alta;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    public function baja() {
+    /**
+     * Función para dar de baja una categoría desde la parte de administración
+     * @param array $parametros Array asociativo con el id de la categoría a dar de baja y el token del administrador conectado
+     */
+    public function baja($parametros=NULL) {
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            echo "Vengo por GET";
+            var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']) && isset($parametros['id']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($usuario);
+
+                                $modeloCategoria = new categoriasModelo();
+                                //$rolBorrar = $modeloUsuario->dameUsuarioId($parametros['id']);
+                                $categoriaBorrar = $modeloCategoria->dameCategoriaId($parametros['id']);
+                                $categoriaBorrar = $this->construyeJSON($categoriaBorrar);
+
+                                extract($categoriaBorrar);
+
+                                //var_dump($usuarioBorrar);
+
+                                $ruta_vista_admin_borrar = VISTAS .'categorias/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
+        if($this->peticion === "POST") {
+            echo "Vengo por POST";
+            //var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                               $modeloCategoria = new categoriasModelo();
+                                //$rolBorrar = $modeloUsuario->dameUsuarioId($parametros['id']);
+                                $borrado = $modeloCategoria->borraCategoriaId();
+                                $borrado = $this->construyeJSON($borrado);
+
+                                extract($borrado);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_borrar = VISTAS .'categorias/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     public function modificar($parametros=NULL) {

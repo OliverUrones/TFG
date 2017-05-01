@@ -38,8 +38,29 @@ class categoriasModelo {
     }
     
     /**
-     * Método que devuelve las categorías
-     * @return array Array asociativo con las categorías devueltas
+     * Método que crea una nueva categoría en la base de datos
+     * @return array $resultado Array asociativo con el estado de la petición y el mensaje correspondiente de ésta
+     */
+    public function nuevaCategoria() {
+        if(strcmp($this->categoria_padre, '\'\'')===0){
+            $this->categoria_padre = 'NULL';
+        }
+        $sql = "INSERT INTO `categorias` (`categoria_id`, `nombre`, `categoria_padre`) VALUES (NULL, ". utf8_encode($this->nombre).", ".$this->categoria_padre.")";
+        
+        $recordSet = $this->conexion->execute($sql);
+        
+        if(!$recordSet) {
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'No se ha podido guardar la categoría.');
+        } else {
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'Categoría guardada correctamente.');
+        }
+        
+        return $resultado;
+    }
+
+    /**
+     * Método que devuelve todas las categorías
+     * @return array $categorias Array asociativo con las categorías devueltas
      */
     public function dameCategorias() {
         //$sql = "SELECT * FROM categorias";
@@ -57,6 +78,11 @@ class categoriasModelo {
         return $categorias;
     }
     
+    /**
+     * Método que devuelve los datos e una categoría a través de su id
+     * @param int $id Identificador de la categoría.
+     * @return array $cateogira Array asociativo con los datos de la categoría, el estado de la petición y el mensaje correspondiente de ésta
+     */
     public function dameCategoriaId($id) {
         $sql = "SELECT c1.categoria_id, c1.nombre, c1.categoria_padre, c2.nombre AS padre FROM categorias AS c1 LEFT OUTER JOIN categorias AS c2 ON c1.categoria_padre =c2.categoria_id WHERE c1.categoria_id=".$id.";";
         
@@ -76,11 +102,31 @@ class categoriasModelo {
         return $categoria;
     }
     
-    public function modificarCategoriaId() {
+    /**
+     * Borra una categoría a través de su ID viniendo por POST
+     * @return array $resultado Array asociativo con el estado de la petición y el mensaje de ésta
+     */
+    public function borraCategoriaId() {
+        $sql = "DELETE FROM categorias WHERE categoria_id=".$this->categoria_id.";";
+        //var_dump($sql);
+        $recordSet = $this->conexion->execute($sql);
+        var_dump($recordSet);
+        //Comprobar mejor el recordSet
+        if($recordSet) {
+            //El usuario se ha borrado
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'La categoria se ha borrado correctamente.');
+        } else {
+            //El usuario no se ha borrado
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'La categoria no se ha podido borrar.');
+        }
+        return $resultado;
+    }
+
+        public function modificarCategoriaId() {
         if(strcmp($this->categoria_padre, '\'\'')===0){
             $this->categoria_padre = 'NULL';
         }
-        $sql = "UPDATE `categorias` SET nombre=".$this->nombre.", categoria_padre=".$this->categoria_padre." WHERE categoria_id = ".$this->categoria_id.";";
+        $sql = "UPDATE `categorias` SET nombre=". utf8_encode($this->nombre).", categoria_padre=".$this->categoria_padre." WHERE categoria_id = ".$this->categoria_id.";";
         var_dump($sql);
         
         $resultado = $this->conexion->execute($sql);

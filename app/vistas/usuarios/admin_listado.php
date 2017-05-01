@@ -36,7 +36,7 @@ if(isset($usuarios)) {
         <?php $key++; } ?>
         <form class="form-inline">
             <div class="form-group has-feedback">
-                <a href="?usuarios/altaAdmin/<?php echo $obj->usuario_id; ?>/<?php echo $admin_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
+                <a href="?usuarios/altaAdmin/<?php echo $admin_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
                 <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>
@@ -55,7 +55,7 @@ if(isset($usuarios)) {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="usuario in usuarios | filter:textoBusqueda:strict">
+                    <tr ng-repeat="usuario in usuarios | filter:textoBusqueda:strict | orderBy:usuario.email">
                         <td>{{usuario.email}}</td>
                         <td>{{usuario.nombre}}</td>
                         <td>{{usuario.apellidos}}</td>

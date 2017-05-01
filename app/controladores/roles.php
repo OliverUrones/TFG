@@ -21,14 +21,183 @@ use app\modelos\rolesModelo\rolesModelo;
  */
 class roles extends Api implements Rest {
     
-    public function alta() {
+    /**
+     * Método para añadir un nuevo rol al sistema
+     */
+    public function alta($parametros=NULL) {
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros)) {
+                if(isset($parametros['token'])) {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1') {
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                                $ruta_vista_admin_alta = VISTAS .'roles/admin_alta.php';
+                                require_once $ruta_vista_admin_alta;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
         
+        if($this->peticion === "POST") {
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                                $modeloRoles = new rolesModelo();
+                                $resultado = $modeloRoles->nuevoRol();
+                                $resultado = $this->construyeJSON($resultado);
+                                
+                                extract($resultado);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_alta = VISTAS .'roles/admin_alta.php';
+                                require_once $ruta_vista_admin_alta;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
-    public function baja() {
+    /**
+     * Método para dar de baja un rol desde la parte privada de la aplicación
+     * @param type $parametros
+     */
+    public function baja($parametros=NULL) {
+        $this->DamePeticion();
         
+        if($this->peticion === "GET") {
+            echo "Vengo por GET";
+            var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']) && isset($parametros['id']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($usuario);
+
+                                $modeloRol = new rolesModelo();
+                                //$rolBorrar = $modeloUsuario->dameUsuarioId($parametros['id']);
+                                $rolBorrar = $modeloRol->dameRolId($parametros['id']);
+                                $rolBorrar = $this->construyeJSON($rolBorrar);
+
+                                extract($rolBorrar);
+
+                                //var_dump($usuarioBorrar);
+
+                                $ruta_vista_admin_borrar = VISTAS .'roles/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if($this->peticion === "POST") {
+            echo "Vengo por POST";
+            //var_dump($parametros);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $admin = $modeloUsuario->dameUsuarioToken($parametros['token']);
+
+                            if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
+                            {
+
+                                //Construyo la cadena JSON
+                                $admin = $this->construyeJSON($admin);
+                                //Devuelvo lo datos del usuario a la vista
+                                //var_dump($usuario);
+                                extract($admin);
+
+                                $modeloRol = new rolesModelo();
+                                $borrado = $modeloRol->borraRolId();
+                                $borrado = $this->construyeJSON($borrado);
+
+                                //$borrado es la respuesta json para devolver a la vista el mensaje
+                                extract($borrado);
+
+                                //var_dump($usuarios);
+
+                                $ruta_vista_admin_borrar = VISTAS .'roles/admin_borrar.php';
+                                require_once $ruta_vista_admin_borrar;
+                            } else {
+                                //No tiene permiso
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
+    /**
+     * Método que modifica el rol
+     * 
+     * Si la petición se realiza por GET se comprueba que venga el id del rol a modificar y el token del administrador logueado para recuperar los datos
+     * del rol a modificar y mostrarlos en el formulario de modificación
+     * 
+     * Si la petición se realiza por POST se comprueba que venga el token del administrador para que se pueda llamar al modelo que modifica el rol en la base de datos.
+     * @param array $parametros Array asociativo con las claves de id del rol y token del administrador
+     */
     public function modificar($parametros=NULL) {
         var_dump($parametros);
         $this->DamePeticion();

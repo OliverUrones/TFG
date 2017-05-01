@@ -39,7 +39,7 @@ if(isset($admin)) {
         <?php } ?>
         <form class="form-inline">
             <div class="form-group has-feedback">
-                <button class="btn btn-default"><span class="glyphicon glyphicon-file"></span> <span class="glyphicon glyphicon-plus-sign"></span></button>
+                <a href="../?archivos/convertir/<?php echo $admin_json->token; ?>" target="_blank" class="btn btn-default"><span class="glyphicon glyphicon-file"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
                 <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>

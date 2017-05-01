@@ -20,14 +20,14 @@ if(isset($roles)) {
                     <ng-model ng-model="roles[<?php echo $key; ?>].tipo  = '<?php echo utf8_decode($obj->tipo); ?>'"></ng-model>
                     <ng-model ng-model="roles[<?php echo $key; ?>].enlace_modificar = '?roles/modificar/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
                     <ng-model ng-model="roles[<?php echo $key; ?>].img_modificar = '../web/imagenes/Admin/administracion_editar.png'"></ng-model>
-<!--                    <ng-model ng-model="roles[<?php echo $key; ?>].enlace_borrar = '?roles/bajaAdmin/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>-->
+                    <ng-model ng-model="roles[<?php echo $key; ?>].enlace_borrar = '?roles/baja/<?php echo $obj->rol_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
                     <ng-model ng-model="roles[<?php echo $key; ?>].img_borrar = '../web/imagenes/Admin/administracion_borrar.png'"></ng-model>
                 </ng-model-options>
             <?php $key++; } ?>
         <?php } ?>
         <form class="form-inline">
             <div class="form-group has-feedback">
-                <button class="btn btn-default"><span class="glyphicon glyphicon-credit-card"></span> <span class="glyphicon glyphicon-plus-sign"></span></button>
+                <a href="?roles/alta/<?php echo $admin_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-credit-card"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
                 <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>
@@ -45,7 +45,7 @@ if(isset($roles)) {
                     <td>{{rol.tipo}}</td>
                     <td>
                         <a href="{{rol.enlace_modificar}}"><img class="img" src="{{rol.img_modificar}}"></a>
-                        <img class="img" src="{{rol.img_borrar}}">
+                        <a href="{{rol.enlace_borrar}}"><img class="img" src="{{rol.img_borrar}}"></a>
                     </td>
                 </tr>
                 <?php // if(isset($roles_json))  { ?>

@@ -59,6 +59,10 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
+    /**
+     * Método para dar de baja a un usuario desde la parte privada
+     * @param array $parametros Array asociativo con el id y el token
+     */
     public function baja($parametros=NULL) {
         echo "Estoy en la clase usuarios en el métod baja()";
         $this->DamePeticion();

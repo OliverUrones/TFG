@@ -19,16 +19,16 @@ if(isset($categorias)) {
                     <ng-model ng-model="categorias[<?php echo $key; ?>].categoria_id  = '<?php echo $obj->categoria_id; ?>'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].padre  = '<?php echo utf8_decode($obj->padre); ?>'"></ng-model>
-                    <ng-model ng-model="categorias[<?php echo $key; ?>].enlace_modificar = '?categorias/modifica/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
+                    <ng-model ng-model="categorias[<?php echo $key; ?>].enlace_modificar = '?categorias/modificar/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].img_modificar = '../web/imagenes/Admin/administracion_editar.png'"></ng-model>
-<!--                    <ng-model ng-model="categorias[<?php echo $key; ?>].enlace_borrar = '?categorias/bajaAdmin/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>-->
+                    <ng-model ng-model="categorias[<?php echo $key; ?>].enlace_borrar = '?categorias/baja/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].img_borrar = '../web/imagenes/Admin/administracion_borrar.png'"></ng-model>
                 </ng-model-options>
             <?php $key++; } ?>
         <?php } ?>
         <form class="form-inline">
             <div class="form-group has-feedback">
-                <button class="btn btn-default"><span class="glyphicon glyphicon-list-alt"></span> <span class="glyphicon glyphicon-plus-sign"></span></button>
+                <a href="?categorias/alta/<?php echo $admin_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-list-alt"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
                 <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>
@@ -48,7 +48,7 @@ if(isset($categorias)) {
                     <td>{{categoria.padre}}</td>
                     <td>
                         <a href="{{categoria.enlace_modificar}}"><img class="img" src="{{categoria.img_modificar}}"></a>
-                        <img class="img" src="{{categoria.img_borrar}}">
+                        <a href="{{categoria.enlace_borrar}}"><img class="img" src="{{categoria.img_borrar}}"></a>
                     </td>
                 </tr>
                 <?php //if(isset($categorias_json))  { ?>

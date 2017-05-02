@@ -47,7 +47,7 @@ class archivos extends Api implements Rest {
         //$parametros = ["token" => $obj->token, "usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria];
         
         //Opción sin token para que el resultado se pueda subir igualmente.
-        $parametros = ["usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria, "ambito" => $obj->ambito];
+        $parametros = ["usuario_id" => $obj->usuario_id, "archivo" => $obj->archivo, "nombre_archivo" => $obj->nombre, "categoria_id" => $obj->categoria, "ambito" => $obj->ambito, "etiquetas" => $obj->etiquetas];
         
         //var_dump($parametros);
         
@@ -55,6 +55,9 @@ class archivos extends Api implements Rest {
         $respuesta = $archivosModel->subeArchivo($parametros);
         
         $respuesta = $this->construyeJSON($respuesta);
+        
+        //Borro el directorio
+        $this->__borrarDirectorioId($obj->directorio_id);
         
         $this->tipo = "application/json";
         $this->EstablecerCabeceras();
@@ -463,6 +466,8 @@ class archivos extends Api implements Rest {
         //var_dump($_FILES['archivos']);
         $this->DamePeticion();
         if($this->peticion === "POST" && isset($_POST['directorio'])) {
+            //$directorio_id contiene el identificador de directorio
+            $directorio_id = $_POST['directorio'];
             //Si existe la clave type del array de ficheros subidos...
             if(isset($_FILES['archivos']['type']))
             {
@@ -476,8 +481,8 @@ class archivos extends Api implements Rest {
                     //Para cada nombre temporal del archivo subido..
                     //$writable = is_writable(CARPETA_TEMPORALES);
                     //Creo un directorio único que genero en la vista y lo mando por POST
-                    if(!file_exists(CARPETA_TEMPORALES.$_POST['directorio'])){
-                        mkdir(CARPETA_TEMPORALES.$_POST['directorio']);
+                    if(!file_exists(CARPETA_TEMPORALES.$directorio_id)){
+                        mkdir(CARPETA_TEMPORALES.$directorio_id);
                     }
                     //var_dump($_POST['directorio']);
                     foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
@@ -488,7 +493,7 @@ class archivos extends Api implements Rest {
                         $nombre_temp = $nombre_temp[2];
                         //echo $nombre_temp;
                         //El destino será en la carpeta temp/$nombre_temp extraído
-                        $destino = CARPETA_TEMPORALES . $_POST['directorio'] . SEPARADOR . microtime()."-".$nombre_temp;
+                        $destino = CARPETA_TEMPORALES . $directorio_id . SEPARADOR . microtime()."-".$nombre_temp;
                         //echo "<p>".$destino."</p>";
                         //Si se ha movido con éxtio...
                         if(move_uploaded_file($origen, str_replace(" ", "-", $destino)))
@@ -497,7 +502,8 @@ class archivos extends Api implements Rest {
                             //var_dump($destino);
                             //Construyo la cadena de parámetros con el nombre de los archivos
                             //Quedará algo como /var/www/html/app/temp/archivo1 /var/www/html/app/temp/archivo2 ...
-                            $images = $destino.' '.$images;
+                            //$images = $destino.' '.$images;
+                            $images .= $destino.' ';
                             //var_dump($images);
                             //echo "<br/>Se ha movido el archivo subido correctamente.";
                         } else {
@@ -568,7 +574,8 @@ class archivos extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            sleep(5);// Hago un sleep para que le de tiempo al Dropzone a subir los ficheros al servidor
+            $directorio_id = $_POST['directorio'];
+            //sleep(5);// Hago un sleep para que le de tiempo al Dropzone a subir los ficheros al servidor
             //var_dump($_POST);
             //Compruebo que se hayan archivos en la carpeta de los archivos temporales
             if(isset($parametros['token'])) {
@@ -588,14 +595,14 @@ class archivos extends Api implements Rest {
                 }
             }
             //var_dump(CARPETA_TEMPORALES);
-            $temporales = scandir(CARPETA_TEMPORALES.$_POST['directorio'], SCANDIR_SORT_ASCENDING);
+            $temporales = scandir(CARPETA_TEMPORALES.$directorio_id, SCANDIR_SORT_ASCENDING);
             //var_dump($temporales);
             $images = '';
             for ($i=0; $i<=count($temporales)-1; $i++) {
                 //var_dump($temporales[$i]);
                 if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
                     //echo '<br/>'.$temporales[$i];
-                    $images = CARPETA_TEMPORALES . $_POST['directorio'] . SEPARADOR . $temporales[$i].' '.$images;
+                    $images .= CARPETA_TEMPORALES . $directorio_id . SEPARADOR . $temporales[$i].' ';
                     //var_dump($images);
                 }
             }
@@ -612,15 +619,15 @@ class archivos extends Api implements Rest {
                 //Se ha ejecutado el script noteshrink.py correctamente
                 //Se debería gestionar los archivos que ha generado el script
                 //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
-                //var_dump($salida[count($salida)-1]);
-                //$this->borrarTemporales($salida);
+                var_dump($salida[count($salida)-1]);
+                $this->borrarTemporales($salida);
 
                 //
-                $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
+                $nombre_archivo = $this->construyeJSON(array('nombre' => $directorio_id.SEPARADOR.$this->dameNombreArchivo($salida[count($salida)-1])));
                 //var_dump($ruta_archivo_temporal);
                 extract($nombre_archivo);
-                $dir_temporal = $_POST['directorio'];
-                extract($dir_temporal);
+                
+                extract($directorio_id);
 
                 //..muestra el forumulario de registro
                 $ruta_vista = VISTAS .'archivos/resultado.php' ;
@@ -833,8 +840,26 @@ class archivos extends Api implements Rest {
             }
         }
     }
+    
+    /**
+     * Método para borrar los archivos que quedan en el directorio después de la conversión y el propio directorio.
+     * @param string $id Identificador del directorio a borrar.
+     */
+    private function __borrarDirectorioId($id) {
+        $ruta = CARPETA_TEMPORALES.$id;
+        if(is_dir($ruta)) {
+            $dir = opendir($ruta);
+            //var_dump($dir);
+            while (false !== ($archivo = readdir($dir))) {
+                if($archivo != "." && $archivo != "..") {
+                    unlink($ruta.SEPARADOR.$archivo);
+                }
+            }
+            rmdir($ruta);
+        }
+    }
 
-        /**
+    /**
      * Función que llama al script NoteShrink.py para tratar los archivos
      * @param string $argumentos Los argumentos del script
      * @return boolean False si ha habido algún error en la ejecución.

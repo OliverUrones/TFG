@@ -24,6 +24,7 @@ class archivosModelo {
     public $nombre = NULL;
     public $enlace_descarga = NULL;    
     public $ambito = NULL;
+    public $etiquetas = NULL;
     
     /**
      * Constructor de la clase por defecto donde se establecen los valores de los atributos cuando vienen por POST
@@ -50,6 +51,9 @@ class archivosModelo {
         if(isset($_POST['ambito'])){
             $this->ambito = $this->conexion->qStr($_POST['ambito']);
         }
+        if(isset($_POST['etiquetas'])){
+            $this->etiquetas = $this->conexion->qStr($_POST['etiquetas']);
+        }
     }
     
     /**
@@ -61,8 +65,8 @@ class archivosModelo {
         $this->__settersPorAjax($params);
         if($this->__mueveArchivo($params)) {
             //Construyo la consulta de inserción
-            $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`, `ambito`)"
-                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".$this->enlace_descarga."', ".$this->ambito.");";
+            $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`, `ambito`, `etiquetas`)"
+                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".$this->enlace_descarga."', ".$this->ambito.", ".$this->etiquetas.");";
             //var_dump($sql);
             //La ejecuto
             $recordSet = $this->conexion->execute($sql);
@@ -118,6 +122,9 @@ class archivosModelo {
         }
         if(isset($params['ambito'])) {
             $this->ambito = $this->conexion->qStr($params['ambito']);
+        }
+        if(isset($params['etiquetas'])) {
+            $this->etiquetas = $this->conexion->qStr($params['etiquetas']);
         }
     }
 

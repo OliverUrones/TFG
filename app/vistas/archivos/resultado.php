@@ -29,6 +29,17 @@ if(isset($usuario)) {
                                     <input 
                                         type="hidden"
                                         disabled
+                                        name="directorio_id"
+                                        id="directorio_id"
+                                        data-ng-model="altaModelo.directorio_id"
+                                        data-ng-init="altaModelo.directorio_id = '<?php echo $directorio_id; ?>'"
+                                        value="<?php echo $directorio_id; ?>">
+<!--                                        {{altaModelo.archivo}}-->
+                                </div>
+                                <div class="form-group">
+                                    <input 
+                                        type="hidden"
+                                        disabled
                                         name="archivo"
                                         id="archivo"
                                         data-ng-model="altaModelo.archivo"
@@ -87,6 +98,18 @@ if(isset($usuario)) {
                                     </select>
 <!--                                {{altaModelo.ambito}}-->
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label ">Etiquetas</label>
+                                    <input type="text" 
+                                           name="etiquetas" 
+                                           class="form-control" 
+                                           id="etiquetas" 
+                                           data-ng-model="altaModelo.etiquetas"
+                                           data-ng-minlength="3"
+                                           required>
+                                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
+                                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                                </div>
                         </div>
                         <div class="modal-footer">
                             <a data-ng-click="subirArchivo(altaModelo); abreResultadoSubida();" data-ng-disabled="!guardarArchivo.$valid" type="submit" class="btn btn-primary">Subir</a>
@@ -112,7 +135,7 @@ if(isset($usuario)) {
 <?php
 }
 ?>
-    <a href="?archivos/descargar/<?php echo $nombre_archivo_json->nombre; ?>/<?php echo $dir_temporal; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
+    <a href="?archivos/descargar/<?php echo $nombre_archivo_json->nombre; ?>/<?php echo $directorio_id; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
 </div>
 <?php
 }

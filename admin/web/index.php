@@ -1,4 +1,7 @@
 <?php
+/**
+ * Archivo index.php para instanciar una petición a la clase Api
+ */
 require_once dirname(__DIR__,2). '/app/Api.php';
 require_once dirname(__DIR__,2). '/app/config.php';
 require_once dirname(__DIR__,2). '/app/interfaz/Rest.php';

@@ -3,7 +3,7 @@
 //        $usuario_json = json_decode($usuario);
 //    }
 
-    $directorio_conversion = uniqid();
+    $directorio_conversion = 'd'.uniqid();
     echo $directorio_conversion;
 ?>
 <?php ob_start() ?>
@@ -25,7 +25,10 @@ if(isset($usuario)) {
     <form role="form" class="form-horizontal" action="?archivos/conversion" enctype="multipart/form-data" method="POST"> 
 <!--    <form role="form" class="form-horizontal" action="" method="POST"  ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
 <?php } ?>
-<input type="text" name="directorio" value="<?php echo $directorio_conversion; ?>">
+<ng-model-options ng-model-options="{ getterSetter: true }">
+    <ng-model ng-model="convertir.directorio = '<?php echo $directorio_conversion; ?>'"></ng-model>
+</ng-model-options>
+        <input type="hidden" name="directorio" value="<?php echo $directorio_conversion; ?>" ng-model="convertir.directorio">
         <div class="form-group dropzone form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone ng-model="convertir.archivos">
             <div class="dz-message">
                 Arrastre aquí sus archivos escaneados

@@ -4,6 +4,7 @@ var dragAndDrop = angular.module('dragAndDropApp', ['thatisuday.dropzone']);
 dragAndDrop.controller('DragAndDropController', function($scope){
     //console.log($scope);
     $scope.convertir = { 'archivos' : []};
+    $scope.convertir.directorio = '';
     $scope.dzOptions = {
         url: '?archivos/subir',
         //url: '?archivos/convertir',
@@ -52,10 +53,10 @@ dragAndDrop.controller('DragAndDropController', function($scope){
             },
             'sendingmultiple' : function(file, xhr, formData) {
                 console.log('Enviando múltiples');
+                console.log($scope.convertir.directorio);
                 //Para añadir al array $_POST la clave 'directori' y el valor que será el directorio único generado por cada conversión
-                console.log(formData.append('directorio', $scope.convertir.directorio));
-                console.log(formData);
-                console.log(xhr);
+                formData.append('directorio', $scope.convertir.directorio);
+                //console.log(xhr);
             },
             'successmultiple' : function(file, xhr) {
                 console.log('Múltiple exitoso');

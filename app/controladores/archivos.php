@@ -474,9 +474,12 @@ class archivos extends Api implements Rest {
                 {
                     $images = '';
                     //Para cada nombre temporal del archivo subido..
-                    if(!file_exists(CARPETA_TEMPORALES.$_POST['directorio'])) {
+                    //$writable = is_writable(CARPETA_TEMPORALES);
+                    //Creo un directorio único que genero en la vista y lo mando por POST
+                    if(!file_exists(CARPETA_TEMPORALES.$_POST['directorio'])){
                         mkdir(CARPETA_TEMPORALES.$_POST['directorio']);
                     }
+                    //var_dump($_POST['directorio']);
                     foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
                         //Se recoge la ruta de origen
                         $origen = $_FILES['archivos']['tmp_name'][$key];
@@ -540,7 +543,7 @@ class archivos extends Api implements Rest {
         if($this->peticion === "GET")
         {
             //Borrar todos los temporales
-            $this->__borrarTodosTemporales();
+            //$this->__borrarTodosTemporales();
             //Recoge el tipo de petición realizada
             //var_dump($parametros);
             if(isset($parametros['token'])) {
@@ -584,45 +587,47 @@ class archivos extends Api implements Rest {
                     }
                 }
             }
-                        //var_dump(CARPETA_TEMPORALES);
-                        $temporales = scandir(CARPETA_TEMPORALES, SCANDIR_SORT_ASCENDING);
-                        //var_dump($temporales);
-                        $images = '';
-                        for ($i=0; $i<=count($temporales)-1; $i++) {
-                            //var_dump($temporales[$i]);
-                            if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
-                                //echo '<br/>'.$temporales[$i];
-                                $images = CARPETA_TEMPORALES . $temporales[$i].' '.$images;
-                                //var_dump($images);
-                            }
-                        }
-                        //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
-                            //echo '<br/>'.$images;
-                        //var_dump($images);
-                        //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
-                        //Será de la forma: /var/www/html/TFG/app/temp/archivo1 [/var/www/html/TFG/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
-                        $argumentos = $this->procesarParametros($images, $_POST);
-                        //echo $argumentos.'<br/';
-                        $salida = $this->ejecutarNoteshrink($argumentos);
-                        //var_dump($salida);
-                        if($salida !== NULL) {
-                            //Se ha ejecutado el script noteshrink.py correctamente
-                            //Se debería gestionar los archivos que ha generado el script
-                            //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
-                            //var_dump($salida[count($salida)-1]);
-                            $this->borrarTemporales($salida);
+            //var_dump(CARPETA_TEMPORALES);
+            $temporales = scandir(CARPETA_TEMPORALES.$_POST['directorio'], SCANDIR_SORT_ASCENDING);
+            //var_dump($temporales);
+            $images = '';
+            for ($i=0; $i<=count($temporales)-1; $i++) {
+                //var_dump($temporales[$i]);
+                if($temporales[$i] !== '.' && $temporales[$i] !== '..') {
+                    //echo '<br/>'.$temporales[$i];
+                    $images = CARPETA_TEMPORALES . $_POST['directorio'] . SEPARADOR . $temporales[$i].' '.$images;
+                    //var_dump($images);
+                }
+            }
+            //La variable $images contiene la ruta de las imágenes que se le va a pasar al script NotheShrink.py para la conversión de archivos
+                //echo '<br/>'.$images;
+            //var_dump($images);
+            //Se construye la cadena con los argumentos que se le pasarán posteriormente al script
+            //Será de la forma: /var/www/html/TFG/app/temp/archivo1 [/var/www/html/TFG/app/temp/archivo2] -b salida.png -o salida.pdf -s 20 -v 25 -n 8 -p 5 -w -S -K
+            $argumentos = $this->procesarParametros($images, $_POST);
+            //echo $argumentos.'<br/';
+            $salida = $this->ejecutarNoteshrink($argumentos);
+            //var_dump($salida);
+            if($salida !== NULL) {
+                //Se ha ejecutado el script noteshrink.py correctamente
+                //Se debería gestionar los archivos que ha generado el script
+                //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
+                //var_dump($salida[count($salida)-1]);
+                //$this->borrarTemporales($salida);
 
-                            //
-                            $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
-                            //var_dump($ruta_archivo_temporal);
-                            extract($nombre_archivo);
+                //
+                $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
+                //var_dump($ruta_archivo_temporal);
+                extract($nombre_archivo);
+                $dir_temporal = $_POST['directorio'];
+                extract($dir_temporal);
 
-                            //..muestra el forumulario de registro
-                            $ruta_vista = VISTAS .'archivos/resultado.php' ;
-                            require_once $ruta_vista;
-                        } else {
-                            echo "El script noteshrink.py ha tirado algún error.";
-                        }
+                //..muestra el forumulario de registro
+                $ruta_vista = VISTAS .'archivos/resultado.php' ;
+                require_once $ruta_vista;
+            } else {
+                echo "El script noteshrink.py ha tirado algún error.";
+            }
         }
     }
 
@@ -792,13 +797,13 @@ class archivos extends Api implements Rest {
      */
     public function descargar($parametros=NULL) {
         //Si viene el nombre del archivo...
-        if(isset($parametros['archivo'])) {
+        if(isset($parametros['archivo']) && isset($parametros['directorio'])) {
             //Se establece el tipo Content-Type para la cabecera
             //Funciona tanto con 'application/force-download' como con 'application/pdf'
             //$this->tipo = 'application/force-download';
             $this->tipo = 'application/pdf';
             //Se construye la ruta del archivo para ser descargado
-            $file = CARPETA_TEMPORALES.$parametros['archivo'];
+            $file = CARPETA_TEMPORALES.$parametros['directorio'].SEPARADOR.$parametros['archivo'];
             //Se establece la cabecera pasándole el archivo a ser descargado.
             $this->EstablecerCabeceras($file, $parametros['archivo']);
         }
@@ -895,14 +900,14 @@ class archivos extends Api implements Rest {
             //Le pongo la extensión .pdf al archivo de salida que genera el algoritmo y le añado la ruta
             if(isset($params['-o']))
             {
-                $params['-o'] = CARPETA_TEMPORALES.$params['-o'].'.pdf';
+                $params['-o'] = CARPETA_TEMPORALES.$params['directorio'].SEPARADOR.$params['-o'].'.pdf';
                 //var_dump($params);
             }
             
             //Estalbezco la ruta de la carpeta temporal donde se van a guardar las imágenes .png mejoradas
             if(isset($params['-b']))
             {
-                $params['-b'] = CARPETA_TEMPORALES.$params['-b'];
+                $params['-b'] = CARPETA_TEMPORALES.$params['directorio'].SEPARADOR.$params['-b'];
                 //var_dump($params);
             }
             foreach ($params as $opcion => $value) {

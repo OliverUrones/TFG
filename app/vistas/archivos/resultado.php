@@ -112,7 +112,7 @@ if(isset($usuario)) {
 <?php
 }
 ?>
-    <a href="?archivos/descargar/<?php echo $nombre_archivo_json->nombre; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
+    <a href="?archivos/descargar/<?php echo $nombre_archivo_json->nombre; ?>/<?php echo $dir_temporal; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
 </div>
 <?php
 }

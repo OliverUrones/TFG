@@ -462,7 +462,7 @@ class archivos extends Api implements Rest {
         //echo "Estoy en el método subir() del controlador archivos";
         //var_dump($_FILES['archivos']);
         $this->DamePeticion();
-        if($this->peticion === "POST") {
+        if($this->peticion === "POST" && isset($_POST['directorio'])) {
             //Si existe la clave type del array de ficheros subidos...
             if(isset($_FILES['archivos']['type']))
             {
@@ -474,6 +474,9 @@ class archivos extends Api implements Rest {
                 {
                     $images = '';
                     //Para cada nombre temporal del archivo subido..
+                    if(!file_exists(CARPETA_TEMPORALES.$_POST['directorio'])) {
+                        mkdir(CARPETA_TEMPORALES.$_POST['directorio']);
+                    }
                     foreach ($_FILES['archivos']['tmp_name'] as $key => $value) {
                         //Se recoge la ruta de origen
                         $origen = $_FILES['archivos']['tmp_name'][$key];
@@ -482,7 +485,7 @@ class archivos extends Api implements Rest {
                         $nombre_temp = $nombre_temp[2];
                         //echo $nombre_temp;
                         //El destino será en la carpeta temp/$nombre_temp extraído
-                        $destino = CARPETA_TEMPORALES . microtime()."-".$nombre_temp;
+                        $destino = CARPETA_TEMPORALES . $_POST['directorio'] . SEPARADOR . microtime()."-".$nombre_temp;
                         //echo "<p>".$destino."</p>";
                         //Si se ha movido con éxtio...
                         if(move_uploaded_file($origen, str_replace(" ", "-", $destino)))

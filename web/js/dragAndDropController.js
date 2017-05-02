@@ -52,6 +52,8 @@ dragAndDrop.controller('DragAndDropController', function($scope){
             },
             'sendingmultiple' : function(file, xhr, formData) {
                 console.log('Enviando múltiples');
+                //Para añadir al array $_POST la clave 'directori' y el valor que será el directorio único generado por cada conversión
+                console.log(formData.append('directorio', $scope.convertir.directorio));
                 console.log(formData);
                 console.log(xhr);
             },

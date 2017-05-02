@@ -33,12 +33,12 @@ class Api {
     private $metodo = 'index';     /*método por defecto*/
     
     /**
-     * @var string $peticion Método de petición para acceder al servicio (GET o POST)
+     * @var array $parametros Array asociativo con los parámetros adicionales procedentes de la url. Puede ser un id y/o un token
      */
     private $parametros = NULL; /*Parámetros provenientes de los formularios*/
     
     /**
-     * @var array $parametros Array asociativo con los parámetros adicionales procedentes de la url. Puede ser un id y/o un token
+     * @var string $peticion Método de petición para acceder al servicio (GET o POST)
      */
     protected $peticion = NULL;
     

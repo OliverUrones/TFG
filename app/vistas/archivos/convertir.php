@@ -2,10 +2,13 @@
 //    if(isset($usuario)) {
 //        $usuario_json = json_decode($usuario);
 //    }
+
+    $directorio_conversion = uniqid();
+    echo $directorio_conversion;
 ?>
 <?php ob_start() ?>
     <h2>Convierta documentos escaneados a PDF</h2>
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
 <?php
 //Si viene el usuario...
 if(isset($usuario)) {
@@ -15,14 +18,14 @@ if(isset($usuario)) {
     //Al action del formulario se le añade el token
 ?>
 <!--    <form role="form" class="form-horizontal" action="?archivos/convertir<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController">-->
-    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" enctype="multipart/form-data" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
+    <form role="form" class="form-horizontal" action="?archivos/conversion<?php if($usuario_json!=null) { echo SEPARADOR.$usuario_json->token ; }?>" enctype="multipart/form-data" method="POST">
 <!--    <form role="form" class="form-horizontal" action="" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController">-->
 <?php } else { ?>
 <!--<form id="formConvertir" role="form" class="form-horizontal" action="" method="POST" enctype="multipart/form-data" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
-    <form role="form" class="form-horizontal" action="?archivos/conversion" enctype="multipart/form-data" method="POST" ng-app="dragAndDropApp" ng-controller="DragAndDropController"> 
+    <form role="form" class="form-horizontal" action="?archivos/conversion" enctype="multipart/form-data" method="POST"> 
 <!--    <form role="form" class="form-horizontal" action="" method="POST"  ng-app="dragAndDropApp" ng-controller="DragAndDropController"> -->
 <?php } ?>
-
+<input type="text" name="directorio" value="<?php echo $directorio_conversion; ?>">
         <div class="form-group dropzone form-group col-xs-12 col-sm-12 col-md-12 col-lg-12" options="dzOptions" callbacks="dzCallbacks" methods="dzMethods" ng-dropzone ng-model="convertir.archivos">
             <div class="dz-message">
                 Arrastre aquí sus archivos escaneados
@@ -49,7 +52,7 @@ if(isset($usuario)) {
             <input type="hidden" placeholder="salida.pdf" class="form-control" name="-o" value="output" ng-model="convertir.o">
 <!--            <p class="help-block">Por defecto será output.pdf</p>-->
         </div>
-            <div ng-app="avanzadasApp" ng-controller="avanzadasAppCtrl as vm">
+            <div>
                 <div ng-class="vm.clase">
                     <div class="form-group">
                         <label>Umbral de saturación</label>

@@ -15,6 +15,7 @@ use app\interfaz\Rest\Rest;
 use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\archivosModelo\archivosModelo;
 use app\modelos\categoriasModelo\categoriasModelo;
+use app\controladores\logs\logs;
 
 /**
  * Description of archivos
@@ -53,6 +54,18 @@ class archivos extends Api implements Rest {
         
         $archivosModel = new archivosModelo();
         $respuesta = $archivosModel->subeArchivo($parametros);
+        
+        $linea_log = [
+                            "fecha" => '['.date("d-m-Y H:i:s").']',
+                            "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
+                            "accion" => '[ACCION: '.'subir archivo'.']',
+                            "nombre_archivo" => '[NOMBRE DEL ARCHIVO: '.$obj->nombre.']',
+                            "archivo" => '[ARCHIVO: '.$obj->archivo.']',
+                            "usuario_id" => '[ID USUARIO: '.$obj->usuario_id.']',
+                            "estado" => '[ESTADO: '.$respuesta['estado'].']',
+                            "mensaje" => '[MENSAJE: '.$respuesta['Mensaje'].']'
+                        ];
+        $logControlador = new logs('archivos', $linea_log);
         
         $respuesta = $this->construyeJSON($respuesta);
         

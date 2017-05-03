@@ -12,6 +12,7 @@ use app\interfaz\Rest\Rest;
 
 use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\rolesModelo\rolesModelo;
+use app\controladores\logs\logs;
 /**
  * Description of usuarios
  *
@@ -476,6 +477,15 @@ class usuarios extends Api\Api implements Rest {
 
             //Se llama al método del modelo usuarios recupera los datos del usuario a loguearse
             $usuario = $usuariosModelo->dameUsuarioLogueado();
+            
+            $linea_log = [
+                            "fecha" => '['.date("d-m-Y H:i:s").']',
+                            "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
+                            "accion" => '[ACCION: '.'login'.']',
+                            "estado" => '[ESTADO: '.$usuario['estado_p'].']',
+                            "mensaje" => '[MENSAJE: '.$usuario['Mensaje'].']'
+                        ];
+            $logControlador = new logs('usuarios', $linea_log);
 
             //var_dump($usuario);
 
@@ -508,6 +518,14 @@ class usuarios extends Api\Api implements Rest {
                 $usuariosModelo = new usuariosModelo();
                 $estado_peticion = $usuariosModelo->borraDatosSesion($parametros['id']);
                 echo $estado_peticion['Mensaje'];
+                $linea_log = [
+                            "fecha" => '['.date("d-m-Y H:i:s").']',
+                            "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
+                            "accion" => '[ACCION: '.'logout'.']',
+                            "estado" => '[ESTADO: '.$estado_peticion['estado_p'].']',
+                            "mensaje" => '[MENSAJE: '.$estado_peticion['Mensaje'].']'
+                        ];
+            $logControlador = new logs('usuarios', $linea_log);
                 
                 //Requerir la vista correspondiente
             }

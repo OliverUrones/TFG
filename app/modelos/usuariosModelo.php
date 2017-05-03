@@ -428,16 +428,16 @@ class usuariosModelo {
                     }
                 } else {
                     //Si password_verify devuelve false; el hash no coincide y el usuario no accede
-                    $resultado = array('estado' => '400 KO', 'Mensaje' => 'Compruebe la contraseña');
+                    $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'Compruebe la contraseña');
                     return $resultado;
                 }
             } else {
-                $resultado = array('estado' => '400 KO', 'Mensaje' => 'La cuenta no está activada');
+                $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'La cuenta no está activada');
                 return $resultado;
             }
         } else {
             //Sino es que el email no existe
-            $resultado = array('estado' => '400 KO', 'Mensaje' => 'No existe el email');
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'No existe el email');
             return $resultado;
         }
     }
@@ -556,9 +556,9 @@ class usuariosModelo {
         $sql = "UPDATE `usuarios` SET `token` = NULL, `validez_token` = NULL WHERE `usuarios`.`usuario_id` = ".$id.";";
         
         if($this->conexion->execute($sql)) {
-            return array('estado' => '200 OK', 'Mensaje' => 'Sesión cerrada correctamente');
+            return array('estado_p' => '200 OK', 'Mensaje' => 'Sesión cerrada correctamente');
         } else {
-            return array('estado' => '400 OK', 'Mensaje' => 'Ha habido un problema al cerrar la sesión');
+            return array('estado_p' => '400 OK', 'Mensaje' => 'Ha habido un problema al cerrar la sesión');
         }
 
     }

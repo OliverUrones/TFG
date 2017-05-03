@@ -1,2 +1,0 @@
-[04-05-2017 01:51:48] [IP: 127.0.0.1] [ACCION: login] [ESTADO: 400 KO] [MENSAJE: La cuenta no está activada]
-[04-05-2017 01:51:48] [IP: 127.0.0.1] [ACCION: login] [ESTADO: 200 OK] [MENSAJE: Usuario logeado correctamente]

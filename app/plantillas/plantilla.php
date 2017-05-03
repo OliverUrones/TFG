@@ -13,6 +13,8 @@
         <link rel="stylesheet" href="web/css/estilos.css">
         <link rel="stylesheet" href="web/css/ngDialog-theme-default.min.css">
         <link rel="stylesheet" href="web/css/ngDialog.min.css">
+        <link rel="stylesheet" href="web/css/ng-table.min.css">
+        <link rel="stylesheet" href="web/css/ng-table.css">
         <link href="web/css/ng-dropzone.min.css" rel="stylesheet" type="text/css"/>
         <link href="web/css/dropzone.css" rel="stylesheet" type="text/css"/>
         <script src="web/js/angular.min.js"></script>
@@ -23,6 +25,8 @@
         <script src="web/js/ng-dropzone.min.js" type="text/javascript"></script>
         <script src="web/js/app.js"></script>
         <script src="web/js/dragAndDropController.js" type="text/javascript"></script>
+        <script src="web/js/ng-table.js" type="text/javascript"></script>
+        <script src="web/js/ng-table.min.js" type="text/javascript"></script>
     </head>
     <body data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
         <header class="navbar">

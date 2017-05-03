@@ -21,7 +21,7 @@ if(isset($usuarios)) {
                 <ng-model ng-model="usuarios[<?php echo $key; ?>].email = '<?php echo $obj->email ?>'"></ng-model>
                 <ng-model ng-model="usuarios[<?php echo $key; ?>].nombre = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
                 <ng-model ng-model="usuarios[<?php echo $key; ?>].apellidos = '<?php echo utf8_decode($obj->apellidos) ?>'"></ng-model>
-                <ng-model ng-model="usuarios[<?php echo $key; ?>].fecha_creacion = '<?php echo $obj->fecha_creacion ?>'"></ng-model>
+                <ng-model ng-model="usuarios[<?php echo $key; ?>].fecha_creacion = '<?php echo $obj->fecha_creacion; ?>'"></ng-model>
                 <ng-model ng-model="usuarios[<?php echo $key; ?>].tipo = '<?php echo $obj->tipo; ?>'"></ng-model>
                 <?php if(strcmp($obj->estado, '1')==0) { ?>
                     <ng-model ng-model="usuarios[<?php echo $key; ?>].estado = '<?php echo 'Activada' ?>'"></ng-model>
@@ -42,8 +42,8 @@ if(isset($usuarios)) {
             </div>
         </form>
         
-        <table class="table table-striped table-hover" id="resultadosBusqueda">
-                <thead class="bg-primary">
+        <table class="table table-striped table-hover" id="resultadosBusqueda" ng-table="tableParams">
+<!--                <thead class="bg-primary">
                     <tr>
                         <td>Email</td>
                         <td>Nombre</td>
@@ -53,16 +53,16 @@ if(isset($usuarios)) {
                         <td>Estado de la cuenta</td>
                         <td>Acciones</td>
                     </tr>
-                </thead>
+                </thead>-->
                 <tbody>
-                    <tr ng-repeat="usuario in usuarios | filter:textoBusqueda:strict | orderBy:usuario.email">
-                        <td>{{usuario.email}}</td>
-                        <td>{{usuario.nombre}}</td>
-                        <td>{{usuario.apellidos}}</td>
-                        <td>{{usuario.fecha_creacion}}</td>
-                        <td>{{usuario.tipo}}</td>
-                        <td>{{usuario.estado}}</td>
-                        <td>
+                    <tr ng-repeat="usuario in $data | filter:textoBusqueda:strict | orderBy:usuario.email">
+                        <td data-title="'Email'" sortable="'email'" filter="{email: 'text'}">{{usuario.email}}</td>
+                        <td data-title="'Nombre'" sortable="'nombre'" filter="{nombre: 'text'}">{{usuario.nombre}}</td>
+                        <td data-title="'Apellidos'" sortable="'apellidos'" filter="{apellidos: 'text'}">{{usuario.apellidos}}</td>
+                        <td data-title="'Fecha de Creación'" sortable="'fecha'" filter="{fecha: 'text'}">{{usuario.fecha_creacion}}</td>
+                        <td data-title="'Tipo'" sortable="'tipo'" filter="{tipo: 'text'}">{{usuario.tipo}}</td>
+                        <td data-title="'estado'" sortable="'estado'" filter="{estado: 'text'}">{{usuario.estado}}</td>
+                        <td data-title="'Acciones'">
                             <a href="{{usuario.enlace_modificar}}"><img class="img" src="{{usuario.img_modificar}}"></a>
                             <a href="{{usuario.enlace_borrar}}"><img class="img" src="{{usuario.img_borrar}}"></a>
                         </td>

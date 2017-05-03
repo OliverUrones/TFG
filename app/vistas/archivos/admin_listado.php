@@ -45,25 +45,25 @@ if(isset($admin)) {
             </div>
         </form>
 
-        <table class="table table-striped table-hover">
-            <thead class="bg-primary">
+        <table class="table table-striped table-hover" ng-table="tableParams">
+<!--            <thead class="bg-primary">
                 <tr>
                     <td>Nombre del Archivo</td>
                     <td>Enlace_descarga</td>
                     <td>Propietario</td>
                     <td>Categoría</td>
-<!--                    <td>Valoración</td>-->
+                    <td>Valoración</td>
                     <td>Ámbito</td>
                     <td>Acciones</td>
                 </tr>
-            </thead>
+            </thead>-->
             <tbody>
-                <tr ng-repeat="archivo in archivos | filter:textoBusqueda:strict">
-                    <td>{{archivo.nombre}}</td>
-                    <td>{{archivo.enlace_descarga}}</td>
-                    <td>{{archivo.nombre_usuario}}</td>
-                    <td>{{archivo.nombre_categoria}}</td>
-                    <td>{{archivo.ambito}}</td>
+                <tr ng-repeat="archivo in $data | filter:textoBusqueda:strict">
+                    <td data-title="'Nombre'" sortable="'nombre'" filter="{nombre: 'text'}">{{archivo.nombre}}</td>
+                    <td data-title="'Enlace Descarga'" sortable="'descarga'" filter="{descarga: 'text'}">{{archivo.enlace_descarga}}</td>
+                    <td data-title="'Propietario'" sortable="'propietario'" filter="{propietario: 'text'}">{{archivo.nombre_usuario}}</td>
+                    <td data-title="'Categoría'" sortable="'categoria'" filter="{categoria: 'text'}">{{archivo.nombre_categoria}}</td>
+                    <td data-title="'Ámbito'" sortable="'ambito'" filter="{ambito: 'text'}">{{archivo.ambito}}</td>
                     <td>
                         <a href="{{archivo.enlace_modificar}}"><img class="img" src="{{archivo.img_modificar}}"></a>
                         <a href="{{archivo.enlace_borrar}}"><img class="img" src="{{archivo.img_borrar}}"></a>

@@ -27,27 +27,60 @@ class busquedaModelo {
     public $nombre_categoria = NULL;
     
     public function busca($cadena) {
+        $this->__conexion();
         //var_dump($cadena);
-        $this->__hayCategorias($cadena);
+        //$this->__hayCategorias($cadena);
+        return $this->__dameResultado($cadena);
     }
     
-    private function __hayCategorias($cadena) {
-        //Genero un array con la cadena de búsqueda que le paso como parámetro
-        $array_cadena = explode(" ", $cadena);
-        var_dump($array_cadena);
-        //Hay que comprobar si en el array generado hay alguna categoría para ello primer
-        //tengo que recuperar las categorías almacenadas en la base de datos.
-        $modeloCategorias = new categoriasModelo();
-        $categorias = $modeloCategorias->dameCategorias();
-        //var_dump($categorias);
-        foreach ($array_cadena as $key => $value) {
-                echo '<br/>'.$value;
-            foreach ($categorias as $clave_categoria => $categoria) {
-                echo '<br/>'.$categoria['nombre'];
-                if(strtolower($value) == strtolower($categoria['nombre'])) {
-                    echo '<br/>'.$value.' = '.$categoria['nombre'];
+    private function __dameResultado($cadena) {
+//        Ejemplo de consulta con MATCH () AGAINST()
+//        SELECT archivos.archivo_id, archivos.nombre, archivos.etiquetas, archivos.enlace_descarga, categorias.nombre, (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ("programacion prueba informatica borrado ortografia") OR MATCH (categorias.nombre) AGAINST ("programacion prueba informatica borrado ortografia")) AS "coincidencia"
+//        FROM archivos, categorias
+//        WHERE archivos.ambito = 1
+//        AND archivos.categoria_id = categorias.categoria_id
+//        ORDER BY coincidencia DESC
+        $sql = "SELECT archivos.archivo_id, archivos.nombre, archivos.etiquetas, archivos.enlace_descarga, categorias.nombre, (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".$cadena."') OR MATCH (categorias.nombre) AGAINST ('".$cadena."')) AS 'coincidencia' "
+                . "FROM archivos, categorias "
+                . "WHERE archivos.ambito = 1 "
+                . "AND archivos.categoria_id = categorias.categoria_id "
+                . "ORDER BY coincidencia DESC";
+        //echo "<br/>".$sql;
+        $recordset = $this->conexion->execute($sql)->getAssoc();
+        
+        //var_dump($recordset);
+        if($recordset) {
+            foreach ($recordset as $key => $value) {
+                //echo '<br/>'.$key.' -- '.$value;
+                foreach ($value as $columna => $valor) {
+                    if(is_string($columna)) {
+                        $resultado[$key][$columna] = $valor;
+                    }
                 }
             }
+            //var_dump($resultado);
+            return $resultado;
         }
+    }
+    
+    /**
+     * Función que conecta con la base de datos
+     */
+    private function __conexion() {
+        
+        //Datos de la conexión host, usuario, contraseña y base de datos
+        $host = '127.0.0.1';
+        $usuario = 'root';
+        $pass = 'toor';
+        $db = 'repositorio';
+        
+        //Creación del objeto ADODB para conectarse a través del drives mysqli
+        $this->conexion = NewADOConnection('mysqli');
+        
+        //Se establece la conexión con los datos
+        $this->conexion->connect($host, $usuario, $pass, $db);
+        
+        //Para debuggear ADODB
+        //$this->conexion->debug = true;
     }
 }

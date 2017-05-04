@@ -71,9 +71,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                    <form action="">
+                    <form action="?busqueda/archivos" method="POST">
                         <div class="input-group">
-                            <input class="form-control" id="buscar" type="text" placeholder="Buscar documentos...">
+                            <input class="form-control" name="busqueda" id="buscar" type="text" placeholder="Buscar documentos...">
                             <span class="input-group-btn">
                                 <button class="btn btn-info">Buscar</button>
                             </span>

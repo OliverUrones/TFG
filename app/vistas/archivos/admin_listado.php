@@ -60,11 +60,13 @@ if(isset($admin)) {
             <tbody>
                 <tr ng-repeat="archivo in $data | filter:textoBusqueda:strict">
                     <td data-title="'Nombre'" sortable="'nombre'" filter="{nombre: 'text'}">{{archivo.nombre}}</td>
-                    <td data-title="'Enlace Descarga'" sortable="'descarga'" filter="{descarga: 'text'}">{{archivo.enlace_descarga}}</td>
-                    <td data-title="'Propietario'" sortable="'propietario'" filter="{propietario: 'text'}">{{archivo.nombre_usuario}}</td>
-                    <td data-title="'Categoría'" sortable="'categoria'" filter="{categoria: 'text'}">{{archivo.nombre_categoria}}</td>
-                    <td data-title="'Ámbito'" sortable="'ambito'" filter="{ambito: 'text'}">{{archivo.ambito}}</td>
-                    <td>
+                    <td data-title="'Enlace Descarga'" sortable="'enlace_descarga'" filter="{descarga: 'text'}">{{archivo.enlace_descarga}}</td>
+                    <td data-title="'Propietario'" sortable="'nombre_usuario'" filter="{propietario: 'text'}">{{archivo.nombre_usuario}}</td>
+                    <td data-title="'Categoría'" sortable="'nombre_categoria'" filter="{categoria: 'text'}">{{archivo.nombre_categoria}}</td>
+                    <td data-title="'Ámbito'" sortable="'ambito'" filter="{ambito: 'text'}">{{archivo.ambito}}
+                        <span ng-class="(archivo.ambito == 'Público') ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close'"></span>
+                    </td>
+                    <td data-title="'Acciones'">
                         <a href="{{archivo.enlace_modificar}}"><img class="img" src="{{archivo.img_modificar}}"></a>
                         <a href="{{archivo.enlace_borrar}}"><img class="img" src="{{archivo.img_borrar}}"></a>
                     </td>

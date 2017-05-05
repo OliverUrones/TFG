@@ -24,47 +24,55 @@
             </li>
         </ul>
 
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="RepositorioApp" data-ng-controller="BorraArchivoController">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 table-responsive" ng-app="archivos" ng-controller="ListadoArchivosController">
             <?php if(isset($archivos_json->Mensaje)) { ?>
                 <h2><?php echo $archivos_json->Mensaje; ?></h2>
             <?php } else { ?>
                 <?php //var_dump($archivos_json); ?>
                 <?php if(isset($archivos_json)) { ?>
+                <table class="table table-striped table-hover" ng-table="tableParams">
                     <?php $key=0; foreach ($archivos_json as $obj) { ?>
-                    <ng-model-options ng-model-options="{ getterSetter: true }">
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_categoria  = '<?php echo utf8_decode($obj->nombre_categoria); ?>'"></ng-model>
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo $obj->enlace_descarga; ?>'"></ng-model>
-                        <?php if($obj->ambito==0) { ?>
-                            <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Privado' ?>'"></ng-model>
-                        <?php } else { ?>
-                            <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Público' ?>'"></ng-model>
-                        <?php } ?>
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_modificar = '?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>'"></ng-model>
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].img_modificar = '../web/imagenes/Admin/administracion_editar.png'"></ng-model>
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_borrar = '?archivos/bajaAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>'"></ng-model>
-                        <ng-model ng-model="archivos[<?php echo $key; ?>].img_borrar = '../web/imagenes/Admin/administracion_borrar.png'"></ng-model>
-                    </ng-model-options>
-            <?php $key++; } ?>
+                        <ng-model-options ng-model-options="{ getterSetter: true }">
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].archivo_id  = '<?php echo utf8_decode($obj->archivo_id); ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].token  = '<?php echo utf8_decode($usuario_json->token); ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_categoria  = '<?php echo utf8_decode($obj->nombre_categoria); ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo $obj->enlace_descarga; ?>'"></ng-model>
+                            <?php if($obj->ambito==0) { ?>
+                                <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Privado' ?>'"></ng-model>
+                            <?php } else { ?>
+                                <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Público' ?>'"></ng-model>
+                            <?php } ?>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].etiquetas  = '<?php echo $obj->etiquetas; ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_modificar = '?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].img_modificar = 'web/imagenes/Admin/administracion_editar.png'"></ng-model>
+<!--                            <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_borrar = 'abreBorradoArchivo(<?php echo $obj->archivo_id; ?>, \'<?php echo $usuario_json->token; ?>\''"></ng-model>-->
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].img_borrar = 'web/imagenes/Admin/administracion_borrar.png'"></ng-model>
+                        </ng-model-options>
+                    <?php $key++; } ?>
                 <?php } ?>
-            <table class="table table-responsive table-bordered table-hover" ng-table="tableParams">
-                <thead class="bg-primary">
+<!--                <thead class="bg-primary">
                     <tr>
                         <td>Nombre</td>
                         <td>Categoría</td>
-                        <td>Enlace de descarga</td>
                         <td>Ámbito</td>
+                        <td>Etiquetas</td>
+                        <td>Enlace de descarga</td>
                         <td>Acciones</td>
                     </tr>
-                </thead>
+                </thead>-->
                 <tbody>
                     <tr ng-repeat="archivo in $data">
                         <td data-title="'Nombre'" sortable="'nombre'">{{archivo.nombre}}</td>
-                        <td data-title="'Categoria'" sortable="'categoria'">{{archivo.nombre_categoria}}</td>
-                        <td data-title="'Descarga'" sortable="'descarga'">{{archivo.enlace_descarga}}</td>
-                        <td data-title="'Nombre'" sortable="'nombre'">{{archivo.}}</td>
-                        <td data-title="'Nombre'" sortable="'nombre'">
-                            
+                        <td data-title="'Categoria'" sortable="'nombre_categoria'">{{archivo.nombre_categoria}}</td>
+                        <td data-title="'Ambito'" sortable="'ambito'">{{archivo.ambito}}
+                            <span ng-class="(archivo.ambito == 'Público') ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close'"></span>
+                        </td>
+                        <td data-title="'Etiquetas'" sortable="'etiquetas'">{{archivo.etiquetas}}</td>
+                        <td data-title="'Descarga'" sortable="'enlace_descarga'"><span class="glyphicon glyphicon-save"></span> <a type="button" href="?archivos/descargarArchivo/{{archivo.enlace_descarga}}">Descargar</a></td>
+                        <td data-title="'Acciones'">
+                            <a href="{{archivo.enlace_modificar}}"><img src="{{archivo.img_modificar}}"></a>
+                            <a ng-click="abreBorradoArchivo(archivo.archivo_id, archivo.token)" href="#"><img src="{{archivo.img_borrar}}"></a>
                         </td>
                     </tr>
                     <?php foreach ($archivos_json as $obj) { ?>
@@ -118,7 +126,7 @@
                                     </form>
                             </script>
                         </div>
-                        <div class="modal modal-content" data-ng-app="RepositorioApp">
+                        <div class="modal modal-content">
                             <script type="text/ng-template" id="resultadoBorrado.html">
                                 <div class="modal-header">
                                     <h3 class="modal-title">Resultado del borrado</h3>

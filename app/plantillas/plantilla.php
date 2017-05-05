@@ -26,6 +26,7 @@
         <script src="web/js/dropzone.js" type="text/javascript"></script>
         <script src="web/js/ng-dropzone.min.js" type="text/javascript"></script>
         <script src="web/js/app.js"></script>
+        <script src="web/js/archivos.js"></script>
         <script src="web/js/dragAndDropController.js" type="text/javascript"></script>
         <script src="web/js/ng-table.js" type="text/javascript"></script>
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>

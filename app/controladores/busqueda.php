@@ -8,6 +8,7 @@
 namespace app\controladores\busqueda;
 
 use app\Api;
+use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\busquedaModelo\busquedaModelo;
 
 /**
@@ -22,16 +23,36 @@ class busqueda extends Api\Api {
         //echo "Estoy en el método archivos() de la clase buscar";
         //Puede venir el token del usuario
         //var_dump($parametros);
-        var_dump($_POST);
-        
-        $modeloBusqueda = new busquedaModelo();
-        $resultado = $modeloBusqueda->busca($_POST['busqueda']);
-        var_dump($resultado);
-        $resultado = $this->construyeJSON($resultado);
+        $this->DamePeticion();
+        if($this->peticion === "POST") {
+            if(isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    //Si el token es válido...
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        //...recupero los datos del usuario
+                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
-        //var_dump($resultado);
-        
-        extract($resultado);
+                        //Construyo la cadena JSON
+                        $usuario = $this->construyeJSON($usuario);
+                        //var_dump($usuario);
+                        extract($usuario);
+                        
+                    }
+                }
+            }
+        }
+        var_dump($_POST);
+        if(isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
+            $modeloBusqueda = new busquedaModelo();
+            $resultado = $modeloBusqueda->busca($_POST['busqueda']);
+            //var_dump($resultado);
+            $resultado = $this->construyeJSON($resultado);
+
+            //var_dump($resultado);
+
+            extract($resultado);
+        }
         
         //Redirección a la vista... y mensaje para comprobación de correo para la activación de la cuenta
         $ruta_vista_resultado = VISTAS .'busquedas/resultado.php' ;

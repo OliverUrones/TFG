@@ -29,7 +29,25 @@
                 <h2><?php echo $archivos_json->Mensaje; ?></h2>
             <?php } else { ?>
                 <?php //var_dump($archivos_json); ?>
-            <table class="table table-responsive table-bordered table-hover">
+                <?php if(isset($archivos_json)) { ?>
+                    <?php $key=0; foreach ($archivos_json as $obj) { ?>
+                    <ng-model-options ng-model-options="{ getterSetter: true }">
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_categoria  = '<?php echo utf8_decode($obj->nombre_categoria); ?>'"></ng-model>
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo $obj->enlace_descarga; ?>'"></ng-model>
+                        <?php if($obj->ambito==0) { ?>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Privado' ?>'"></ng-model>
+                        <?php } else { ?>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Público' ?>'"></ng-model>
+                        <?php } ?>
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_modificar = '?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>'"></ng-model>
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].img_modificar = '../web/imagenes/Admin/administracion_editar.png'"></ng-model>
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_borrar = '?archivos/bajaAdmin/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>'"></ng-model>
+                        <ng-model ng-model="archivos[<?php echo $key; ?>].img_borrar = '../web/imagenes/Admin/administracion_borrar.png'"></ng-model>
+                    </ng-model-options>
+            <?php $key++; } ?>
+                <?php } ?>
+            <table class="table table-responsive table-bordered table-hover" ng-table="tableParams">
                 <thead class="bg-primary">
                     <tr>
                         <td>Nombre</td>
@@ -40,8 +58,17 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr ng-repeat="archivo in $data">
+                        <td data-title="'Nombre'" sortable="'nombre'">{{archivo.nombre}}</td>
+                        <td data-title="'Categoria'" sortable="'categoria'">{{archivo.nombre_categoria}}</td>
+                        <td data-title="'Descarga'" sortable="'descarga'">{{archivo.enlace_descarga}}</td>
+                        <td data-title="'Nombre'" sortable="'nombre'">{{archivo.}}</td>
+                        <td data-title="'Nombre'" sortable="'nombre'">
+                            
+                        </td>
+                    </tr>
                     <?php foreach ($archivos_json as $obj) { ?>
-                        <tr>
+<!--                        <tr>
                             <td><span class="glyphicon glyphicon-file"></span> <?php echo utf8_decode($obj->nombre); ?></td>
                             <td><span class="glyphicon glyphicon-list-alt"></span> <?php echo utf8_decode($obj->nombre_categoria); ?></td>
                             <td><span class="glyphicon glyphicon-save"></span> <a type="button" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>">Descargar</a></td>
@@ -56,7 +83,7 @@
                                 <a href="?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>"><img class="img" src="web/imagenes/Admin/administracion_editar.png" ></a>
                                 <a data-ng-click="abreBorradoArchivo(<?php echo $obj->archivo_id; ?>, '<?php echo $usuario_json->token; ?>');" href="#"><img class="img" src="web/imagenes/Admin/administracion_borrar.png" ></a>
                             </td>
-                        </tr>
+                        </tr>-->
                         <div class="modal modal-content">
                             <script type="text/ng-template" id="confirmaBorrado.html">
                                     <div class="modal-header">

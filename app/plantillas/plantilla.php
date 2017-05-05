@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <?php //var_dump($usuario);
     if(isset($usuario)) {
-        $usuario = json_decode($usuario);
+        $usuario_json = json_decode($usuario);
+        //var_dump("Usuario json");
+        //var_dump($usuario_json);
     }
 ?>
 <html>
@@ -35,7 +37,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
-                                <?php if(!isset($usuario->token)) { ?>
+                                <?php if(!isset($usuario_json->token)) { ?>
                                 <li role="presentation"><a href="?home/index">Inicio</a></li>
                                 <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
@@ -45,17 +47,17 @@
                                 //$usuario = json_decode($usuario);
                                 //var_dump($usuario->estado === '200 OK');
                             ?>
-                                <li role="presentation"><a href="?home/index/<?php echo $usuario->token ?>">Inicio</a></li>
-                                <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario->token ?>">Conversión</a></li>
+                                <li role="presentation"><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-<!--                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario->usuario_id ?>">Salir</a></li>-->
+<!--                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id ?>">Salir</a></li>-->
                                 <li class="dropdown dr">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario->usuario_id ?>/<?php echo $usuario->token ?>">Ver perfil</a></li>
+                                        <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Ver perfil</a></li>
                                         <li class="divider"></li>
-                                        <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario->usuario_id ?>">Salir</a></li>
+                                        <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>">Salir</a></li>
                                     </ul>
                                 </li>
                             <?php
@@ -71,7 +73,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                    <form action="?busqueda/archivos" method="POST">
+                    <?php if(!isset($usuario_json->token)) { ?>
+                        <form action="?busqueda/archivos" method="POST">
+                    <?php } else { ?>
+                        <form action="?busqueda/archivos/<?php echo $usuario_json->token; ?>" method="POST">
+                    <?php } ?>
                         <div class="input-group">
                             <input class="form-control" name="busqueda" id="buscar" type="text" placeholder="Buscar documentos...">
                             <span class="input-group-btn">

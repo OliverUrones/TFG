@@ -1,4 +1,4 @@
-var formularios = angular.module('RepositorioApp', ['ngDialog']);
+var formularios = angular.module('RepositorioApp', ['ngDialog', 'ngTable']);
 
 formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', function($scope, ngDialog) {
     //Objeto que representa al modelo de los datos del formulario de alta
@@ -12,12 +12,25 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
 }]);
 
 //Cuadro de diálog parar el borrado de archivos en el perfil del usuario de la parte pública
-formularios.controller('BorraArchivoController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
+formularios.controller('BorraArchivoController', ['$scope', 'ngDialog', 'NgTableParams', '$http', function($scope, ngDialog, $http, NgTableParams) {
     
     //Modelo del archivo que se va a borrar
     $scope.archivoBorradoModelo = {};
     //console.log("Inicio controller");
     //console.log($scope);
+    
+        console.log("Hola");
+    $scope.archivos = [];
+    $scope.tableParams = new NgTableParams({
+        count: 5,
+        sorting: {nombre: "asc"}
+    },
+    {
+        paginationMaxBlocks: 13,
+        paginationMinBlocks: 2,
+        dataset: $scope.archivos
+    });
+    console.log($scope.tableParams.defaultSettings);
     
     /**
      * Función que recibe como parámetros el ID del archivo a borrar y el token del usuario para construir la 

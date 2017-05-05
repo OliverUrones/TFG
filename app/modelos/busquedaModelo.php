@@ -40,10 +40,11 @@ class busquedaModelo {
 //        WHERE archivos.ambito = 1
 //        AND archivos.categoria_id = categorias.categoria_id
 //        ORDER BY coincidencia DESC
-        $sql = "SELECT archivos.archivo_id, archivos.nombre, archivos.etiquetas, archivos.enlace_descarga, categorias.nombre, (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".$cadena."') OR MATCH (categorias.nombre) AGAINST ('".$cadena."')) AS 'coincidencia' "
+        $sql = "SELECT archivos.archivo_id, archivos.nombre AS 'nombre_archivo', archivos.etiquetas, archivos.enlace_descarga, categorias.nombre AS 'categoria', (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".$cadena."') OR MATCH (categorias.nombre) AGAINST ('".$cadena."')) AS 'coincidencia' "
                 . "FROM archivos, categorias "
                 . "WHERE archivos.ambito = 1 "
                 . "AND archivos.categoria_id = categorias.categoria_id "
+                . "AND (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".$cadena."') OR MATCH (categorias.nombre) AGAINST ('".$cadena."')) = 1 "
                 . "ORDER BY coincidencia DESC";
         //echo "<br/>".$sql;
         $recordset = $this->conexion->execute($sql)->getAssoc();
@@ -58,7 +59,8 @@ class busquedaModelo {
                     }
                 }
             }
-            //var_dump($resultado);
+            $resultado['total'] = count($resultado);
+            $resultado['cadena'] = $cadena;
             return $resultado;
         }
     }

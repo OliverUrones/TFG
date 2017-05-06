@@ -63,8 +63,9 @@ if(isset($admin)) {
                     <td data-title="'Enlace Descarga'" sortable="'enlace_descarga'" filter="{descarga: 'text'}">{{archivo.enlace_descarga}}</td>
                     <td data-title="'Propietario'" sortable="'nombre_usuario'" filter="{propietario: 'text'}">{{archivo.nombre_usuario}}</td>
                     <td data-title="'Categoría'" sortable="'nombre_categoria'" filter="{categoria: 'text'}">{{archivo.nombre_categoria}}</td>
-                    <td data-title="'Ámbito'" sortable="'ambito'" filter="{ambito: 'text'}">{{archivo.ambito}}
+                    <td data-title="'Ámbito'" sortable="'ambito'" filter="{ambito: 'text'}">
                         <span ng-class="(archivo.ambito == 'Público') ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close'"></span>
+                        {{archivo.ambito}}
                     </td>
                     <td data-title="'Acciones'">
                         <a href="{{archivo.enlace_modificar}}"><img class="img" src="{{archivo.img_modificar}}"></a>

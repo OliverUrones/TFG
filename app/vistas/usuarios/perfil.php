@@ -65,8 +65,9 @@
                     <tr ng-repeat="archivo in $data">
                         <td data-title="'Nombre'" sortable="'nombre'">{{archivo.nombre}}</td>
                         <td data-title="'Categoria'" sortable="'nombre_categoria'">{{archivo.nombre_categoria}}</td>
-                        <td data-title="'Ambito'" sortable="'ambito'">{{archivo.ambito}}
+                        <td data-title="'Ambito'" sortable="'ambito'">
                             <span ng-class="(archivo.ambito == 'Público') ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close'"></span>
+                            {{archivo.ambito}}
                         </td>
                         <td data-title="'Etiquetas'" sortable="'etiquetas'">{{archivo.etiquetas}}</td>
                         <td data-title="'Descarga'" sortable="'enlace_descarga'"><span class="glyphicon glyphicon-save"></span> <a type="button" href="?archivos/descargarArchivo/{{archivo.enlace_descarga}}">Descargar</a></td>

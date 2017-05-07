@@ -25,6 +25,7 @@ if(isset($admin)) {
                     <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo $obj->enlace_descarga; ?>'"></ng-model>
                     <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_usuario  = '<?php echo utf8_decode($obj->nombre_usuario); ?>'"></ng-model>
                     <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_categoria  = '<?php echo utf8_decode($obj->nombre_categoria); ?>'"></ng-model>
+                    <ng-model ng-model="archivos[<?php echo $key; ?>].etiquetas  = '<?php echo utf8_decode($obj->etiquetas); ?>'"></ng-model>
                     <?php if($obj->ambito==0) { ?>
                         <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Privado' ?>'"></ng-model>
                     <?php } else { ?>
@@ -60,12 +61,15 @@ if(isset($admin)) {
             <tbody>
                 <tr ng-repeat="archivo in $data | filter:textoBusqueda:strict">
                     <td data-title="'Nombre'" sortable="'nombre'" filter="{nombre: 'text'}">{{archivo.nombre}}</td>
-                    <td data-title="'Enlace Descarga'" sortable="'enlace_descarga'" filter="{descarga: 'text'}">{{archivo.enlace_descarga}}</td>
-                    <td data-title="'Propietario'" sortable="'nombre_usuario'" filter="{propietario: 'text'}">{{archivo.nombre_usuario}}</td>
-                    <td data-title="'Categoría'" sortable="'nombre_categoria'" filter="{categoria: 'text'}">{{archivo.nombre_categoria}}</td>
+                    <td data-title="'Categoría'" sortable="'nombre_categoria'" filter="{nombre_categoria: 'text'}">{{archivo.nombre_categoria}}</td>
                     <td data-title="'Ámbito'" sortable="'ambito'" filter="{ambito: 'text'}">
                         <span ng-class="(archivo.ambito == 'Público') ? 'glyphicon glyphicon-eye-open' : 'glyphicon glyphicon-eye-close'"></span>
                         {{archivo.ambito}}
+                    </td>
+                    <td data-title="'Propietario'" sortable="'nombre_usuario'" filter="{nombre_usuario: 'text'}">{{archivo.nombre_usuario}}</td>
+                    <td data-title="'Etiquetas'" sortable="'etiquetas'" filter="{etiquetas: 'text'}">{{archivo.etiquetas}}</td>
+                    <td data-title="'Descarga'">
+                        <span class="glyphicon glyphicon-save"></span> <a type="button" href="?archivos/descargarArchivo/{{archivo.enlace_descarga}}">Descargar</a>
                     </td>
                     <td data-title="'Acciones'">
                         <a href="{{archivo.enlace_modificar}}"><img class="img" src="{{archivo.img_modificar}}"></a>

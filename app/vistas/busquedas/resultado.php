@@ -11,7 +11,7 @@ if(isset($usuario)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-app="" ng-controller="">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <?php if(isset($resultado_json) && $resultado_json != 'null') { ?>
             <h1>Resultado de la búsqueda: <small><?php echo $resultado_json->cadena; ?></small></h1>
             <?php if($resultado_json->total > 0) { ?>

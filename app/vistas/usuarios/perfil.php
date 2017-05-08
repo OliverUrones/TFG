@@ -156,8 +156,30 @@
         </ul>
     
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <table>
-                <?php var_dump($usuario_json); ?>
+                <?php //var_dump($usuario_json); ?>
+            <div class="form-group has-feedback">
+                <a href="?usuarios/modicarDatos/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Modificar datos</a>
+                <a href="?usuarios/cambiaPass/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Cambiar contraseña</a>
+                <a href="?usuarios/eliminar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar cuenta</a>
+            </div>
+<!--            <div class="btn-group btn-group-md">
+                <button type="button" class="btn btn-default">Modificar mis datos</button>
+                <button type="button" class="btn btn-default">Cambiar contraseña</button>
+                <button type="button" class="btn btn-default">Eliminar cuenta</button>
+            </div>-->
+            <table class="table table-striped table-hover">
+                <tr>
+                    <td class="text-right"><h2>Email:</h2></td>
+                    <td><h2><?php echo $usuario_json->email; ?></h2></td>
+                </tr>
+                <tr>
+                    <td class="text-right"><h2>Nombre:</h2></td>
+                    <td><h2><?php echo $usuario_json->nombre; ?></h2></td>
+                </tr>
+                <tr>
+                    <td class="text-right"><h2>Apellidos:</h2></td>
+                    <td><h2><?php echo $usuario_json->apellidos; ?></h2></td>
+                </tr>
             </table>
         </div>
     <?php } ?>

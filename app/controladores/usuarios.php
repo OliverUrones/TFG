@@ -282,7 +282,7 @@ class usuarios extends Api\Api implements Rest {
     }
     
     /**
-     * Método para modificar un usuario.
+     * Método para modificar un usuario para la parte de administración.
      * Si la petición viene por GET se muestran los datos en el formulario de modificación.
      * Si la petición viene por POST se modificará el usuario en la base de datos.
      * Devuelve a la vista los datos del usuario que se va a modificar o que se ha modificado y los datos del administrador conectado.

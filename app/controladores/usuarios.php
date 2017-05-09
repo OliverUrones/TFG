@@ -380,7 +380,28 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
-    /**
+    public function cambiarPass($parametros=NULL) {
+        $this->DamePeticion();
+        if(is_array($parametros) && count($parametros) === 2) {
+            if(isset($parametros['id']) && isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+                        
+                        $usuario = $this->construyeJSON($usuario);
+                        
+                        extract($usuario);
+                        
+                        $ruta_vista_modificar_pass = VISTAS . 'usuarios/cambiarPass.php';
+                        require_once $ruta_vista_modificar_pass;
+                    }
+                }
+            }
+        }
+    }
+
+        /**
      * Método para editar los datos del propio usuario logueado
      * @param array $parametros Array asociativo con las claves id y token del usuario logueado
      */

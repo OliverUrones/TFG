@@ -159,7 +159,7 @@
                 <?php //var_dump($usuario_json); ?>
             <div class="form-group has-feedback">
                 <a href="?usuarios/modificarDatos/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Modificar datos</a>
-                <a href="?usuarios/cambiaPass/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Cambiar contraseña</a>
+                <a href="?usuarios/cambiarPass/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Cambiar contraseña</a>
                 <a href="?usuarios/eliminar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar cuenta</a>
             </div>
 <!--            <div class="btn-group btn-group-md">

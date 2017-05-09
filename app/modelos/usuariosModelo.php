@@ -195,6 +195,30 @@ class usuariosModelo {
     }
     
     /**
+     * Método que modifica los datos del propio usuario logueado en la base de datos
+     * @return array 
+     */
+    public function modificaDatosUsuarioId() {
+        $sql = "UPDATE `usuarios` SET rol_id=".$this->rol_id.", nombre=". utf8_encode($this->nombre).", apellidos=". utf8_encode($this->apellidos)." WHERE usuario_id=".$this->usuario_id.";";
+        
+        //var_dump($sql);
+        //Ejecución de la consulta
+        $resultado = $this->conexion->execute($sql);
+
+        if(!$resultado)
+        {
+            return array('estado_p' => '400 KO', 'Mensaje' => 'Error al modificar la cuenta.');
+        }else
+        {
+            $usuario = $this->dameUsuarioId(str_replace("'", "", $this->usuario_id));
+            $usuario['estado_p'] = '200 OK';
+            $usuario['Mensaje'] = 'Usuario modificado correctamente';
+            $usuario['accion'] = 'modificar';
+            return $usuario;
+        }
+    }
+
+        /**
      * Método que modifica los datos de un usuario desde la parte de administración
      * @return array Los datos del usuario que se acaba de modificar con el estado, el mensaje y la acción que se ha realizado
      */

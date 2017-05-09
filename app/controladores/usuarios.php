@@ -381,6 +381,67 @@ class usuarios extends Api\Api implements Rest {
     }
     
     /**
+     * Método para editar los datos del propio usuario logueado
+     * @param array $parametros Array asociativo con las claves id y token del usuario logueado
+     */
+    public function modificarDatos($parametros=NULL) {
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2){
+                if(isset($parametros['id']) && isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        //var_dump($parametros);
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+                                                        
+                            $usuario = $this->construyeJSON($usuario);
+
+                            extract($usuario);
+
+                            $ruta_vista_modificar = VISTAS .'usuarios/modificar.php';
+                            require_once $ruta_vista_modificar;
+                        }
+                    }
+
+                }
+            }
+        }
+        
+        if($this->peticion === "POST") {
+            //var_dump($_POST);
+            if(is_array($parametros)){
+                if(isset($parametros['token']))
+                {
+                    if(isset($parametros['id']) && isset($parametros['token']) && strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->modificaDatosUsuarioId();
+
+                            $usuario = $this->construyeJSON($usuario);
+
+                            //$borrado es la respuesta json para devolver a la vista el mensaje
+                            extract($usuario);
+
+                            //var_dump($usuarios);
+
+                            $ruta_vista_modificar = VISTAS .'usuarios/modificar.php';
+                            require_once $ruta_vista_modificar;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+        /**
      * Función que devuelve los datos del perfil de un usuario
      * @param type $id
      */

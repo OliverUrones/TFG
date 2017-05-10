@@ -894,7 +894,7 @@ class archivos extends Api implements Rest {
             exec($comando, $salida, $valor_retorno);
             //var_dump($salida);
             foreach ($salida as $key => $value) {
-                //echo $key.' '.$value.'<br/>';
+                echo $key.' '.$value.'<br/>';
             }
         }
         if($valor_retorno === 0) {
@@ -954,11 +954,13 @@ class archivos extends Api implements Rest {
                 //var_dump($params);
             }
             foreach ($params as $opcion => $value) {
-                if($opcion === '-w' || $opcion === '-S' || $opcion === '-K')
-                {
-                    $cadena = $cadena.$opcion.' ';
-                } else {
-                    $cadena = $cadena.$opcion.' '.$value.' ';
+                if($opcion !== 'directorio') {
+                    if($opcion === '-w' || $opcion === '-S' || $opcion === '-K')
+                    {
+                        $cadena = $cadena.$opcion.' ';
+                    } else {
+                        $cadena = $cadena.$opcion.' '.$value.' ';
+                    }
                 }
             }
             //var_dump($cadena);

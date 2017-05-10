@@ -135,9 +135,7 @@ if(isset($usuario)) {
             </script>
         </div>
     </div>
-<?php
-}
-?>  <p>El archivo sólo estará disponible para una única descarga.</p>
+<?php } ?> 
     <a href="?archivos/descargar/<?php echo $directorio_id_json->directorio_id; ?>/<?php echo $nombre_archivo_json->nombre; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
 </div>
 <?php

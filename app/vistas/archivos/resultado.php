@@ -1,4 +1,7 @@
 <?php
+if(isset($directorio_id)) {
+    $directorio_id_json = json_decode($directorio_id);
+}
 if(isset($nombre_archivo)) {
     $nombre_archivo_json = json_decode($nombre_archivo);
     //var_dump($nombre_archivo_json);
@@ -134,8 +137,8 @@ if(isset($usuario)) {
     </div>
 <?php
 }
-?>
-    <a href="?archivos/descargar/<?php echo $nombre_archivo_json->nombre; ?>/<?php echo $directorio_id; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
+?>  <p>El archivo sólo estará disponible para una única descarga.</p>
+    <a href="?archivos/descargar/<?php echo $directorio_id_json->directorio_id; ?>/<?php echo $nombre_archivo_json->nombre; ?>" type="button" class="btn btn-default btn-lg btn-block">Descargar</a>
 </div>
 <?php
 }

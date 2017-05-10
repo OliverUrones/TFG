@@ -70,7 +70,7 @@ class archivos extends Api implements Rest {
         $respuesta = $this->construyeJSON($respuesta);
         
         //Borro el directorio
-        $this->__borrarDirectorioId($obj->directorio_id);
+        $this->borrarDirectorioId($obj->directorio_id);
         
         $this->tipo = "application/json";
         $this->EstablecerCabeceras();
@@ -636,7 +636,8 @@ class archivos extends Api implements Rest {
                 $this->borrarTemporales($salida);
 
                 //
-                $nombre_archivo = $this->construyeJSON(array('nombre' => $directorio_id.SEPARADOR.$this->dameNombreArchivo($salida[count($salida)-1])));
+                $nombre_archivo = $this->construyeJSON(array('nombre' => $this->dameNombreArchivo($salida[count($salida)-1])));
+                $directorio_id = $this->construyeJSON(array('directorio_id' => $directorio_id));
                 //var_dump($ruta_archivo_temporal);
                 extract($nombre_archivo);
                 
@@ -661,7 +662,11 @@ class archivos extends Api implements Rest {
      */
     public function convertir($parametros=NULL) {
         //Habría que comprobar si hay usuario logueado o no!!
-
+        //Si viene el directorio de una conversión anterior lo borro
+        if(isset($parametros['directorio'])) {
+            //var_dump($parametros['directorio']);
+            $this->borrarDirectorioId($parametros['directorio']);
+        }
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
 //        $ruta_vista_login = VISTAS . 'usuarios/login.php';
@@ -858,7 +863,7 @@ class archivos extends Api implements Rest {
      * Método para borrar los archivos que quedan en el directorio después de la conversión y el propio directorio.
      * @param string $id Identificador del directorio a borrar.
      */
-    private function __borrarDirectorioId($id) {
+    public function borrarDirectorioId($id) {
         $ruta = CARPETA_TEMPORALES.$id;
         if(is_dir($ruta)) {
             $dir = opendir($ruta);

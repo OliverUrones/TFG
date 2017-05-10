@@ -13,6 +13,7 @@ use app\interfaz\Rest\Rest;
 use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\rolesModelo\rolesModelo;
 use app\controladores\logs\logs;
+use app\controladores\archivos\archivos;
 /**
  * Description of usuarios
  *
@@ -23,12 +24,18 @@ class usuarios extends Api\Api implements Rest {
     /**
      * Función que da de alta un usuario
      */
-    public function alta() {
+    public function alta($parametros=NULL) {
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
 //        $ruta_vista_login = VISTAS . 'usuarios/login.php';
 //        require_once $ruta_vista_login;
         
+        //Si viene el directorio de una conversión anterior lo borro
+        if(isset($parametros['directorio'])) {
+            //var_dump($parametros['directorio']);
+            $controladorArchivos = new archivos();
+            $controladorArchivos->borrarDirectorioId($parametros['directorio']);
+        }
         //Recoge el tipo de petición realizada
         $this->DamePeticion();
         
@@ -514,8 +521,15 @@ class usuarios extends Api\Api implements Rest {
     /**
      * Función para loguearse en la parte pública
      */
-    public function login() {
+    public function login($parametros=NULL) {
         //echo "Estoy en la clase usuarios en el método login()";
+        
+        //Si viene el directorio de una conversión anterior lo borro
+        if(isset($parametros['directorio'])) {
+            //var_dump($parametros['directorio']);
+            $controladorArchivos = new archivos();
+            $controladorArchivos->borrarDirectorioId($parametros['directorio']);
+        }
         //Incluyo las otras partes del layout
         //Tendría que incluir las categorías aquí también y en cada uno de los métodos
 

@@ -24,6 +24,17 @@ if(isset($usuario)) {
                        required>
             </div>
             <div class="form-group">
+<!--                <label class="control-label">ID</label>-->
+                <input type="hidden"
+                       name="rol_id"
+                       class="form-control"
+                       id="rol_id"
+                       value="<?php echo $usuario_json->rol_id; ?>"
+                       required
+                       readonly
+                       required>
+            </div>
+            <div class="form-group">
                 <label class="control-label">Email</label>
 <!--                <p class="form-control-static"><?php //echo $usuario_json->email; ?></p>-->
                 <input type="text"

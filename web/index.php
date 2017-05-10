@@ -6,6 +6,7 @@ require_once dirname(__DIR__). '/app/controladores/home.php';
 require_once dirname(__DIR__). '/app/controladores/usuarios.php';
 require_once dirname(__DIR__). '/app/controladores/logs.php';
 require_once dirname(__DIR__). '/app/controladores/busqueda.php';
+require_once dirname(__DIR__). '/app/controladores/archivos.php';
 require_once dirname(__DIR__). '/app/modelos/usuariosModelo.php';
 require_once dirname(__DIR__). '/app/modelos/archivosModelo.php';
 require_once dirname(__DIR__). '/app/modelos/categoriasModelo.php';

@@ -11,6 +11,7 @@ use app\Api;
 use app\interfaz\Rest\Rest;
 
 use app\modelos\usuariosModelo\usuariosModelo;
+use app\controladores\archivos\archivos;
 
 /**
  * Description of home
@@ -26,6 +27,12 @@ class home extends Api\Api {
     /*Método de la petición por defecto*/
     public function index($parametros=NULL) {
         //echo "Estoy en el método index() de la clase home";
+        //Si viene el directorio de una conversión anterior lo borro
+        if(isset($parametros['directorio'])) {
+            //var_dump($parametros['directorio']);
+            $controladorArchivos = new archivos();
+            $controladorArchivos->borrarDirectorioId($parametros['directorio']);
+        }
         //Incluir la ruta de las categorías.php
         $ruta_vista_home = VISTAS.'home.php';
 //        $ruta_vista_login = VISTAS.'usuarios/login.php';

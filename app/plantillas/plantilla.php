@@ -5,6 +5,12 @@
         //var_dump("Usuario json");
         //var_dump($usuario_json);
     }
+    if(isset($directorio_id)) {
+        $id_dir = true;
+        $directorio_id_json = json_decode($directorio_id);
+    } else {
+        $id_dir = false;
+    }
 ?>
 <html>
     <head>
@@ -39,11 +45,11 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
                                 <?php if(!isset($usuario_json->token)) { ?>
-                                <li role="presentation"><a href="?home/index">Inicio</a></li>
-                                <li role="presentation"><a href="?archivos/convertir">Conversión</a></li>
+                                <li role="presentation"><a href="?home/index/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/alta">Registro</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/login">Login</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/alta/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Registro</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/login/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Login</a></li>
                             <?php } else {
                                 //$usuario = json_decode($usuario);
                                 //var_dump($usuario->estado === '200 OK');

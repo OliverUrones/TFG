@@ -632,7 +632,7 @@ class archivos extends Api implements Rest {
                 //Se ha ejecutado el script noteshrink.py correctamente
                 //Se debería gestionar los archivos que ha generado el script
                 //Primero borraré los temporales haciendo referencia a la salida: opened ... ruta/archivo/temporal
-                var_dump($salida[count($salida)-1]);
+                //var_dump($salida[count($salida)-1]);
                 $this->borrarTemporales($salida);
 
                 //

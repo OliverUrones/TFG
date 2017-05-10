@@ -4,7 +4,7 @@
 //    }
 
     $directorio_conversion = 'd'.uniqid();
-    echo $directorio_conversion;
+    //echo $directorio_conversion;
 ?>
 <?php ob_start() ?>
     <h2>Convierta documentos escaneados a PDF</h2>

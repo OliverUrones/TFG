@@ -1,7 +1,15 @@
+<?php //var_dump($usuario); 
+    if(isset($error)) {
+        $error_json = json_decode($error);
+    }
+?>
 <?php ob_start() ?>
 <!--    <div data-ng-app="loginApp" data-ng-controller="loginAppCtrl">-->
     <div>
         <h2>Login</h2>
+        <?php if(isset($error_json)) { ?>
+            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $error_json->Mensaje; ?></div>
+        <?php } ?>
         <form name="loginForm" role="form" action="?usuarios/login" method="POST">
             <div class="form-group">
                 <label class="control-label">Email</label>

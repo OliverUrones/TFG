@@ -1,6 +1,7 @@
 <?php
 if(isset($directorio_id)) {
     $directorio_id_json = json_decode($directorio_id);
+    var_dump($directorio_id_json);
 }
 if(isset($nombre_archivo)) {
     $nombre_archivo_json = json_decode($nombre_archivo);
@@ -35,7 +36,7 @@ if(isset($usuario)) {
                                         name="directorio_id"
                                         id="directorio_id"
                                         data-ng-model="altaModelo.directorio_id"
-                                        data-ng-init="altaModelo.directorio_id = '<?php echo $directorio_id; ?>'"
+                                        data-ng-init="altaModelo.directorio_id = '<?php echo $directorio_id_json->directorio_id; ?>'"
                                         value="<?php echo $directorio_id; ?>">
 <!--                                        {{altaModelo.archivo}}-->
                                 </div>

@@ -689,11 +689,13 @@ class usuarios extends Api\Api implements Rest {
             //Compruebo si viene el id
             if(isset($parametros['id']))
             {
-                var_dump($parametros);
+                //var_dump($parametros);
                 //Se crea un objeto del modelo usuarios
                 $usuariosModelo = new usuariosModelo();
                 $estado_peticion = $usuariosModelo->borraDatosSesion($parametros['id']);
-                echo $estado_peticion['Mensaje'];
+                //echo $estado_peticion['Mensaje'];
+                $estado_peticion = $this->construyeJSON($estado_peticion);
+                extract($estado_peticion);
                 $linea_log = [
                             "fecha" => '['.date("d-m-Y H:i:s").']',
                             "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
@@ -701,9 +703,11 @@ class usuarios extends Api\Api implements Rest {
                             "estado" => '[ESTADO: '.$estado_peticion['estado_p'].']',
                             "mensaje" => '[MENSAJE: '.$estado_peticion['Mensaje'].']'
                         ];
-            $logControlador = new logs('usuarios', $linea_log);
+                $logControlador = new logs('usuarios', $linea_log);
                 
                 //Requerir la vista correspondiente
+                $ruta_vista_logout = VISTAS .'usuarios/logout.php';
+                require_once $ruta_vista_logout;
             }
         }   
     }
@@ -720,13 +724,16 @@ class usuarios extends Api\Api implements Rest {
             //Compruebo si viene el id
             if(isset($parametros['id']))
             {
-                var_dump($parametros);
+                //var_dump($parametros);
                 //Se crea un objeto del modelo usuarios
                 $usuariosModelo = new usuariosModelo();
                 $estado_peticion = $usuariosModelo->borraDatosSesion($parametros['id']);
-                echo $estado_peticion['Mensaje'];
-                
+                $estado_peticion = $this->construyeJSON($estado_peticion);
+                //echo $estado_peticion['Mensaje'];
+                extract($estado_peticion);
                 //Requerir la vista correspondiente
+                $ruta_vista_admin_logout = VISTAS .'usuarios/admin_logout.php';
+                require_once $ruta_vista_admin_logout;
             }
         }
     }

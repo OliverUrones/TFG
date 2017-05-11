@@ -92,7 +92,7 @@ class archivosModelo {
         if(isset($params['archivo'])) {
             $fecha = date("-d-m-Y-H-i-s");
             
-            $old_name = CARPETA_TEMPORALES.$params['archivo'];
+            $old_name = CARPETA_TEMPORALES.$params['directorio_id'].SEPARADOR.$params['archivo'];
             $new_name = DIRECTORIO_ARCHIVOS_ABSOLUTA.$params['nombre_archivo'].$fecha.'.pdf';
             
             if(rename($old_name, $new_name)) {
@@ -165,8 +165,8 @@ class archivosModelo {
      * @return array Datos del archivo buscado y el estado de la petición y el mensaje de ésta.
      */
     public function dameArchivoId($id) {
-        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria', `valoracion`.puntuacion "
-                . "FROM `usuarios`, `archivos`, `categorias`, `valoracion` "
+        $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
+                . "FROM `usuarios`, `archivos`, `categorias` "
                 . "WHERE `usuarios`.usuario_id = `archivos`.usuario_id "
                 . "AND `categorias`.categoria_id = `archivos`.categoria_id "
                 . "AND `archivos`.archivo_id = ".$id.";";

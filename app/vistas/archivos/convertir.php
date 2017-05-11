@@ -5,9 +5,15 @@
 
     $directorio_conversion = 'd'.uniqid();
     //echo $directorio_conversion;
+    if(isset($error)) {
+        $error_json = json_decode($error);
+    }
 ?>
 <?php ob_start() ?>
     <h2>Convierta documentos escaneados a PDF</h2>
+    <?php if( (isset($error_json->estado_p) && $error_json->estado_p === '400 KO') ) { ?>
+    <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>¡Error! </strong><?php echo $error_json->Mensaje; ?></div>
+        <?php } ?>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-app="dragAndDropApp" ng-controller="DragAndDropController">
 <?php
 //Si viene el usuario...

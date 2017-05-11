@@ -648,6 +648,17 @@ class archivos extends Api implements Rest {
                 require_once $ruta_vista;
             } else {
                 echo "El script noteshrink.py ha tirado algún error.";
+                
+                $this->borrarDirectorioId($directorio_id);
+                $directorio_id = $this->construyeJSON(array('directorio_id' => $directorio_id));
+                extract($directorio_id);
+                
+                $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'Pruebe a dejar los parámetros por defecto o vuélvalo a intentar'));
+                extract($error);
+                
+                
+                $ruta_vista = VISTAS .'archivos/convertir.php' ;
+                require_once $ruta_vista;
             }
         }
     }

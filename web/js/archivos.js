@@ -27,14 +27,13 @@ archivos.controller('ListadoArchivosController', ['$scope', 'NgTableParams', 'ng
          * @returns {undefined}
          */
         $scope.abreBorradoArchivo = function(archivo_id, token) {
-            $scope.borraArchivoDialog = ngDialog.open({template: 'confirmaBorrado.html', className: 'ngdialog-theme-default', scope: $scope});
+            $scope.borraArchivoDialog = ngDialog.open({template: 'confirmaBorrado.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
             var url = "index.php?archivos/ver/"+archivo_id+"/"+token;
             console.log("url : "+url);
             $http.get(url)
                 .then(function (respuesta) {
                     $scope.archivoBorradoModelo = respuesta.data;
                     $scope.archivoBorradoModelo.token = token;
-                        //console.log($scope.archivoBorradoModelo);
                 });
         };
 

@@ -406,7 +406,7 @@ class archivos extends Api implements Rest {
      * @param array $parametros Array asociativo con el token del administrador logueado
      */
     public function listarTodos($parametros=NULL) {
-        echo "Estoy en la clase archivos en el método listarTodos";
+        //echo "Estoy en la clase archivos en el método listarTodos";
         if(is_array($parametros)){
             if(isset($parametros['token']))
             {
@@ -512,6 +512,9 @@ class archivos extends Api implements Rest {
                         $archivo = $archivoModelo->dameArchivoId($parametros['id']);
                         $archivo = $this->construyeJSON($archivo);
                         echo $archivo;
+                    } else {
+                        $error = $this->construyeJSON(array("estado_p" => "400 KO", 'Mensaje' => "La sesión ha caducado"));
+                        echo $error;
                     }
                 }
             }

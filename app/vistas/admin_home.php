@@ -1,7 +1,7 @@
 <?php
 if(isset($admin)) {
     $admin_json = json_decode($admin);
-    var_dump($admin_json);
+    //var_dump($admin_json);
 }
 ?>
 <?php ob_start() ?>
@@ -49,23 +49,6 @@ if(isset($admin)) {
     </div>
     
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php $contenido = ob_get_clean(); ?>
 <?php 
     /*Función para cargar plantilla en la configuración*/

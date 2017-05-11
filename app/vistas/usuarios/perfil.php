@@ -95,6 +95,7 @@
                         </tr>-->
                         <div class="modal modal-content">
                             <script type="text/ng-template" id="confirmaBorrado.html">
+                                <div ng-if="archivoBorradoModelo.estado_p == '200 OK'">
                                     <div class="modal-header">
                                         <h3 class="modal-title">Borrar archivo</h3>
                                     </div>
@@ -125,6 +126,19 @@
                                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
                                         </div>
                                     </form>
+                                </div>
+                                
+                                <div ng-if="archivoBorradoModelo.estado_p == '400 KO'">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Error</h3>
+                                    </div>
+                                        <div class="modal-body">                                            
+                                            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>¡Error! </strong>{{archivoBorradoModelo.Mensaje}}</div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a type="button" href="?usuarios/login" class="btn btn-primary">Login</a>
+                                        </div>
+                                </div>
                             </script>
                         </div>
                         <div class="modal modal-content">

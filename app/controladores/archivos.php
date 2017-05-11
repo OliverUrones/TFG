@@ -134,6 +134,12 @@ class archivos extends Api implements Rest {
                                 $ruta_vista_admin_borrar = VISTAS.'archivos/admin_borrar.php';
                                 require_once $ruta_vista_admin_borrar;
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -175,6 +181,12 @@ class archivos extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -217,6 +229,12 @@ class archivos extends Api implements Rest {
 
                             $ruta_vista_admin_modificar = VISTAS .'archivos/modificar.php';
                             require_once $ruta_vista_admin_modificar;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
                         }
                     }
 
@@ -265,6 +283,12 @@ class archivos extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
                         }
                     }
                 }
@@ -309,6 +333,12 @@ class archivos extends Api implements Rest {
                                 $ruta_vista_admin_modificar = VISTAS .'archivos/admin_modificar.php';
                                 require_once $ruta_vista_admin_modificar;
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
 
@@ -358,6 +388,12 @@ class archivos extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -404,6 +440,12 @@ class archivos extends Api implements Rest {
                         } else {
                             //No tiene permiso
                         }
+                    } else {
+                        $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                        extract($error);
+
+                        $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                        require_once $ruta_vista_admin_login;
                     }
                 }
             }
@@ -442,6 +484,12 @@ class archivos extends Api implements Rest {
 
                         $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
                         require_once $ruta_vista_perfil;
+                    } else {
+                        $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                        extract($error);
+
+                        $ruta_vista_login = VISTAS.'usuarios/login.php';
+                        require_once $ruta_vista_login;
                     }
                 }
             }

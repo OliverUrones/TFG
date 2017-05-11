@@ -48,6 +48,12 @@ class roles extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -88,6 +94,12 @@ class roles extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -139,6 +151,12 @@ class roles extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -182,6 +200,12 @@ class roles extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -225,6 +249,12 @@ class roles extends Api implements Rest {
 
                             $ruta_vista_admin_modificar = VISTAS .'roles/admin_modificar.php';
                             require_once $ruta_vista_admin_modificar;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
 
@@ -270,6 +300,12 @@ class roles extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -277,6 +313,10 @@ class roles extends Api implements Rest {
         }
     }
     
+    /**
+     * Método para listar los roles que hay en el sistema desde la parte privada de la aplicación
+     * @param type $parametros
+     */
     public function listar($parametros=NULL) {
         //echo "Voy a listar los roles";
         if(is_array($parametros)){
@@ -313,7 +353,13 @@ class roles extends Api implements Rest {
                         } else {
                             //No tiene permiso
                         }
-                    }
+                    } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
+                        }
                 }
             }
         }

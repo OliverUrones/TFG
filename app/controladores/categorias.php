@@ -55,6 +55,12 @@ class categorias extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -95,6 +101,12 @@ class categorias extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -145,6 +157,12 @@ class categorias extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -188,6 +206,12 @@ class categorias extends Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -223,6 +247,12 @@ class categorias extends Api implements Rest {
 
                             $ruta_vista_admin_modificar = VISTAS .'categorias/admin_modificar.php';
                             require_once $ruta_vista_admin_modificar;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
 
@@ -267,6 +297,12 @@ class categorias extends Api implements Rest {
                                 $ruta_vista_admin_modificar = VISTAS .'categorias/admin_modificar.php';
                                 require_once $ruta_vista_admin_modificar;
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -274,6 +310,10 @@ class categorias extends Api implements Rest {
         }
     }
     
+    /**
+     * Método para listar las categorías desde la parte privada
+     * @param type $parametros
+     */
     public function listar($parametros=NULL) {
         if(is_array($parametros)){
             if(isset($parametros['token']))
@@ -308,7 +348,13 @@ class categorias extends Api implements Rest {
                         } else {
                             //No tiene permiso
                         }
-                    }
+                    } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
+                        }
                 }
             }
         }

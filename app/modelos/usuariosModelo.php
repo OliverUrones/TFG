@@ -417,7 +417,7 @@ class usuariosModelo {
                     
                     //Establezco la validez del token en segundos para 10 Minutos
                     $time = time(); //Fecha actual del sistema en segundos
-                    $this->validez_token = ($time+6000); //Se suma 600segundos para 10 Minutos de validez del token a la fecha actual
+                    $this->validez_token = ($time+6); //Se suma 600segundos para 10 Minutos de validez del token a la fecha actual
                     
                     //Consulta para actualizar los campos token y validez_token en la base de datos en función del id del usuario
                     //uniqid() generará un id único con 13 caracteres al que se le añadirá la t delante para indicar que es el token

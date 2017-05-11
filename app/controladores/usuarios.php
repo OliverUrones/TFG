@@ -110,6 +110,12 @@ class usuarios extends Api\Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -152,6 +158,12 @@ class usuarios extends Api\Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -198,6 +210,12 @@ class usuarios extends Api\Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -237,6 +255,12 @@ class usuarios extends Api\Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -244,7 +268,11 @@ class usuarios extends Api\Api implements Rest {
         }
     }
 
-        public function listar($parametros=NULL) {
+    /**
+     * Método para listar los usuarios de la aplicación desde la parte privada
+     * @param type $parametros
+     */
+    public function listar($parametros=NULL) {
         //echo "Estoy en la clase usuarios en el método listar";
         if(is_array($parametros)){
             if(isset($parametros['token']))
@@ -278,6 +306,12 @@ class usuarios extends Api\Api implements Rest {
                         } else {
                             //No tiene permiso
                         }
+                    } else {
+                        $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                        extract($error);
+
+                        $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                        require_once $ruta_vista_admin_login;
                     }
                 }
             }
@@ -329,6 +363,12 @@ class usuarios extends Api\Api implements Rest {
 
                             $ruta_vista_admin_modificar = VISTAS .'usuarios/admin_modificar.php';
                             require_once $ruta_vista_admin_modificar;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
 
@@ -380,6 +420,12 @@ class usuarios extends Api\Api implements Rest {
                             } else {
                                 //No tiene permiso
                             }
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                            require_once $ruta_vista_admin_login;
                         }
                     }
                 }
@@ -387,21 +433,33 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
+    /**
+     * Método para que un usuario cambie su contraseña desde el perfil del usuario.
+     * @param type $parametros
+     */
     public function cambiarPass($parametros=NULL) {
         $this->DamePeticion();
-        if(is_array($parametros) && count($parametros) === 2) {
-            if(isset($parametros['id']) && isset($parametros['token'])) {
-                if(strlen($parametros['token']) === 14) {
-                    $modeloUsuario = new usuariosModelo();
-                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
-                        $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
-                        
-                        $usuario = $this->construyeJSON($usuario);
-                        
-                        extract($usuario);
-                        
-                        $ruta_vista_modificar_pass = VISTAS . 'usuarios/cambiarPass.php';
-                        require_once $ruta_vista_modificar_pass;
+        if($this->peticion === 'GET') {
+            if(is_array($parametros) && count($parametros) === 2) {
+                if(isset($parametros['id']) && isset($parametros['token'])) {
+                    if(strlen($parametros['token']) === 14) {
+                        $modeloUsuario = new usuariosModelo();
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+
+                            $usuario = $this->construyeJSON($usuario);
+
+                            extract($usuario);
+
+                            $ruta_vista_modificar_pass = VISTAS . 'usuarios/cambiarPass.php';
+                            require_once $ruta_vista_modificar_pass;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
+                        }
                     }
                 }
             }
@@ -433,6 +491,12 @@ class usuarios extends Api\Api implements Rest {
 
                             $ruta_vista_modificar = VISTAS .'usuarios/modificar.php';
                             require_once $ruta_vista_modificar;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
                         }
                     }
 
@@ -462,6 +526,12 @@ class usuarios extends Api\Api implements Rest {
 
                             $ruta_vista_modificar = VISTAS .'usuarios/modificar.php';
                             require_once $ruta_vista_modificar;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
                         }
                     }
                 }
@@ -474,27 +544,37 @@ class usuarios extends Api\Api implements Rest {
      * @param type $id
      */
     public function perfil($parametros=NULL) {
-        if(is_array($parametros) && count($parametros) === 2){
-            if(isset($parametros['id']) && isset($parametros['token']))
-            {
-                if(strlen($parametros['token']) === 14) {
-                    //Creo un objeto usuario
-                    $modeloUsuario = new usuariosModelo();
-                    //Si el token es válido...
-                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
-                        //...recupero los datos del usuario
-                        $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
+        $this->DamePeticion();
+        if($this->peticion === "GET") {
+            if(is_array($parametros) && count($parametros) === 2){
+                if(isset($parametros['id']) && isset($parametros['token']))
+                {
+                    if(strlen($parametros['token']) === 14) {
+                        //Creo un objeto usuario
+                        $modeloUsuario = new usuariosModelo();
+                        //Si el token es válido...
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            //...recupero los datos del usuario
+                            $usuario = $modeloUsuario->dameUsuarioToken($parametros['token']);
 
-                        //Construyo la cadena JSON
-                        $usuario = $this->construyeJSON($usuario);
-                        //Devuelvo lo datos del usuario a la vista
-                        //var_dump($usuario);
-                        extract($usuario);
+                            //Construyo la cadena JSON
+                            $usuario = $this->construyeJSON($usuario);
+                            //Devuelvo lo datos del usuario a la vista
+                            //var_dump($usuario);
+                            extract($usuario);
+                            
+                            $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
+                            require_once $ruta_vista_perfil;
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+                            
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
+                        }
                     }
+
                 }
-                
-                $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
-                require_once $ruta_vista_perfil;
             }
         }
         //Compruebo la validez del token del usuario con usuario_id = $id

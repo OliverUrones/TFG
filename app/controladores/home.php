@@ -85,6 +85,11 @@ class home extends Api\Api {
                     //Devuelvo lo datos del usuario a la vista
                     //var_dump($usuario);
                     extract($usuario);
+                } else {
+                    $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                    extract($error);
+
+                    require_once $ruta_vista_admin_login;
                 }
             }
         } else {
@@ -112,10 +117,20 @@ class home extends Api\Api {
                     //var_dump($usuario);
                     extract($admin);
                     require_once $ruta_vista_home;
+                } else {
+                    $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                    extract($error);
+
+                    $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+                    require_once $ruta_vista_admin_login;
                 }
             }
         } else {
-            echo "No tiene permiso para ver la página.";
+            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'No tiene permiso para ver esta página.'));
+            extract($error);
+
+            $ruta_vista_admin_login = VISTAS.'usuarios/admin_login.php';
+            require_once $ruta_vista_admin_login;
         }
     }
 }

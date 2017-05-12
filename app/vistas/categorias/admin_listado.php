@@ -44,7 +44,7 @@ if(isset($categorias)) {
             <tbody>
                 <tr ng-repeat="categoria in $data | filter:textoBusqueda">
                     <td data-title="'Nombre'" sortable="'nombre'" filter="{nombre: 'text'}">{{categoria.nombre}}</td>
-                    <td data-title="'Categoría padre'" sortable="'nombre'" filter="{nombre: 'text'}">{{categoria.padre}}</td>
+                    <td data-title="'Categoría padre'" sortable="'padre'" filter="{padre: 'text'}">{{categoria.padre}}</td>
                     <td data-title="'Acciones'" class="text-center">
                         <a href="{{categoria.enlace_modificar}}"><img class="img" src="{{categoria.img_modificar}}"></a>
                         <a href="{{categoria.enlace_borrar}}"><img class="img" src="{{categoria.img_borrar}}"></a>

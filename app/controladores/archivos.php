@@ -101,6 +101,11 @@ class archivos extends Api implements Rest {
                         $this->tipo = "application/json";
                         $this->EstablecerCabeceras();
                         echo $respuesta;
+                    } else {
+                        $respuesta = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado'));
+                        $this->tipo = "application/json";
+                        $this->EstablecerCabeceras();
+                        echo $respuesta;
                     }
                 }
             }
@@ -511,9 +516,13 @@ class archivos extends Api implements Rest {
                         $archivoModelo = new archivosModelo();
                         $archivo = $archivoModelo->dameArchivoId($parametros['id']);
                         $archivo = $this->construyeJSON($archivo);
+                        $this->tipo = "application/json";
+                        $this->EstablecerCabeceras();
                         echo $archivo;
                     } else {
                         $error = $this->construyeJSON(array("estado_p" => "400 KO", 'Mensaje' => "La sesión ha caducado"));
+                        $this->tipo = "application/json";
+                        $this->EstablecerCabeceras();
                         echo $error;
                     }
                 }

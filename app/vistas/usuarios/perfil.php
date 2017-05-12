@@ -143,6 +143,7 @@
                         </div>
                         <div class="modal modal-content">
                             <script type="text/ng-template" id="resultadoBorrado.html">
+                            <div ng-if="archivoBorradoModelo.resultado.estado_p == '200 OK'">
                                 <div class="modal-header">
                                     <h3 class="modal-title">Resultado del borrado</h3>
                                 </div>
@@ -152,6 +153,19 @@
                                 <div class="modal-footer">
                                     <a type="button" class="btn btn-primary" href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Volver</a>
                                 </div>
+                            </div>
+                            
+                            <div ng-if="archivoBorradoModelo.resultado.estado_p == '400 KO'">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Error al borrar el archivo</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"></button><strong>¡Error! </strong>{{archivoBorradoModelo.resultado.Mensaje}}</div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a type="button" class="btn btn-primary" href="?usuarios/login">Login</a>
+                                </div>
+                            </div>
                             </script>
                         </div>
                     <?php } ?>

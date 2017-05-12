@@ -43,7 +43,7 @@
                             <?php } else { ?>
                                 <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Público' ?>'"></ng-model>
                             <?php } ?>
-                            <ng-model ng-model="archivos[<?php echo $key; ?>].etiquetas  = '<?php echo $obj->etiquetas; ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].etiquetas  = '<?php echo utf8_decode($obj->etiquetas); ?>'"></ng-model>
                             <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_modificar = '?archivos/modificar/<?php echo $obj->archivo_id; ?>/<?php echo $usuario_json->token; ?>'"></ng-model>
                             <ng-model ng-model="archivos[<?php echo $key; ?>].img_modificar = 'web/imagenes/Admin/administracion_editar.png'"></ng-model>
 <!--                            <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_borrar = 'abreBorradoArchivo(<?php echo $obj->archivo_id; ?>, \'<?php echo $usuario_json->token; ?>\''"></ng-model>-->

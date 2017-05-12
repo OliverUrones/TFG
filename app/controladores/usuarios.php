@@ -609,8 +609,8 @@ class usuarios extends Api\Api implements Rest {
             } else {
                 //echo "NO soy administrador";
                 //Recargo la página de index del directorio admin
-                $usuario = $this->construyeJSON(array('estado' => '400 KO', 'Mensaje' => 'No está permitido el acceso a los usuarios que no son administradores.'));
-                extract($usuario);
+                $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'Compruebe el usuario y/o la contraseña. No está permitido el acceso a los usuarios que no son administradores.'));
+                extract($error);
                 
                 $ruta_vista_login = VISTAS.'usuarios/admin_login.php';
 

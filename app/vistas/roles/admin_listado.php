@@ -32,18 +32,17 @@ if(isset($roles)) {
                 <i class="glyphicon glyphicon-search form-control-feedback"></i>
             </div>
         </form>
-        
-        <table class="table table-striped table-hover">
-            <thead class="bg-primary">
+        <table class="table table-striped table-hover" ng-table="tableParams">
+<!--            <thead class="bg-primary">
                 <tr>
                     <td>Tipo</td>
                     <td class="">Acciones</td>
                 </tr>
-            </thead>
+            </thead>-->
             <tbody>
-                <tr ng-repeat="rol in roles | filter:textoBusqueda">
-                    <td>{{rol.tipo}}</td>
-                    <td>
+                <tr ng-repeat="rol in $data | filter:textoBusqueda">
+                    <td data-title="'Tipo'" sortable="'tipo'" filter="{tipo: 'text'}">{{rol.tipo}}</td>
+                    <td data-title="'Acciones'" class="text-center">
                         <a href="{{rol.enlace_modificar}}"><img class="img" src="{{rol.img_modificar}}"></a>
                         <a href="{{rol.enlace_borrar}}"><img class="img" src="{{rol.img_borrar}}"></a>
                     </td>

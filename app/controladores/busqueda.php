@@ -41,21 +41,21 @@ class busqueda extends Api\Api {
                     }
                 }
             }
-        }
-        var_dump($_POST);
-        if(isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
-            $modeloBusqueda = new busquedaModelo();
-            $resultado = $modeloBusqueda->busca($_POST['busqueda']);
-            //var_dump($resultado);
-            $resultado = $this->construyeJSON($resultado);
+            //var_dump($_POST);
+            if(isset($_POST['busqueda']) && !empty($_POST['busqueda'])) {
+                $modeloBusqueda = new busquedaModelo();
+                $resultado = $modeloBusqueda->busca($_POST['busqueda']);
+                //var_dump($resultado);
+                $resultado = $this->construyeJSON($resultado);
 
-            //var_dump($resultado);
+                //var_dump($resultado);
 
-            extract($resultado);
+                extract($resultado);
+            }
+
+            //Redirección a la vista... y mensaje para comprobación de correo para la activación de la cuenta
+            $ruta_vista_resultado = VISTAS .'busquedas/resultado.php' ;
+            require_once $ruta_vista_resultado;
         }
-        
-        //Redirección a la vista... y mensaje para comprobación de correo para la activación de la cuenta
-        $ruta_vista_resultado = VISTAS .'busquedas/resultado.php' ;
-        require_once $ruta_vista_resultado;
     }
 }

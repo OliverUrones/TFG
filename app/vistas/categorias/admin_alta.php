@@ -20,10 +20,10 @@ if(isset($resultado)) {
         <h2>Alta categoría</h2>
         <?php if( isset($resultado_json->estado_p) ) { ?>
             <?php if( $resultado_json->estado_p === "200 OK") { ?>
-                <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $resultado_json->Mensaje; ?></div>
+                <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"></button><?php echo $resultado_json->Mensaje; ?></div>
                 <a href="?categorias/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-success" value="Enviar" data-ng-init="">Volver</a>
             <?php } else { ?>
-                <div class="alert alert-info"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $resultado_json->Mensaje; ?></div>
+                <div class="alert alert-info"><button type="button" class="close" data-dismiss="alert"></button><?php echo $resultado_json->Mensaje; ?></div>
                 <a href="?categorias/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-info" value="Enviar" data-ng-init="">Volver</a>
             <?php } ?>
         <?php } elseif(!isset ($resultado_json)) { ?>

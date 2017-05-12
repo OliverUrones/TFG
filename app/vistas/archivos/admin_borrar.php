@@ -63,10 +63,10 @@ if(isset($borrado)) {
         </form>
     <?php } elseif (isset($admin_json) && isset ($borrado_json) ) { ?>
         <?php if(strcmp($borrado_json->estado_p, "200 OK")== 0) {?>
-            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $borrado_json->Mensaje ?></div>
+            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"></button><?php echo $borrado_json->Mensaje ?></div>
             <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
         <?php } else { ?>
-            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $borrado_json->Mensaje ?></div>
+            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"></button><?php echo $borrado_json->Mensaje ?></div>
             <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
         <?php } ?>
     <?php } ?>

@@ -1,7 +1,16 @@
+<?php
+    if(isset($error)) {
+        $error_json = json_decode($error);
+        //var_dump($error_json);
+    }
+?>
 <?php ob_start() ?>
 <!--    <div data-ng-app="loginApp" data-ng-controller="loginAppCtrl">-->
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3" data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
         <h2>Login</h2>
+        <?php if( (isset($error_json->estado_p) && $error_json->estado_p === '400 KO') ) { ?>
+            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>¡Error! </strong><?php echo $error_json->Mensaje; ?></div>
+        <?php } ?>
         <form name="loginForm" role="form" action="?usuarios/admin" method="POST">
             <div class="form-group">
                 <label class="control-label">Email</label>

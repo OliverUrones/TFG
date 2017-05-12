@@ -13,7 +13,7 @@ if(isset($admin)) {
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
         <?php if( (isset($archivo_json->accion) && $archivo_json->accion === 'modificar') && (isset($archivo_json->estado_p) && $archivo_json->estado_p === '200 OK') ) { ?>
-            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $archivo_json->Mensaje; ?></div>
+            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"></button><?php echo $archivo_json->Mensaje; ?></div>
         <?php } ?>
         <h2>Modificar archivo</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?archivos/modificarAdmin/<?php echo $admin_json->token; ?>" method="POST">
@@ -76,17 +76,6 @@ if(isset($admin)) {
             <div class="form-group">
                 <label class="control-label">Enlace de descarga</label>
                 <p class="form-control-static"><?php echo $archivo_json->enlace_descarga; ?></p>
-<!--                <input type="text"
-                       name="enlace_descarga"
-                       class="form-control"
-                       id="enlace_descarga"
-                       data-ng-model=""
-                       value="<?php //echo $archivo_json->enlace_descarga; ?>"
-                       required>-->
-            </div>
-            <div class="form-group">
-                <label class="control-label">Puntuacion</label>
-                <p class="form-control-static"><?php echo $archivo_json->puntuacion; ?></p>
 <!--                <input type="text"
                        name="enlace_descarga"
                        class="form-control"

@@ -44,7 +44,7 @@ class busquedaModelo {
                 . "FROM archivos, categorias "
                 . "WHERE archivos.ambito = 1 "
                 . "AND archivos.categoria_id = categorias.categoria_id "
-                . "AND (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".$cadena."') OR MATCH (categorias.nombre) AGAINST ('".$cadena."')) = 1 "
+                . "AND (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".utf8_encode($cadena)."') OR MATCH (categorias.nombre) AGAINST ('".utf8_encode($cadena)."')) = 1 "
                 . "ORDER BY coincidencia DESC";
         //echo "<br/>".$sql;
         $recordset = $this->conexion->execute($sql)->getAssoc();

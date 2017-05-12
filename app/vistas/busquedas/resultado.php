@@ -26,7 +26,7 @@ if(isset($usuario)) {
                                 <h4 class="media-heading">ID: <small><?php echo $obj->archivo_id; ?></small></h4>
                                 <h4 class="media-heading">Nombre: <small><?php echo utf8_decode($obj->nombre_archivo); ?></small></h4>
                                 <h4 class="media-heading">Categoria: <small><?php echo utf8_decode($obj->categoria); ?></small><h4>
-                                <h4 class="media-heading">Etiquetas: <small><?php echo $obj->etiquetas; ?></small></h4>
+                                <h4 class="media-heading">Etiquetas: <small><?php echo utf8_decode($obj->etiquetas); ?></small></h4>
                             </div>
                             <div class="media-left">
                                 <a class="btn btn-default" href="?archivos/descargarArchivo/<?php echo $obj->enlace_descarga; ?>"><h5><i class="glyphicon glyphicon-download"></i> Descargar</h5></a>

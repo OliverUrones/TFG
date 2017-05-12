@@ -66,7 +66,7 @@ class archivosModelo {
         if($this->__mueveArchivo($params)) {
             //Construyo la consulta de inserción
             $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`, `ambito`, `etiquetas`)"
-                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".$this->enlace_descarga."', ".$this->ambito.", ".$this->etiquetas.");";
+                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".$this->enlace_descarga."', ".$this->ambito.", ".utf8_encode($this->etiquetas).");";
             //var_dump($sql);
             //La ejecuto
             $recordSet = $this->conexion->execute($sql);
@@ -134,8 +134,8 @@ class archivosModelo {
      * @return type
      */
     public function dameArchivos($id) {
-        $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria', `valoracion`.puntuacion "
-                . "FROM `archivos`, `categorias`, `valoracion` "
+        $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria' "
+                . "FROM `archivos`, `categorias` "
                 . "WHERE `archivos`.`usuario_id` = '".$id."' "
                 . "AND `categorias`.`categoria_id`=`archivos`.`categoria_id`;";
 //        $sql2 = "SELECT valoracion.valoracion_id, valoracion.usuario_id, valoracion.archivo_id, valoracion.puntuacion, archivos.archivo_id, archivos.usuario_id, archivos.categoria_id, archivos.nombre, archivos.enlace_descarga, usuarios.usuario_id FROM valoracion, archivos, usuarios

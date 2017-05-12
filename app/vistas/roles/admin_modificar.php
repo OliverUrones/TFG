@@ -13,7 +13,7 @@ if(isset($admin)) {
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
         <?php if( (isset($rol_json->accion) && $rol_json->accion === 'modificar') && (isset($rol_json->estado_p) && $rol_json->estado_p === '200 OK') ) { ?>
-            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $rol_json->Mensaje; ?></div>
+            <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"></button><?php echo $rol_json->Mensaje; ?></div>
         <?php } ?>
         <h2>Modificar rol</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?roles/modificar/<?php echo $admin_json->token; ?>" method="POST">

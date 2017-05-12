@@ -249,9 +249,9 @@ class archivosModelo {
         $resultado = $this->conexion->execute($sql);
         
         if(!$resultado) {
-            return array('estado' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
+            return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
-            return array('estado' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
+            return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }
     

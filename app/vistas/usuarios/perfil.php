@@ -122,7 +122,7 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
-                                            <a type="button" data-ng-click="borraArchivo(archivoBorradoModelo); abreResultadoBorrado();" data-ng-disabled="!borrarArchivo.$valid" type="submit" class="btn btn-primary">Confirmar</a>
+                                            <a type="button" data-ng-click="borraArchivo(archivoBorradoModelo); abreResultadoBorrado();" type="submit" class="btn btn-primary">Confirmar</a>
                                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
                                         </div>
                                     </form>
@@ -133,7 +133,7 @@
                                         <h3 class="modal-title">Error</h3>
                                     </div>
                                         <div class="modal-body">                                            
-                                            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><strong>¡Error! </strong>{{archivoBorradoModelo.Mensaje}}</div>
+                                            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert"></button><strong>¡Error! </strong>{{archivoBorradoModelo.Mensaje}}</div>
                                         </div>
                                         <div class="modal-footer">
                                             <a type="button" href="?usuarios/login" class="btn btn-primary">Login</a>

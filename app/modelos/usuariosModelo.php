@@ -503,7 +503,11 @@ class usuariosModelo {
         //Intenta obtener una fila de la consulta
         $columna = $this->conexion->getRow($sql);
         
-        return $columna['validez_token'];
+        if(isset($columna['validez_token'])) {
+            return $columna['validez_token'];
+        } else {
+            return false;
+        }
     }
     
     /**

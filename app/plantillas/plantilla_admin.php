@@ -89,17 +89,24 @@
             <div class="clearfix visible-lg-inline-block"></div>
         </header>-->
         <?php } else { ?>
-        <header class="nav">
+            <header>
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header">
+                        <h1 class="navbar-brand">Administración</h1>
+                    </div>
+                </nav>
+            </header>
+<!--        <header class="nav">
             <div class="clearfix visible-lg-inline-block"></div>
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h1>Admnistración</h1>
+                            <h1 class="text-center">Admnistración</h1>
                         </div>
                     </div>
                 </div>
             <div class="clearfix visible-lg-inline-block"></div>
-        </header>
+        </header>-->
         <?php } ?>
         <div class="container">
             <?php

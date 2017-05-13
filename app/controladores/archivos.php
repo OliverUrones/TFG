@@ -583,6 +583,7 @@ class archivos extends Api implements Rest {
                             echo "<br/>NO se ha movido el archivo subido.";
                         }
                     }
+                    echo json_encode($destino);
                 } else 
                 {
                     echo "El formato requerido no coincide.";

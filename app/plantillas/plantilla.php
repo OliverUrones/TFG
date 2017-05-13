@@ -51,12 +51,16 @@
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="?home/index/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
-                        <li><a href="?archivos/convertir/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
-                        <li><a href="?usuarios/alta/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Registro</a></li>
-                        <li><a href="?usuarios/login/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Login</a></li>
-                    </ul>
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav navbar-nav">
+                                <li><a href="?home/index/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
+                                <li><a href="?archivos/convertir/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
+                                <li><a href="?usuarios/alta/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Registro</a></li>
+                                <li><a href="?usuarios/login/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -73,23 +77,28 @@
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
-                        <li><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
-                        <li></li>
-                        <li></li>
-                        <li class="dropdown dr">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li role="presentation" class=""><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Ver perfil</a></li>
-                                <li class="divider"></li>
-                                <li role="presentation" class=""><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>">Salir</a></li>
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav navbar-nav">
+                                <li><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
+                                <li><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
+                                <li></li>
+                                <li></li>
+                                <li class="dropdown dr">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li role="presentation" class=""><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Mis datos</a></li>
+                                        <li class="divider"></li>
+                                        <li role="presentation" class=""><a href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Mis archivos</a></li>
+                                        <li class="divider"></li>
+                                        <li role="presentation" class=""><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>">Salir</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
-        <div class="clearfix visible-lg-inline-block"></div>
         </header>
         <?php } ?>
 <!--        <header class="navbar">

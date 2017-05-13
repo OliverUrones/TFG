@@ -16,9 +16,11 @@ dragAndDrop.controller('DragAndDropController', function($scope){
         addRemoveLinks: true,
         clickable: true,
         acceptedFiles: 'image/jpg, image/jpeg, image/png',
-        dictDefaultMessage : 'Arrastre aquí sus archivos escaneados',
+        dictDefaultMessage : 'Arrastre aquí sus archivos escaneados.',
+        dictFallbackMessage : 'Su navegador no soporta la subida de archivos a través de Drag and Drop.',
+        dictInvalidFileType : 'No se aceptan archivos de este tipo.',
         dictRemoveFile : 'Borrar',
-        dictResponseError : 'No se puede subir la foto',
+        dictResponseError : 'No se puede subir la foto.',
         autoProcessQueue: true,
         init: function() {
             var botonEnviar = document.querySelector('#EnviarArchivos');

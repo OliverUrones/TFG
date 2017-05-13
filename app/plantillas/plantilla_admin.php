@@ -34,7 +34,31 @@
     </head>
     <body>
         <?php if(isset($admin_json) && $admin_json->rol_id === '1') { ?>
-        <header class="navbar navbar-inverse">
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Desplegar navegación</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="?home/adminIndex/<?php echo $admin_json->token ?>">Administración</a>
+                </div>
+                
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="?home/adminIndex/<?php echo $admin_json->token ?>">Inicio</a></li>
+                        <li><a href="?usuarios/listar/<?php echo $admin_json->token ?>">Usuarios</a></li>
+                        <li><a href="?roles/listar/<?php echo $admin_json->token ?>">Roles</a></li>
+                        <li><a href="?archivos/listarTodos/<?php echo $admin_json->token ?>">Archivos</a></li>
+                        <li><a href="?categorias/listar/<?php echo $admin_json->token ?>">Categorías</a></li>
+                        <li><a href="?usuarios/adminLogout/<?php echo $admin_json->usuario_id ?>">Salir</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+<!--        <header class="navbar navbar-inverse">
             <div class="clearfix visible-lg-inline-block"></div>
                 <div class="container">
                     <div class="row">
@@ -63,7 +87,7 @@
                     </div>
                 </div>
             <div class="clearfix visible-lg-inline-block"></div>
-        </header>
+        </header>-->
         <?php } else { ?>
         <header class="nav">
             <div class="clearfix visible-lg-inline-block"></div>

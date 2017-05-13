@@ -29,8 +29,8 @@ if(isset($categorias)) {
         <form class="form-inline">
             <div class="form-group has-feedback">
                 <a href="?categorias/alta/<?php echo $admin_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-list-alt"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
-                <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
-                <i class="glyphicon glyphicon-search form-control-feedback"></i>
+<!--                <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
+                <i class="glyphicon glyphicon-search form-control-feedback"></i>-->
             </div>
         </form>
         <table class="table table-striped table-hover" ng-table='tableParams'>

@@ -38,7 +38,61 @@
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>
     </head>
     <body data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
-        <header class="navbar">
+        <?php if(!isset($usuario_json->token)) { ?>
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Desplegar navegación</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="?home/index/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
+                        <li><a href="?archivos/convertir/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
+                        <li><a href="?usuarios/alta/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Registro</a></li>
+                        <li><a href="?usuarios/login/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Login</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <?php } else { ?>
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Desplegar navegación</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                
+                <div class="collapse navbar-collapse navbar-ex1-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
+                        <li><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
+                        <li></li>
+                        <li></li>
+                        <li class="dropdown dr">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li role="presentation" class=""><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Ver perfil</a></li>
+                                <li class="divider"></li>
+                                <li role="presentation" class=""><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>">Salir</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        <div class="clearfix visible-lg-inline-block"></div>
+        </header>
+        <?php } ?>
+<!--        <header class="navbar">
             <div class="clearfix visible-lg-inline-block"></div>
             <div class="container">
                 <div class="row">
@@ -57,8 +111,8 @@
                                 <li role="presentation"><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
                                 <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-<!--                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id ?>">Salir</a></li>-->
+                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id ?>">Salir</a></li>
                                 <li class="dropdown dr">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-right">
@@ -75,7 +129,7 @@
                 </div>
             </div>
             <div class="clearfix visible-lg-inline-block"></div>
-        </header>
+        </header>-->
         
         <div class="container">
             <div class="row">

@@ -37,8 +37,8 @@ if(isset($usuarios)) {
         <form class="form-inline">
             <div class="form-group has-feedback">
                 <a href="?usuarios/altaAdmin/<?php echo $admin_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-user"></span> <span class="glyphicon glyphicon-plus-sign"></span></a>
-                <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
-                <i class="glyphicon glyphicon-search form-control-feedback"></i>
+<!--                <input type="text" class="form-control" ng-model="textoBusqueda" placeholder="Filtrar...">
+                <i class="glyphicon glyphicon-search form-control-feedback"></i>-->
             </div>
         </form>
         

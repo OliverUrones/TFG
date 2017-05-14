@@ -37,7 +37,7 @@ if(isset($usuario)) {
             </div>
             <div class="form-group">
                 <label class="control-label">Contraseña nueva</label>
-                <input type="text"
+                <input type="password"
                        name="password"
                        class="form-control"
                        id="password"
@@ -49,7 +49,7 @@ if(isset($usuario)) {
             </div>
             <div class="form-group">
                 <label class="control-label">Repetir contraseña nueva</label>
-                <input type="text"
+                <input type="password"
                        name="password_repeat"
                        class="form-control"
                        id="password_repeat"

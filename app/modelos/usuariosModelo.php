@@ -249,7 +249,7 @@ class usuariosModelo {
         
         $resultado = $this->conexion->execute($sql);
         
-        if(!resultado) {
+        if(!$resultado) {
             return array('estado_p' => '400 KO', 'Mensaje' => 'Error al cambiar la contraseña');
         } else {
             return array('estado_p' => '200 OK', 'Mensaje' => 'Contraseña cambiada correctamente');

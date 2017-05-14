@@ -47,14 +47,17 @@
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="?home/adminIndex/<?php echo $admin_json->token ?>">Inicio</a></li>
-                        <li><a href="?usuarios/listar/<?php echo $admin_json->token ?>">Usuarios</a></li>
-                        <li><a href="?roles/listar/<?php echo $admin_json->token ?>">Roles</a></li>
-                        <li><a href="?archivos/listarTodos/<?php echo $admin_json->token ?>">Archivos</a></li>
-                        <li><a href="?categorias/listar/<?php echo $admin_json->token ?>">Categorías</a></li>
-                        <li><a href="?usuarios/adminLogout/<?php echo $admin_json->usuario_id ?>">Salir</a></li>
-                    </ul>
+                    <div class="container">
+                        <div class="row">
+                            <ul class="nav navbar-nav">
+                                <li><a href="?usuarios/listar/<?php echo $admin_json->token ?>">Usuarios</a></li>
+                                <li><a href="?roles/listar/<?php echo $admin_json->token ?>">Roles</a></li>
+                                <li><a href="?archivos/listarTodos/<?php echo $admin_json->token ?>">Archivos</a></li>
+                                <li><a href="?categorias/listar/<?php echo $admin_json->token ?>">Categorías</a></li>
+                                <li><a href="?usuarios/adminLogout/<?php echo $admin_json->usuario_id ?>">Salir</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </header>

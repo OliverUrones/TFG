@@ -70,4 +70,43 @@ class envioEmailModelo {
             echo "Error al enviar mensaje: " . $mail->ErrorInfo;
         }
     }
+    
+    public function cambioPassInfo($email) {
+        $mail = new \PHPMailer();
+        
+        //Activo el debug
+        $mail->SMTPDebug = 2;
+        
+        //Configuración envío por SMTP
+        $mail->isSMTP();
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = $this->seguridad;
+        
+        //Datos del servidor
+        $mail->Host = $this->host;
+        $mail->Port = $this->puerto;
+        $mail->Username = $this->usuario;
+        $mail->Password = $this->password;
+        
+        //Emisor del correo
+        $mail->setFrom("no-reply@repositorio.es", "Oliver Urones");
+        
+        //Receptor del correo
+        //Le quito las comillas simples que vienen en la cadena para la proteción de SQL-Inject porque sino al añadir la dirección con addAddress da error
+        $email = str_replace("'", "", $email);
+        $mail->addAddress($email, $nombre." ".$apellidos );
+        
+        
+        $mail->Subject = "Activar cuenta";
+        //Sustituir localhost por la dirección IP del servidor
+        $mail->Body = "La contraseña de su cuenta ha sido cambiada. Si ud. no ha realizado dicho cambio, por favor, póngase en contacto con el administrador.";
+        $mail->AltBody = "La contraseña de su cuenta ha sido cambiada. Si ud. no ha realizado dicho cambio, por favor, póngase en contacto con el administrador.";
+
+//        if($mail->send()){
+//            echo "Mensaje enviado";
+//        } else {
+//            //Ver info del error
+//            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
+//        }
+    }
 }

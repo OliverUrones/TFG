@@ -241,6 +241,20 @@ class usuariosModelo {
             return $usuario;
         }
     }
+    
+    public function cambiaPass() {
+        $this->__creaHash($this->password);
+
+        $sql = "UPDATE `usuarios` SET password='".$this->password."' WHERE usuario_id=".$this->usuario_id.";";
+        
+        $resultado = $this->conexion->execute($sql);
+        
+        if(!resultado) {
+            return array('estado_p' => '400 KO', 'Mensaje' => 'Error al cambiar la contraseña');
+        } else {
+            return array('estado_p' => '200 OK', 'Mensaje' => 'Contraseña cambiada correctamente');
+        }
+    }
 
     /**
      * Función que conecta con la base de datos

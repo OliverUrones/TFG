@@ -464,6 +464,37 @@ class usuarios extends Api\Api implements Rest {
                 }
             }
         }
+        
+        if($this->peticion === 'POST') {
+            if(is_array($parametros) && count($parametros) === 2) {
+                if(isset($parametros['id']) && isset($parametros['token'])) {
+                    if(strlen($parametros['token']) === 14) {
+                        $modeloUsuario = new usuariosModelo();
+                        if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                            $respuesta = $modeloUsuario->cambiaPass();
+                            $respuesta = $this->construyeJSON($respuesta);
+                            
+                            extract($respuesta);
+                            
+                            $usuario = $modeloUsuario->dameUsuarioId($parametros['id']);
+                            $usuario = $this->construyeJSON($usuario);
+
+                            extract($usuario);
+                            
+                            $ruta_vista_modificar_pass = VISTAS . 'usuarios/cambiarPass.php';
+                            require_once $ruta_vista_modificar_pass;
+                            
+                        } else {
+                            $error = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado.'));
+                            extract($error);
+
+                            $ruta_vista_login = VISTAS.'usuarios/login.php';
+                            require_once $ruta_vista_login;
+                        }
+                    }
+                }
+            }
+        }
     }
 
         /**

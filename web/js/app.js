@@ -104,9 +104,9 @@ angular
     };
 }]);
 
-angular
-    .module('avanzadasApp', [])
-    .controller("avanzadasAppCtrl", OpcionesAvanzadas);
+//angular
+//    .module('avanzadasApp', [])
+//    .controller("avanzadasAppCtrl", OpcionesAvanzadas);
     
 //function OpcionesAvanzadas() {
 //    //var vm = this;

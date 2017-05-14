@@ -33,6 +33,7 @@
         <script src="web/js/ng-dropzone.min.js" type="text/javascript"></script>
         <script src="web/js/app.js"></script>
         <script src="web/js/archivos.js"></script>
+        <script src="web/js/cambiaPass.js"></script>
         <script src="web/js/dragAndDropController.js" type="text/javascript"></script>
         <script src="web/js/ng-table.js" type="text/javascript"></script>
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>
@@ -86,7 +87,7 @@
                                 <li></li>
                                 <li class="dropdown dr">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
-                                    <ul class="dropdown-menu dropdown-menu-right">
+                                    <ul class="dropdown-menu dropdown-menu-left">
                                         <li role="presentation" class=""><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Mis datos</a></li>
                                         <li class="divider"></li>
                                         <li role="presentation" class=""><a href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Mis archivos</a></li>

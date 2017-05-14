@@ -57,8 +57,8 @@
                    data-ng-model="altaModelo.password_repeat" 
                    data-ng-minlength="8"
                    required>
-            <span data-ng-show="altaModelo.password_repeat !== altaModelo.password">Las contraseñas no coinciden</span>
-            <span data-ng-show='alta.password.$error.minlength'>La contraseña debe tener al menos 8 caracteres.</span>
+            <span data-ng-show="altaModelo.password_repeat !== altaModelo.password">Las contraseñas no coinciden.</span>
+            <span data-ng-show='alta.password_repeat.$error.minlength'>La contraseña debe tener al menos 8 caracteres.</span>
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="resgistroDialog()" data-ng-disabled="!alta.$valid">Registrarse</button>

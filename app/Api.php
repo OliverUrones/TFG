@@ -125,7 +125,7 @@ class Api {
 
                 //var_dump($parametros);
                 /*Si todavía quedan elementos en el array., en concreto 2 o 3.*/
-                if(count($parametros) > 0 && count($parametros) < 3) {
+                if(count($parametros) > 0 && count($parametros) <= 3) {
                     /*..vienen más parámetros a parte de la clase y el método. Los argumentos del método a invocar id y token*/
                     for ($i = 0; $i < count($parametros); $i++) {
                         //Compruebo si el primer caracter de la dentro del array de parámetros es t...

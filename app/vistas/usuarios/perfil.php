@@ -183,12 +183,13 @@
             </li>
         </ul>
     
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-app="usuarios" ng-controller="EliminarCuentaController">
                 <?php //var_dump($usuario_json); ?>
             <div class="form-group has-feedback">
                 <a href="?usuarios/modificarDatos/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span> Modificar datos</a>
                 <a href="?usuarios/cambiarPass/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span> Cambiar contraseña</a>
-                <a href="?usuarios/eliminar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar cuenta</a>
+<!--                <a ng-click="eliminarCuenta();" href="?usuarios/eliminar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar cuenta</a>-->
+                <a ng-click="abrirConfirmacionBorrado();" class="btn btn-default"><span class="glyphicon glyphicon-remove-circle"></span> Eliminar cuenta</a>
             </div>
 <!--            <div class="btn-group btn-group-md">
                 <button type="button" class="btn btn-default">Modificar mis datos</button>
@@ -209,6 +210,39 @@
                     <td><h2><?php echo $usuario_json->apellidos; ?></h2></td>
                 </tr>
             </table>
+            <div class="modal modal-content">
+                <script type="text/ng-template" id="eliminarCuenta.html">
+                    <form name="guardarArchivo" class="form-horizontal" role="form" action="" method="POST">
+                        <div class="modal-header">
+                            <h3 class="modal-title">¿Está seguro de que desea borrar su cuenta?</h3>
+                        </div>
+                        <div class="modal-body">
+                            También se borrarán sus archivos subidos al repositorio
+                            <input 
+                                type="hidden"
+                                disabled
+                                name="usuario_id"
+                                id="usuario_id"
+                                ng-model="usuarioABorrar.usuario_id"
+                                data-ng-init="usuarioABorrar.usuario_id = '<?php echo $usuario_json->usuario_id; ?>'"
+                                value="<?php echo $usuario_json->usuario_id; ?>">
+                            <input 
+                                type="hidden"
+                                disabled
+                                name="token"
+                                id="token"
+                                ng-model="usuarioABorrar.token"
+                                data-ng-init="usuarioABorrar.token = '<?php echo $usuario_json->token; ?>'"
+                                value="<?php echo $usuario_json->token; ?>">
+                        </div>
+                        {{usuarioABorrar}}
+                        <div class="modal-footer">
+                            <a data-ng-click="eliminarCuenta(usuarioABorrar)" type="button" class="btn btn-primary">Confirmar</a>
+                            <a data-ng-click="closeThisDialog()" type="button" class="btn btn-danger">Cancelar</a>
+                        </div>
+                    <form>
+                </script>
+            </div>
         </div>
     <?php } ?>
 <?php

@@ -33,6 +33,7 @@
         <script src="web/js/ng-dropzone.min.js" type="text/javascript"></script>
         <script src="web/js/app.js"></script>
         <script src="web/js/archivos.js"></script>
+        <script src="web/js/usuarios.js"></script>
         <script src="web/js/cambiaPass.js"></script>
         <script src="web/js/dragAndDropController.js" type="text/javascript"></script>
         <script src="web/js/ng-table.js" type="text/javascript"></script>
@@ -81,18 +82,18 @@
                     <div class="container">
                         <div class="row">
                             <ul class="nav navbar-nav">
-                                <li><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
-                                <li><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
+                                <li><a href="?home/index/<?php echo $usuario_json->token ?>/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
+                                <li><a href="?archivos/convertir/<?php echo $usuario_json->token ?>/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
                                 <li></li>
                                 <li></li>
                                 <li class="dropdown dr">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-left">
-                                        <li role="presentation" class=""><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Mis datos</a></li>
+                                        <li role="presentation" class=""><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Mis datos</a></li>
                                         <li class="divider"></li>
-                                        <li role="presentation" class=""><a href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Mis archivos</a></li>
+                                        <li role="presentation" class=""><a href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Mis archivos</a></li>
                                         <li class="divider"></li>
-                                        <li role="presentation" class=""><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>">Salir</a></li>
+                                        <li role="presentation" class=""><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Salir</a></li>
                                     </ul>
                                 </li>
                             </ul>

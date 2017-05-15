@@ -29,7 +29,6 @@ if(isset($usuario)) {
                     </div>
                     <form name="guardarArchivo" class="form-horizontal" role="form" action="?archivos/alta/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
                         <div class="modal-body">
-                                <div class="form-group">
                                     <input 
                                         type="hidden"
                                         disabled
@@ -39,8 +38,6 @@ if(isset($usuario)) {
                                         data-ng-init="altaModelo.directorio_id = '<?php echo $directorio_id_json->directorio_id; ?>'"
                                         value="<?php echo $directorio_id; ?>">
 <!--                                        {{altaModelo.archivo}}-->
-                                </div>
-                                <div class="form-group">
                                     <input 
                                         type="hidden"
                                         disabled
@@ -50,8 +47,6 @@ if(isset($usuario)) {
                                         data-ng-init="altaModelo.archivo = '<?php echo $nombre_archivo_json->nombre; ?>'"
                                         value="<?php echo $nombre_archivo_json->nombre; ?>">
 <!--                                        {{altaModelo.archivo}}-->
-                                </div>
-                                <div class="form-group">
                                     <input 
                                         type="hidden"
                                         disabled
@@ -61,8 +56,6 @@ if(isset($usuario)) {
                                         data-ng-init="altaModelo.usuario_id = <?php echo $usuario_json->usuario_id; ?>"
                                         value="<?php echo $usuario_json->usuario_id; ?>">
 <!--                                        {{altaModelo.usuario_id}}-->
-                                </div>
-                                <div class="form-group">
                                     <input 
                                         type="hidden"
                                         name="token"
@@ -72,7 +65,6 @@ if(isset($usuario)) {
                                         data-ng-init="altaModelo.token = '<?php echo $usuario_json->token; ?>'"
                                         value="<?php echo $usuario_json->token; ?>">
 <!--                                        {{altaModelo.token}}-->
-                                </div>
                                 <div class="form-group">
                                     <label class="control-label ">Nombre</label>
                                     <input type="text" 

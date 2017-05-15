@@ -462,7 +462,12 @@ class archivos extends Api implements Rest {
      * @param array $parametros Array asociativo con el id  y el token del usuario logueado
      */
     public function listar($parametros=NULL) {
-        if(is_array($parametros) && count($parametros) === 2){
+        //Si viene el directorio de una conversión anterior lo borro
+            //var_dump($parametros);
+        if(isset($parametros['directorio'])) {
+            $this->borrarDirectorioId($parametros['directorio']);
+        }
+        if(is_array($parametros) && (count($parametros) === 2 || count($parametros) === 3)){
             if(isset($parametros['id']) && isset($parametros['token']))
             {
                 if(strlen($parametros['token']) === 14) {

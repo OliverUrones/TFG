@@ -174,14 +174,39 @@ class usuariosModelo {
     }
     
     /**
-     * Borra un usuario de la base de datos mediante su id
+     * Método para que se borre un registro de usuario de la base de datos. A través de Ajax
+     * Se llamará a este método cuando un usuario quiera eliminar su cuenta
+     * @param int $id Identificador del usuario cuya cuenta se va a eliminar
+     * @return array $resultado Array con el resultado de la acción.
+     */
+    public function borraUsuarioIdAjax($id) {
+        $this->__conexion();
+        $sql = "DELETE FROM usuarios WHERE usuario_id=".$id.";";
+        //var_dump($sql);
+        $recordSet = $this->conexion->execute($sql);
+        //var_dump($recordSet);
+        //Comprobar mejor el recordSet
+        if($recordSet) {
+            //El usuario se ha borrado
+            $resultado = array('estado_p' => '200 OK', 'Mensaje' => 'El usuario se ha borrado correctamente.');
+        } else {
+            //El usuario no se ha borrado
+            $resultado = array('estado_p' => '400 KO', 'Mensaje' => 'El usuario no se ha podido borrar.');
+        }
+        
+        return $resultado;
+    }
+
+
+    /**
+     * Borra un usuario de la base de datos mediante su id viniendo por formulario POST
      * @param type $id
      */
     public function borraUsuarioId() {
         $sql = "DELETE FROM usuarios WHERE usuario_id=".$this->usuario_id.";";
         //var_dump($sql);
         $recordSet = $this->conexion->execute($sql);
-        var_dump($recordSet);
+        //var_dump($recordSet);
         //Comprobar mejor el recordSet
         if($recordSet) {
             //El usuario se ha borrado

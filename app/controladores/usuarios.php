@@ -67,7 +67,33 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
-    /**
+    public function bajaCuenta($parametros=NULL) {
+        $json = file_get_contents('php://input');
+        //var_dump($json);
+        $parametros = json_decode($json, true);
+        $error_json = json_last_error_msg();
+        
+        if(isset($parametros) && count($parametros) === 2) {
+            if(isset($parametros['id']) && isset($parametros['token'])) {
+                if(strlen($parametros['token']) === 14) {
+                    $modeloUsuario = new usuariosModelo();
+                    if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
+                        $respuesta = $modeloUsuario->borraUsuarioIdAjax($parametros['id']);
+                        $this->tipo = "application/json";
+                        $this->EstablecerCabeceras();
+                        echo $respuesta;
+                    } else {
+                        $respuesta = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado'));
+                        $this->tipo = "application/json";
+                        $this->EstablecerCabeceras();
+                        echo $respuesta;
+                    }
+                }
+            }
+        }
+    }
+
+        /**
      * Método para dar de baja a un usuario desde la parte privada
      * @param array $parametros Array asociativo con el id y el token
      */
@@ -575,9 +601,15 @@ class usuarios extends Api\Api implements Rest {
      * @param type $id
      */
     public function perfil($parametros=NULL) {
+        //Si viene el directorio de una conversión anterior lo borro
+            //var_dump($parametros);
+        if(isset($parametros['directorio'])) {
+            $controladorArchivos = new archivos();
+            $controladorArchivos->borrarDirectorioId($parametros['directorio']);
+        }
         $this->DamePeticion();
         if($this->peticion === "GET") {
-            if(is_array($parametros) && count($parametros) === 2){
+            if(is_array($parametros) && (count($parametros) === 2 || count($parametros) === 3)){
                 if(isset($parametros['id']) && isset($parametros['token']))
                 {
                     if(strlen($parametros['token']) === 14) {
@@ -712,7 +744,12 @@ class usuarios extends Api\Api implements Rest {
      * Función para cerrar sesión
      */
     public function logout($parametros = NULL) {
-        
+        //Si viene el directorio de una conversión anterior lo borro
+            //var_dump($parametros);
+        if(isset($parametros['directorio'])) {
+            $controladorArchivos = new archivos();
+            $controladorArchivos->borrarDirectorioId($parametros['directorio']);
+        }
         //Recogo el tipo de petición realizada
         $this->DamePeticion();
         //si viene por GET...

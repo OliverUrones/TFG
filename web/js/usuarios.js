@@ -27,8 +27,15 @@ usuarios.controller('EliminarCuentaController', ['$scope', 'ngDialog', '$http', 
                 .then(function (respuesta) {
                     console.log("Éxito $http.post()");
                     console.log(JSON.stringify(respuesta.data));
-                    $scope.usuarioBorrado.resultado = respuesta.data;
-                    //console.log($scope.archivoBorradoModelo.resultado);
+                    $scope.usuarioABorrar.resultado = respuesta.data;
+                    console.log($scope.usuarioABorrar.resultado);
                 });
+        };
+        
+        $scope.abreResultadoBaja = function () {
+            $scope.resultadoSubidaDialog = ngDialog.open({template: 'resultadoBajaCuenta.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
+            console.log($scope.resultadoSubidaDialog);
+            //console.log(altaModelo.respuesta);
+            //console.log("Estoy aquí");
         };
 }]);

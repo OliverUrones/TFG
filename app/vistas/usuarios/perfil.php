@@ -237,10 +237,24 @@
                         </div>
                         {{usuarioABorrar}}
                         <div class="modal-footer">
-                            <a data-ng-click="eliminarCuenta(usuarioABorrar)" type="button" class="btn btn-primary">Confirmar</a>
+                            <a data-ng-click="eliminarCuenta(usuarioABorrar); closeThisDialog(); abreResultadoBaja();" type="button" class="btn btn-primary">Confirmar</a>
                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-danger">Cancelar</a>
                         </div>
                     <form>
+                </script>
+            </div>
+
+            <div class="modal modal-content" data-ng-app="RepositorioApp">
+                <script type="text/ng-template" id="resultadoBajaCuenta.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Eliminación de la cuenta</h3>
+                    </div>
+                    <div class="modal-body">
+                        {{usuarioABorrar.resultado.Mensaje}}
+                    </div>
+                    <div class="modal-footer">
+                        <a type="button" class="btn btn-primary" href="?home/index">Salir</a>
+                    </div>
                 </script>
             </div>
         </div>

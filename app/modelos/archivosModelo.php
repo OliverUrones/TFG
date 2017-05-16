@@ -238,12 +238,27 @@ class archivosModelo {
         }
     }
     
-    /**
+    public function borraTodosArchivosPorIdUsuario($id) {
+        $enlace_descarga = $this->dameEnlacesArchivos($id, false);
+        $sql = "DELETE FROM archivos WHERE usuario_id='".$id."';";
+        
+        $resultado = $this->conexion->execute($sql);
+        
+        if(!$resultado) {
+            return false;
+        } else {
+            $this->eliminaArchivoFisico($enlace_descarga);
+            return true;
+        }
+    }
+
+        /**
      * Borra un archivo a través del id viniendo por get. Para la parte pública
      * @param type $id
      * @return type
      */
     public function borraArchivo($id) {
+        $enlace_descarga = $this->dameEnlacesArchivos($id, true);
         $sql = "DELETE FROM archivos WHERE archivo_id='".$id."';";
         
         $resultado = $this->conexion->execute($sql);
@@ -251,22 +266,70 @@ class archivosModelo {
         if(!$resultado) {
             return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
+            $this->eliminaArchivoFisico($enlace_descarga);
             return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }
     
     /**
+     * Función que devuelve un array con los enlaces de descarga de los archivos en la base de datos.
+     * @param int $id ID o bien del archivo o bien del usuario, esto viene determinado por el segundo parámetro del método.
+     * @param bool $tipo_id true cuando el id es del archivo, false cuando el id es del usuario.
+     * @return array $ Array con los enlaces de los archivos recuperados.
+     */
+    public function dameEnlacesArchivos($id, $tipo_id) {
+        $sql = "SELECT `archivos`.`enlace_descarga` FROM `archivos` WHERE ";
+        //Si el $tipo_id es true el id es del archivo
+        if($tipo_id) {
+            $sql .= "archivo_id = ".$id.";";
+            $recordset = $this->conexion->getRow($sql);
+            if($recordset) {
+                foreach ($recordset as $key => $value) {
+                    if(is_string($key)) {
+                        $enlaces[$key] = $value;
+                    }
+                }
+            }
+        } else {
+            //Si es false el id es del usuario
+            $sql .= "usuario_id = ".$id.";";
+            $recordset = $this->conexion->getCol($sql);
+            //var_dump($recordset);
+            if($recordset) {
+                foreach ($recordset as $key => $value) {
+                    //echo '<br/>'.$key.' -- '.$value;
+                    $enlaces[$key] = $value;
+                }
+                //var_dump($archivos);
+            }
+        }
+        
+        
+            return $enlaces;
+    }
+
+    public function eliminaArchivoFisico($enlaces_descarga) {
+        if(is_array($enlaces_descarga)) {
+            foreach ($enlaces_descarga as $key => $value) {
+                unlink(DIRECTORIO_ARCHIVOS_ABSOLUTA.$value);
+            }
+        }
+    }
+
+        /**
      * Borra un archivo a través del id. Para la parte privada
      * @return array Array asociativo con el estado de la peticón y el mensaje
      */
     public function borraArchivoId() {
+        $enlace_descarga = $this->dameEnlacesArchivos($this->archivo_id, true);
         $sql = "DELETE FROM archivos WHERE archivo_id=".$this->archivo_id.";";
-        var_dump($sql);
+        //var_dump($sql);
         $resultado = $this->conexion->execute($sql);
         
         if(!$resultado) {
             return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
+            $this->eliminaArchivoFisico($enlace_descarga);
             return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }

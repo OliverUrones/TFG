@@ -12,6 +12,7 @@ use app\interfaz\Rest\Rest;
 
 use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\rolesModelo\rolesModelo;
+use app\modelos\archivosModelo\archivosModelo;
 use app\controladores\logs\logs;
 use app\controladores\archivos\archivos;
 /**
@@ -78,10 +79,19 @@ class usuarios extends Api\Api implements Rest {
                 if(strlen($parametros['token']) === 14) {
                     $modeloUsuario = new usuariosModelo();
                     if($modeloUsuario->compruebaValidezToken($parametros['token'])) {
-                        $respuesta = $modeloUsuario->borraUsuarioIdAjax($parametros['id']);
-                        $this->tipo = "application/json";
-                        $this->EstablecerCabeceras();
-                        echo $respuesta;
+                        $modeloArchivos = new archivosModelo();
+                        if($modeloArchivos->borraTodosArchivosPorIdUsuario($parametros['id'])) {
+                            $respuesta = $modeloUsuario->borraUsuarioIdAjax($parametros['id']);
+                            $respuesta = $this->construyeJSON($respuesta);
+                            $this->tipo = "application/json";
+                            $this->EstablecerCabeceras();
+                            echo $respuesta;
+                        } else {
+                            $respuesta = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'No se ha podido borrar su cuenta, por favor intentelo mas tarde'));
+                            $this->tipo = "application/json";
+                            $this->EstablecerCabeceras();
+                            echo $respuesta;
+                        }
                     } else {
                         $respuesta = $this->construyeJSON(array('estado_p' => '400 KO', 'Mensaje' => 'La sesión ha caducado'));
                         $this->tipo = "application/json";

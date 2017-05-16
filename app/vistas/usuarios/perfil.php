@@ -253,7 +253,7 @@
                         {{usuarioABorrar.resultado.Mensaje}}
                     </div>
                     <div class="modal-footer">
-                        <a type="button" class="btn btn-primary" href="?home/index">Salir</a>
+                        <a type="button" class="btn btn-primary" href="?home/index">Salir</a> 
                     </div>
                 </script>
             </div>

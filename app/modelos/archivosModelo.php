@@ -238,6 +238,11 @@ class archivosModelo {
         }
     }
     
+    /**
+     * Método que borra los archivos de un usuario a través del id del usuario en la tabla archivos
+     * @param int $id
+     * @return boolean true en caso de éxito, false en caso de fallo
+     */
     public function borraTodosArchivosPorIdUsuario($id) {
         $enlace_descarga = $this->dameEnlacesArchivos($id, false);
         $sql = "DELETE FROM archivos WHERE usuario_id='".$id."';";
@@ -247,7 +252,7 @@ class archivosModelo {
         if(!$resultado) {
             return false;
         } else {
-            $this->eliminaArchivoFisico($enlace_descarga);
+            $this->__eliminaArchivoFisico($enlace_descarga);
             return true;
         }
     }
@@ -266,7 +271,7 @@ class archivosModelo {
         if(!$resultado) {
             return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
-            $this->eliminaArchivoFisico($enlace_descarga);
+            $this->__eliminaArchivoFisico($enlace_descarga);
             return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }
@@ -308,7 +313,11 @@ class archivosModelo {
             return $enlaces;
     }
 
-    public function eliminaArchivoFisico($enlaces_descarga) {
+    /**
+     * Función privada para borrar del directorio archivos los archivos subidos al repositorio
+     * @param array $enlaces_descarga Array con los enlaces de descargas
+     */
+    private function __eliminaArchivoFisico($enlaces_descarga) {
         if(is_array($enlaces_descarga)) {
             foreach ($enlaces_descarga as $key => $value) {
                 unlink(DIRECTORIO_ARCHIVOS_ABSOLUTA.$value);
@@ -329,7 +338,7 @@ class archivosModelo {
         if(!$resultado) {
             return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
-            $this->eliminaArchivoFisico($enlace_descarga);
+            $this->__eliminaArchivoFisico($enlace_descarga);
             return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }

@@ -11,7 +11,7 @@ if(isset($admin)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" data-ng-app="usuarios">
         <?php if( (isset($usuario_json->accion) && $usuario_json->accion === 'modificar') && (isset($usuario_json->estado_p) && $usuario_json->estado_p === '200 OK') ) { ?>
             <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"></button><?php echo $usuario_json->Mensaje; ?></div>
         <?php } ?>
@@ -23,7 +23,8 @@ if(isset($admin)) {
                        name="usuario_id"
                        class="form-control"
                        id="usuario_id"
-                       data-ng-model=""
+                       data-ng-model="usuarioModificado.usuario_id"
+                       data-ng-init="usuarioModificado.usuario_id = '<?php echo $usuario_json->usuario_id; ?>'"
                        value="<?php echo $usuario_json->usuario_id; ?>"
                        required
                        readonly>
@@ -69,9 +70,13 @@ if(isset($admin)) {
                        name="nombre"
                        class="form-control"
                        id="nombre"
-                       data-ng-model=""
+                       data-ng-model="usuarioModificado.nombre"
+                       data-ng-init="usuarioModificado.nombre = '<?php echo $usuario_json->nombre; ?>'"
+                       data-ng-minlength="3"
                        value="<?php echo $usuario_json->nombre; ?>"
                        required>
+                <span data-ng-show='modificar.nombre.$error.required && !modificar.nombre.$pristine'>El nombre es obligatorio.</span>
+                <span data-ng-show='modificar.nombre.$error.minlength && !modificar.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
             </div>
             <div class="form-group">
                 <label class="control-label">Apellidos</label>
@@ -79,7 +84,8 @@ if(isset($admin)) {
                        name="apellidos"
                        class="form-control"
                        id="apellidos"
-                       data-ng-model=""
+                       data-ng-model="usuarioModificado.apellidos"
+                       data-ng-init="usuarioModificado.apellidos = '<?php echo $usuario_json->apellidos; ?>'"
                        value="<?php echo $usuario_json->apellidos; ?>"
                        required>
             </div>
@@ -130,8 +136,8 @@ if(isset($admin)) {
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
-                <a href="?usuarios/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
+                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Modificar</button>
+                <a href="?usuarios/listar/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="">Volver</a>
             </div>
         </form>
     </div>

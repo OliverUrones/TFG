@@ -11,7 +11,7 @@ if(isset($admin)) {
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" data-ng-app="archivos">
         <?php if( (isset($archivo_json->accion) && $archivo_json->accion === 'modificar') && (isset($archivo_json->estado_p) && $archivo_json->estado_p === '200 OK') ) { ?>
             <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert"></button><?php echo $archivo_json->Mensaje; ?></div>
         <?php } ?>
@@ -23,7 +23,8 @@ if(isset($admin)) {
                        name="archivo_id"
                        class="form-control"
                        id="archivo_id"
-                       data-ng-model=""
+                       data-ng-model="archivoModificado.archivo_id"
+                       data-ng-init="archivoModificado.archivo_id = '<?php echo $archivo_json->archivo_id; ?>'"
                        value="<?php echo $archivo_json->archivo_id; ?>"
                        required
                        readonly>
@@ -34,7 +35,8 @@ if(isset($admin)) {
                        name="usuario_id"
                        class="form-control"
                        id="usuario_id"
-                       data-ng-model=""
+                       data-ng-model="archivoModificado.usuario_id"
+                       data-ng-init="archivoModificado.usuario_id = '<?php echo $archivo_json->usuario_id; ?>'"
                        value="<?php echo $archivo_json->usuario_id; ?>"
                        required
                        readonly>
@@ -69,9 +71,13 @@ if(isset($admin)) {
                        name="nombre"
                        class="form-control"
                        id="nombre"
-                       data-ng-model=""
+                       data-ng-model="archivoModificado.nombre"
+                       data-ng-init="archivoModificado.nombre = '<?php echo $archivo_json->nombre; ?>'"
+                       data-ng-minlength="3"
                        value="<?php echo $archivo_json->nombre; ?>"
                        required>
+                <span data-ng-show='modificar.nombre.$error.required && !modificar.nombre.$pristine'>El nombre es obligatorio.</span>
+                <span data-ng-show='modificar.nombre.$error.minlength && !modificar.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
             </div>
             <div class="form-group">
                 <label class="control-label">Enlace de descarga</label>
@@ -117,8 +123,8 @@ if(isset($admin)) {
                 </select>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Modificar</button>
-                <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!alta.$valid">Volver</a>
+                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Modificar</button>
+                <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="">Volver</a>
             </div>
         </form>
     </div>

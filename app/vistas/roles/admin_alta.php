@@ -6,12 +6,12 @@ if(isset($admin)) {
 
 if(isset($resultado)) {
     $resultado_json = json_decode($resultado);
-    var_dump($resultado_json);
+    //var_dump($resultado_json);
 }
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" data-ng-app="roles" data-ng-controller="ListadoRolesController">
         <h2>Alta rol</h2>
         <?php if( isset($resultado_json->estado_p) ) { ?>
             <?php if( $resultado_json->estado_p === "200 OK") { ?>
@@ -28,8 +28,11 @@ if(isset($resultado)) {
                     <input type="tipo" 
                            name="tipo" 
                            class="form-control" 
-                           data-ng-model="altaModelo.email" 
+                           data-ng-model="altaRol.tipo" 
+                           data-ng-minlength="3"
                            required>
+                    <span data-ng-show='alta.tipo.$error.required && !alta.tipo.$pristine'>El tipo es obligatorio.</span>
+                    <span data-ng-show='alta.tipo.$error.minlength && !alta.tipo.$pristine'>Debe tener al menos 3 caracteres.</span>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="resgistroDialog()" data-ng-disabled="!alta.$valid">Alta</button>

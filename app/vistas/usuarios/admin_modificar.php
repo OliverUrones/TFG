@@ -1,7 +1,7 @@
 <?php
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
-    var_dump($usuario_json);
+    //var_dump($usuario_json);
 }
 
 if(isset($admin)) {
@@ -41,18 +41,6 @@ if(isset($admin)) {
                        >
             </div>-->
             <div class="form-group">
-                <label class="control-label">Tipo de Rol</label>
-                <select class="form-control" name="rol_id" id="rol_id">
-                    <?php foreach ($usuario_json->roles as $key => $value) { ?>
-                        <?php if($value->rol_id === $usuario_json->rol_id) { ?>
-                            <option selected value="<?php echo $value->rol_id; ?>"><?php echo $value->tipo; ?></option>
-                        <?php } else {?>
-                            <option value="<?php echo $value->rol_id; ?>"><?php echo $value->tipo; ?></option>
-                        <?php } ?>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="form-group">
                 <label class="control-label">Email</label>
                 <p class="form-control-static"><?php echo $usuario_json->email; ?></p>
 <!--                <input type="text"
@@ -61,6 +49,18 @@ if(isset($admin)) {
                        id="email"
                        data-ng-model=""
                        value="<?php //echo $usuario_json->email; ?>"
+                       required
+                       readonly>-->
+            </div>
+            <div class="form-group">
+                <label class="control-label">Fecha de Creación</label>
+                <p class="form-control-static" name="fecha_creacion" id="fecha_creacion"><?php echo $usuario_json->fecha_creacion; ?></p>
+<!--                <input type="text"
+                       name="fecha_creacion"
+                       class="form-control"
+                       id="fecha_creacion"
+                       data-ng-model=""
+                       value="<?php //echo $usuario_json->fecha_creacion; ?>"
                        required
                        readonly>-->
             </div>
@@ -102,18 +102,6 @@ if(isset($admin)) {
                        >-->
             </div>
             <?php } ?>
-            <div class="form-group">
-                <label class="control-label">Fecha de Creación</label>
-                <p class="form-control-static" name="fecha_creacion" id="fecha_creacion"><?php echo $usuario_json->fecha_creacion; ?></p>
-<!--                <input type="text"
-                       name="fecha_creacion"
-                       class="form-control"
-                       id="fecha_creacion"
-                       data-ng-model=""
-                       value="<?php //echo $usuario_json->fecha_creacion; ?>"
-                       required
-                       readonly>-->
-            </div>
 <!--            <div class="form-group">
                 <label class="control-label">Estado</label>
                 <input type="text"
@@ -123,6 +111,18 @@ if(isset($admin)) {
                        data-ng-model=""
                        value="<?php //echo $usuario_json->estado; ?>">
             </div>-->
+            <div class="form-group">
+                <label class="control-label">Tipo de Rol</label>
+                <select class="form-control" name="rol_id" id="rol_id">
+                    <?php foreach ($usuario_json->roles as $key => $value) { ?>
+                        <?php if($value->rol_id === $usuario_json->rol_id) { ?>
+                            <option selected value="<?php echo $value->rol_id; ?>"><?php echo $value->tipo; ?></option>
+                        <?php } else {?>
+                            <option value="<?php echo $value->rol_id; ?>"><?php echo $value->tipo; ?></option>
+                        <?php } ?>
+                    <?php } ?>
+                </select>
+            </div>
             <div class="form-group">
                 <label class="control-label">Estado de la cuenta</label>
                 <select class="form-control" id="estado" name="estado">

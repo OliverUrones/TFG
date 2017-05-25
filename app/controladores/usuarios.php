@@ -108,12 +108,12 @@ class usuarios extends Api\Api implements Rest {
      * @param array $parametros Array asociativo con el id y el token
      */
     public function baja($parametros=NULL) {
-        echo "Estoy en la clase usuarios en el métod baja()";
+        //echo "Estoy en la clase usuarios en el métod baja()";
         $this->DamePeticion();
         
         if($this->peticion === "GET") {
-            echo "Vengo por GET";
-            var_dump($parametros);
+            //echo "Vengo por GET";
+            //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']) && isset($parametros['id']))
                 {
@@ -159,7 +159,7 @@ class usuarios extends Api\Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            echo "Vengo por POST";
+            //echo "Vengo por POST";
             //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
@@ -367,7 +367,7 @@ class usuarios extends Api\Api implements Rest {
      * 
      */
     public function modificar($parametros=NULL) {
-        echo "Estoy en la clase usuarios en el método modificar()";
+        //echo "Estoy en la clase usuarios en el método modificar()";
         $this->DamePeticion();
         if($this->peticion === "GET") {
             if(is_array($parametros) && count($parametros) === 2){
@@ -414,8 +414,8 @@ class usuarios extends Api\Api implements Rest {
         
         if($this->peticion === "POST") {
             //Si viene la modificación por formulario
-            echo "La petición de modificar viene por POST";
-            var_dump($_POST);
+            //echo "La petición de modificar viene por POST";
+            //var_dump($_POST);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
                 {

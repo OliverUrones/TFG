@@ -1,7 +1,7 @@
 <?php 
 if(isset($categoria)) {
     $categoria_json = json_decode($categoria);
-    var_dump($categoria_json);
+    //var_dump($categoria_json);
 }
 
 if(isset($admin)) {

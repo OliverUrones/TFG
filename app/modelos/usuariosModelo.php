@@ -250,7 +250,7 @@ class usuariosModelo {
     public function modificaUsuarioId() {
         $sql = "UPDATE `usuarios` SET rol_id=".$this->rol_id.", nombre=". utf8_encode($this->nombre).", apellidos=". utf8_encode($this->apellidos).", estado=".$this->estado." WHERE usuario_id=".$this->usuario_id.";";
         
-        var_dump($sql);
+        //var_dump($sql);
         //Ejecución de la consulta
         $resultado = $this->conexion->execute($sql);
 

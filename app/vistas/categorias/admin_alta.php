@@ -11,12 +11,12 @@ if(isset($listaCategorias)) {
 
 if(isset($resultado)) {
     $resultado_json = json_decode($resultado);
-    var_dump($resultado_json);
+    //var_dump($resultado_json);
 }
 ?>
 <?php ob_start() ?>
 <div class="container">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3" data-ng-app="categorias" data-ng-controller="ListadoCategoriasController">
         <h2>Alta categoría</h2>
         <?php if( isset($resultado_json->estado_p) ) { ?>
             <?php if( $resultado_json->estado_p === "200 OK") { ?>
@@ -33,8 +33,11 @@ if(isset($resultado)) {
                     <input type="nombre" 
                            name="nombre" 
                            class="form-control" 
-                           data-ng-model="altaModelo.email" 
+                           data-ng-model="altaCategoria.nombre" 
+                           data-ng-minlength="3"
                            required>
+                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
+                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Categoría padre</label>

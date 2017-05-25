@@ -115,8 +115,8 @@ class roles extends Api implements Rest {
         $this->DamePeticion();
         
         if($this->peticion === "GET") {
-            echo "Vengo por GET";
-            var_dump($parametros);
+            //echo "Vengo por GET";
+            //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']) && isset($parametros['id']))
                 {
@@ -164,7 +164,7 @@ class roles extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            echo "Vengo por POST";
+            //echo "Vengo por POST";
             //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
@@ -223,7 +223,7 @@ class roles extends Api implements Rest {
      * @param array $parametros Array asociativo con las claves de id del rol y token del administrador
      */
     public function modificar($parametros=NULL) {
-        var_dump($parametros);
+        //var_dump($parametros);
         $this->DamePeticion();
         if($this->peticion === "GET") {
             if(is_array($parametros) && count($parametros) === 2){
@@ -263,7 +263,7 @@ class roles extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            var_dump($_POST);
+            //var_dump($_POST);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
                 {

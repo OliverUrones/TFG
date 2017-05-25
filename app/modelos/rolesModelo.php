@@ -59,7 +59,7 @@ class rolesModelo {
         $sql = "DELETE FROM roles WHERE rol_id=".$this->rol_id.";";
         //var_dump($sql);
         $recordSet = $this->conexion->execute($sql);
-        var_dump($recordSet);
+        //var_dump($recordSet);
         //Comprobar mejor el recordSet
         if($recordSet) {
             //El usuario se ha borrado
@@ -117,7 +117,7 @@ class rolesModelo {
     
     public function modificarRolId() {
         $sql = "UPDATE `roles` SET tipo=".$this->tipo." WHERE rol_id=".$this->rol_id.";";
-        var_dump($sql);
+        //var_dump($sql);
         $resultado = $this->conexion->execute($sql);
 
         if(!$resultado)
@@ -129,7 +129,7 @@ class rolesModelo {
             $rol['estado_p'] = '200 OK';
             $rol['Mensaje'] = 'Rol modificado correctamente';
             $rol['accion'] = 'modificar';
-            var_dump($rol);
+            //var_dump($rol);
             return $rol;
         }
     }

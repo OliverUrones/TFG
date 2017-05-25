@@ -152,7 +152,7 @@ class archivos extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            echo "Vengo por POST";
+            //echo "Vengo por POST";
             //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
@@ -306,7 +306,7 @@ class archivos extends Api implements Rest {
      * @param array $parametros Array asociativo con el id del archivo y el token del administrador logueado
      */
     public function modificarAdmin($parametros=NULL) {
-        echo "Estoy en la controlador archivos en el método modificarAdmin()";
+        //echo "Estoy en la controlador archivos en el método modificarAdmin()";
         $this->DamePeticion();
         if($this->peticion === "GET") {
             if(is_array($parametros) && count($parametros) === 2){

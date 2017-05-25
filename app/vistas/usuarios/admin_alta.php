@@ -11,7 +11,7 @@ if(isset($admin)) {
 
 if(isset($resultado)) {
     $resultado_json = json_decode($resultado);
-    var_dump($resultado_json);
+    //var_dump($resultado_json);
 }
 ?>
 <?php ob_start() ?>

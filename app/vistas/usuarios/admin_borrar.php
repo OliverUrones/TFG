@@ -5,7 +5,7 @@ if(isset($admin)) {
 
 if(isset($usuarioBorrar)) {
     $usuarioBorrar_json = json_decode($usuarioBorrar);
-    var_dump($usuarioBorrar_json);
+    //var_dump($usuarioBorrar_json);
 }
 
 if(isset($borrado)) {

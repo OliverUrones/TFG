@@ -35,7 +35,7 @@ if(isset($borrado)) {
             </div>
             <div class="form-group">
                 <label class="control-label">Categoría padre</label>
-                <p class="form-control-static"><?php echo $categoriaBorrar_json->padre; ?></p>
+                <p class="form-control-static"><?php echo ($categoriaBorrar_json->padre === "") ? 'Ninguna' : $categoriaBorrar_json->padre ?></p>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar">Borrar</button>

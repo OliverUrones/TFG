@@ -1,7 +1,7 @@
 <?php
 if(isset($directorio_id)) {
     $directorio_id_json = json_decode($directorio_id);
-    var_dump($directorio_id_json);
+    //var_dump($directorio_id_json);
 }
 if(isset($nombre_archivo)) {
     $nombre_archivo_json = json_decode($nombre_archivo);

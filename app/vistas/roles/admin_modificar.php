@@ -1,7 +1,7 @@
 <?php 
 if(isset($rol)) {
     $rol_json = json_decode($rol);
-    var_dump($rol_json);
+    //var_dump($rol_json);
 }
 
 if(isset($admin)) {

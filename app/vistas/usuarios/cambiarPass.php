@@ -1,7 +1,7 @@
 <?php
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
-    var_dump($usuario_json);
+    //var_dump($usuario_json);
 }
 ?>
 <?php ob_start() ?>

@@ -79,17 +79,17 @@ if(isset($admin)) {
                 <span data-ng-show='modificar.nombre.$error.required && !modificar.nombre.$pristine'>El nombre es obligatorio.</span>
                 <span data-ng-show='modificar.nombre.$error.minlength && !modificar.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label class="control-label">Enlace de descarga</label>
                 <p class="form-control-static"><?php echo $archivo_json->enlace_descarga; ?></p>
-<!--                <input type="text"
+                <input type="text"
                        name="enlace_descarga"
                        class="form-control"
                        id="enlace_descarga"
                        data-ng-model=""
                        value="<?php //echo $archivo_json->enlace_descarga; ?>"
-                       required>-->
-            </div>
+                       required>
+            </div>-->
             <div class="form-group">
                 <label class="control-label">Nombre de la categoría</label>
                 <select class="form-control" name="categoria_id" id="categoria_id">

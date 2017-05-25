@@ -6,12 +6,12 @@ if(isset($admin)) {
 
 if(isset($archivoBorrar)) {
     $archivoBorrar_json = json_decode($archivoBorrar);
-    var_dump($archivoBorrar_json);
+    //var_dump($archivoBorrar_json);
 }
 
 if(isset($borrado)) {
     $borrado_json = json_decode($borrado);
-    var_dump($borrado_json);
+    //var_dump($borrado_json);
 }
 ?>
 <?php ob_start() ?>
@@ -34,10 +34,10 @@ if(isset($borrado)) {
                 <label class="control-label">Nombre</label>
                 <p class="form-control-static"><?php echo $archivoBorrar_json->nombre; ?></p>
             </div>
-            <div class="form-group">
+<!--            <div class="form-group">
                 <label class="control-label">Enlace de descarga</label>
                 <p class="form-control-static"><?php echo $archivoBorrar_json->enlace_descarga; ?></p>
-            </div>
+            </div>-->
             <div class="form-group">
                 <label class="control-label">Propietario</label>
                 <p class="form-control-static"><?php echo $archivoBorrar_json->nombre_usuario; ?></p>

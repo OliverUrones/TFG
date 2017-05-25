@@ -110,7 +110,7 @@ class categoriasModelo {
         $sql = "DELETE FROM categorias WHERE categoria_id=".$this->categoria_id.";";
         //var_dump($sql);
         $recordSet = $this->conexion->execute($sql);
-        var_dump($recordSet);
+        //var_dump($recordSet);
         //Comprobar mejor el recordSet
         if($recordSet) {
             //El usuario se ha borrado
@@ -127,7 +127,7 @@ class categoriasModelo {
             $this->categoria_padre = 'NULL';
         }
         $sql = "UPDATE `categorias` SET nombre=". utf8_encode($this->nombre).", categoria_padre=".$this->categoria_padre." WHERE categoria_id = ".$this->categoria_id.";";
-        var_dump($sql);
+        //var_dump($sql);
         
         $resultado = $this->conexion->execute($sql);
 

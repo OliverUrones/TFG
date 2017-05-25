@@ -68,7 +68,7 @@ class categorias extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            echo "Vengo por POST";
+            //echo "Vengo por POST";
             //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
@@ -121,8 +121,8 @@ class categorias extends Api implements Rest {
     public function baja($parametros=NULL) {
         $this->DamePeticion();
         if($this->peticion === "GET") {
-            echo "Vengo por GET";
-            var_dump($parametros);
+            //echo "Vengo por GET";
+            //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']) && isset($parametros['id']))
                 {
@@ -170,7 +170,7 @@ class categorias extends Api implements Rest {
         }
         
         if($this->peticion === "POST") {
-            echo "Vengo por POST";
+            //echo "Vengo por POST";
             //var_dump($parametros);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
@@ -262,8 +262,8 @@ class categorias extends Api implements Rest {
         
         if($this->peticion === "POST") {
             //Si viene la modificación por formulario
-            echo "La petición de modificar viene por POST";
-            var_dump($_POST);
+            //echo "La petición de modificar viene por POST";
+            //var_dump($_POST);
             if(is_array($parametros)){
                 if(isset($parametros['token']))
                 {
@@ -292,7 +292,7 @@ class categorias extends Api implements Rest {
                                 $categoria = $this->construyeJSON($categoria);
                                 
                                 extract($categoria);
-                                var_dump($categoria);
+                                //var_dump($categoria);
                                 
                                 $ruta_vista_admin_modificar = VISTAS .'categorias/admin_modificar.php';
                                 require_once $ruta_vista_admin_modificar;

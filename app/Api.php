@@ -1,9 +1,4 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 namespace app\Api;
 
@@ -88,7 +83,8 @@ class Api {
     
     /**
      * Método que trata la url del tipo "clase/método/argumentos" para obtener
-     * los parámetros para realizar la llamada al servicio
+     * los parámetros para realizar la llamada al servicio.
+     * Este método establecerá los atributos controlador, método y parámetros de la clase Api.
      */
     private function TratarURL() {
         //Recogo la URI de la petición y la trato, de forma que queda un array con las claves "path" y "query"
@@ -227,7 +223,8 @@ class Api {
     }
     
     /**
-     * Método que establece el método de petición de acceso al servicio
+     * Método que establece el método de petición de acceso al servicio.
+     * Establece el atributo petición de la clase Api.
      */
     protected function DamePeticion() {
         
@@ -336,8 +333,8 @@ class Api {
    }
    
    /**
-     * Función que codifica en JSON los datos recibidos como parámetros
-     * @param array $respuesta Estado de la petición y/o datos
+     * Método que codifica en JSON los datos recibidos como parámetros
+     * @param array $respuesta Este array contendrá el estado de la petición, un mensaje y los datos correspondientes si los hubiera.
      * @return string Cadena de respuesta en JSON
      */
    protected function construyeJSON($respuesta) {

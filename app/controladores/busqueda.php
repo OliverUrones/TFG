@@ -12,13 +12,19 @@ use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\busquedaModelo\busquedaModelo;
 
 /**
- * Description of buscar
+ * Clase controlador para la gestión de las acciones relacionadas con las búsquedas de archivos
+ * Esta clase usa los modelos de usuarios y búsqueda
  *
  * @author oliver
  */
 class busqueda extends Api\Api {
-    //put your code here
-    
+
+    /**
+     * Método que ejecuta una búsqueda de archivos a través de una cadena de texto recibida.
+     * 
+     * Este método se ejecuta exclusivamente por POST
+     * @param array $parametros Array asociativo con el token de usuario registrado en caso de haberlo
+     */
     public function archivos($parametros=NULL) {
         //echo "Estoy en el método archivos() de la clase buscar";
         //Puede venir el token del usuario

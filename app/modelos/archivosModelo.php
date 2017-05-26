@@ -1,33 +1,64 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modelos\archivosModelo;
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
 //require_once ADODB;
 
 /**
- * Description of archivosModelo
+ * Clase modelo para la gestión de los datos de los archivos en la base de datos
  *
  * @author oliver
  */
 class archivosModelo {
+    /**
+     * Atributo con el nombre de la tabla en la base de datos
+     * @var string 
+     */
     private $tabla = 'archivos';
+    /**
+     * Atributo con la conexión a la base de datos
+     * @var Objeto ADODB 
+     */
     private $conexion = NULL;
+    /**
+     * Atributo identificador del archivo de la base de datos
+     * @var int
+     */
     public $archivo_id = NULL;
+    /**
+     * Atributo identificador del usuario propietario del archivo
+     * @var int
+     */
     public $usuario_id = NULL;
+    /**
+     * Atributo identificador de la categoría a la que pertenece el archivo
+     * @var int
+     */
     public $categoria_id = NULL;
+    /**
+     * Atributo con el nombre del archivo en la base de datos
+     * @var string
+     */
     public $nombre = NULL;
-    public $enlace_descarga = NULL;    
+    /**
+     * Atributo con el enlace del archivo en la base de datos, éste se corresponde con el nombre del archivo almacenado en la carpeta /app/archivos
+     * @var string
+     */
+    public $enlace_descarga = NULL;
+    /**
+     * Atributo con el ámbito del archivo: 1 público, 0 privado
+     * @var int
+     */
     public $ambito = NULL;
+    /**
+     * Atributo con las etiquetas identificativas (tags) del archivo
+     * @var string
+     */
     public $etiquetas = NULL;
     
     /**
-     * Constructor de la clase por defecto donde se establecen los valores de los atributos cuando vienen por POST
+     * Constructor de la clase por defecto donde se establecen los valores de los atributos cuando vienen por POST.
+     * Se realiza una llamada al método privado __conexion() para establecer la conexión con la base de datos
      */
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
@@ -58,7 +89,10 @@ class archivosModelo {
     
     /**
      * Método que guarda un archivo en la base de datos. Los parámetros son de una llamada Ajax
-     * @param array $params
+     * 
+     * Se realiza una llamada al método privado __setterPorAjax($params) para establecer los atributos de la clase para construir la consulta a la base de datos
+     * @param array $params Array asociativo con los atributos que viene de la petición
+     * @return array Array asociativo con el estado de la petición y un mensaje informativo.
      */
     public function subeArchivo($params) {
         //Establezco los atributos de la clase
@@ -86,7 +120,8 @@ class archivosModelo {
     
     /**
      * Método privado que mueve el archivo pdf del directorio temporal al directorio de archivos
-     * @param type $params
+     * @param array $params Array asociativo con el identificador del directorio temporar, el nombre del archivo y el archivo en cuestión
+     * @return bool True en caso de éxito. False en caso de fallo
      */
     private function __mueveArchivo($params) {
         if(isset($params['archivo'])) {
@@ -106,8 +141,8 @@ class archivosModelo {
         return true;
     }
 
-        /**
-     * Función que sirve para establecer los valores de los atributos de la clase para añadir un archivo a la base de datos.
+    /**
+     * Metodo privado que sirve para establecer los valores de los atributos de la clase para añadir un archivo a la base de datos cuando éstos vienen por Ajax
      * @param type $params
      */
     private function __settersPorAjax($params) {
@@ -130,8 +165,9 @@ class archivosModelo {
 
     /**
      * Método que devuelve los archivos y el nombre de la categoría a la que pertenecen de un usuario en concreto, a través del id del usuario
-     * @param type $id
-     * @return type
+     * @param int $id Identificador del usuario en la base de datos
+     * @return array $archivos Array asociativo con los datos del archivo recuperado en caso de éxito
+     * @return array Array asociativo con el estado de la petición y un mensaje en caso de no tener archivos guardados para el $id del usuario
      */
     public function dameArchivos($id) {
         $sql = "SELECT `archivos`.*, `categorias`.`nombre` AS 'nombre_categoria' "
@@ -161,8 +197,8 @@ class archivosModelo {
     
     /**
      * Método que devuelve los datos de un archivo a través de su id
-     * @param int $id ID del archivo a recuperar los datos
-     * @return array Datos del archivo buscado y el estado de la petición y el mensaje de ésta.
+     * @param int $id Identificador del archivo a recuperar
+     * @return array $archivo Datos del archivo buscado y el estado de la petición y el mensaje de ésta.
      */
     public function dameArchivoId($id) {
         $sql = "SELECT `archivos`.*, `usuarios`.nombre AS 'nombre_usuario', `categorias`.nombre AS 'nombre_categoria' "
@@ -239,7 +275,8 @@ class archivosModelo {
     }
     
     /**
-     * Método que borra los archivos de un usuario a través del id del usuario en la tabla archivos
+     * Método que borra los archivos de un usuario a través del id del usuario en la tabla archivos.
+     * Si el archivo se elimina correctamente de la base de datos también se borra de la carpeta /app/archivos
      * @param int $id
      * @return boolean true en caso de éxito, false en caso de fallo
      */
@@ -257,10 +294,12 @@ class archivosModelo {
         }
     }
 
-        /**
-     * Borra un archivo a través del id viniendo por get. Para la parte pública
-     * @param type $id
-     * @return type
+    /**
+     * Método que borra un archivo a través del identificador del archivo.
+     * Este método se utilia para la parte pública a través de una petición GET.
+     * Si se elimina el archivo de la base de datos correctamente también se borra de la carpeta /app/archivos
+     * @param int $id Identificador del archivo a borrar
+     * @return array Array asociativo con el estado de la petición y el mensaje informativo
      */
     public function borraArchivo($id) {
         $enlace_descarga = $this->dameEnlacesArchivos($id, true);
@@ -277,10 +316,11 @@ class archivosModelo {
     }
     
     /**
-     * Función que devuelve un array con los enlaces de descarga de los archivos en la base de datos.
-     * @param int $id ID o bien del archivo o bien del usuario, esto viene determinado por el segundo parámetro del método.
+     * Método que devuelve un array con los enlaces de descarga de los archivos en la base de datos.
+     * La llamada a esta función se realiza cuando se van a los archivos de una cuenta de usuario que se ha dado de baja
+     * @param int $id Identificador: o bien del archivo o bien del usuario, esto viene determinado por el segundo parámetro del método.
      * @param bool $tipo_id true cuando el id es del archivo, false cuando el id es del usuario.
-     * @return array $ Array con los enlaces de los archivos recuperados.
+     * @return array $enlaces Array con los enlaces de los archivos recuperados.
      */
     public function dameEnlacesArchivos($id, $tipo_id) {
         $sql = "SELECT `archivos`.`enlace_descarga` FROM `archivos` WHERE ";
@@ -314,7 +354,7 @@ class archivosModelo {
     }
 
     /**
-     * Función privada para borrar del directorio archivos los archivos subidos al repositorio
+     * Método privado para borrar del directorio app/archivos los archivos subidos al repositorio
      * @param array $enlaces_descarga Array con los enlaces de descargas
      */
     private function __eliminaArchivoFisico($enlaces_descarga) {
@@ -325,9 +365,9 @@ class archivosModelo {
         }
     }
 
-        /**
-     * Borra un archivo a través del id. Para la parte privada
-     * @return array Array asociativo con el estado de la peticón y el mensaje
+    /**
+     * Método que borra un archivo a través del id. Para la parte privada
+     * @return array Array asociativo con el estado de la peticón y el mensaje informativo
      */
     public function borraArchivoId() {
         $enlace_descarga = $this->dameEnlacesArchivos($this->archivo_id, true);
@@ -344,7 +384,9 @@ class archivosModelo {
     }
 
     /**
-     * Función que conecta con la base de datos
+     * Método privado para realizar la conexión a la base de datos.
+     * 
+     * Establece el atributo conexión de la clase como un objeto ADODB
      */
     private function __conexion() {
         
@@ -354,7 +396,7 @@ class archivosModelo {
         $pass = 'toor';
         $db = 'repositorio';
         
-        //Creación del objeto ADODB para conectarse a través del drives mysqli
+        //Creación del objeto ADODB para conectarse a través del driver mysqli
         $this->conexion = NewADOConnection('mysqli');
         
         //Se establece la conexión con los datos

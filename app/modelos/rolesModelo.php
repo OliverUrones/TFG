@@ -1,26 +1,40 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modelos\rolesModelo;
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
 
 
 /**
- * Description of rolesModelo
+ * Clase modelo para la gestión de los datos de los roles en la base de datos
  *
  * @author oliver
  */
 class rolesModelo {
+    /**
+     * Atributo con el nombre de la tabla en la base de datos
+     * @var string
+     */
     private $tabla = 'roles';
+    /**
+     * Atributo con la conexión a la base de datos
+     * @var Objeto ADODB 
+     */
     private $conexion = NULL;
+    /**
+     * Atributo identificador del rol en la base de datos
+     * @var int
+     */
     public $rol_id = NULL;
+    /**
+     * Atributo para el tipo de rol en la bse de datos
+     * @var string
+     */
     public $tipo = NULL;
     
+    /**
+     * Constructor por defecto de la clase en donde se realiza la llamada al método privado __conexion() para realizar la conexión a la base de datos
+     * Se establecen los atributos de la clase cuando éstos viene a través de una petición POST
+     */
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
         $this->__conexion();
@@ -34,7 +48,7 @@ class rolesModelo {
     }
     
     /**
-     * Método que añade un nuevo rol a la base de datos
+     * Método que crea un nuevo rol en la base de datos
      * @return array $resultado Array asociativo con el estado de la petición y el mensaje correspondiente de ésta
      */
     public function nuevoRol() {
@@ -52,7 +66,7 @@ class rolesModelo {
     }
     
     /**
-     * Método para borrar un rol de la base de datos a través de su id
+     * Método para borrar un rol de la base de datos a través de su identificador viniendo por POST
      * @return array $resultado Array asociativo con el estado de la petición y el mensaje correspondiente de ésta.
      */
     public function borraRolId() {
@@ -73,8 +87,8 @@ class rolesModelo {
     }
 
     /**
-     * Método que devuelve el listado de roles de la base de datos
-     * @return array $roles Array asociativo con los datos de los roles
+     * Método que devuelve todos los roles de la base de datos
+     * @return array $roles Array asociativo con los roles devueltos
      */
     public function listadoRoles() {
         $sql = "SELECT * FROM `roles`;";
@@ -96,6 +110,11 @@ class rolesModelo {
         }
     }
     
+    /**
+     * Método que deuelve los datos de un rol a través de su identificador
+     * @param int $id Identificador del rol
+     * @return array $rol Array asociativo con los datos del rol, el estado de la petición y el mensaje correspondiente de ésta
+     */
     public function dameRolId($id) {
         $sql = "SELECT * FROM roles WHERE rol_id='".$id."';";
         
@@ -115,6 +134,10 @@ class rolesModelo {
         return $rol;
     }
     
+    /**
+     * Método que modifica los datos de un rol a través de su identificador en la base de datos
+     * @return array $rol Array asociativo con los datos del estado de la petición, el mensaje informativo y los datos del rol modificado en caso de éxito
+     */
     public function modificarRolId() {
         $sql = "UPDATE `roles` SET tipo=".$this->tipo." WHERE rol_id=".$this->rol_id.";";
         //var_dump($sql);
@@ -135,7 +158,9 @@ class rolesModelo {
     }
 
     /**
-     * Función que conecta con la base de datos
+     * Método privado para realizar la conexión a la base de datos.
+     * 
+     * Establece el atributo conexión de la clase como un objeto ADODB
      */
     private function __conexion() {
         

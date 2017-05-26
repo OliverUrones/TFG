@@ -1,9 +1,4 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 namespace app\controladores\usuarios;
 
@@ -16,14 +11,20 @@ use app\modelos\archivosModelo\archivosModelo;
 use app\controladores\logs\logs;
 use app\controladores\archivos\archivos;
 /**
- * Description of usuarios
+ * Clase controlador para la gestión de las acciones relacionadas con los usuarios
+ * Esta clase usa los modelos de usuarios, roles y archivos.
+ * También usa los controladores logs y archivos.
  *
  * @author oliver
  */
 class usuarios extends Api\Api implements Rest {
 
     /**
-     * Función que da de alta un usuario
+     * Método para el registro de usuarios desde la parte pública.
+     * 
+     * Si la petición viene por GET: Se muestra la vista con el formulario de alta
+     * Si la petición viene por POST: Se muestra el resultado del alta del nuevo usuario
+     * @param type $parametros
      */
     public function alta($parametros=NULL) {
         //Incluyo las otras partes del layout
@@ -68,6 +69,12 @@ class usuarios extends Api\Api implements Rest {
         }
     }
     
+    /**
+     * Método para dar de baja una cuenta de usuario a través del propio perfil del usuario.
+     * 
+     * Esta petición se realiza por POST a través de Ajax
+     * @param array $parametros Array asociatio con el id del usuario a borrar y su token
+     */
     public function bajaCuenta($parametros=NULL) {
         $json = file_get_contents('php://input');
         //var_dump($json);
@@ -103,8 +110,11 @@ class usuarios extends Api\Api implements Rest {
         }
     }
 
-        /**
+    /**
      * Método para dar de baja a un usuario desde la parte privada
+     * 
+     * Si la petición viene por GET: Se recuperarán los datos del usuario en cuestión para visualizarlos
+     * Si la petición viene por POST: Se borrará el usuario de la base de datos
      * @param array $parametros Array asociativo con el id y el token
      */
     public function baja($parametros=NULL) {
@@ -208,10 +218,10 @@ class usuarios extends Api\Api implements Rest {
     }
     
     /**
-     * Método que da de alata un usuario desde la parte de administración
+     * Método que da de alta un usuario desde la parte de administración
      * 
-     * Si la petición viene por GET se mostrará el formulario de alta y se le incluirán a la vista los datos del administrador y los roles del sistema en formato JSON.
-     * Si la petición viene por POST se procesara el alta del nuevo usuario en la base de datos y se le incluirán a la vista los datos del administrador y el resultado de la operación en formato JSON.
+     * Si la petición viene por GET: Se mostrará el formulario de alta y se le incluirán a la vista los datos del administrador y los roles del sistema en formato JSON.
+     * Si la petición viene por POST: Se procesara el alta del nuevo usuario en la base de datos y se le incluirán a la vista los datos del administrador y el resultado de la operación en formato JSON.
      * @param array $parametros Array asociativo con el token del usuario administrador
      */
     public function altaAdmin($parametros=NULL) {
@@ -306,7 +316,9 @@ class usuarios extends Api\Api implements Rest {
 
     /**
      * Método para listar los usuarios de la aplicación desde la parte privada
-     * @param type $parametros
+     * 
+     * Este método se ejecuta por GET exclusivamente y recupera el listado de todos los usuarios en el sistema para visualizarlos
+     * @param array $parametros Array asocitivo con el token del usuario administrador conectado
      */
     public function listar($parametros=NULL) {
         //echo "Estoy en la clase usuarios en el método listar";
@@ -354,16 +366,24 @@ class usuarios extends Api\Api implements Rest {
         }
     }
 
-    public function ver($id) {
-        echo "Estoy en la clase usuarios en el método ver() y el parámetro id es ".$id[0];
+    /**
+     * Método creado en caso de que se quiera ver los datos de un usuario en concreto para la parte privada.
+     * 
+     * No está implementado, en caso de que se quiera implementar se deberá implementar.
+     * Este método es sobrecargado desde la clase interfaz Rest
+     * @param type $id
+     */
+    public function ver() {
+        //echo "Estoy en la clase usuarios en el método ver() y el parámetro id es ".$id[0];
     }
     
     /**
      * Método para modificar un usuario para la parte de administración.
-     * Si la petición viene por GET se muestran los datos en el formulario de modificación.
-     * Si la petición viene por POST se modificará el usuario en la base de datos.
+     * 
+     * Si la petición viene por GET: Se muestran los datos en el formulario de modificación.
+     * Si la petición viene por POST: Se modificará el usuario en la base de datos.
      * Devuelve a la vista los datos del usuario que se va a modificar o que se ha modificado y los datos del administrador conectado.
-     * @param array $parametros Con el id del usuario a modificar y el token del administrador conectado que va a modificar el usuario.
+     * @param array $parametros Array asociativo con el id del usuario a modificar y el token del administrador conectado que va a modificar el usuario.
      * 
      */
     public function modificar($parametros=NULL) {
@@ -471,7 +491,10 @@ class usuarios extends Api\Api implements Rest {
     
     /**
      * Método para que un usuario cambie su contraseña desde el perfil del usuario.
-     * @param type $parametros
+     * 
+     * Si la petición viene por GET: Se muestra el formulario para el cambio de contraseña
+     * Si la petición viene por POST: Se modificará la contraseña del usuario que ha solicitado el cambio.
+     * @param array $parametros Array asociativo con las claves del id y token del usuario que realiza el cambio de contraseña
      */
     public function cambiarPass($parametros=NULL) {
         $this->DamePeticion();
@@ -533,8 +556,11 @@ class usuarios extends Api\Api implements Rest {
         }
     }
 
-        /**
+    /**
      * Método para editar los datos del propio usuario logueado
+     * 
+     * Si la petición viene por GET: Se muestra el formulario para la modificación de los datos
+     * Si la petición viene por POST: Se modifican los datos del usuario
      * @param array $parametros Array asociativo con las claves id y token del usuario logueado
      */
     public function modificarDatos($parametros=NULL) {
@@ -606,9 +632,11 @@ class usuarios extends Api\Api implements Rest {
         }
     }
 
-        /**
+    /**
      * Función que devuelve los datos del perfil de un usuario
-     * @param type $id
+     * 
+     * Este método se ejecuta sólo por GET
+     * @param array $parametros Array asociativo con las clave id y token del usuario a modificar y directorio para el borrado del directorio temporal de una conversión de archivo anterior.
      */
     public function perfil($parametros=NULL) {
         //Si viene el directorio de una conversión anterior lo borro
@@ -653,6 +681,11 @@ class usuarios extends Api\Api implements Rest {
         //Compruebo la validez del token del usuario con usuario_id = $id
     }
     
+    /**
+     * Método para el acceso de usuarios con rol administardor en la parte privada
+     * 
+     * Este método se ejecuta sólo por POST 
+     */
     public function admin() {
         //echo "Estoy en el método admin() de la clase usuarios";
         
@@ -669,7 +702,7 @@ class usuarios extends Api\Api implements Rest {
             $admin = $usuarioModelo->dameUsuarioLogueado();
             //var_dump($usuario);
             
-            //Si el usuaario logueado es de tipo administrador (rol_id = 1) ...
+            //Si el usuario logueado es de tipo administrador (rol_id = 1) ...
             if(isset($admin['rol_id']) && $admin['rol_id'] === '1' && $admin['estado'] === '1')
             {
                 //echo "Soy administrador";
@@ -693,7 +726,11 @@ class usuarios extends Api\Api implements Rest {
     }
 
     /**
-     * Función para loguearse en la parte pública
+     * Método que realiza el ingreso a la aplicación desde la parte pública.
+     * 
+     * Si la petición viene por GET: Se muestra el formulario de acceso.
+     * Si la petición viene por POST: Se ejecutará el intento de ingreso
+     * @param array $parametros Array asociativo con la clave directorio para el borrado del directorio temporar de una conversión anterior
      */
     public function login($parametros=NULL) {
         //echo "Estoy en la clase usuarios en el método login()";
@@ -751,7 +788,10 @@ class usuarios extends Api\Api implements Rest {
     }
     
     /**
-     * Función para cerrar sesión
+     * Método para cerrar la sesión de un usuario en la parte pública.
+     * 
+     * Este método se ejecuta por GET exclusivamente
+     * @param array $parametros Array asociativo con el id del usuario que cierra la sesión y directorio para el borrado del directorio temporar de conversión
      */
     public function logout($parametros = NULL) {
         //Si viene el directorio de una conversión anterior lo borro
@@ -791,8 +831,10 @@ class usuarios extends Api\Api implements Rest {
     }
     
     /**
-     * Función para cerrar la sesión de la parte privada de administración
-     * @param array $parametros
+     * Método para cerrar la sesión de un usuario administrado en la parte privada.
+     * 
+     * Este método se ejecuta por GET exclusivamente
+     * @param array $parametros Array asociativo con la clave id del usuario administrador
      */
     public function adminLogout($parametros=NULL) {
         //Recogo el tipo de petición realizada
@@ -816,6 +858,12 @@ class usuarios extends Api\Api implements Rest {
         }
     }
 
+    /**
+     * Método para activar la cuenta de un nuevo usuario registrado
+     * 
+     * Este método se ejecuta exclusivamente por GET y a través del enlace que se le envia al email del usuario recién registrado
+     * @param array $parametros Array asociativo con el id del usuario a activar la cuenta
+     */
     public function activar($parametros = NULL) {
         //echo "Se va a activar la cuenta con id = ".$id[0];
         //Incluyo las otras partes del layout

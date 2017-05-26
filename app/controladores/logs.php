@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\controladores\logs;
 
 use app\modelos\logsModelo\logsModelo;
@@ -15,16 +9,16 @@ use app\modelos\logsModelo\logsModelo;
  * @author oliver
  */
 class logs {
-    //put your code here
+    
     /**
      * Nombre del archivo de log que se va a crear o modificar
-     * @var type 
+     * @var string 
      */
     public $archivo_log = NULL;
     
     /**
      * Instancia del modelo log iniciada a NULL;
-     * @var type 
+     * @var Objeto logsModelo 
      */
     public $modelo_log = NULL;
     
@@ -42,7 +36,7 @@ class logs {
     }
     
     /**
-     * Función para añadir una línea a un log en concreto
+     * Método privado para añadir una línea a un log en concreto
      * @param string $nombre_log Nombre del log que se va a crear o modificar.
      * @param array $datos_linea Array asociativo con los datos que van a formar parte de una entrada o línea en el archivo log.
      */
@@ -50,9 +44,9 @@ class logs {
         $this->modelo_log->insertaDatos($nombre_log, $datos_linea);
     }
 
-        /**
-     * Método para comprobar si un archivo de log está ya creado o si hay que crearlo.
-     * El método establece el atributo de la clase $this->archivo_log que será la ruta con el nombre del archio
+    /**
+     * Método privado para comprobar si un archivo de log está ya creado o si hay que crearlo.
+     * El método establece el atributo de la clase $this->archivo_log que será la ruta con el nombre del archivo
      * 
      * @return bool True en caso de éxito y False en caso de fallo;
      */

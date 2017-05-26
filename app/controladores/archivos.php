@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\controladores\archivos;
 
 use app\Api\Api;
@@ -18,7 +12,9 @@ use app\modelos\categoriasModelo\categoriasModelo;
 use app\controladores\logs\logs;
 
 /**
- * Description of archivos
+ * Clase controlador para la gestión de las acciones relacionadas con los archivos
+ * Esta clase usa los modelos de usuarios, archivos y categorías.
+ * También usa el controlador logs
  *
  * @author oliver
  */
@@ -27,7 +23,9 @@ class archivos extends Api implements Rest {
     
     /**
      * Método que añade un archivo al repositorio desde la parte pública después de que un usuario logueado haya realizado una conversión
-     * @param type $parametros
+     * 
+     * Este método se ejecuta por POST a través de Ajax
+     * @param array $parametros NULL. Los datos se recogen a través de la función file_get_contents('php://input') de la petición Ajax
      */
     public function alta($parametros=NULL) {
         //echo "Estoy en el método alta del controlador archivos.";
@@ -81,7 +79,9 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Función que borra archivos desde la parte pública del perfil de usuario a través de ajax
+     * Método que borra archivos desde la parte pública del perfil del usuario a través de Ajax.
+     * 
+     * Este método se ejecuta por POST a través de Ajax.
      * @param array $parametros Array asociativo que en este caso, al venir a través de Ajax, será nulo y se inicializarán con los valores recuperados de la cadena JSON a través de file_get_contents('php://input')
      */
     public function baja($parametros=NULL) {
@@ -114,6 +114,9 @@ class archivos extends Api implements Rest {
     
     /**
      * Método para borrar archivos desde la parte privada de la aplicación
+     * 
+     * Si viene por GET: Se muestran los datos del archivo a borrar
+     * Si viene por POST: Se ejecuta el borrado del archivo en cuestión
      * @param array $parametros Array asociativo que contiene el id del archivo y el token del administrador logueado
      */
     public function bajaAdmin($parametros=NULL) {
@@ -201,10 +204,13 @@ class archivos extends Api implements Rest {
     
     /**
      * Método para modificar los datos de un archivo cuando un usuario está logueado desde la parte del perfil
+     * 
+     * Si la petición se realiza por GET: Se muestran los datos del archivo que se va a borrar
+     * Si la petición viene por POST: Se ejecuta el borrado del archivo en cuestión y se visualiza un mensaje
      * @param array $parametros Array asociativo con el id del archivo y el token del usuario logueado
      */
     public function modificar($parametros=NULL) {
-        echo "Estoy en el controlador archivos en el método modificar()";
+        //echo "Estoy en el controlador archivos en el método modificar()";
         $this->DamePeticion();
         if($this->peticion === "GET") {
             if(is_array($parametros) && count($parametros) === 2){
@@ -303,6 +309,9 @@ class archivos extends Api implements Rest {
 
     /**
      * Método para modificar un archivo desde la parte privada de la aplicacición
+     * 
+     * Si la petición viene por GET: Se visualizan los datos del archivo a borrar.
+     * Si la petición viene por POST: Se realiza el borrado mostrando el mensaje correspondiente en la vista
      * @param array $parametros Array asociativo con el id del archivo y el token del administrador logueado
      */
     public function modificarAdmin($parametros=NULL) {
@@ -408,6 +417,8 @@ class archivos extends Api implements Rest {
     
     /**
      * Método que lista todos los archivos guardados en la base de datos para la parte privada de la aplicación
+     * 
+     * Este método se ejecuta exclusivamente por GET
      * @param array $parametros Array asociativo con el token del administrador logueado
      */
     public function listarTodos($parametros=NULL) {
@@ -457,9 +468,11 @@ class archivos extends Api implements Rest {
         }
     }
 
-        /**
-     * Función que lista los archivos que un usuario tiene subidos en su perfil.
-     * @param array $parametros Array asociativo con el id  y el token del usuario logueado
+    /**
+     * Método que lista los archivos que un usuario tiene subidos en su perfil.
+     * 
+     * Este métdoo se ejecuta exclusivamente por GET.
+     * @param array $parametros Array asociativo con el id y el token del usuario logueado
      */
     public function listar($parametros=NULL) {
         //Si viene el directorio de una conversión anterior lo borro
@@ -507,8 +520,10 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Método que devuelve en formato JSON los datos de un archivo para visualizarlo. Este método se usa para visualizar los datos del archivo que se va a querer borrar
-     * desde el perfil de la parte pública
+     * Método que devuelve en formato JSON los datos de un archivo para visualizarlo.
+     * 
+     * Este método se ejecuta por GET y se usa para visualizar los datos del archivo que se va a querer borrar
+     * desde el perfil de la parte pública.
      * @param array $parametros Array asociativo con el id del archivo y el token del usuario logueado
      */
     public function ver($parametros=NULL) {
@@ -537,6 +552,8 @@ class archivos extends Api implements Rest {
     
     /**
      * Función para subir las fotos automáticamente cuando se añaden a la zona Drag and Drop del formulario de convertir
+     * 
+     * Este método se ejecuta por POST a través de Ajax mediante la librería dropzone.js
      * @param array $parametros Array con valor NULL para este método
      */
     public function subir($parametros=NULL) {
@@ -601,7 +618,7 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Método que borra todos los archivos que permanecen en la carpeta temp de la aplicación
+     * Método privado que borra todos los archivos que permanecen en la carpeta temp de la aplicación
      */
     private function __borrarTodosTemporales() {
         $manejador = opendir(CARPETA_TEMPORALES);
@@ -615,6 +632,9 @@ class archivos extends Api implements Rest {
     /**
      * Método que realiza la conversión cuando se pulsa el botón enviar y se han subido archivos automáticamente a través de la zona
      * de Drag and Drop
+     * 
+     * Si viene por GET se visualiza el formulario de conversión de archivos.
+     * Si viene por POST se lanza la ejecución del script NoteShrink
      * @param array $parametros Array asociativo con el token del usuario logueado o NULL si no se ha logueado ningún usuario
      */
     public function conversion($parametros=NULL) {
@@ -734,7 +754,8 @@ class archivos extends Api implements Rest {
      * 1º se suben las fotos al servidor a través del drag And Drop del formulario de forma automática con Dropzone.js
      * 2º se manda el resto de datos del formulario (parámetros para el script NoteShrink.py) para realiar la conversión
      * Estas dos etapas las realizan los métodos subir() y conversion().
-     * Función que muestra el formulario de subida de darchivos si viene por GET.Si viene por POST sube los archivos y manda los parámetros del script a la vez para realizar la conversión con NoteShrink.py
+     * Método que muestra el formulario de subida de archivos si viene por GET.
+     * Si viene por POST sube los archivos y manda los parámetros del script a la vez para realizar la conversión con NoteShrink.py
      * @param type $parametros
      */
     public function convertir($parametros=NULL) {
@@ -863,8 +884,9 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Función que devuelve la ruta en la carpeta temp del fichero pdf convertido
-     * @param string $salida Última línea del script NoteShrink.py que muestra la cadena wrote ruta/al/archivo.pdf
+     * Método privado que devuelve la ruta en la carpeta temp del fichero pdf convertido
+     * 
+     * @param string $salida Última línea de la salida del script NoteShrink.py que muestra el estado de la conversión (Si la conversión se ha realizado con éxito la cadena es wrote ruta/al/archivo.pdf)
      * @return string $ruta Cadena con la ruta al archivo
      */
     private function dameNombreArchivo($salida) {
@@ -913,7 +935,7 @@ class archivos extends Api implements Rest {
     }
 
     /**
-     * Función que borrará los archivos temporales que se han subido al servidor en la carpeta temp de la aplicación
+     * Método privado que borrará los archivos temporales que se han subido al servidor en la carpeta temp de la aplicación
      * @param array $salida Array con las líneas de salida del script NoteShrink.py
      */
     private function borrarTemporales($salida) {
@@ -955,10 +977,10 @@ class archivos extends Api implements Rest {
     }
 
     /**
-     * Función que llama al script NoteShrink.py para tratar los archivos
+     * Método privado que llama al script NoteShrink.py para tratar los archivos
      * @param string $argumentos Los argumentos del script
      * @return boolean False si ha habido algún error en la ejecución.
-     * @return array Array con las líneas de salida de la ejecución del script
+     * @return array $salida Array con las líneas de salida de la ejecución del script en caso de éxtio y NULL en caso contrario
      */
     private function ejecutarNoteshrink($argumentos) {
         if(isset($argumentos)) {
@@ -982,7 +1004,7 @@ class archivos extends Api implements Rest {
     }
 
         /**
-     * Función que comprueba que el tipo de archivo es PNG o JPG
+     * Método privado que comprueba que el tipo de archivo es PNG, JPG o JPEG
      * @param array $tipos Array con los tipos de los archivos subidos "image/jpeg" o "image/png"
      * @return boolean True | False Devuelve falso si se ha subido un archivo que no es jpeg o png y true en caso contrario
      */
@@ -1005,7 +1027,7 @@ class archivos extends Api implements Rest {
     }
     
     /**
-     * Función que devuelve una cadena con los parámetros necesarios para el funcionamiento del script noteshrink.py
+     * Método privado que devuelve una cadena con los parámetros necesarios para el funcionamiento del script NoteShrink.py
      * Ejemplo: imágen1 [imágen2] -b ruta_a_carpeta_temporal/salida.png -o ruta_a_carpeta_temporal/salida.pdf ...
      * @param string $imagenes Cadena con las rutas completas a los archivos jpg/png que se van a procesar
      * @param array $params Valores recibidos desde el formulario en el array $_POST

@@ -22,17 +22,10 @@ class logsModelo {
     private $ruta = NULL;
     
     /**
-     * Constructor de la clase por defecto que establece los artributos de ruta, nombre, fecha e IP.
+     * Método para insertar datos en un archivo log
+     * @param string $nombre_log Nombre del archivo donde se insertarán los $datos
+     * @param array $datos Array asociativo con los datos a insertar
      */
-    public function __construct() {
-        //echo "Estoy en el __construct() de logsModelo";
-        
-//        echo '<br/>Ruta: '.$this->ruta;
-//        echo '<br/>Nombre del archivo log: '.$this->nombre;
-//        echo '<br/>Fecha de la acción a registrar : '.$this->fecha;
-//        echo '<br/>IP desde la que se realiza la acción : '.$this->IP;
-    }
-    
     public function insertaDatos($nombre_log, $datos) {
         if($archivo = fopen($this->ruta.$this->nombre, "a")) {
             //echo '<br/>Se ha creado el fichero '. $this->ruta.$this->nombre."";
@@ -49,7 +42,7 @@ class logsModelo {
      * Función que devuelve la ruta del archivo log
      * 
      * Se comprueba si la $this->ruta es un archivo y si existe $this->nombre (el log) si no existe lo crea.
-     * @param string $nombre_log Cadena con el nombre del log que se usara para crear el archivo.
+     * @param string $nombre_log Cadena con el nombre del log que se usará para crear el archivo.
      * @return string $ruta_archivo Devuelve la ruta con el nombre del archivo /ruta/al/log.txt.
      */
     public function dameDatosArchivoLog($nombre_log) {

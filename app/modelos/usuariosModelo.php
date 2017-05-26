@@ -1,39 +1,82 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modelos\usuariosModelo;
 //require_once ADODB;
 //require_once ADODB_ADMIN;
 require_once APLICACION.'modelos'.SEPARADOR.'envioEmailModelo.php';
 
 /**
- * Description of usuariosModelo
+ * Clase modelo para la gestión de los datos de los usuarios en la base de datos
  *
  * @author oliver
  */
 class usuariosModelo {
-    
+    /**
+     * Atributo con el nombre de la tabla en la base de datos
+     * @var string
+     */
     private $tabla = 'usuarios';
+    /**
+     * Atributo con la conexión a la base de datos
+     * @var Objeto ADODB 
+     */
     private $conexion = NULL;
+    /**
+     * Atributo identificador del usuario en la base de datos
+     * @var int
+     */
     public $usuario_id = NULL;
+    /**
+     * Atributo identificador del rol del usuario en la base de datos
+     * @var int
+     */
     public $rol_id = 2;
+    /**
+     * Atributo del email del usuario en la base de datos
+     * @var string 
+     */
     public $email = NULL;
+    /**
+     * Atributo de la contraseña del usuario
+     * @var string
+     */
     public $password = NULL;
+    /**
+     * Atributo del nombre del usuario en la base de datos
+     * @var string
+     */
     public $nombre = NULL;
+    /**
+     * Atributo de los apellidos del usuario en la base de datos
+     * @var string
+     */
     public $apellidos = NULL;
+    /**
+     * Atributo del token del usuario en la base de datos
+     * @var string
+     */
     public $token = 'NULL';
+    /**
+     * Atributo de la validez del token del usuario en la base de datos
+     * @var int
+     */
     public $validez_token = NULL;
+    /**
+     * Atributo de la fecha de creación del usuario en la base de datos
+     * @var string
+     */
     public $fecha_creacion = NULL;
+    /**
+     * Atributo que representa el estado de la cuenta del usuario en la base de datos.
+     * 1 para activada; 0 para desactivada
+     * @var int
+     */
     public $estado = 0;
 
 
     /**
-     * Constructor de defecto que recoge los datos de $_POST y los guarda en los atributos
+     * Constructor por defecto de la clase en donde se realiza la llamada al método privado __conexion() para realizar la conexión a la base de datos
+     * Se establecen los atributos de la clase cuando éstos viene a través de una petición POST
      */
     public function __construct() {
         
@@ -78,6 +121,12 @@ class usuariosModelo {
         }
     }
 
+    /**
+     * Método que devuelve el listado de todos los usuarios que se encuentran registrados en el sistema
+     * 
+     * La llamada a este método se realiza desde la parte privada de la aplicación
+     * @return array $usuarios Array asociativo con los datos del listado de usuarios
+     */
     public function listadoUsuarios() {
         $sql = "SELECT `usuarios`.*, `roles`.tipo FROM `usuarios`, `roles` WHERE `usuarios`.rol_id = `roles`.rol_id;";
         
@@ -134,7 +183,8 @@ class usuariosModelo {
     }
 
     /**
-     * Función que introduce un usuario en la base de datos realizando la llamada desde la parte pública
+     * Método que introduce un usuario en la base de datos realizando la llamada desde la parte pública
+     * @return array Array asociativo con el estado de la peticion y el mensaje correspondiente
      */
     public function registroUsuario() {
         //Establezco la fecha de creación con la fecha actual en formato año-mes-día hora:minutos:segundos
@@ -174,7 +224,8 @@ class usuariosModelo {
     }
     
     /**
-     * Método para que se borre un registro de usuario de la base de datos. A través de Ajax
+     * Método para que se borre un registro de usuario de la base de datos a través de Ajax
+     * 
      * Se llamará a este método cuando un usuario quiera eliminar su cuenta
      * @param int $id Identificador del usuario cuya cuenta se va a eliminar
      * @return array $resultado Array con el resultado de la acción.
@@ -200,7 +251,9 @@ class usuariosModelo {
 
     /**
      * Borra un usuario de la base de datos mediante su id viniendo por formulario POST
-     * @param type $id
+     * 
+     * Se llamará a este método cuando se quiera borrar un usuario desde la parte privada
+     * @return array Array asociativo con el estado de la petición y el mensaje correspondiente
      */
     public function borraUsuarioId() {
         $sql = "DELETE FROM usuarios WHERE usuario_id=".$this->usuario_id.";";
@@ -221,7 +274,9 @@ class usuariosModelo {
     
     /**
      * Método que modifica los datos del propio usuario logueado en la base de datos
-     * @return array 
+     * 
+     * Se llamará a este método cuando un usuario quiera cambiar sus propios datos
+     * @return array $usuario Devuele el estado de la petición, el mensaje de ésta y los datos del usuario modificado en caso de éxito 
      */
     public function modificaDatosUsuarioId() {
         $sql = "UPDATE `usuarios` SET rol_id=".$this->rol_id.", nombre=". utf8_encode($this->nombre).", apellidos=". utf8_encode($this->apellidos)." WHERE usuario_id=".$this->usuario_id.";";
@@ -243,8 +298,10 @@ class usuariosModelo {
         }
     }
 
-        /**
+    /**
      * Método que modifica los datos de un usuario desde la parte de administración
+     * 
+     * Se llamará a este método cuando se quiera modificar los datos de un usuario desde la parte privada
      * @return array Los datos del usuario que se acaba de modificar con el estado, el mensaje y la acción que se ha realizado
      */
     public function modificaUsuarioId() {
@@ -267,6 +324,12 @@ class usuariosModelo {
         }
     }
     
+    /**
+     * Método que actualiza la contraseña de un usuario
+     * 
+     * Se llamará a este método cuando un usuario quiera cambiar su contraseña actuals
+     * @return array Array asociativo con el estado de la petición y el mensaje correspondiente
+     */
     public function cambiaPass() {
         $this->__creaHash($this->password);
 
@@ -282,7 +345,9 @@ class usuariosModelo {
     }
 
     /**
-     * Función que conecta con la base de datos
+     * Método privado para realizar la conexión a la base de datos.
+     * 
+     * Establece el atributo conexión de la clase como un objeto ADODB
      */
     private function __conexion() {
         
@@ -329,8 +394,8 @@ class usuariosModelo {
     }
     
     /**
-     * Función que comprueba el estado de una cuetna asociada a un email. estado=1 --> activada; estado=0 --> desactivada
-     * @param string $email
+     * Función que comprueba el estado de una cuenta asociada a un email. estado=1 --> activada; estado=0 --> desactivada
+     * @param string $email Email de usuario para comprobar si su cuenta está activada o no
      * @return boolean True si la cuenta está activada | False si no está activada
      */
     private function __cuentaActivada($email) {
@@ -352,7 +417,9 @@ class usuariosModelo {
 
 
     /**
-     * Función que genera el hash de la contraseña
+     * Método privado que establece el atributo password de la clase
+     * 
+     * Genera el hash encriptado de la contraseña
      * Se usará el algoritmo CRYPT_BLOWFISH con la constante PASSWORD_BCRYPT de php
      * @param string $password Contraseña que introduce el usuario
      */
@@ -361,9 +428,9 @@ class usuariosModelo {
     }
     
     /**
-     * Función que devuelve el id de un usuario cuyo email exista o falso en caso contrario
+     * Método privado que devuelve el identificador de usuario si el email existe o falso en caso contrario
      * @param type $email
-     * @return boolean
+     * @return array|boolean $columna Array asociativo con el identificador del usuario en caso de éxtio o false en caso de fallo
      */
     private function __dameId($email) {
         
@@ -389,8 +456,11 @@ class usuariosModelo {
     }
     
     /**
-     * Función que activa una cuenta en la base de datos.
-     * @param string $id Id de la cuenta a activar
+     * Método que activa una cuenta en la base de datos.
+     * 
+     * Este método se ejecuta cuando el usuario recibe el email de activación de cuenta
+     * @param string $id Identificador de la cuenta a activar
+     * @return array Array asociativo con el estado de la petición y el mensaje correspondiente
      */
     public function activarCuenta($id) {
         //Comprueba el estado de la cuenta con id $id
@@ -419,9 +489,9 @@ class usuariosModelo {
     }
     
     /**
-     * Función que comrueba el estado de una cuenta de usuario a través del id del usuario
-     * @param int $id ID de la cuenta del usuario a activar
-     * @return int Devuelve el estado actual de la cuenta de usuario
+     * Método que devuelve el estado de una cuenta de usuario a través del identificador de usuario
+     * @param int $id Identificador de la cuenta del usuario a comprobar el estado
+     * @return int Devuelve el estado actual de la cuenta de usuario en caso de éxito o null en caso de fallo
      */
     function __dameEstado($id) {
         $sql = "SELECT `estado` FROM `usuarios` WHERE `usuario_id`=".$id.";";
@@ -435,7 +505,7 @@ class usuariosModelo {
 
 
     /**
-     * Función que establece el token y su validez a la hora de loguearse y devuelve el usuario logueado y el estado de la petición 
+     * Método que establece el token y su validez a la hora de loguearse y devuelve el usuario logueado y el estado de la petición
      * @return array Devuelve un array asociativo con el estado de la petición, un mensaje y el usuario en caso de logueo exitoso
      */
     public function dameUsuarioLogueado() {
@@ -506,10 +576,10 @@ class usuariosModelo {
     }
     
     /**
-     * Función que devuelve el hash de una contraseña de usuario almacenada en la base de datos buscándolo por email
+     * Método que devuelve el hash de una contraseña de usuario almacenada en la base de datos buscándolo por email
      * @param string $email Email del usuario registrado
      * @return boolean False Si el usuario no existe
-     * @return string El hash del usuario si existe
+     * @return array $columna Array asociativo con el hash del usuario si existe
      */
     private function __damePass($email) {
         //Consulta para seleccionar el password de un usuario
@@ -531,9 +601,10 @@ class usuariosModelo {
     }
     
     /**
-     * Función que devuelve la validez de un token
-     * @param string $token
-     * @return int
+     * Método privado que devuelve la validez de un token
+     * @param string $token Token a comprobar su validez
+     * @return array $columna Array asociativo con la validez del token
+     * @return bool False en caso de fallo
      */
     private function __validezToken($token) {
         //Consulta para seleccionar validez_token de un usuario
@@ -550,8 +621,8 @@ class usuariosModelo {
     }
     
     /**
-     * Función que comprueba la validez de un token para comprobar si un usuario tiene una sesión abierta o no
-     * @param string $token
+     * Método que comprueba la validez de un token para comprobar si un usuario tiene una sesión abierta o no
+     * @param string $token Token del usuario a comprobar la sesión
      * @return boolean True si el token es válido False si no lo es
      */
     public function compruebaValidezToken($token) {
@@ -569,9 +640,9 @@ class usuariosModelo {
     }
     
     /**
-     * Función que devuelve los datos del usuario a través de un token
-     * @param string $token Token de 14 caracteres siendo t el primero de ellos
-     * @return ObjetoJSON Devuelve el objeto JSON
+     * Métod que devuelve los datos del usuario a través de un token
+     * @param string $token Token del usuario a recuperar los datos
+     * @return array $usuario Array asociativo con los datos del usuario, el estado de la petición y el mensaje correspondiente
      */
     public function dameUsuarioToken($token) {
         $sql = "SELECT * FROM `usuarios` WHERE token='".$token."'";
@@ -592,8 +663,9 @@ class usuariosModelo {
     }
     
     /**
-     * Función que devuelve los datos del usuario a traves del id
-     * @param type $id
+     * Método que devuelve los datos del usuario a traves del id
+     * @param int $id Identificador del usuario a recuperar los datos
+     * @return array $usuario Array asociativo con los datos del usuario recuperado
      */
     public function dameUsuarioId($id) {
         $sql = "SELECT * FROM `usuarios` WHERE usuario_id='".$id."'";
@@ -614,9 +686,9 @@ class usuariosModelo {
     }
 
     /**
-     * Función que actualiza el campo token y validez_token a NULL para cerrar la sesión de un usuario
-     * @param int $id Id del usuario
-     * @return array Array asociativo con el estado y el Mensaje de la petición
+     * Método que actualiza el campo token y validez_token a NULL para cerrar la sesión de un usuario
+     * @param int $id Identificador del usuario
+     * @return array Array asociativo con el estado de la petición y el mensaje correspondiente
      */
     public function borraDatosSesion($id) {
         //Consulta para poner quitar el token y la validez

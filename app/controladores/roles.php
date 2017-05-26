@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\controladores\roles;
 
 use app\Api\Api;
@@ -15,7 +9,8 @@ use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\rolesModelo\rolesModelo;
 
 /**
- * Description of roles
+ * Clase controlador para la gestión de las acciones relacionadas con los roles
+ * Esta clase usa los modelos de usuarios y roles
  *
  * @author oliver
  */
@@ -23,6 +18,10 @@ class roles extends Api implements Rest {
     
     /**
      * Método para añadir un nuevo rol al sistema
+     * 
+     * Si viene por GET: Se muestra el formulario para crear un nuevo rol
+     * Si viene por POST: Se realiza la creación del nuevo rol
+     * @param array $parametros Array asociativo con el token del usuario administrador conectado
      */
     public function alta($parametros=NULL) {
         $this->DamePeticion();
@@ -109,7 +108,10 @@ class roles extends Api implements Rest {
     
     /**
      * Método para dar de baja un rol desde la parte privada de la aplicación
-     * @param type $parametros
+     * 
+     * Si viene por GET: Se muestran los datos del rol a dar de baja
+     * Si viene por POST: Se realiza el borrado del rol
+     * @param array $parametros Array asociativo con el id del rol para borrar y el token del usuario administrador conectado
      */
     public function baja($parametros=NULL) {
         $this->DamePeticion();
@@ -216,11 +218,9 @@ class roles extends Api implements Rest {
     /**
      * Método que modifica el rol
      * 
-     * Si la petición se realiza por GET se comprueba que venga el id del rol a modificar y el token del administrador logueado para recuperar los datos
-     * del rol a modificar y mostrarlos en el formulario de modificación
-     * 
-     * Si la petición se realiza por POST se comprueba que venga el token del administrador para que se pueda llamar al modelo que modifica el rol en la base de datos.
-     * @param array $parametros Array asociativo con las claves de id del rol y token del administrador
+     * Si viene por GET: Se muestran los datos del rol a modificar
+     * Si viene por POST: Se realiza la modificacion del rol
+     * @param array $parametros Array asociativo con las claves id del rol a modificar y el token del usuario administrador conectado
      */
     public function modificar($parametros=NULL) {
         //var_dump($parametros);
@@ -315,7 +315,9 @@ class roles extends Api implements Rest {
     
     /**
      * Método para listar los roles que hay en el sistema desde la parte privada de la aplicación
-     * @param type $parametros
+     * 
+     * Este método se ejecuta exclusivamente por GET
+     * @param array $parametros Array asociativo con el token del usuario administrador conectado
      */
     public function listar($parametros=NULL) {
         //echo "Voy a listar los roles";

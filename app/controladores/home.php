@@ -14,7 +14,7 @@ use app\modelos\usuariosModelo\usuariosModelo;
 use app\controladores\archivos\archivos;
 
 /**
- * Description of home
+ * Clase controlador que contiene los métodos por defecto que se ejecutarán al iniciar la aplicación
  *
  * @author oliver
  */
@@ -24,7 +24,12 @@ class home extends Api\Api {
     public function home() {
     }
     
-    /*Método de la petición por defecto*/
+    /**
+     * Método que ejecuta la petición por defecto.
+     * 
+     * Este método carga la vista inicial de la aplicación mandando los datos necesarios al archivo app/vistas/home.php
+     * @param array $parametros Array con los parámetros de la petición si los hubiera.
+     */
     public function index($parametros=NULL) {
         //echo "Estoy en el método index() de la clase home";
         //Si viene el directorio de una conversión anterior lo borro
@@ -62,8 +67,10 @@ class home extends Api\Api {
     }
     
     /**
-     * Método para el acceso a la parte de administración
-     * @param array $parametros
+     * Método que ejecuta la petición por defecto para la parte privada.
+     * 
+     * Carga la vista del login para la parte privada
+     * @param array $parametros Array con los parámetros de la petición si los hubiera.
      */
     public function admin($parametros=NULL) {
         //echo "Estoy en el método admin() de la clase home";
@@ -97,6 +104,12 @@ class home extends Api\Api {
         }
     }
     
+    /**
+     * Método que ejecuta la petición para la parte privada.
+     * 
+     * Carga la vista admin_home.php para la parte privada que será la pantalla inicial después de haber iniciado sesión.
+     * @param array $parametros Array asociativo con el token del usuario que está logueado
+     */
     public function adminIndex($parametros=NULL) {
         $ruta_vista_home = VISTAS.'admin_home.php';
         

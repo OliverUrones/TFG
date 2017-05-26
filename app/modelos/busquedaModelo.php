@@ -1,31 +1,57 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modelos\busquedaModelo;
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
 
 use app\modelos\categoriasModelo\categoriasModelo;
 
 /**
- * Description of busquedaModelo
+ * Clase modelo para la gestión de los datos de de las búsquedas en la base de datos
  *
  * @author oliver
  */
 class busquedaModelo {
+    /**
+     * Variable con el nombre de la tabla en la base de datos
+     * @var string 
+     */
     private $tabla = 'archivos';
+    /**
+     * Variable con la conexión a la base de datos
+     * @var Objeto ADODB 
+     */
     private $conexion = NULL;
+    /**
+     * Atributo identificador del archivo de la base de datos
+     * @var int
+     */
     public $archivo_id = NULL;
-    public $nombre_archivo = NULL;
+    /**
+     * Atributo con el enlace del archivo en la base de datos, éste se corresponde con el nombre del archivo almacenado en la carpeta /app/archivos
+     * @var string
+     */
     public $enlace_descarga = NULL;
+    /**
+     * Atributo con el ámbito del archivo: 1 público, 0 privado
+     * @var int
+     */
     public $ambito = NULL;
+    /**
+     * Atributo con las etiquetas identificativas (tags) del archivo
+     * @var string
+     */
     public $etiquetas = NULL;
+    /**
+     * Atributo con el nombre de la categoría a la que pertenece el archivo
+     * @var string
+     */
     public $nombre_categoria = NULL;
     
+    /**
+     * Método que establece la conexión a la base de datos y devuelve el resultado de la búsqueda
+     * @param string $cadena Cadena con la búsqueda a realizar
+     * @return array Array asociativo con el resultado de la búsqueda
+     */
     public function busca($cadena) {
         $this->__conexion();
         //var_dump($cadena);
@@ -33,6 +59,11 @@ class busquedaModelo {
         return $this->__dameResultado($cadena);
     }
     
+    /**
+     * Método privado que realiza la consulta a la base de datos con la cadena que se le pasa como parámetro
+     * @param string $cadena Cadena con la búsqueda a realizar
+     * @return array $resultado Array asociativo con los datos de los archivos encontrados
+     */
     private function __dameResultado($cadena) {
 //        Ejemplo de consulta con MATCH () AGAINST()
 //        SELECT archivos.archivo_id, archivos.nombre, archivos.etiquetas, archivos.enlace_descarga, categorias.nombre, (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ("programacion prueba informatica borrado ortografia") OR MATCH (categorias.nombre) AGAINST ("programacion prueba informatica borrado ortografia")) AS "coincidencia"
@@ -66,7 +97,9 @@ class busquedaModelo {
     }
     
     /**
-     * Función que conecta con la base de datos
+     * Método privado para realizar la conexión a la base de datos.
+     * 
+     * Establece el atributo conexión de la clase como un objeto ADODB
      */
     private function __conexion() {
         

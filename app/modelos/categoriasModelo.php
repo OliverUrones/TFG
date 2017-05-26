@@ -1,27 +1,45 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modelos\categoriasModelo;
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
 //require_once ADODB;
 
 /**
- * Description of categoriasModelo
+ * Clase modelo para la gestión de los datos de las categorías en la base de datos
  *
  * @author oliver
  */
 class categoriasModelo {
+    /**
+     * Atributo con el nombre de la tabla en la base de datos
+     * @var string
+     */
     private $tabla = 'categorias';
+    /**
+     * Atributo con la conexión a la base de datos
+     * @var Objeto ADODB 
+     */
     private $conexion = NULL;
+    /**
+     * Atributo identificador de la categoría en la base de datos
+     * @var int
+     */
     public $categoria_id = NULL;
+    /**
+     * Atributo con el nombre 
+     * @var string
+     */
     public $nombre = NULL;
+    /**
+     * Atributo identificador de la categoría padre en la base de datos
+     * @var int
+     */
     public $categoria_padre = NULL;
     
+    /**
+     * Constructor por defecto de la clase en donde se realiza la llamada al método privado __conexión para realizar la conexión a la base de datos
+     * Se establecen los atributos de la clase cuando éstos viene a través de una petición POST
+     */
     public function __construct() {
         //Llamo a la función para conectarse a la base de datos
         $this->__conexion();
@@ -59,7 +77,7 @@ class categoriasModelo {
     }
 
     /**
-     * Método que devuelve todas las categorías
+     * Método que devuelve todas las categorías de la base de datos
      * @return array $categorias Array asociativo con las categorías devueltas
      */
     public function dameCategorias() {
@@ -79,9 +97,9 @@ class categoriasModelo {
     }
     
     /**
-     * Método que devuelve los datos e una categoría a través de su id
+     * Método que devuelve los datos de una categoría a través de su identificador
      * @param int $id Identificador de la categoría.
-     * @return array $cateogira Array asociativo con los datos de la categoría, el estado de la petición y el mensaje correspondiente de ésta
+     * @return array $categoria Array asociativo con los datos de la categoría, el estado de la petición y el mensaje correspondiente de ésta
      */
     public function dameCategoriaId($id) {
         $sql = "SELECT c1.categoria_id, c1.nombre, c1.categoria_padre, c2.nombre AS padre FROM categorias AS c1 LEFT OUTER JOIN categorias AS c2 ON c1.categoria_padre =c2.categoria_id WHERE c1.categoria_id=".$id.";";
@@ -103,7 +121,7 @@ class categoriasModelo {
     }
     
     /**
-     * Borra una categoría a través de su ID viniendo por POST
+     * Método que borra una categoría a través de su identificador viniendo por POST
      * @return array $resultado Array asociativo con el estado de la petición y el mensaje de ésta
      */
     public function borraCategoriaId() {
@@ -122,7 +140,11 @@ class categoriasModelo {
         return $resultado;
     }
 
-        public function modificarCategoriaId() {
+    /**
+     * Método que modifica los datos de una categoría a través de su identificador en la base de datos
+     * @return array $categoria Array asociativo con los datos del estado de la petición, el mensaje informativo y los datos de la categoría modificada en caso de éxito
+     */
+    public function modificarCategoriaId() {
         if(strcmp($this->categoria_padre, '\'\'')===0){
             $this->categoria_padre = 'NULL';
         }
@@ -145,7 +167,9 @@ class categoriasModelo {
     }
 
     /**
-     * Función que conecta con la base de datos
+     * Método privado para realizar la conexión a la base de datos.
+     * 
+     * Establece el atributo conexión de la clase como un objeto ADODB
      */
     private function __conexion() {
         

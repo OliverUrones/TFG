@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\controladores\categorias;
 
 use app\Api\Api;
@@ -16,13 +10,18 @@ use app\modelos\usuariosModelo\usuariosModelo;
 use app\modelos\categoriasModelo\categoriasModelo;
 
 /**
- * Description of categorias
+ * Clase controlador para la gestión de las acciones relacionadas con las categorías
+ * Esta clase usa los modelos de usuarios y categorías
  *
  * @author oliver
  */
 class categorias extends Api implements Rest {
+    
     /**
-     * Función para dar de alta una nueva categoría.
+     * Método para dar de alta una nueva categoría en la parte privada
+     * 
+     * Si viene por GET: Se muestra el formulario para crear una nueva categoría
+     * Si viene po POST: Se realiza la creación de la nueva categoría
      * @param array $parametros Array asociativo con el token del administrador conectado
      */
     public function alta($parametros=NULL) {
@@ -115,7 +114,10 @@ class categorias extends Api implements Rest {
     }
 
     /**
-     * Función para dar de baja una categoría desde la parte de administración
+     * Método para dar de baja una categoría desde la parte privada
+     * 
+     * Si viene por GET: Se muestran los datos de la categoría que se va a borrar
+     * Si viene por POST: Se borra la categoría en cuestión y se muestra el mensaje correspondiente
      * @param array $parametros Array asociativo con el id de la categoría a dar de baja y el token del administrador conectado
      */
     public function baja($parametros=NULL) {
@@ -219,6 +221,13 @@ class categorias extends Api implements Rest {
         }
     }
     
+    /**
+     * Método para modificar los datos de una categoría
+     * 
+     * Si viene por GET: Se visualizan los datos de la categoría a modificar.
+     * Si viene por POST: Se realiza la modificación de la categoría
+     * @param array $parametros Array asociatio con las claves id de la categoría a modificar y el token del usuario administrador conectado
+     */
     public function modificar($parametros=NULL) {
         $this->DamePeticion();
         if($this->peticion === "GET") {
@@ -312,7 +321,9 @@ class categorias extends Api implements Rest {
     
     /**
      * Método para listar las categorías desde la parte privada
-     * @param type $parametros
+     * 
+     * Este médoto se ejecuta exclusivamente por GET
+     * @param array $parametros Array asociativo con el token del usuario administrador conectado
      */
     public function listar($parametros=NULL) {
         if(is_array($parametros)){
@@ -360,6 +371,12 @@ class categorias extends Api implements Rest {
         }
     }
 
+    /**
+     * Método que lista las categorías a través de Ajax
+     * 
+     * Este método se ejecuta por GET a través de Ajax para mostrar el listado de categorías cuando se realiza la subida de un archivo al repositorio
+     * @param array $params NULL No se necesitan parámetros para 
+     */
     public function listarAjax($params=NULL) {
         $categorias = new categoriasModelo();
         $categorias = $categorias->dameCategorias();

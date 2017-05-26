@@ -1,27 +1,37 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\interfaz\Rest;
 
 /**
- *
+ * Interfaz en la que se declaran los métodos principales de las operaciones a realizar
+ * Se tendrán que definir e implementar los métodos en cada una de las clases donde se implemente la interfaz
+ * 
  * @author oliver
  */
 interface Rest {
     
-    /*POST*/
+    /**
+     * Método para dar de alta un recurso
+     */
     public function alta();
     
+    /**
+     * Método para dar de baja un recurso
+     */
     public function baja();
     
+    /**
+     * Método para modificar un recurso
+     */
     public function modificar();
     
-    /*GET*/
+    /**
+     * Método para listar recursos
+     */
     public function listar();
-    public function ver($id);
+    
+    /**
+     * Método para ver un recurso
+     */
+    public function ver();
 }

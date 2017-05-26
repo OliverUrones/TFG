@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace app\modelos\envioEmailModelo;
 
 require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'PHPMailer/PHPMailerAutoload.php';
@@ -13,29 +7,50 @@ require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'PHPMailer/PHPMailerAutoload.p
 //require_once PHPMAILER_SMTP;
 
 /**
- * Description of envioEmailModelo
+ * Clase modelo para la gestión de los datos para enviar un email a través de la clase PHPMailer
  *
  * @author oliver
  */
 class envioEmailModelo {
-        
+    /**
+     * Atributo que representa el tipo de seguridad del envio del correo
+     * @var string
+     */
     public $seguridad = "ssl";
+    /**
+     * Atributo que representa el servidor de correo electrónico
+     * @var string
+     */
     public $host = "smtp.gmail.com";
+    /**
+     * Atributo que representa el puerto que usa el $host del servidor de correo electrónico
+     * @var int
+     */
     public $puerto = 465;
+    /**
+     * Atributo la cuenta del usuario con la que se enviarán los correos
+     * @var string
+     */
     public $usuario = "Oliver.Urones@usal.es";
     //Quitar la contraseña antes de subirlo al repositorio
+    /**
+     * Atributo de la contraseña asociada al $usuario para el envío de los correos
+     * @var type 
+     */
     public $password = "*******";
     
     /**
      * Función que manda un correo con el enlace para activar la cuenta
-     * @param int $usuario_id   id del usuario
-     * @param string $email     email del usuario
+     * @param int $usuario_id Identificador el usuario al que se le va a mandar el correo
+     * @param string $email Email del usuario al que se le va a mandar el correo
+     * @param string $nombre Nombre del usuario
+     * @param string $apellidos Apellidos del usuario
      */
     public function activarCuenta($usuario_id, $email, $nombre, $apellidos) {
         //Creación del objeto mail de la clase PHPMailer
         $mail = new \PHPMailer();
         
-        //Activo el debug
+        //Activo el debug --> En producción esto debe estar desactivado
         $mail->SMTPDebug = 2;
         
         //Configuración envío por SMTP
@@ -71,6 +86,10 @@ class envioEmailModelo {
         }
     }
     
+    /**
+     * Método de envio de correo para informar del cambio de contraseña
+     * @param string $email Email del usuario que ha cambiado la contraseña
+     */
     public function cambioPassInfo($email) {
         $mail = new \PHPMailer();
         
@@ -102,11 +121,11 @@ class envioEmailModelo {
         $mail->Body = "La contraseña de su cuenta ha sido cambiada. Si ud. no ha realizado dicho cambio, por favor, póngase en contacto con el administrador.";
         $mail->AltBody = "La contraseña de su cuenta ha sido cambiada. Si ud. no ha realizado dicho cambio, por favor, póngase en contacto con el administrador.";
 
-//        if($mail->send()){
-//            echo "Mensaje enviado";
-//        } else {
-//            //Ver info del error
-//            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
-//        }
+        if($mail->send()){
+            echo "Mensaje enviado";
+        } else {
+            //Ver info del error
+            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
+        }
     }
 }

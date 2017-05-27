@@ -367,7 +367,7 @@ class roles extends Api implements Rest {
         }
     }
     
-    public function ver($id) {
+    public function ver($parametros=NULL) {
         
     }
 }

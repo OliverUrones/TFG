@@ -196,20 +196,37 @@
                 <button type="button" class="btn btn-default">Cambiar contraseña</button>
                 <button type="button" class="btn btn-default">Eliminar cuenta</button>
             </div>-->
-            <table class="table table-striped table-hover">
-                <tr>
-                    <td class="text-right"><h2>Email:</h2></td>
-                    <td><h2><?php echo $usuario_json->email; ?></h2></td>
-                </tr>
-                <tr>
-                    <td class="text-right"><h2>Nombre:</h2></td>
-                    <td><h2><?php echo $usuario_json->nombre; ?></h2></td>
-                </tr>
-                <tr>
-                    <td class="text-right"><h2>Apellidos:</h2></td>
-                    <td><h2><?php echo $usuario_json->apellidos; ?></h2></td>
-                </tr>
-            </table>
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+                <form>
+                    <div class="form-group">
+                        <h3><label class="control-label">Email</label></h3>
+                        <h3>
+                            <input 
+                                class="form-control"
+                                readonly
+                                value="<?php echo $usuario_json->email ?>">
+                        </h3>
+                    </div>
+                    <div class="form-group">
+                        <h3><label class="control-label">Nombre y Apellidos</label></h3>
+                        <h3>
+                            <input 
+                                class="form-control"
+                                readonly
+                                value="<?php echo $usuario_json->nombre ?> <?php echo $usuario_json->apellidos ?>">
+                        </h3>
+                    </div>
+                    <div class="form-group">
+                        <h3><label class="control-label">Fecha de creación</label></h3>
+                        <h3>
+                            <input 
+                                class="form-control"
+                                readonly
+                                value="<?php echo $usuario_json->fecha_creacion ?>">
+                        </h3>
+                    </div>
+                </form>
+            </div>
             <div class="modal modal-content">
                 <script type="text/ng-template" id="eliminarCuenta.html">
                     <form name="guardarArchivo" class="form-horizontal" role="form" action="" method="POST">

@@ -189,7 +189,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <h1>Autor</h1>
-                        <p class="text-justify">Este Trabajo de Fin de Grado ha sido desarrollado por el alumno <strong>Oliver Urones García</strong>, estudiante del Grado en Ingeniería Informática en Sistemas de Información en la Escuela Politécnica Superior de Zamora (Universidad de Salamanca)</p>
+                        <p class="text-justify">Este Trabajo de Fin de Grado ha sido desarrollado por el alumno <strong>Antonio Oliver Urones García</strong>, estudiante del Grado en Ingeniería Informática en Sistemas de Información en la Escuela Politécnica Superior de Zamora (Universidad de Salamanca)</p>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <h1>Documentación</h1>

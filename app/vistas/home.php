@@ -1,23 +1,20 @@
 <?php ob_start() ?>
-<h2>Portada</h2>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquid ex ea commodi consequat. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+<h2>Sistema inteligente orientado a servicios para la optimización de escaneo de documentos manuscritos</h2>
+<div class="logoUsal">
+</div>
+    <p class="text-justify">
+        Esta aplicación web es el resultado del Trabajo de Fin de Grado del alumno Antonio Oliver Urones García, estudiante del Grado en Ingeniería Informática en Sistemas de Información en la Escuela Politécnica Superior de Zamora, perteneciente a la Universidad de Salamanca.
+    </p>
+    <p class="text-justify">
+        La aplicación usa un algoritmo llamado <a href="https://github.com/mzucker/noteshrink">NoteShrink</a> creado por Matt Zucker cuya documentación teórica se puede consultar <a href="https://mzucker.github.io/2016/09/20/noteshrink.html">aquí</a>. Este algoritmo realiza un proceso de mejora de imágenes convirtiéndolas en un archivo en formato pdf.
+        El algoritmo está programado en Python y usa algunos módulos de este lenguaje para realizar su trabajo.
+    </p>
+    <p class="text-justify">
+        Dándose de alta en la aplicación se puede subir los archivos que se conviertan para tener un repositorio de archivos dándole así valor a la comunidad universitaria y compartiendo información y conocimiento.
+    </p>
+    <p class="text-justify">
+        Los pasos para realizar la conversión de los archivos son muy sencillos, simplemente hay que arrastrar o seleccionar los archivos escaneados en formato jpg, jpeg y/o png a convertir en la zona designada para ello y una vez realizada la conversión tendremos disponible nuestro archivo pdf para su descarga o subida al repositorio.
+    </p>
 <?php $contenido = ob_get_clean(); ?>
 <?php 
     /*Función para cargar plantilla en la configuración*/

@@ -14,6 +14,10 @@ usuarios.controller('ListadoUsuariosController', ['$scope', 'NgTableParams', fun
         console.log($scope.tableParams.defaultSettings);
 }]);
 
+usuarios.controller('RecordarController', ['$scope', function ($scope) {
+        $scope.recordarModelo = {};
+}]);
+
 usuarios.controller('EliminarCuentaController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
         $scope.usuarioABorrar = {};
         $scope.abrirConfirmacionBorrado = function () {

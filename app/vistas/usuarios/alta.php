@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
-<h2>Formulario para el registro</h2>
 <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl">-->
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="RepositorioApp" data-ng-controller="ValidacionFormsController">
+<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3" data-ng-app="RepositorioApp" data-ng-controller="ValidacionFormsController">
+    <h2>Formulario para el registro</h2>
     <form name="alta" class="form-horizontal" role="form" action="?usuarios/alta" method="POST">
         <div class="form-group">
             <label class="control-label ">Nombre</label>

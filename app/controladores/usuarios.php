@@ -895,4 +895,60 @@ class usuarios extends Api\Api implements Rest {
             }
         }
     }
+    
+    /**
+     * Método que controla el envío del formulario para cuando un usuario olvida su contraseña
+     * 
+     * Si la petición viene por GET: se muestra el formulario para enviar el email
+     * Si la petición viene por POST: se llama al método restablecerPass() de la clase modeloUsuarios para enviar el email al usuario
+     */
+    public function recordar() {
+        //echo "Estoy en el método recordar() del controlador usuarios";
+        $this->DamePeticion();
+        
+        if($this->peticion === 'GET') {
+            $ruta_vista_recordar = VISTAS . 'usuarios/recordar.php';
+            require_once $ruta_vista_recordar;
+        }
+        
+        if($this->peticion === 'POST') {
+            $modeloUsuarios = new usuariosModelo();
+            $respuesta = $modeloUsuarios->restablecerPass();
+            $respuesta = $this->construyeJSON($respuesta);
+            
+            extract($respuesta);
+            
+            $ruta_vista_recordar = VISTAS . 'usuarios/recordar.php';
+            require_once $ruta_vista_recordar;
+        }
+    }
+    
+    /**
+     * Método que se ejecuta cuando se le manda el correo al usuario que ha olvidado la contraseña
+     * 
+     * Si la petición viene por GET: se le muestra el formulario para introducir la nueva contraseña
+     * Si la petición viene por POST: se llama al método restablecerPass del modelo usuarios para establecer el cambio en la base de datos
+     * @param array $parametros Array asociativo con el id del usuario.
+     */
+    public function restablecer($parametros=NULL) {
+        $this->DamePeticion();
+        if($this->peticion === 'GET' && isset($parametros['id'])) {
+            //Si la petición viene por GET el usuario ha pinchado en el enlace que se le ha enviado al correo
+            $usuario_id = $this->construyeJSON($parametros);
+            extract($usuario_id);
+            $ruta_vista_restablecer = VISTAS . 'usuarios/restablecer.php';
+            require_once $ruta_vista_restablecer;
+        }
+        
+        if($this->peticion === 'POST') {
+            $modeloUsuarios = new usuariosModelo();
+            $respuesta = $modeloUsuarios->restablecerPass($parametros['id']);
+            $respuesta = $this->construyeJSON($respuesta);
+            
+            extract($respuesta);
+            
+            $ruta_vista_restablecer = VISTAS . 'usuarios/restablecer.php';
+            require_once $ruta_vista_restablecer;
+        }
+    }
 }

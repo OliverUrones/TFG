@@ -5,7 +5,7 @@
 ?>
 <?php ob_start() ?>
 <!--    <div data-ng-app="loginApp" data-ng-controller="loginAppCtrl">-->
-    <div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
         <h2>Login</h2>
         <?php if(isset($error_json)) { ?>
             <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $error_json->Mensaje; ?></div>
@@ -33,9 +33,9 @@
                 <span data-ng-show='loginForm.password_login.$error.required && !loginForm.password_login.$pristine'>La contraseña es obligatoria.</span>
                 <span data-ng-show='loginForm.password_login.$error.minlength && !loginForm.password_login.$pristine'>La contraseña debe tener al menos 8 caracteres.</span>
             </div>
-<!--            <div class="form-group">
+            <div class="form-group">
                 <a href="?usuarios/recordar">¿Ha olvidado la contraseña?</a>
-            </div>-->
+            </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-success" data-ng-disabled="!loginForm.$valid" data-ng-click="login(loginModelo)">Entrar</button>
             </div>

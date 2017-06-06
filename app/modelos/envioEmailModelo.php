@@ -40,7 +40,7 @@ class envioEmailModelo {
     public $password = "*******";
     
     /**
-     * Función que manda un correo con el enlace para activar la cuenta
+     * Método que manda un correo con el enlace para activar la cuenta
      * @param int $usuario_id Identificador el usuario al que se le va a mandar el correo
      * @param string $email Email del usuario al que se le va a mandar el correo
      * @param string $nombre Nombre del usuario
@@ -87,6 +87,54 @@ class envioEmailModelo {
     }
     
     /**
+     * Método que manda un enlace para restablecer la contraseña
+     * @param int $usuario_id Identificador del usuario para restablecer la contraseña
+     * @param string $email Email del usuario al que se le mandará el correo con el enlace
+     * @return boolean True en caso de éxito y False en caso de error
+     */
+    public function recordarPass($usuario_id, $email) {
+        //Creación del objeto mail de la clase PHPMailer
+        $mail = new \PHPMailer();
+        
+        //Activo el debug --> En producción esto debe estar desactivado
+        $mail->SMTPDebug = 2;
+        
+        //Configuración envío por SMTP
+        $mail->isSMTP();
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = $this->seguridad;
+        
+        //Datos del servidor
+        $mail->Host = $this->host;
+        $mail->Port = $this->puerto;
+        $mail->Username = $this->usuario;
+        $mail->Password = $this->password;
+        
+        //Emisor del correo
+        $mail->setFrom("no-reply@repositorio.es", "Oliver Urones");
+        
+        //Receptor del correo
+        //Le quito las comillas simples que vienen en la cadena para la proteción de SQL-Inject porque sino al añadir la dirección con addAddress da error
+        $email = str_replace("'", "", $email);
+        $mail->addAddress($email);
+        
+        
+        $mail->Subject = "Olvido de ".utf8_decode("contraseña")."";
+        //Sustituir localhost por la dirección IP del servidor
+        $mail->Body = "Para restablecer su ".utf8_decode("contraseña")." haga click <a href=\"https://localhost/TFG2/?usuarios/restablecer/".$usuario_id."\">". utf8_decode("Aquí")."</a>";
+        $mail->AltBody = "Para restablecer su contraseña copie el siguiente enlace https://localhost/TFG2/?usuarios/restablecer/".$usuario_id." y péguelo en la barra de direcciones del navegador";
+
+        if($mail->send()){
+            echo "Mensaje enviado";
+            return true;
+        } else {
+            //Ver info del error
+            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
+            return false;
+        }
+    }
+
+        /**
      * Método de envio de correo para informar del cambio de contraseña
      * @param string $email Email del usuario que ha cambiado la contraseña
      */

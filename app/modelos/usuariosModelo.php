@@ -327,7 +327,7 @@ class usuariosModelo {
     /**
      * Método que actualiza la contraseña de un usuario
      * 
-     * Se llamará a este método cuando un usuario quiera cambiar su contraseña actuals
+     * Se llamará a este método cuando un usuario quiera cambiar su contraseña actual
      * @return array Array asociativo con el estado de la petición y el mensaje correspondiente
      */
     public function cambiaPass() {
@@ -368,6 +368,40 @@ class usuariosModelo {
     }
     
     /**
+     * Método para restablecer la contraseña de un usuario que se le ha olvidado
+     * 
+     * Si no viene el $id identificador del usuario se le mandará un correo al email proporcionado en el formulario y devolverá la respuesta del envío del email
+     * @param int $id Identificador del usuario. Puede ser NULL
+     * @return array Array asociativo con el estado de la petición y el mensaje correspondiente.
+     */
+    public function restablecerPass($id=NULL) {
+        if(!isset($id)) {
+            //echo "No viene el id";
+            //Si no viene el $id como parámetro se le envía el correo al usuario
+            if($this->__existe($this->email)) {
+                //echo "el email ".$this->email." existe";
+                $this->usuario_id = $this->__dameId($this->email);
+                //Envio correo para activar cuenta
+                $mail = new \app\modelos\envioEmailModelo\envioEmailModelo();
+                if($mail->recordarPass($this->usuario_id, $this->email)) {
+                    //El mensaje se ha enviado
+                    return array('estado_p' => '200 OK', 'Mensaje' => 'Revise su correo para restablecer su contraseña');
+                } else {
+                    //No se ha enviado el mensaje
+                    return array('estado_p' => '400 KO', 'Mensaje' => 'No se ha podido envíar el mensaje a su correo, por favor, inténtelo más tarde.');
+                }
+            } else {
+                //El email no existe, mostrar mensaje de error correspondiente
+                //echo "el email ".$this->email." NO existe";
+                return array('estado_p' => '400 KO', 'Mensaje' => 'El email introducido no existe.');
+            }
+        } else {
+            //Si viene el $id como parámetro, el correo ya ha sido envíado al usuario y éste a pulsado en el enlace
+            return $this->cambiaPass();
+        }
+    }
+
+        /**
      * Función que comprueba si un usuario existe mediante su correo electrónico
      * @param string $email email del usuario a comprobar
      * @return boolean true si existe; false si no existe

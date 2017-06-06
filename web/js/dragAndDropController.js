@@ -51,7 +51,7 @@ dragAndDrop.controller('DragAndDropController', function($scope){
             },
             'removefile' : function(file) {
                 console.log("Eliminado archivo");
-                console.log(file);
+                console.log(this.removefile(file));
             },
             'sendingmultiple' : function(file, xhr, formData) {
                 console.log('Enviando múltiples');

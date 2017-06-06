@@ -18,9 +18,8 @@ if(isset($usuario)) {
         <h2>Modificar archivo</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?archivos/modificar/<?php echo $usuario_json->token; ?>" method="POST">
 <!--            <div class="form-group">-->
-                <label class="control-label">ArchivoID</label>
-                <label class="control-label"><?php echo $archivo_json->archivo_id; ?></label>
-                <input type="text"
+<!--                <label class="control-label">ArchivoID</label>-->
+                <input type="hidden"
                        name="archivo_id"
                        class="form-control"
                        id="archivo_id"
@@ -70,28 +69,6 @@ if(isset($usuario)) {
                        id="nombre"
                        value="<?php echo $archivo_json->nombre; ?>"
                        required>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Enlace de descarga</label>
-                <p class="form-control-static"><?php echo $archivo_json->enlace_descarga; ?></p>
-<!--                <input type="text"
-                       name="enlace_descarga"
-                       class="form-control"
-                       id="enlace_descarga"
-                       data-ng-model=""
-                       value="<?php //echo $archivo_json->enlace_descarga; ?>"
-                       required>-->
-            </div>
-            <div class="form-group">
-                <label class="control-label">Puntuacion</label>
-                <p class="form-control-static"><?php echo $archivo_json->puntuacion; ?></p>
-<!--                <input type="text"
-                       name="enlace_descarga"
-                       class="form-control"
-                       id="enlace_descarga"
-                       data-ng-model=""
-                       value="<?php //echo $archivo_json->enlace_descarga; ?>"
-                       required>-->
             </div>
             <div class="form-group">
                 <label class="control-label">Nombre de la categoría</label>

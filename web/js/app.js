@@ -73,6 +73,7 @@ formularios.controller('LoginFormController', ['$scope', 'ngDialog', '$http', fu
                     console.log(respuesta);
                 });
     };
+    $scope.busquedaModelo = {};
 }]);
 
 angular

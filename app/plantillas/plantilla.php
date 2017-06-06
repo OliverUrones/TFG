@@ -35,6 +35,7 @@
         <script src="web/js/archivos.js"></script>
         <script src="web/js/usuarios.js"></script>
         <script src="web/js/cambiaPass.js"></script>
+        <script src="web/js/busquedas.js"></script>
         <script src="web/js/dragAndDropController.js" type="text/javascript"></script>
         <script src="web/js/ng-table.js" type="text/javascript"></script>
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>
@@ -146,16 +147,26 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                     <?php if(!isset($usuario_json->token)) { ?>
-                        <form action="?busqueda/archivos" method="POST">
+                        <form name="buscar" action="?busqueda/archivos" method="POST">
                     <?php } else { ?>
-                        <form action="?busqueda/archivos/<?php echo $usuario_json->token; ?>" method="POST">
+                        <form name="buscar" action="?busqueda/archivos/<?php echo $usuario_json->token; ?>" method="POST">
                     <?php } ?>
                         <div class="input-group">
-                            <input class="form-control" name="busqueda" id="buscar" type="text" placeholder="Buscar documentos...">
+                            <input 
+                                class="form-control" 
+                                name="busqueda" 
+                                id="busqueda" 
+                                type="text" 
+                                data-ng-model="busquedaModelo.busqueda"
+                                data-ng-minlength="3"
+                                placeholder="Buscar documentos..."
+                                required>
                             <span class="input-group-btn">
-                                <button class="btn btn-info">Buscar</button>
+                                <button class="btn btn-info" data-ng-disabled="!buscar.$valid">Buscar</button>
                             </span>
                         </div>
+                        <span data-ng-show='buscar.busqueda.$error.required && !buscar.busqueda.$pristine'>La búsqueda no puede ser una cadena vacía.</span>
+                        <span data-ng-show='buscar.busqueda.$error.minlength && !buscar.busqueda.$pristine'>La cadena de búsqueda debe tener al menos 3 caracteres.</span>
                     </form>
                 </div>
             </div>

@@ -6,7 +6,7 @@
         Esta aplicación web es el resultado del Trabajo de Fin de Grado del alumno Antonio Oliver Urones García, estudiante del Grado en Ingeniería Informática en Sistemas de Información en la Escuela Politécnica Superior de Zamora, perteneciente a la Universidad de Salamanca.
     </p>
     <p class="text-justify">
-        La aplicación usa un algoritmo llamado <a href="https://github.com/mzucker/noteshrink">NoteShrink</a> creado por Matt Zucker cuya documentación teórica se puede consultar <a href="https://mzucker.github.io/2016/09/20/noteshrink.html">aquí</a>. Este algoritmo realiza un proceso de mejora de imágenes convirtiéndolas en un archivo en formato pdf.
+        La aplicación usa un algoritmo llamado <a href="https://github.com/mzucker/noteshrink" target="__blank">NoteShrink</a> creado por Matt Zucker cuya documentación teórica se puede consultar <a href="https://mzucker.github.io/2016/09/20/noteshrink.html" target="__blank">aquí</a>. Este algoritmo realiza un proceso de mejora de imágenes convirtiéndolas en un archivo en formato pdf.
         El algoritmo está programado en Python y usa algunos módulos de este lenguaje para realizar su trabajo.
     </p>
     <p class="text-justify">

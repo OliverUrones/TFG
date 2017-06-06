@@ -35,7 +35,6 @@
         <script src="web/js/archivos.js"></script>
         <script src="web/js/usuarios.js"></script>
         <script src="web/js/cambiaPass.js"></script>
-        <script src="web/js/busquedas.js"></script>
         <script src="web/js/dragAndDropController.js" type="text/javascript"></script>
         <script src="web/js/ng-table.js" type="text/javascript"></script>
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>

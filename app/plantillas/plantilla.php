@@ -39,7 +39,8 @@
         <script src="web/js/ng-table.js" type="text/javascript"></script>
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>
     </head>
-    <body data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
+<!--    <body data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">-->
+    <body>
         <?php if(!isset($usuario_json->token)) { ?>
         <header>
             <nav class="navbar navbar-default">
@@ -109,31 +110,31 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
                         <ul class="nav nav-pills nav-justified">
-                                <?php if(!isset($usuario_json->token)) { ?>
-                                <li role="presentation"><a href="?home/index/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
-                                <li role="presentation"><a href="?archivos/convertir/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
+                                <?php //if(!isset($usuario_json->token)) { ?>
+                                <li role="presentation"><a href="?home/index/<?php //echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir/<?php //echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/alta/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Registro</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/login/<?php echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Login</a></li>
-                            <?php } else {
+                                <li role="presentation" class="text-right"><a href="?usuarios/alta/<?php //echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Registro</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/login/<?php //echo ($id_dir) ? $directorio_id_json->directorio_id : "" ?>">Login</a></li>
+                            <?php //} else {
                                 //$usuario = json_decode($usuario);
                                 //var_dump($usuario->estado === '200 OK');
                             ?>
-                                <li role="presentation"><a href="?home/index/<?php echo $usuario_json->token ?>">Inicio</a></li>
-                                <li role="presentation"><a href="?archivos/convertir/<?php echo $usuario_json->token ?>">Conversión</a></li>
+                                <li role="presentation"><a href="?home/index/<?php //echo $usuario_json->token ?>">Inicio</a></li>
+                                <li role="presentation"><a href="?archivos/convertir/<?php //echo $usuario_json->token ?>">Conversión</a></li>
                                 <li role="presentation"><a href="#">Categorías</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id ?>/<?php echo $usuario->token ?>">Perfil</a></li>
-                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id ?>">Salir</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php //echo $usuario_json->usuario_id ?>/<?php //echo $usuario->token ?>">Perfil</a></li>
+                                <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php //echo $usuario_json->usuario_id ?>">Salir</a></li>
                                 <li class="dropdown dr">
                                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Perfil <span class="caret"></span></a>
                                     <ul class="dropdown-menu dropdown-menu-right">
-                                        <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>">Ver perfil</a></li>
+                                        <li role="presentation" class="text-right"><a href="?usuarios/perfil/<?php //echo $usuario_json->usuario_id; ?>/<?php //echo $usuario_json->token; ?>">Ver perfil</a></li>
                                         <li class="divider"></li>
-                                        <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php echo $usuario_json->usuario_id; ?>">Salir</a></li>
+                                        <li role="presentation" class="text-right"><a href="?usuarios/logout/<?php //echo $usuario_json->usuario_id; ?>">Salir</a></li>
                                     </ul>
                                 </li>
                             <?php
-                                }
+                                //}
                             ?>
                         </ul>
                     </div>

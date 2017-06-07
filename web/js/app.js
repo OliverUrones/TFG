@@ -87,9 +87,9 @@ angular
     
 }]);
 
-angular
-    .module('estadoActivacionApp', ['ngDialog'])
-    .controller('estadoActivacionController', ['$scope', 'ngDialog', function($scope, ngDialog) {
+//angular
+//    .module('estadoActivacionApp', ['ngDialog'])
+formularios.controller('estadoActivacionController', ['$scope', 'ngDialog', function($scope, ngDialog) {
     
     //Objeto que representa al modelo de los datos del formulario de alta
     $scope.altaModelo = {};

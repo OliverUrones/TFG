@@ -122,7 +122,7 @@
                                             </table>
                                         </div>
                                         <div class="modal-footer">
-                                            <a type="button" data-ng-click="borraArchivo(archivoBorradoModelo); abreResultadoBorrado();" type="submit" class="btn btn-primary">Confirmar</a>
+                                            <a type="button" data-ng-click="borraArchivo(archivoBorradoModelo); closeThisDialog(); abreResultadoBorrado();" type="submit" class="btn btn-primary">Confirmar</a>
                                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-primary">Cancelar</a>
                                         </div>
                                     </form>
@@ -252,7 +252,6 @@
                                 data-ng-init="usuarioABorrar.token = '<?php echo $usuario_json->token; ?>'"
                                 value="<?php echo $usuario_json->token; ?>">
                         </div>
-                        {{usuarioABorrar}}
                         <div class="modal-footer">
                             <a data-ng-click="eliminarCuenta(usuarioABorrar); closeThisDialog(); abreResultadoBaja();" type="button" class="btn btn-primary">Confirmar</a>
                             <a data-ng-click="closeThisDialog()" type="button" class="btn btn-danger">Cancelar</a>

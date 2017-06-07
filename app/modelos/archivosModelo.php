@@ -310,7 +310,9 @@ class archivosModelo {
         if(!$resultado) {
             return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
-            $this->__eliminaArchivoFisico($enlace_descarga);
+            if($enlace_descarga!=NULL) {
+                $this->__eliminaArchivoFisic-o($enlace_descarga);
+            }
             return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }
     }
@@ -334,6 +336,7 @@ class archivosModelo {
                         $enlaces[$key] = $value;
                     }
                 }
+                return $enlaces;
             }
         } else {
             //Si es false el id es del usuario
@@ -345,12 +348,12 @@ class archivosModelo {
                     //echo '<br/>'.$key.' -- '.$value;
                     $enlaces[$key] = $value;
                 }
+                return $enlaces;
                 //var_dump($archivos);
             }
         }
         
         
-            return $enlaces;
     }
 
     /**

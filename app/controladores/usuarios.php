@@ -764,26 +764,50 @@ class usuarios extends Api\Api implements Rest {
             //Se llama al método del modelo usuarios recupera los datos del usuario a loguearse
             $usuario = $usuariosModelo->dameUsuarioLogueado();
             
-            $linea_log = [
-                            "fecha" => '['.date("d-m-Y H:i:s").']',
-                            "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
-                            "accion" => '[ACCION: '.'login'.']',
-                            "estado" => '[ESTADO: '.$usuario['estado_p'].']',
-                            "mensaje" => '[MENSAJE: '.$usuario['Mensaje'].']'
-                        ];
-            $logControlador = new logs('usuarios', $linea_log);
+            if($usuario['estado_p'] === '400 KO') {
+                //Redirijo al login de nuevo
+                $linea_log = [
+                                "fecha" => '['.date("d-m-Y H:i:s").']',
+                                "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
+                                "accion" => '[ACCION: '.'login'.']',
+                                "estado" => '[ESTADO: '.$usuario['estado_p'].']',
+                                "mensaje" => '[MENSAJE: '.$usuario['Mensaje'].']'
+                            ];
+                $logControlador = new logs('usuarios', $linea_log);
+                //Se convierte los datos a JSON
+                $usuario = $this->construyeJSON($usuario);
+
+                //Función extract() para pasar los datos a la vista
+                extract($usuario);
+                
+                //..muestra el forumulario de login
+                $ruta_vista_login = VISTAS . 'usuarios/login.php';
+                require_once $ruta_vista_login;
+            } else {
+                //Login correcto
+                $linea_log = [
+                                "fecha" => '['.date("d-m-Y H:i:s").']',
+                                "ip" => '[IP: '.$_SERVER['REMOTE_ADDR'].']',
+                                "accion" => '[ACCION: '.'login'.']',
+                                "estado" => '[ESTADO: '.$usuario['estado_p'].']',
+                                "mensaje" => '[MENSAJE: '.$usuario['Mensaje'].']'
+                            ];
+                $logControlador = new logs('usuarios', $linea_log);
+                //Se convierte los datos a JSON
+                $usuario = $this->construyeJSON($usuario);
+
+                //Función extract() para pasar los datos a la vista
+                extract($usuario);
+                
+                //Redirección a la vista... y mensaje del estado del login ************ OJO
+                $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
+                require_once $ruta_vista_perfil;
+            }
+            
 
             //var_dump($usuario);
 
-            //Se convierte los datos a JSON
-            $usuario = $this->construyeJSON($usuario);
-
-            //Función extract() para pasar los datos a la vista
-            extract($usuario);
             
-            //Redirección a la vista... y mensaje del estado del login ************ OJO
-            $ruta_vista_perfil = VISTAS .'usuarios/perfil.php';
-            require_once $ruta_vista_perfil;
         }
     }
     

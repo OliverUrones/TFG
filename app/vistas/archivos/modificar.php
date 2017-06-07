@@ -12,10 +12,10 @@ if(isset($usuario)) {
 <?php ob_start() ?>
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <h2>Modificar archivo</h2>
         <?php if( (isset($archivo_json->accion) && $archivo_json->accion === 'modificar') && (isset($archivo_json->estado_p) && $archivo_json->estado_p === '200 OK') ) { ?>
             <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $archivo_json->Mensaje; ?></div>
         <?php } ?>
-        <h2>Modificar archivo</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?archivos/modificar/<?php echo $usuario_json->token; ?>" method="POST">
 <!--            <div class="form-group">-->
 <!--                <label class="control-label">ArchivoID</label>-->

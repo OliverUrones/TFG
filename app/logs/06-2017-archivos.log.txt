@@ -1,0 +1,3 @@
+[06-06-2017 19:21:34] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Tree y Notes B] [ARCHIVO: output.pdf] [ID USUARIO: 6] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[07-06-2017 10:08:35] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Archivo para borrar] [ARCHIVO: output.pdf] [ID USUARIO: 6] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[07-06-2017 11:34:37] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Archivo de prueba para el usuario Prueba] [ARCHIVO: output.pdf] [ID USUARIO: 26] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]

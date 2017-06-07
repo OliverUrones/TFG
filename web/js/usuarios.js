@@ -30,7 +30,7 @@ usuarios.controller('EliminarCuentaController', ['$scope', 'ngDialog', '$http', 
             $http.post("index.php?usuarios/bajaCuenta", datos)
                 .then(function (respuesta) {
                     console.log("Éxito $http.post()");
-                    console.log(JSON.stringify(respuesta.data));
+                    //console.log(JSON.stringify(respuesta.data));
                     $scope.usuarioABorrar.resultado = respuesta.data;
                     console.log($scope.usuarioABorrar.resultado);
                 });
@@ -39,7 +39,7 @@ usuarios.controller('EliminarCuentaController', ['$scope', 'ngDialog', '$http', 
         $scope.abreResultadoBaja = function () {
             $scope.resultadoSubidaDialog = ngDialog.open({template: 'resultadoBajaCuenta.html', className: 'ngdialog-theme-default', scope: $scope, showClose: false, closeByEscape: false, closeByDocument: false});
             console.log($scope.resultadoSubidaDialog);
-            //console.log(altaModelo.respuesta);
+            //console.log($scope.usuarioABorrar.resultado);
             //console.log("Estoy aquí");
         };
 }]);

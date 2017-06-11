@@ -29,7 +29,7 @@ if(isset($respuesta)) {
                 <span data-ng-show="recordar.email.$error.email && !recordar.email.$pristine">El email no es válido.</span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!recordar.$valid">Modificar</button>
+                <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!recordar.$valid">Enviar</button>
                 <a href="?usuarios/login" type="button" class="btn btn-danger" value="Enviar" data-ng-init="">Volver</a>
             </div>
         </form>

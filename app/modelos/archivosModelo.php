@@ -256,13 +256,13 @@ class archivosModelo {
      */
     public function modificaArchivoId() {
         //var_dump($_POST);
-        $sql = "UPDATE `archivos` SET nombre=".utf8_encode($this->nombre).", categoria_id=".$this->categoria_id.", ambito=".$this->ambito." WHERE archivo_id=".$this->archivo_id.";";
+        $sql = "UPDATE `archivos` SET nombre=".utf8_encode($this->nombre).", categoria_id=".$this->categoria_id.", ambito=".$this->ambito.", etiquetas=".utf8_encode($this->etiquetas)." WHERE archivo_id=".$this->archivo_id.";";
         //var_dump($sql);
         $resultado = $this->conexion->execute($sql);
 
         if(!$resultado)
         {
-            return array('estado' => '400 KO', 'Mensaje' => 'Error al activar la cuenta');
+            return array('estado' => '400 KO', 'Mensaje' => 'Error al modificar el archivo');
         }else
         {
             $archivo = $this->dameArchivoId(str_replace("'", "", $this->archivo_id));
@@ -311,7 +311,7 @@ class archivosModelo {
             return array('estado_p' => '400 KO', 'Mensaje' => "Error al borrar el archivo");
         } else {
             if($enlace_descarga!=NULL) {
-                $this->__eliminaArchivoFisic-o($enlace_descarga);
+                $this->__eliminaArchivoFisico($enlace_descarga);
             }
             return array('estado_p' => '200 OK', 'Mensaje' => "Archivo borrado correctamente");
         }

@@ -1,3 +1,8 @@
 [06-06-2017 19:21:34] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Tree y Notes B] [ARCHIVO: output.pdf] [ID USUARIO: 6] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
 [07-06-2017 10:08:35] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Archivo para borrar] [ARCHIVO: output.pdf] [ID USUARIO: 6] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
 [07-06-2017 11:34:37] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Archivo de prueba para el usuario Prueba] [ARCHIVO: output.pdf] [ID USUARIO: 26] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[09-06-2017 16:21:59] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Prueba] [ARCHIVO: output.pdf] [ID USUARIO: 9] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[09-06-2017 16:26:19] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Prueba] [ARCHIVO: output.pdf] [ID USUARIO: 10] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[09-06-2017 16:29:44] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Prueba] [ARCHIVO: output.pdf] [ID USUARIO: 10] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[09-06-2017 16:31:05] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Prueba] [ARCHIVO: output.pdf] [ID USUARIO: 10] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]
+[11-06-2017 16:43:06] [IP: ::1] [ACCION: subir archivo] [NOMBRE DEL ARCHIVO: Ejemplo] [ARCHIVO: output.pdf] [ID USUARIO: 7] [ESTADO: 200 OK] [MENSAJE: El archivo se ha añadido al repositorio correctamente.]

@@ -123,6 +123,15 @@ if(isset($admin)) {
                 </select>
             </div>
             <div class="form-group">
+                <label class="control-label">Etiquetas</label>
+                <input type="text"
+                       name="etiquetas"
+                       class="form-control"
+                       id="etiquetas"
+                       value="<?php echo $archivo_json->etiquetas; ?>"
+                       required>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Modificar</button>
                 <a href="?archivos/listarTodos/<?php echo $admin_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="">Volver</a>
             </div>

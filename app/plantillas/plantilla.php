@@ -39,8 +39,7 @@
         <script src="web/js/ng-table.js" type="text/javascript"></script>
         <script src="web/js/ng-table.min.js" type="text/javascript"></script>
     </head>
-<!--    <body data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">-->
-    <body>
+    <body data-ng-app="RepositorioApp" data-ng-controller="LoginFormController">
         <?php if(!isset($usuario_json->token)) { ?>
         <header>
             <nav class="navbar navbar-default">
@@ -157,16 +156,12 @@
                                 name="busqueda" 
                                 id="busqueda" 
                                 type="text" 
-                                data-ng-model="busquedaModelo.busqueda"
-                                data-ng-minlength="3"
                                 placeholder="Buscar documentos..."
                                 required>
                             <span class="input-group-btn">
-                                <button class="btn btn-info" data-ng-disabled="!buscar.$valid">Buscar</button>
+                                <button class="btn btn-info">Buscar</button>
                             </span>
                         </div>
-                        <span data-ng-show='buscar.busqueda.$error.required && !buscar.busqueda.$pristine'>La búsqueda no puede ser una cadena vacía.</span>
-                        <span data-ng-show='buscar.busqueda.$error.minlength && !buscar.busqueda.$pristine'>La cadena de búsqueda debe tener al menos 3 caracteres.</span>
                     </form>
                 </div>
             </div>

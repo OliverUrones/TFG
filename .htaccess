@@ -1,18 +1,5 @@
-# Uncomment the following to prevent the httpoxy vulnerability
-# See: https://httpoxy.org/
-#<IfModule mod_headers.c>
-#    RequestHeader unset Proxy
-#</IfModule>
-
-<IfModule mod_rewrite.c>
-    RewriteEngine on
-#RewriteCond %{REQUEST_FILENAME} !-d
-#RewriteCond %{REQUEST_FILENAME} !-f
-#RewriteCond %{HTTP:header} !-f
-#RewriteCond %{DOCUMENT_ROOT}/ !-f
-#    RewriteBase "/TFG2/"
-#    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/?$                              index.php?controlador=$1&metodo=$2                  [QSA]   [L]
-#    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/([0-9]+)/?$                     index.php?controlador=$1&metodo=$2&id=$3            [QSA]   [L]
-#    RewriteRule  ^(.[a-zA-Z]+)/(.[a-zA-Z]+)/([0-9]+)/(.[a-zA-Z0-9]+)/?$     index.php?controlador=$1&metodo=$2&id=$3&token=$4   [QSA]   [L]
-#    RewriteRule  ^(.*)$                                                     index.php?controlador=home&metodo=index             [QSA]   [L]
-</IfModule>
+# Fixes a vulnerability in CentOS: http://stackoverflow.com/questions/20533279/prevent-php-from-parsing-non-php-files-such-as-somefile-php-txt
+<FilesMatch \.php\.txt$>
+    RemoveHandler .php
+    ForceType text/plain
+</FilesMatch>

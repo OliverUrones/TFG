@@ -111,6 +111,15 @@ if(isset($usuario)) {
                        readonly>-->
             </div>
             <div class="form-group">
+                <label class="control-label">Etiquetas</label>
+                <input type="text"
+                       name="etiquetas"
+                       class="form-control"
+                       id="etiquetas"
+                       value="<?php echo $archivo_json->etiquetas; ?>"
+                       required>
+            </div>
+            <div class="form-group">
                 <button type="submit" class="btn btn-success" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Modificar</button>
                 <a href="?archivos/listar/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" type="button" class="btn btn-danger" value="Enviar" data-ng-init="" data-ng-disabled="!modificar.$valid">Volver</a>
             </div>

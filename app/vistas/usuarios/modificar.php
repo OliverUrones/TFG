@@ -7,10 +7,10 @@ if(isset($usuario)) {
 <?php ob_start() ?>
 <div class="container">
     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+        <h2>Modificar mis datos</h2>
         <?php if( (isset($usuario_json->accion) && $usuario_json->accion === 'modificar') && (isset($usuario_json->estado_p) && $usuario_json->estado_p === '200 OK') ) { ?>
             <div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $usuario_json->Mensaje; ?></div>
         <?php } ?>
-        <h2>Modificar mis datos</h2>
         <form name="modificar" class="form-horizontal" role="form" action="?usuarios/modificarDatos/<?php echo $usuario_json->usuario_id; ?>/<?php echo $usuario_json->token; ?>" method="POST">
             <div class="form-group">
 <!--                <label class="control-label">ID</label>-->

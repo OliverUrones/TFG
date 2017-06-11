@@ -51,7 +51,7 @@ class envioEmailModelo {
         $mail = new \PHPMailer();
         
         //Activo el debug --> En producción esto debe estar desactivado
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         
         //Configuración envío por SMTP
         $mail->isSMTP();
@@ -79,10 +79,10 @@ class envioEmailModelo {
         $mail->AltBody = "Para activar la cuenta copie el siguiente enlace https://localhost/TFG2/?usuarios/activar/".$usuario_id." y péguelo en la barra de direcciones del navegador";
 
         if($mail->send()){
-            echo "Mensaje enviado";
+            //echo "Mensaje enviado";
         } else {
             //Ver info del error
-            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
+            //echo "Error al enviar mensaje: " . $mail->ErrorInfo;
         }
     }
     
@@ -97,7 +97,7 @@ class envioEmailModelo {
         $mail = new \PHPMailer();
         
         //Activo el debug --> En producción esto debe estar desactivado
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         
         //Configuración envío por SMTP
         $mail->isSMTP();
@@ -125,11 +125,11 @@ class envioEmailModelo {
         $mail->AltBody = "Para restablecer su contraseña copie el siguiente enlace https://localhost/TFG2/?usuarios/restablecer/".$usuario_id." y péguelo en la barra de direcciones del navegador";
 
         if($mail->send()){
-            echo "Mensaje enviado";
+            //echo "Mensaje enviado";
             return true;
         } else {
             //Ver info del error
-            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
+            //echo "Error al enviar mensaje: " . $mail->ErrorInfo;
             return false;
         }
     }
@@ -142,7 +142,7 @@ class envioEmailModelo {
         $mail = new \PHPMailer();
         
         //Activo el debug
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         
         //Configuración envío por SMTP
         $mail->isSMTP();
@@ -170,10 +170,10 @@ class envioEmailModelo {
         $mail->AltBody = "La contraseña de su cuenta ha sido cambiada. Si ud. no ha realizado dicho cambio, por favor, póngase en contacto con el administrador.";
 
         if($mail->send()){
-            echo "Mensaje enviado";
+            //echo "Mensaje enviado";
         } else {
             //Ver info del error
-            echo "Error al enviar mensaje: " . $mail->ErrorInfo;
+            //echo "Error al enviar mensaje: " . $mail->ErrorInfo;
         }
     }
 }

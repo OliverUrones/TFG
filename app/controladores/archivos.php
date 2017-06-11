@@ -992,9 +992,9 @@ class archivos extends Api implements Rest {
             //var_dump($comando);
             exec($comando, $salida, $valor_retorno);
             //var_dump($salida);
-            foreach ($salida as $key => $value) {
-                echo $key.' '.$value.'<br/>';
-            }
+//            foreach ($salida as $key => $value) {
+//                //echo $key.' '.$value.'<br/>';
+//            }
         }
         if($valor_retorno === 0) {
             return $salida;

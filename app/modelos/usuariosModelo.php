@@ -439,7 +439,7 @@ class usuariosModelo {
         //Intenta obtener una fila de la consulta
         $columna = $this->conexion->getRow($sql);
         //var_dump($columna);
-        if(is_array($columna) && $columna['estado'] == 1)
+        if(isset($columna['estado']) && is_array($columna) && $columna['estado'] == 1)
         {
             //La cuenta está activada
             return true;

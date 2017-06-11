@@ -5,7 +5,7 @@ if(isset($directorio_id)) {
 }
 if(isset($nombre_archivo)) {
     $nombre_archivo_json = json_decode($nombre_archivo);
-    var_dump($nombre_archivo_json);
+    //var_dump($nombre_archivo_json);
     if(isset($categorias)) {
         $categorias_json = json_decode($categorias);
         //var_dump($categorias_json);

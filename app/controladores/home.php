@@ -21,8 +21,8 @@ use app\controladores\archivos\archivos;
 class home extends Api\Api {
     
     /*Constructor*/
-    public function home() {
-    }
+//    public function home() {
+//    }
     
     /**
      * Método que ejecuta la petición por defecto.

@@ -107,7 +107,7 @@ if(isset($usuario)) {
                         </div>
                     </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-success" id="EnviarArchivos" value="EnviarArchivos">Enviar</button>
+                <button type="submit" class="btn btn-success" id="EnviarArchivos" value="EnviarArchivos">Convertir</button>
             </div>
     </form>
     </div>

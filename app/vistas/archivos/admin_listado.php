@@ -22,7 +22,7 @@ if(isset($admin)) {
             <?php $key=0; foreach ($archivos_json as $obj) { ?>
                 <ng-model-options ng-model-options="{ getterSetter: true }">
                     <ng-model ng-model="archivos[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
-                    <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo $obj->enlace_descarga; ?>'"></ng-model>
+                    <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo utf8_decode($obj->enlace_descarga); ?>'"></ng-model>
                     <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_usuario  = '<?php echo utf8_decode($obj->nombre_usuario); ?>'"></ng-model>
                     <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_categoria  = '<?php echo utf8_decode($obj->nombre_categoria); ?>'"></ng-model>
                     <ng-model ng-model="archivos[<?php echo $key; ?>].etiquetas  = '<?php echo utf8_decode($obj->etiquetas); ?>'"></ng-model>

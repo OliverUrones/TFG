@@ -1,10 +1,12 @@
 <?php
 if(isset($archivo)) {
+    //var_dump($archivo);
     $archivo_json = json_decode($archivo);
     //var_dump($archivo_json);
 }
 
 if(isset($usuario)) {
+    //var_dump($usuario);
     $usuario_json = json_decode($usuario);
     //var_dump($usuario_json);
 }

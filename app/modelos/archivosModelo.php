@@ -100,7 +100,7 @@ class archivosModelo {
         if($this->__mueveArchivo($params)) {
             //Construyo la consulta de inserción
             $sql = "INSERT INTO `archivos` (`usuario_id`, `categoria_id`, `nombre`, `enlace_descarga`, `ambito`, `etiquetas`)"
-                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".$this->enlace_descarga."', ".$this->ambito.", ".utf8_encode($this->etiquetas).");";
+                    . " VALUES (".$this->usuario_id.", ".$this->categoria_id.", ".utf8_encode($this->nombre).", '".utf8_encode($this->enlace_descarga)."', ".$this->ambito.", ".utf8_encode($this->etiquetas).");";
             //var_dump($sql);
             //La ejecuto
             $recordSet = $this->conexion->execute($sql);

@@ -37,7 +37,7 @@
                             <ng-model ng-model="archivos[<?php echo $key; ?>].token  = '<?php echo utf8_decode($usuario_json->token); ?>'"></ng-model>
                             <ng-model ng-model="archivos[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
                             <ng-model ng-model="archivos[<?php echo $key; ?>].nombre_categoria  = '<?php echo utf8_decode($obj->nombre_categoria); ?>'"></ng-model>
-                            <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo $obj->enlace_descarga; ?>'"></ng-model>
+                            <ng-model ng-model="archivos[<?php echo $key; ?>].enlace_descarga  = '<?php echo utf8_decode($obj->enlace_descarga); ?>'"></ng-model>
                             <?php if($obj->ambito==0) { ?>
                                 <ng-model ng-model="archivos[<?php echo $key; ?>].ambito = '<?php echo 'Privado' ?>'"></ng-model>
                             <?php } else { ?>

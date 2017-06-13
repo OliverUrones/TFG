@@ -19,6 +19,7 @@
                        placeholder="corre@correo.es"
                        name="email_login"
                        data-ng-model="loginModelo.email"
+                       autocomplete="off"
                        required>
                 <span data-ng-show="loginForm.email_login.$error.required && !loginForm.email_login.$pristine">El email es obligatorio.</span>
                 <span data-ng-show="loginForm.email_login.$error.email && !loginForm.email_login.$pristine">El email no es válido.</span>
@@ -30,6 +31,7 @@
                        placeholder="********"
                        name="password_login"
                        data-ng-model="loginModelo.password"
+                       autocomplete="off"
                        required>
                 <span data-ng-show='loginForm.password_login.$error.required && !loginForm.password_login.$pristine'>La contraseña es obligatoria.</span>
                 <span data-ng-show='loginForm.password_login.$error.minlength && !loginForm.password_login.$pristine'>La contraseña debe tener al menos 8 caracteres.</span>

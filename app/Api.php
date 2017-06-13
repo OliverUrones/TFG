@@ -241,6 +241,12 @@ class Api {
     protected function EstablecerCabeceras($ruta=NULL, $nombre=NULL) {
         header("HTTP/1.1 " . $this->codEstado . " " . $this->GetCodEstado());  
         header("Content-Type:" . $this->tipo . ';charset=utf-8');
+        //Para evitar vulnerabilidad no-cache control
+        header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        header("Pragma: no-cache"); // HTTP 1.0.
+        header("Expires: 0"); // Proxies.
+        //Para evitar ataques del tipo Cross-Site X-XSS
+        header( 'X-XSS-Protection: 1;mode=block' );
         //Si se le pasas como argumento un archivo...
         if(isset($ruta) && $ruta !== NULL) {
             //...Se establece Content-Disposition: attachment; filename=$filename para descargar el archivo

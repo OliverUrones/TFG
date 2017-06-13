@@ -11,6 +11,7 @@
                    id="nombre" 
                    data-ng-model="altaModelo.nombre"
                    data-ng-minlength="3"
+                   autocomplete="off"
                    required>
             <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
             <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
@@ -22,6 +23,7 @@
                    class="form-control" 
                    id="apellidos" 
                    data-ng-model="altaModelo.apellidos"
+                   autocomplete="off"
                    required>
             <span data-ng-show='alta.apellidos.$error.required && !alta.apellidos.$pristine'>Los apellidos son obligatorios.</span>
         </div>
@@ -31,7 +33,8 @@
                    name="email" 
                    placeholder="correo@correo.es" 
                    class="form-control" 
-                   data-ng-model="altaModelo.email" 
+                   data-ng-model="altaModelo.email"
+                   autocomplete="off"
                    required>
             <span data-ng-show='alta.email.$error.required && !alta.email.$pristine'>El email es obligatorio.</span>
             <span data-ng-show='alta.email.$error.email && !alta.email.$pristine'>El email no es válido.</span>
@@ -44,6 +47,7 @@
                    class="form-control" 
                    data-ng-model="altaModelo.password" 
                    data-ng-minlength="8"
+                   autocomplete="off"
                    required>
             <span data-ng-show='alta.password.$error.required && !alta.password.$pristine'>La contraseña es obligatoria.</span>
             <span data-ng-show='alta.password.$error.minlength && !alta.password.$pristine'>La contraseña debe tener al menos 8 caracteres.</span>
@@ -56,6 +60,7 @@
                    class="form-control" 
                    data-ng-model="altaModelo.password_repeat" 
                    data-ng-minlength="8"
+                   autocomplete="off"
                    required>
             <span data-ng-show="altaModelo.password_repeat !== altaModelo.password">Las contraseñas no coinciden.</span>
             <span data-ng-show='alta.password_repeat.$error.minlength'>La contraseña debe tener al menos 8 caracteres.</span>

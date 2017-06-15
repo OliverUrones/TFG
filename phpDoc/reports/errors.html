@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>     &raquo; Compilation errors
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">TFG</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/app.html">\app</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">58</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+
+            <ul class="side-nav nav nav-list">
+                <li class="nav-header">Navigation</li>
+                                                                            <li><a href="#web/index.php"><i class="icon-file"></i> web/index.php</a></li>
+                                                                                                                                                            <li><a href="#admin/web/index.php"><i class="icon-file"></i> admin/web/index.php</a></li>
+                                                                                                    <li><a href="#admin/index.php"><i class="icon-file"></i> admin/index.php</a></li>
+                                                                                                    <li><a href="#app/interfaz/Rest.php"><i class="icon-file"></i> app/interfaz/Rest.php</a></li>
+                                                                                                    <li><a href="#app/plantillas/plantilla_admin.php"><i class="icon-file"></i> app/plantillas/plantilla_admin.php</a></li>
+                                                                                                    <li><a href="#app/plantillas/plantilla.php"><i class="icon-file"></i> app/plantillas/plantilla.php</a></li>
+                                                                                                    <li><a href="#app/modelos/rolesModelo.php"><i class="icon-file"></i> app/modelos/rolesModelo.php</a></li>
+                                                                                                    <li><a href="#app/modelos/categoriasModelo.php"><i class="icon-file"></i> app/modelos/categoriasModelo.php</a></li>
+                                                                                                    <li><a href="#app/modelos/usuariosModelo.php"><i class="icon-file"></i> app/modelos/usuariosModelo.php</a></li>
+                                                                                                    <li><a href="#app/modelos/busquedaModelo.php"><i class="icon-file"></i> app/modelos/busquedaModelo.php</a></li>
+                                                                                                    <li><a href="#app/modelos/logsModelo.php"><i class="icon-file"></i> app/modelos/logsModelo.php</a></li>
+                                                                                                    <li><a href="#app/modelos/archivosModelo.php"><i class="icon-file"></i> app/modelos/archivosModelo.php</a></li>
+                                                                                                    <li><a href="#app/modelos/envioEmailModelo.php"><i class="icon-file"></i> app/modelos/envioEmailModelo.php</a></li>
+                                                                                                    <li><a href="#app/vistas/roles/admin_modificar.php"><i class="icon-file"></i> app/vistas/roles/admin_modificar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/roles/admin_listado.php"><i class="icon-file"></i> app/vistas/roles/admin_listado.php</a></li>
+                                                                                                    <li><a href="#app/vistas/roles/admin_borrar.php"><i class="icon-file"></i> app/vistas/roles/admin_borrar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/roles/admin_alta.php"><i class="icon-file"></i> app/vistas/roles/admin_alta.php</a></li>
+                                                                                                    <li><a href="#app/vistas/home.php"><i class="icon-file"></i> app/vistas/home.php</a></li>
+                                                                                                    <li><a href="#app/vistas/archivos/admin_modificar.php"><i class="icon-file"></i> app/vistas/archivos/admin_modificar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/archivos/resultado.php"><i class="icon-file"></i> app/vistas/archivos/resultado.php</a></li>
+                                                                                                    <li><a href="#app/vistas/archivos/admin_listado.php"><i class="icon-file"></i> app/vistas/archivos/admin_listado.php</a></li>
+                                                                                                    <li><a href="#app/vistas/archivos/modificar.php"><i class="icon-file"></i> app/vistas/archivos/modificar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/archivos/admin_borrar.php"><i class="icon-file"></i> app/vistas/archivos/admin_borrar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/archivos/convertir.php"><i class="icon-file"></i> app/vistas/archivos/convertir.php</a></li>
+                                                                                                    <li><a href="#app/vistas/admin_home.php"><i class="icon-file"></i> app/vistas/admin_home.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/logout.php"><i class="icon-file"></i> app/vistas/usuarios/logout.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/estado_activacion.php"><i class="icon-file"></i> app/vistas/usuarios/estado_activacion.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/admin_modificar.php"><i class="icon-file"></i> app/vistas/usuarios/admin_modificar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/login.php"><i class="icon-file"></i> app/vistas/usuarios/login.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/admin_login.php"><i class="icon-file"></i> app/vistas/usuarios/admin_login.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/perfil.php"><i class="icon-file"></i> app/vistas/usuarios/perfil.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/restablecer.php"><i class="icon-file"></i> app/vistas/usuarios/restablecer.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/cambiarPass.php"><i class="icon-file"></i> app/vistas/usuarios/cambiarPass.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/recordar.php"><i class="icon-file"></i> app/vistas/usuarios/recordar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/admin_listado.php"><i class="icon-file"></i> app/vistas/usuarios/admin_listado.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/modificar.php"><i class="icon-file"></i> app/vistas/usuarios/modificar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/admin_borrar.php"><i class="icon-file"></i> app/vistas/usuarios/admin_borrar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/admin_logout.php"><i class="icon-file"></i> app/vistas/usuarios/admin_logout.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/alta.php"><i class="icon-file"></i> app/vistas/usuarios/alta.php</a></li>
+                                                                                                    <li><a href="#app/vistas/usuarios/admin_alta.php"><i class="icon-file"></i> app/vistas/usuarios/admin_alta.php</a></li>
+                                                                                                    <li><a href="#app/vistas/categorias/admin_modificar.php"><i class="icon-file"></i> app/vistas/categorias/admin_modificar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/categorias/admin_listado.php"><i class="icon-file"></i> app/vistas/categorias/admin_listado.php</a></li>
+                                                                                                    <li><a href="#app/vistas/categorias/admin_borrar.php"><i class="icon-file"></i> app/vistas/categorias/admin_borrar.php</a></li>
+                                                                                                    <li><a href="#app/vistas/categorias/admin_alta.php"><i class="icon-file"></i> app/vistas/categorias/admin_alta.php</a></li>
+                                                                                                    <li><a href="#app/vistas/busquedas/resultado.php"><i class="icon-file"></i> app/vistas/busquedas/resultado.php</a></li>
+                                                                                                                                                            <li><a href="#app/Api.php"><i class="icon-file"></i> app/Api.php</a></li>
+                                                                                                    <li><a href="#app/controladores/usuarios.php"><i class="icon-file"></i> app/controladores/usuarios.php</a></li>
+                                                                                                    <li><a href="#app/controladores/archivos.php"><i class="icon-file"></i> app/controladores/archivos.php</a></li>
+                                                                                                    <li><a href="#app/controladores/home.php"><i class="icon-file"></i> app/controladores/home.php</a></li>
+                                                                                                    <li><a href="#app/controladores/busqueda.php"><i class="icon-file"></i> app/controladores/busqueda.php</a></li>
+                                                                                                    <li><a href="#app/controladores/logs.php"><i class="icon-file"></i> app/controladores/logs.php</a></li>
+                                                                                                    <li><a href="#app/controladores/roles.php"><i class="icon-file"></i> app/controladores/roles.php</a></li>
+                                                                                                    <li><a href="#app/controladores/categorias.php"><i class="icon-file"></i> app/controladores/categorias.php</a></li>
+                                                                    </ul>
+        </div>
+
+        <div class="span10 offset2">
+            <ul class="breadcrumb">
+                <li><a href="../"><i class="icon-remove-sign"></i></a><span class="divider">\</span></li>
+                <li>Compilation Errors</li>
+            </ul>
+
+            
+                            <div class="package-contents">
+                                            <a name="web/index.php" id="web/index.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            web/index.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="admin/web/index.php" id="admin/web/index.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            admin/web/index.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="admin/index.php" id="admin/index.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            admin/index.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/interfaz/Rest.php" id="app/interfaz/Rest.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/interfaz/Rest.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/plantillas/plantilla_admin.php" id="app/plantillas/plantilla_admin.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/plantillas/plantilla_admin.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/plantillas/plantilla.php" id="app/plantillas/plantilla.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/plantillas/plantilla.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/rolesModelo.php" id="app/modelos/rolesModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/rolesModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/categoriasModelo.php" id="app/modelos/categoriasModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/categoriasModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/usuariosModelo.php" id="app/modelos/usuariosModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/usuariosModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/busquedaModelo.php" id="app/modelos/busquedaModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/busquedaModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/logsModelo.php" id="app/modelos/logsModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/logsModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/archivosModelo.php" id="app/modelos/archivosModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/archivosModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/modelos/envioEmailModelo.php" id="app/modelos/envioEmailModelo.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/modelos/envioEmailModelo.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/roles/admin_modificar.php" id="app/vistas/roles/admin_modificar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/roles/admin_modificar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/roles/admin_listado.php" id="app/vistas/roles/admin_listado.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/roles/admin_listado.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/roles/admin_borrar.php" id="app/vistas/roles/admin_borrar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/roles/admin_borrar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/roles/admin_alta.php" id="app/vistas/roles/admin_alta.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/roles/admin_alta.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/home.php" id="app/vistas/home.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/home.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/archivos/admin_modificar.php" id="app/vistas/archivos/admin_modificar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/archivos/admin_modificar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/archivos/resultado.php" id="app/vistas/archivos/resultado.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/archivos/resultado.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/archivos/admin_listado.php" id="app/vistas/archivos/admin_listado.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/archivos/admin_listado.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/archivos/modificar.php" id="app/vistas/archivos/modificar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/archivos/modificar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/archivos/admin_borrar.php" id="app/vistas/archivos/admin_borrar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/archivos/admin_borrar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/archivos/convertir.php" id="app/vistas/archivos/convertir.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/archivos/convertir.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/admin_home.php" id="app/vistas/admin_home.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/admin_home.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/logout.php" id="app/vistas/usuarios/logout.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/logout.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/estado_activacion.php" id="app/vistas/usuarios/estado_activacion.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/estado_activacion.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/admin_modificar.php" id="app/vistas/usuarios/admin_modificar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/admin_modificar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/login.php" id="app/vistas/usuarios/login.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/login.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/admin_login.php" id="app/vistas/usuarios/admin_login.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/admin_login.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/perfil.php" id="app/vistas/usuarios/perfil.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/perfil.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/restablecer.php" id="app/vistas/usuarios/restablecer.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/restablecer.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/cambiarPass.php" id="app/vistas/usuarios/cambiarPass.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/cambiarPass.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/recordar.php" id="app/vistas/usuarios/recordar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/recordar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/admin_listado.php" id="app/vistas/usuarios/admin_listado.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/admin_listado.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/modificar.php" id="app/vistas/usuarios/modificar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/modificar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/admin_borrar.php" id="app/vistas/usuarios/admin_borrar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/admin_borrar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/admin_logout.php" id="app/vistas/usuarios/admin_logout.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/admin_logout.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/alta.php" id="app/vistas/usuarios/alta.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/alta.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/usuarios/admin_alta.php" id="app/vistas/usuarios/admin_alta.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/usuarios/admin_alta.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/categorias/admin_modificar.php" id="app/vistas/categorias/admin_modificar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/categorias/admin_modificar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/categorias/admin_listado.php" id="app/vistas/categorias/admin_listado.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/categorias/admin_listado.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/categorias/admin_borrar.php" id="app/vistas/categorias/admin_borrar.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/categorias/admin_borrar.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/categorias/admin_alta.php" id="app/vistas/categorias/admin_alta.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/categorias/admin_alta.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/vistas/busquedas/resultado.php" id="app/vistas/busquedas/resultado.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/vistas/busquedas/resultado.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/Api.php" id="app/Api.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/Api.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/usuarios.php" id="app/controladores/usuarios.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/usuarios.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/archivos.php" id="app/controladores/archivos.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/archivos.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/home.php" id="app/controladores/home.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/home.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/busqueda.php" id="app/controladores/busqueda.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/busqueda.php
+                            <small style="float: right;padding-right: 10px;">1</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/logs.php" id="app/controladores/logs.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/logs.php
+                            <small style="float: right;padding-right: 10px;">2</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>53</td>
+                                        <td>Argument $nombre_log is missing from the Docblock of crearArchivo</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/roles.php" id="app/controladores/roles.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/roles.php
+                            <small style="float: right;padding-right: 10px;">3</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>370</td>
+                                        <td>Argument $parametros is missing from the Docblock of ver</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>370</td>
+                                        <td>No summary for method ver()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                            <div class="package-contents">
+                                            <a name="app/controladores/categorias.php" id="app/controladores/categorias.php"></a>
+                        <h3>
+                            <i class="icon-file"></i>
+                            app/controladores/categorias.php
+                            <small style="float: right;padding-right: 10px;">3</small>
+                        </h3>
+                        <div>
+                            <table class="table markers table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Line</th>
+                                    <th>Description</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>0</td>
+                                        <td>No summary was found for this file</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>390</td>
+                                        <td>Argument $parametros is missing from the Docblock of ver</td>
+                                    </tr>
+                                                                    <tr>
+                                        <td>error</td>
+                                        <td>390</td>
+                                        <td>No summary for method ver()</td>
+                                    </tr>
+                                                            </tbody>
+                            </table>
+                        </div>
+                                    </div>
+                    </div>
+    </section>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/app.html">\app</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on June 15th, 2017 at 12:10.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

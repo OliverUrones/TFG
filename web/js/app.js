@@ -14,7 +14,7 @@ formularios.controller('ValidacionFormsController', ['$scope', 'ngDialog', funct
 formularios.controller('SubidaArchivoFormController', ['$scope', 'ngDialog', '$http', function($scope, ngDialog, $http) {
     $http.get("index.php?categorias/listarAjax",$scope.altaModelo.categorias)
             .then(function (respuesta) {
-                //console.log(JSON.stringify(respuesta.data));
+                console.log(JSON.stringify(respuesta.data));
                 $scope.altaModelo.categorias = respuesta.data;
                 console.log($scope.altaModelo.categorias);
     });

@@ -74,8 +74,8 @@ if(isset($usuario)) {
                                            data-ng-model="altaModelo.nombre"
                                            data-ng-minlength="3"
                                            required>
-                                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
-                                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.required && !guardarArchivo.nombre.$pristine'>El nombre es obligatorio.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.minlength && !guardarArchivo.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label ">Categorías</label>
@@ -103,8 +103,8 @@ if(isset($usuario)) {
                                            data-ng-model="altaModelo.etiquetas"
                                            data-ng-minlength="3"
                                            required>
-                                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
-                                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.required && !guardarArchivo.nombre.$pristine'>Las etiquetas son obligatorias.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.minlength && !aguardarArchivolta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
                                 </div>
                         </div>
                         <div class="modal-footer">

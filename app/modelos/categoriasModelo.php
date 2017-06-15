@@ -88,7 +88,7 @@ class categoriasModelo {
             //echo '<br/>'.$key.' -- '.$value;
             foreach ($value as $columna => $valor) {
                 if(is_string($columna)) {
-                    $categorias[$key][$columna] = $valor;
+                    $categorias[$key][$columna] = utf8_decode($valor);
                 }
             }
         }

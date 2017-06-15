@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>TFG</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">TFG</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown">
+                        <a href="../index.html" class="dropdown-toggle" data-toggle="dropdown">
+                            API Documentation <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                                                        <li><a href="../namespaces/app.html">\app</a></li>
+                                                    </ul>
+                    </li>
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">58</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-838118198"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-838118198" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-125503727"></a>
+                                <a href="../namespaces/app.html" style="margin-left: 30px; padding-left: 0">app</a>
+            </div>
+            <div id="namespace-125503727" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1010266021"></a>
+                                <a href="../namespaces/app.Api.html" style="margin-left: 30px; padding-left: 0">Api</a>
+            </div>
+            <div id="namespace-1010266021" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.Api.Api.html">Api</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1068180243"></a>
+                                <a href="../namespaces/app.controladores.html" style="margin-left: 30px; padding-left: 0">controladores</a>
+            </div>
+            <div id="namespace-1068180243" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1965865335"></a>
+                                <a href="../namespaces/app.controladores.archivos.html" style="margin-left: 30px; padding-left: 0">archivos</a>
+            </div>
+            <div id="namespace-1965865335" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.archivos.archivos.html">archivos</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-361674481"></a>
+                                <a href="../namespaces/app.controladores.busqueda.html" style="margin-left: 30px; padding-left: 0">busqueda</a>
+            </div>
+            <div id="namespace-361674481" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.busqueda.busqueda.html">busqueda</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1536517356"></a>
+                                <a href="../namespaces/app.controladores.categorias.html" style="margin-left: 30px; padding-left: 0">categorias</a>
+            </div>
+            <div id="namespace-1536517356" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.categorias.categorias.html">categorias</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2138481428"></a>
+                                <a href="../namespaces/app.controladores.home.html" style="margin-left: 30px; padding-left: 0">home</a>
+            </div>
+            <div id="namespace-2138481428" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.home.home.html">home</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1468766715"></a>
+                                <a href="../namespaces/app.controladores.logs.html" style="margin-left: 30px; padding-left: 0">logs</a>
+            </div>
+            <div id="namespace-1468766715" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.logs.logs.html">logs</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-473719097"></a>
+                                <a href="../namespaces/app.controladores.roles.html" style="margin-left: 30px; padding-left: 0">roles</a>
+            </div>
+            <div id="namespace-473719097" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.roles.roles.html">roles</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-141931454"></a>
+                                <a href="../namespaces/app.controladores.usuarios.html" style="margin-left: 30px; padding-left: 0">usuarios</a>
+            </div>
+            <div id="namespace-141931454" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.controladores.usuarios.usuarios.html">usuarios</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-882380322"></a>
+                                <a href="../namespaces/app.interfaz.html" style="margin-left: 30px; padding-left: 0">interfaz</a>
+            </div>
+            <div id="namespace-882380322" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-343593219"></a>
+                                <a href="../namespaces/app.interfaz.Rest.html" style="margin-left: 30px; padding-left: 0">Rest</a>
+            </div>
+            <div id="namespace-343593219" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                    <li class="interface"><a href="../classes/app.interfaz.Rest.Rest.html">Rest</a></li>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1401476869"></a>
+                                <a href="../namespaces/app.modelos.html" style="margin-left: 30px; padding-left: 0">modelos</a>
+            </div>
+            <div id="namespace-1401476869" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-524831117"></a>
+                                <a href="../namespaces/app.modelos.archivosModelo.html" style="margin-left: 30px; padding-left: 0">archivosModelo</a>
+            </div>
+            <div id="namespace-524831117" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.archivosModelo.archivosModelo.html">archivosModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-2127552991"></a>
+                                <a href="../namespaces/app.modelos.busquedaModelo.html" style="margin-left: 30px; padding-left: 0">busquedaModelo</a>
+            </div>
+            <div id="namespace-2127552991" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.busquedaModelo.busquedaModelo.html">busquedaModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1377116859"></a>
+                                <a href="../namespaces/app.modelos.categoriasModelo.html" style="margin-left: 30px; padding-left: 0">categoriasModelo</a>
+            </div>
+            <div id="namespace-1377116859" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.categoriasModelo.categoriasModelo.html">categoriasModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1497544775"></a>
+                                <a href="../namespaces/app.modelos.envioEmailModelo.html" style="margin-left: 30px; padding-left: 0">envioEmailModelo</a>
+            </div>
+            <div id="namespace-1497544775" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.envioEmailModelo.envioEmailModelo.html">envioEmailModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1654123247"></a>
+                                <a href="../namespaces/app.modelos.logsModelo.html" style="margin-left: 30px; padding-left: 0">logsModelo</a>
+            </div>
+            <div id="namespace-1654123247" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.logsModelo.logsModelo.html">logsModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-467354830"></a>
+                                <a href="../namespaces/app.modelos.rolesModelo.html" style="margin-left: 30px; padding-left: 0">rolesModelo</a>
+            </div>
+            <div id="namespace-467354830" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.rolesModelo.rolesModelo.html">rolesModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                    <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1493635873"></a>
+                                <a href="../namespaces/app.modelos.usuariosModelo.html" style="margin-left: 30px; padding-left: 0">usuariosModelo</a>
+            </div>
+            <div id="namespace-1493635873" class="accordion-body collapse ">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/app.modelos.usuariosModelo.usuariosModelo.html">usuariosModelo</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    
+                    <ul>
+                                                                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/app.controladores.archivos.html">\app\controladores\archivos</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\app\controladores\archivos</small>archivos</h1>
+                    <p><em>Clase controlador para la gestión de las acciones relacionadas con los archivos
+Esta clase usa los modelos de usuarios, archivos y categorías.</em></p>
+                    <p>También usa el controlador logs</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/app.Api.Api.html#method_Api" class="">Api()</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#method_GetCodEstado" class="">GetCodEstado()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_alta" class="">alta()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_baja" class="">baja()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_bajaAdmin" class="">bajaAdmin()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_modificar" class="">modificar()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_modificarAdmin" class="">modificarAdmin()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_listarTodos" class="">listarTodos()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_listar" class="">listar()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_ver" class="">ver()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_subir" class="">subir()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_conversion" class="">conversion()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_convertir" class="">convertir()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_descargarArchivo" class="">descargarArchivo()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_descargar" class="">descargar()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_borrarDirectorioId" class="">borrarDirectorioId()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/app.Api.Api.html#method_DamePeticion" class="">DamePeticion()</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#method_EstablecerCabeceras" class="">EstablecerCabeceras()</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#method_construyeJSON" class="">construyeJSON()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/app.Api.Api.html#property_peticion" class="">$peticion</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#property_tipo" class="">$tipo</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#property_codEstado" class="">$codEstado</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/app.Api.Api.html#method_TratarURL" class="">TratarURL()</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#method_EjecutarPeticion" class="">EjecutarPeticion()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method___borrarTodosTemporales" class="">__borrarTodosTemporales()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_dameNombreArchivo" class="">dameNombreArchivo()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_borrarTemporales" class="">borrarTemporales()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_ejecutarNoteshrink" class="">ejecutarNoteshrink()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_comprobarTiposArchivos" class="">comprobarTiposArchivos()</a><br />
+                                                                    <a href="../classes/app.controladores.archivos.archivos.html#method_procesarParametros" class="">procesarParametros()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/app.Api.Api.html#property_controlador" class="">$controlador</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#property_metodo" class="">$metodo</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#property_parametros" class="">$parametros</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#property_ruta_controlador" class="">$ruta_controlador</a><br />
+                                                                    <a href="../classes/app.Api.Api.html#property_espacio_nombres" class="">$espacio_nombres</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/app.controladores.archivos.html"><div class="path-wrapper">app/controladores/archivos.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper"><a href="../classes/app.Api.Api.html">\app\Api\Api</a></div>
+                                                                                                    <div class="namespace-wrapper">\app\controladores\archivos\archivos</div>
+                            </dd>
+
+                                                                            <dt>Implements</dt>
+                                                        <dd><a href="../classes/app.interfaz.Rest.Rest.html"><div class="namespace-wrapper">\app\interfaz\Rest\Rest</div></a></dd>
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>oliver</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_peticion" name="property_peticion" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$peticion</h3>
+                <pre class="signature">$peticion : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Método de petición para acceder al servicio (GET o POST)                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_tipo" name="property_tipo" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$tipo</h3>
+                <pre class="signature">$tipo : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Content-Type de la cabecera                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_codEstado" name="property_codEstado" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$codEstado</h3>
+                <pre class="signature">$codEstado : integer</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                &mdash; Código de estado de la petición. (Lo mismo no hace falta)                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_controlador" name="property_controlador" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$controlador</h3>
+                <pre class="signature">$controlador : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Controlador a ejecutar. Por defecto es &#039;home&#039;                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_metodo" name="property_metodo" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$metodo</h3>
+                <pre class="signature">$metodo : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Método a ejecutar. Por defecto es &#039;index&#039;                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_parametros" name="property_parametros" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$parametros</h3>
+                <pre class="signature">$parametros : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; Array asociativo con los parámetros adicionales procedentes de la url. Puede ser un id y/o un token                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_ruta_controlador" name="property_ruta_controlador" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$ruta_controlador</h3>
+                <pre class="signature">$ruta_controlador : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Cadena con la ruta relativa a la carpeta de controladores.                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_espacio_nombres" name="property_espacio_nombres" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$espacio_nombres</h3>
+                <pre class="signature">$espacio_nombres : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; Cadena con el espacio de nombres (namespace) de los controladores dentro de la aplicación                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_Api" name="method_Api" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">Api()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">Api() </pre>
+                <p><em>Constructor de la clase Api.</em></p>
+                <p>Realiza la llamada para establecer el tipo de petición (GET o POST).
+Tratar la url que le viene.
+Establece una cabeceras iniciales de Content-Type como text/html
+Y por último, ejecuta la petición.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_GetCodEstado" name="method_GetCodEstado" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">GetCodEstado()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">GetCodEstado() : string</pre>
+                <p><em>Método que devuelve el código del estado de la petición</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Mensaje correspondiente al código del estado de la petición</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_alta" name="method_alta" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">alta()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">alta(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método que añade un archivo al repositorio desde la parte pública después de que un usuario logueado haya realizado una conversión</em></p>
+                <p>Este método se ejecuta por POST a través de Ajax</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>NULL. Los datos se recogen a través de la función file_get_contents('php://input') de la petición Ajax</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_baja" name="method_baja" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">baja()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">baja(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método que borra archivos desde la parte pública del perfil del usuario a través de Ajax.</em></p>
+                <p>Este método se ejecuta por POST a través de Ajax.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo que en este caso, al venir a través de Ajax, será nulo y se inicializarán con los valores recuperados de la cadena JSON a través de file_get_contents('php://input')</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_bajaAdmin" name="method_bajaAdmin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">bajaAdmin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">bajaAdmin(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método para borrar archivos desde la parte privada de la aplicación</em></p>
+                <p>Si viene por GET: Se muestran los datos del archivo a borrar
+Si viene por POST: Se ejecuta el borrado del archivo en cuestión</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo que contiene el id del archivo y el token del administrador logueado</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_modificar" name="method_modificar" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">modificar()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">modificar(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método para modificar los datos de un archivo cuando un usuario está logueado desde la parte del perfil</em></p>
+                <p>Si la petición se realiza por GET: Se muestran los datos del archivo que se va a borrar
+Si la petición viene por POST: Se ejecuta el borrado del archivo en cuestión y se visualiza un mensaje</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el id del archivo y el token del usuario logueado</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_modificarAdmin" name="method_modificarAdmin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">modificarAdmin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">modificarAdmin(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método para modificar un archivo desde la parte privada de la aplicacición</em></p>
+                <p>Si la petición viene por GET: Se visualizan los datos del archivo a borrar.
+Si la petición viene por POST: Se realiza el borrado mostrando el mensaje correspondiente en la vista</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el id del archivo y el token del administrador logueado</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_listarTodos" name="method_listarTodos" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">listarTodos()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">listarTodos(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método que lista todos los archivos guardados en la base de datos para la parte privada de la aplicación</em></p>
+                <p>Este método se ejecuta exclusivamente por GET</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el token del administrador logueado</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_listar" name="method_listar" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">listar()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">listar(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método que lista los archivos que un usuario tiene subidos en su perfil.</em></p>
+                <p>Este métdoo se ejecuta exclusivamente por GET.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el id y el token del usuario logueado</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_ver" name="method_ver" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">ver()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">ver(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método que devuelve en formato JSON los datos de un archivo para visualizarlo.</em></p>
+                <p>Este método se ejecuta por GET y se usa para visualizar los datos del archivo que se va a querer borrar
+desde el perfil de la parte pública.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el id del archivo y el token del usuario logueado</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_subir" name="method_subir" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">subir()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">subir(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Función para subir las fotos automáticamente cuando se añaden a la zona Drag and Drop del formulario de convertir</em></p>
+                <p>Este método se ejecuta por POST a través de Ajax mediante la librería dropzone.js</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array con valor NULL para este método</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_conversion" name="method_conversion" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">conversion()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">conversion(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método que realiza la conversión cuando se pulsa el botón enviar y se han subido archivos automáticamente a través de la zona
+de Drag and Drop</em></p>
+                <p>Si viene por GET se visualiza el formulario de conversión de archivos.
+Si viene por POST se lanza la ejecución del script NoteShrink</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el token del usuario logueado o NULL si no se ha logueado ningún usuario</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_convertir" name="method_convertir" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">convertir()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">convertir(\app\controladores\archivos\type  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>NOTA: Esta función no se usa en ningún sitio de la aplicación ya que el proceso de convertir archivos lo he dividido en dos:
+1º se suben las fotos al servidor a través del drag And Drop del formulario de forma automática con Dropzone.js
+2º se manda el resto de datos del formulario (parámetros para el script NoteShrink.py) para realiar la conversión
+Estas dos etapas las realizan los métodos subir() y conversion().</em></p>
+                <p>Método que muestra el formulario de subida de archivos si viene por GET.
+Si viene por POST sube los archivos y manda los parámetros del script a la vez para realizar la conversión con NoteShrink.py</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\app\controladores\archivos\type</td>
+                                <td>$parametros </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_descargarArchivo" name="method_descargarArchivo" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">descargarArchivo()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">descargarArchivo(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método para establecer las cabeceras a la hora de descargar los archivos que hacen referencia en la base de datos.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el archivo para descargar</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_descargar" name="method_descargar" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">descargar()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">descargar(array  <span class="argument">$parametros = NULL</span>) </pre>
+                <p><em>Método para descargar el archivo inmediatamente después de ejecutar la conversión</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$parametros </td>
+                                <td><p>Array asociativo con el archivo para descargar</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_borrarDirectorioId" name="method_borrarDirectorioId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">borrarDirectorioId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">borrarDirectorioId(string  <span class="argument">$id</span>) </pre>
+                <p><em>Método para borrar los archivos que quedan en el directorio después de la conversión y el propio directorio.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$id </td>
+                                <td><p>Identificador del directorio a borrar.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_DamePeticion" name="method_DamePeticion" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">DamePeticion()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">DamePeticion() </pre>
+                <p><em>Método que establece el método de petición de acceso al servicio.</em></p>
+                <p>Establece el atributo petición de la clase Api.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_EstablecerCabeceras" name="method_EstablecerCabeceras" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">EstablecerCabeceras()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">EstablecerCabeceras(string|NULL  <span class="argument">$ruta = NULL</span>, string|NULL  <span class="argument">$nombre = NULL</span>) </pre>
+                <p><em>Método que establece las cabeceras del servicio</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|NULL</td>
+                                <td>$ruta </td>
+                                <td><p>Ruta del fichero para descargar.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|NULL</td>
+                                <td>$nombre </td>
+                                <td><p>Nombre del fichero para descargar.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_construyeJSON" name="method_construyeJSON" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">construyeJSON()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">construyeJSON(array  <span class="argument">$respuesta</span>) : string</pre>
+                <p><em>Método que codifica en JSON los datos recibidos como parámetros</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$respuesta </td>
+                                <td><p>Este array contendrá el estado de la petición, un mensaje y los datos correspondientes si los hubiera.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Cadena de respuesta en JSON</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_TratarURL" name="method_TratarURL" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">TratarURL()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">TratarURL() </pre>
+                <p><em>Método que trata la url del tipo &quot;clase/método/argumentos&quot; para obtener
+los parámetros para realizar la llamada al servicio.</em></p>
+                <p>Este método establecerá los atributos controlador, método y parámetros de la clase Api.</p>
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_EjecutarPeticion" name="method_EjecutarPeticion" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">EjecutarPeticion()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">EjecutarPeticion() </pre>
+                <p><em>Método que va a dirigir la petición a un método de una clase con unos argumentos, si los hubiera,
+en función del método de la petición realizada (POST, GET)</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/app.Api.Api.html"><div class="path-wrapper">\app\Api\Api</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___borrarTodosTemporales" name="method___borrarTodosTemporales" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__borrarTodosTemporales()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__borrarTodosTemporales() </pre>
+                <p><em>Método privado que borra todos los archivos que permanecen en la carpeta temp de la aplicación</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_dameNombreArchivo" name="method_dameNombreArchivo" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">dameNombreArchivo()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">dameNombreArchivo(string  <span class="argument">$salida</span>) : string</pre>
+                <p><em>Método privado que devuelve la ruta en la carpeta temp del fichero pdf convertido</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$salida </td>
+                                <td><p>Última línea de la salida del script NoteShrink.py que muestra el estado de la conversión (Si la conversión se ha realizado con éxito la cadena es wrote ruta/al/archivo.pdf)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>$ruta Cadena con la ruta al archivo</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_borrarTemporales" name="method_borrarTemporales" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">borrarTemporales()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">borrarTemporales(array  <span class="argument">$salida</span>) </pre>
+                <p><em>Método privado que borrará los archivos temporales que se han subido al servidor en la carpeta temp de la aplicación</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$salida </td>
+                                <td><p>Array con las líneas de salida del script NoteShrink.py</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_ejecutarNoteshrink" name="method_ejecutarNoteshrink" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">ejecutarNoteshrink()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">ejecutarNoteshrink(string  <span class="argument">$argumentos</span>) : boolean</pre>
+                <p><em>Método privado que llama al script NoteShrink.py para tratar los archivos</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$argumentos </td>
+                                <td><p>Los argumentos del script</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>False si ha habido algún error en la ejecución.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_comprobarTiposArchivos" name="method_comprobarTiposArchivos" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">comprobarTiposArchivos()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">comprobarTiposArchivos(array  <span class="argument">$tipos</span>) : boolean</pre>
+                <p><em>Método privado que comprueba que el tipo de archivo es PNG, JPG o JPEG</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$tipos </td>
+                                <td><p>Array con los tipos de los archivos subidos &quot;image/jpeg&quot; o &quot;image/png&quot;</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>True | False Devuelve falso si se ha subido un archivo que no es jpeg o png y true en caso contrario</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_procesarParametros" name="method_procesarParametros" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">procesarParametros()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">procesarParametros(string  <span class="argument">$imagenes</span>, array  <span class="argument">$params</span>) : string</pre>
+                <p><em>Método privado que devuelve una cadena con los parámetros necesarios para el funcionamiento del script NoteShrink.py
+Ejemplo: imágen1 [imágen2] -b ruta_a_carpeta_temporal/salida.png -o ruta_a_carpeta_temporal/salida.pdf .</em></p>
+                <p>..</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$imagenes </td>
+                                <td><p>Cadena con las rutas completas a los archivos jpg/png que se van a procesar</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>Valores recibidos desde el formulario en el array $_POST</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>$cadena Devuelve la cadena de los argumentos construida</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">archivos.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/app/controladores/archivos.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                            <li><a href="../namespaces/app.html">\app</a></li>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on June 15th, 2017 at 12:10.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>

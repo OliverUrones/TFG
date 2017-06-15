@@ -12,8 +12,8 @@
 <!--    <div data-ng-app="loginApp" data-ng-controller="loginAppCtrl">-->
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3">
         <h2>Login</h2>
-        <?php if(isset($error_json) && $error_json->estado_p === '400 KO') { ?>
-            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $error_json->Mensaje; ?></div>
+        <?php if(isset($usuario_json) && $usuario_json->estado_p === '400 KO') { ?>
+            <div class="alert alert-danger"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $usuario_json->Mensaje; ?></div>
         <?php } ?>
         <form name="loginForm" role="form" action="?usuarios/login" method="POST">
             <div class="form-group">

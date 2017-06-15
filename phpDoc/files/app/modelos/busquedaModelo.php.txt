@@ -1,0 +1,122 @@
+<?php
+
+namespace app\modelos\busquedaModelo;
+require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
+
+use app\modelos\categoriasModelo\categoriasModelo;
+
+/**
+ * Clase modelo para la gestión de los datos de de las búsquedas en la base de datos
+ *
+ * @author oliver
+ */
+class busquedaModelo {
+    /**
+     * Variable con el nombre de la tabla en la base de datos
+     * @var string 
+     */
+    private $tabla = 'archivos';
+    /**
+     * Variable con la conexión a la base de datos
+     * @var Objeto ADODB 
+     */
+    private $conexion = NULL;
+    /**
+     * Atributo identificador del archivo de la base de datos
+     * @var int
+     */
+    public $archivo_id = NULL;
+    /**
+     * Atributo con el enlace del archivo en la base de datos, éste se corresponde con el nombre del archivo almacenado en la carpeta /app/archivos
+     * @var string
+     */
+    public $enlace_descarga = NULL;
+    /**
+     * Atributo con el ámbito del archivo: 1 público, 0 privado
+     * @var int
+     */
+    public $ambito = NULL;
+    /**
+     * Atributo con las etiquetas identificativas (tags) del archivo
+     * @var string
+     */
+    public $etiquetas = NULL;
+    /**
+     * Atributo con el nombre de la categoría a la que pertenece el archivo
+     * @var string
+     */
+    public $nombre_categoria = NULL;
+    
+    /**
+     * Método que establece la conexión a la base de datos y devuelve el resultado de la búsqueda
+     * @param string $cadena Cadena con la búsqueda a realizar
+     * @return array Array asociativo con el resultado de la búsqueda
+     */
+    public function busca($cadena) {
+        $this->__conexion();
+        //var_dump($cadena);
+        //$this->__hayCategorias($cadena);
+        return $this->__dameResultado($cadena);
+    }
+    
+    /**
+     * Método privado que realiza la consulta a la base de datos con la cadena que se le pasa como parámetro
+     * @param string $cadena Cadena con la búsqueda a realizar
+     * @return array $resultado Array asociativo con los datos de los archivos encontrados
+     */
+    private function __dameResultado($cadena) {
+//        Ejemplo de consulta con MATCH () AGAINST()
+//        SELECT archivos.archivo_id, archivos.nombre, archivos.etiquetas, archivos.enlace_descarga, categorias.nombre, (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ("programacion prueba informatica borrado ortografia") OR MATCH (categorias.nombre) AGAINST ("programacion prueba informatica borrado ortografia")) AS "coincidencia"
+//        FROM archivos, categorias
+//        WHERE archivos.ambito = 1
+//        AND archivos.categoria_id = categorias.categoria_id
+//        ORDER BY coincidencia DESC
+        $sql = "SELECT archivos.archivo_id, archivos.nombre AS 'nombre_archivo', archivos.etiquetas, archivos.enlace_descarga, categorias.nombre AS 'categoria', (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".$cadena."') OR MATCH (categorias.nombre) AGAINST ('".$cadena."')) AS 'coincidencia' "
+                . "FROM archivos, categorias "
+                . "WHERE archivos.ambito = 1 "
+                . "AND archivos.categoria_id = categorias.categoria_id "
+                . "AND (MATCH (archivos.nombre, archivos.etiquetas) AGAINST ('".utf8_encode($cadena)."') OR MATCH (categorias.nombre) AGAINST ('".utf8_encode($cadena)."')) = 1 "
+                . "ORDER BY coincidencia DESC";
+        //echo "<br/>".$sql;
+        $recordset = $this->conexion->execute($sql)->getAssoc();
+        
+        //var_dump($recordset);
+        if($recordset) {
+            foreach ($recordset as $key => $value) {
+                //echo '<br/>'.$key.' -- '.$value;
+                foreach ($value as $columna => $valor) {
+                    if(is_string($columna)) {
+                        $resultado[$key][$columna] = $valor;
+                    }
+                }
+            }
+            $resultado['total'] = count($resultado);
+            $resultado['cadena'] = $cadena;
+            return $resultado;
+        }
+    }
+    
+    /**
+     * Método privado para realizar la conexión a la base de datos.
+     * 
+     * Establece el atributo conexión de la clase como un objeto ADODB
+     */
+    private function __conexion() {
+        
+        //Datos de la conexión host, usuario, contraseña y base de datos
+        $host = '127.0.0.1';
+        $usuario = 'root';
+        $pass = 'toor';
+        $db = 'repositorio';
+        
+        //Creación del objeto ADODB para conectarse a través del drives mysqli
+        $this->conexion = NewADOConnection('mysqli');
+        
+        //Se establece la conexión con los datos
+        $this->conexion->connect($host, $usuario, $pass, $db);
+        
+        //Para debuggear ADODB
+        //$this->conexion->debug = true;
+    }
+}
+

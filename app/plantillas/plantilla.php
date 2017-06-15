@@ -199,7 +199,8 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <h1>Documentación</h1>
-                        <p class="text-justify"><a href="#">Para programadores</a></p>
+                        <p class="text-justify"><a href="phpDoc/index.html" target="__blank">API Documentación para programadores</a></p>
+                        <p class="text-justify"><a href="mailto:admin@admin.es" target="__blank">Contacte con el administrador</a></p>
                     </div>
                     <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
                         <h1>

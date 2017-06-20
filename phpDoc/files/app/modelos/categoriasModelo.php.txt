@@ -7,7 +7,10 @@ require_once dirname(__DIR__).DIRECTORY_SEPARATOR.'adodb5/adodb.inc.php';
 /**
  * Clase modelo para la gestión de los datos de las categorías en la base de datos
  *
- * @author oliver
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
  */
 class categoriasModelo {
     /**
@@ -88,7 +91,7 @@ class categoriasModelo {
             //echo '<br/>'.$key.' -- '.$value;
             foreach ($value as $columna => $valor) {
                 if(is_string($columna)) {
-                    $categorias[$key][$columna] = $valor;
+                    $categorias[$key][$columna] = utf8_decode($valor);
                 }
             }
         }

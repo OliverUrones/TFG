@@ -1,4 +1,22 @@
 <?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista del resultado de la conversión realizada
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $usuario Datos del usuario logueado
+ * @var string JSON
+ * 
+ * $nombre_archivo Nombre del archivo convertido
+ * @var string JSON
+ * 
+ * $directorio_id Identificador del directorio temporal de la conversión
+ * @var string JSON
+ */
 if(isset($directorio_id)) {
     $directorio_id_json = json_decode($directorio_id);
     //var_dump($directorio_id_json);
@@ -74,8 +92,8 @@ if(isset($usuario)) {
                                            data-ng-model="altaModelo.nombre"
                                            data-ng-minlength="3"
                                            required>
-                                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
-                                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.required && !guardarArchivo.nombre.$pristine'>El nombre es obligatorio.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.minlength && !guardarArchivo.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label ">Categorías</label>
@@ -103,8 +121,8 @@ if(isset($usuario)) {
                                            data-ng-model="altaModelo.etiquetas"
                                            data-ng-minlength="3"
                                            required>
-                                    <span data-ng-show='alta.nombre.$error.required && !alta.nombre.$pristine'>El nombre es obligatorio.</span>
-                                    <span data-ng-show='alta.nombre.$error.minlength && !alta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.required && !guardarArchivo.nombre.$pristine'>Las etiquetas son obligatorias.</span>
+                                    <span data-ng-show='guardarArchivo.nombre.$error.minlength && !aguardarArchivolta.nombre.$pristine'>Debe tener al menos 3 caracteres.</span>
                                 </div>
                         </div>
                         <div class="modal-footer">

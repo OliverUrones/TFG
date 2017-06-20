@@ -1,4 +1,19 @@
 <?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista para restablecer la contraseña de una cuenta de usuario para la parte pública
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $usuario_id Identificador del usuario
+ * @var string JSON
+ * 
+ * $respuesta Datos de la operación realizada
+ * @var string JSON
+ */
 if(isset($usuario_id)) {
     $usuario_id_json = json_decode($usuario_id);
     //var_dump($usuario_id_json);

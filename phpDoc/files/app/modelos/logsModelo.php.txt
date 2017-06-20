@@ -11,7 +11,10 @@ namespace app\modelos\logsModelo;
 /**
  * Modelo de la clase logs para los datos principales que contendrá el archivo de logs del sistema.
  *
- * @author Oliver Urones García
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
  */
 class logsModelo {
     //Atributos de la clase logsModelo

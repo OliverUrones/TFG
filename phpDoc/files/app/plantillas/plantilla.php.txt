@@ -1,5 +1,24 @@
 <!DOCTYPE html>
-<?php //var_dump($usuario);
+<?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista de la plantilla principal para la parte pública
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $usuario Datos del usuario logueado
+ * @var string JSON
+ * 
+ * $directorio_id Identificador del directorio temporal de conversión
+ * @var string JSON
+ * 
+ * $admin Datos del administrador conectado
+ * @var string JSON
+ */
+//var_dump($usuario);
     if(isset($usuario)) {
         $usuario_json = json_decode($usuario);
         //var_dump("Usuario json");
@@ -199,7 +218,8 @@
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <h1>Documentación</h1>
-                        <p class="text-justify"><a href="phpDoc/index.html" target="__blank">Para programadores</a></p>
+                        <p class="text-justify"><a href="phpDoc/index.html" target="__blank">API Documentación para programadores</a></p>
+                        <p class="text-justify"><a href="mailto:admin@admin.es" target="__blank">Contacte con el administrador</a></p>
                     </div>
                     <div class="col-xs-12 col-sm-3 col-sm-offset-1 col-md-3 col-md-offset-1 col-lg-3 col-lg-offset-1">
                         <h1>

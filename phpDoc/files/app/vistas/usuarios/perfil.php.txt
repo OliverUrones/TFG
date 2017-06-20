@@ -1,4 +1,20 @@
-<?php //var_dump($usuario); 
+<?php 
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista de los datos del perfil de un usuario para la parte pública
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $usuario Datos del usuario conectado
+ * @var string JSON
+ * 
+ * $archivos Datos de los archivos listados
+ * @var string JSON
+ */
+//var_dump($usuario); 
     if(isset($usuario)) {
         $usuario_json = json_decode($usuario);
         //var_dump($usuario_json);

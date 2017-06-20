@@ -16,7 +16,10 @@ use app\controladores\logs\logs;
  * Esta clase usa los modelos de usuarios, archivos y categorías.
  * También usa el controlador logs
  *
- * @author oliver
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
  */
 class archivos extends Api implements Rest {
 

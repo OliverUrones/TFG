@@ -1,3 +1,17 @@
+<?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista del alta de usuarios para la parte pública
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $registro Datos con la operación de registro realizada
+ * @var string JSON
+ */
+?>
 <?php ob_start(); ?>
 <!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" data-ng-app="altaApp" data-ng-controller="altaAppCtrl">-->
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-3 col-md-offset-3" data-ng-app="RepositorioApp" data-ng-controller="ValidacionFormsController">

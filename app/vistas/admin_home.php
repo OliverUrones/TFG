@@ -1,4 +1,16 @@
 <?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista de la página principal de la parte de administración
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $admin Datos del administrador conectado
+ * @var string JSON
+ */
 if(isset($admin)) {
     $admin_json = json_decode($admin);
     //var_dump($admin_json);

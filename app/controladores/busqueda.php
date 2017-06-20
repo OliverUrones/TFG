@@ -15,7 +15,10 @@ use app\modelos\busquedaModelo\busquedaModelo;
  * Clase controlador para la gestión de las acciones relacionadas con las búsquedas de archivos
  * Esta clase usa los modelos de usuarios y búsqueda
  *
- * @author oliver
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
  */
 class busqueda extends Api\Api {
 

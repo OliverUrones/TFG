@@ -1,4 +1,22 @@
 <?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista del resultado de la conversión realizada
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $usuario Datos del usuario logueado
+ * @var string JSON
+ * 
+ * $nombre_archivo Nombre del archivo convertido
+ * @var string JSON
+ * 
+ * $directorio_id Identificador del directorio temporal de la conversión
+ * @var string JSON
+ */
 if(isset($directorio_id)) {
     $directorio_id_json = json_decode($directorio_id);
     //var_dump($directorio_id_json);

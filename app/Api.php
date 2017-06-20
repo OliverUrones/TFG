@@ -9,10 +9,10 @@ namespace app\Api;
  * Se establecerán unas cabeceras iniciales pudiendo cambiar durante la ejecución de la petición.
  * Se ejecutará la petición al servicio con los parámetros recogidos.
  *
- * @author Oliver Urones García
+ * @author A. Oliver Urones García
  * @copyleft (cc) 2017, Oliver Urones
  * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
- * @version alfa
+ * @version 1.0
  * 
  */
 class Api {

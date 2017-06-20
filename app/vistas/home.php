@@ -1,3 +1,13 @@
+<?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista de la página principal de la parte pública
+ */
+?>
 <?php ob_start() ?>
 <h2>Sistema inteligente orientado a servicios para la optimización de escaneo de documentos manuscritos</h2>
 <div class="logoUsal">

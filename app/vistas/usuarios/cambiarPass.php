@@ -1,4 +1,19 @@
 <?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista para cambiar la contraseña de una cuenta de usuario para la parte pública
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $usuario Datos del usuario para cambiar la contraseña
+ * @var string JSON
+ * 
+ * $respuesta Datos de la respuesta de la operación
+ * @var string JSON
+ */
 if(isset($usuario)) {
     $usuario_json = json_decode($usuario);
     //var_dump($usuario_json);

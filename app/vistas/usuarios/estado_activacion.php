@@ -1,5 +1,17 @@
 <?php ob_start(); ?>
 <?php
+/**
+ * @author A. Oliver Urones García
+ * @copyleft (cc) 2017, Oliver Urones
+ * @license https://creativecommons.org/licenses/by-nc-sa/4.0/ Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+ * @version 1.0
+ * 
+ * Vista del estado de la activación de la cuenta para la parte pública
+ * 
+ * La vista recibe las siguientes variables del controlador
+ * $estado_activacion Datos con el estado de la activación de la cuenta de un usuario
+ * @var string JSON
+ */
 if(isset($estado_activacion)) {
 ?>
 <div class="modal modal-content" data-ng-controller="estadoActivacionController" data-ng-init="msgActivacion()">

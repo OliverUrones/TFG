@@ -38,7 +38,6 @@ if(isset($usuario)) {
                                 <img class="pull-left" src="web/imagenes/public/pdf_file.png" alt="Icono de archivo">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">ID: <small><?php echo $obj->archivo_id; ?></small></h4>
                                 <h4 class="media-heading">Nombre: <small><?php echo utf8_decode($obj->nombre_archivo); ?></small></h4>
                                 <h4 class="media-heading">Categoria: <small><?php echo utf8_decode($obj->categoria); ?></small><h4>
                                 <h4 class="media-heading">Etiquetas: <small><?php echo utf8_decode($obj->etiquetas); ?></small></h4>

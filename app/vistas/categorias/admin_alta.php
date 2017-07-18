@@ -62,7 +62,7 @@ if(isset($resultado)) {
                     <select class="form-control" name="categoria_padre" id="categoria_padre">
                         <option selected value="">Ninguna</option>
                         <?php foreach ($listaCategorias_json as $obj) { ?>
-                        <option value="<?php echo $obj->categoria_id ?>"><?php echo utf8_decode($obj->nombre); ?></option>
+                        <option value="<?php echo $obj->categoria_id ?>"><?php echo $obj->nombre; ?></option>
                         <?php } ?>
                     </select>
                 </div>

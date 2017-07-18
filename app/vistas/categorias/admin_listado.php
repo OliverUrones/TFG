@@ -32,8 +32,8 @@ if(isset($categorias)) {
             <?php $key = 0; foreach ($categorias_json as $obj) { ?>
                 <ng-model-options ng-model-options="{ getterSetter: true }">
                     <ng-model ng-model="categorias[<?php echo $key; ?>].categoria_id  = '<?php echo $obj->categoria_id; ?>'"></ng-model>
-                    <ng-model ng-model="categorias[<?php echo $key; ?>].nombre  = '<?php echo utf8_decode($obj->nombre); ?>'"></ng-model>
-                    <ng-model ng-model="categorias[<?php echo $key; ?>].padre  = '<?php echo utf8_decode($obj->padre); ?>'"></ng-model>
+                    <ng-model ng-model="categorias[<?php echo $key; ?>].nombre  = '<?php echo $obj->nombre; ?>'"></ng-model>
+                    <ng-model ng-model="categorias[<?php echo $key; ?>].padre  = '<?php echo $obj->padre; ?>'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].enlace_modificar = '?categorias/modificar/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].img_modificar = '../web/imagenes/Admin/administracion_editar.png'"></ng-model>
                     <ng-model ng-model="categorias[<?php echo $key; ?>].enlace_borrar = '?categorias/baja/<?php echo $obj->categoria_id; ?>/<?php echo $admin_json->token; ?>'"></ng-model>
